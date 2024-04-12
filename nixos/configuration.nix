@@ -19,7 +19,7 @@
     # inputs.hardware.nixosModules.common-ssd
 
     # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+    ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -110,20 +110,6 @@
     vesktop
     vscode
   ];
-
-  # User
-  users.users = {
-    greysilly7 = {
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "password";
-      isNormalUser = true;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-      ];
-    };
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";
