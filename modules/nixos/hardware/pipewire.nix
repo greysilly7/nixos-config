@@ -12,7 +12,7 @@
 
   options.hardware.pipewire.enable = lib.mkEnableOption "Enable Pipewire";
 
-  config = lib.mkIf config.pipewire {
+  config = lib.mkIf config.hardware.pipewire.enable {
     # Enable sound with pipewire.
     sound.enable = true;
     hardware.pulseaudio.enable = false;

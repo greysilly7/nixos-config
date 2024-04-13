@@ -10,7 +10,7 @@
 {
   options.desktop.gaming.steam.enable = lib.mkEnableOption "Enable Intel Support";
 
-  config = lib.mkIf config.steam {
+  config = lib.mkIf config.desktop.gaming.steam.enable {
     programs.steam.enable = true;
 
     environment.systemPackages = with pkgs; [ steamPackages.steamcmd ];

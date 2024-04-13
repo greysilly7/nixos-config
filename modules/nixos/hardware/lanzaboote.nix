@@ -12,7 +12,7 @@
 
   options.hardware.lanzaboote.enable = lib.mkEnableOption "Enable Lanzaboote";
 
-  config = lib.mkIf config.lanzaboote {
+  config = lib.mkIf config.hardware.lanzaboote.enable {
     # Lanzaboote currently replaces the systemd-boot module.
     # This setting is usually set to true in configuration.nix
     # generated at installation time. So we force it to false

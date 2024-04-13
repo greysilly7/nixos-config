@@ -10,8 +10,7 @@
 {
   options.desktop.kde.enable = lib.mkEnableOption "Enable Intel Support";
 
-
-  config = lib.mkIf config.kde {
+  config = lib.mkIf config.desktop.kde.enable {
     services.xserver.enable = true;
 
     services.xserver.displayManager.sddm = {

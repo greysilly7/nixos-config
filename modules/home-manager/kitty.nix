@@ -8,9 +8,9 @@
 }:
 
 {
-  options.gnupg.enable = lib.mkEnableOption "Enable git";
+  options.kitty.enable = lib.mkEnableOption "Enable kitty";
 
-  config = lib.mkIf config.kitty {
+  config = lib.mkIf config.kitty.enable {
     programs.kitty = {
       enable = true;
       shellIntegration.enableBashIntegration = true;
