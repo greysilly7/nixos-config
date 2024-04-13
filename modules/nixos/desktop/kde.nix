@@ -8,13 +8,8 @@
 }:
 
 {
-  options = {
-    kde = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable KDE.";
-    };
-  };
+  options.desktop.kde.enable = lib.mkEnableOption "Enable Intel Support";
+
 
   config = lib.mkIf config.kde {
     services.xserver.enable = true;

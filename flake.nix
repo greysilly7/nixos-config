@@ -53,16 +53,18 @@
             (
               { pkgs, ... }:
               {
-                gaming = true;
-                steam = true;
-                kde = true;
-                battery = true;
-                bluetooth = true;
-                intel = true;
-                lanzaboote = true;
-                pipewire = true;
-                git = true;
-                gnupg = true;
+                hardware.battery.enable = true;
+                hardware.bluetooth.enable = true;
+                hardware.intel.enable = true;
+                hardware.lanzaboote.enable = true;
+                hardware.pipewire.enable = true;
+
+                desktop.kde.enable = true;
+                desktop.gaming.enable = true;
+                desktop.gaming.steam.enable = true;
+
+                shell.gnupg.enable = true;
+                shell.git.enable = true;
               }
             )
           ] ++ builtins.attrValues self.nixosModules;
@@ -84,8 +86,8 @@
             (
               { pkgs, ... }:
               {
-                kitty = true;
-                git = true;
+                gnupg.enable = true;
+                git.enableBashIntegration = true;
               }
             )
           ] ++ builtins.attrValues self.homeManagerModules;

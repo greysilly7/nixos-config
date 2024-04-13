@@ -8,13 +8,7 @@
 }:
 
 {
-  options = {
-    git = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable and configure git.";
-    };
-  };
+  options.git.enable = lib.mkEnableOption "Enable git";
 
   config = {
     programs.git = lib.mkIf config.git {

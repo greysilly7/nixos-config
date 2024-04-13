@@ -8,13 +8,7 @@
 }:
 
 {
-  options = {
-    gaming = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable gaming.";
-    };
-  };
+  options.desktop.gaming.enable = lib.mkEnableOption "Enable Gaming Configs and Packages";
 
   config = lib.mkIf config.gaming {
     environment.systemPackages = with pkgs; [

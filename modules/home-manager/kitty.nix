@@ -8,13 +8,7 @@
 }:
 
 {
-  options = {
-    kitty = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Kitty Shell.";
-    };
-  };
+  options.gnupg.enable = lib.mkEnableOption "Enable git";
 
   config = lib.mkIf config.kitty {
     programs.kitty = {

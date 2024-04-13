@@ -8,13 +8,7 @@
 }:
 
 {
-  options = {
-    steam = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Steam.";
-    };
-  };
+  options.desktop.gaming.steam.enable = lib.mkEnableOption "Enable Intel Support";
 
   config = lib.mkIf config.steam {
     programs.steam.enable = true;

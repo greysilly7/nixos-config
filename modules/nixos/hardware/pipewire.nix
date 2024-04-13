@@ -10,13 +10,7 @@
 {
   imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
 
-  options = {
-    pipewire = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable PipeWire.";
-    };
-  };
+  options.hardware.pipewire.enable = lib.mkEnableOption "Enable Pipewire";
 
   config = lib.mkIf config.pipewire {
     # Enable sound with pipewire.

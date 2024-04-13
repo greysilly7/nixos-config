@@ -8,13 +8,8 @@
 }:
 
 {
-  options = {
-    bluetooth = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Bluetooth.";
-    };
-  };
+  options.hardware.bluetooth.enable = lib.mkEnableOption "Enable Bluetooth";
+
 
   config = lib.mkIf config.bluetooth {
     hardware.bluetooth.enable = true;

@@ -8,12 +8,7 @@
 }:
 
 {
-  options = {
-    battery = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-    };
-  };
+  options.hardware.battery.enable = lib.mkEnableOption "Enable Battery Optimization";
 
   config = lib.mkIf config.battery {
     # Battery Life Tuning

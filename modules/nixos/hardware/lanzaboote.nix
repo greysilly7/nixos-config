@@ -10,13 +10,7 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  options = {
-    lanzaboote = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Lanzaboote.";
-    };
-  };
+  options.hardware.lanzaboote.enable = lib.mkEnableOption "Enable Lanzaboote";
 
   config = lib.mkIf config.lanzaboote {
     # Lanzaboote currently replaces the systemd-boot module.

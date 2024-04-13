@@ -8,13 +8,7 @@
 }:
 
 {
-  options = {
-    intel = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Intel.";
-    };
-  };
+  options.hardware.intel.enable = lib.mkEnableOption "Enable Intel Support";
 
   config = lib.mkIf config.intel {
     services.xserver.videoDrivers = [ "intel" ];
