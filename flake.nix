@@ -51,6 +51,20 @@
             ./nixos/configuration.nix
             self.nixosModules
           ] ++ builtins.attrValues self.nixosModules;
+
+          gaming = true;
+          steam = true;
+
+          kde = true;
+
+          battery = true;
+          bluetooth = true;
+          intel = true;
+          lanzaboote = true;
+          pipewire = true;
+
+          git = true;
+          gnupg = true;
         };
       };
 
@@ -66,6 +80,9 @@
             # > Our main home-manager configuration file <
             ./home-manager/home.nix
           ] ++ builtins.attrValues self.homeManagerModules;
+
+          git = true;
+          gnupg = true;
         };
       };
     };

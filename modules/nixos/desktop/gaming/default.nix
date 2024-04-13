@@ -16,7 +16,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.options.gaming {
     environment.systemPackages = with pkgs; [
       # cockatrice
       lutris

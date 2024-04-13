@@ -15,7 +15,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.options.battery {
     # Battery Life Tuning
     services.tlp = {
       enable = true;

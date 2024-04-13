@@ -101,7 +101,6 @@
     curl
     firefox
     vim
-    git
     unzip
     zip
     p7zip

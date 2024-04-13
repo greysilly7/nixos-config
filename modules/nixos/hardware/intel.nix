@@ -16,7 +16,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.options.intel {
     services.xserver.videoDrivers = [ "intel" ];
 
     environment.variables.LIBVA_DRIVER_NAME = "iHD";
