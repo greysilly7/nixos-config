@@ -11,7 +11,7 @@
   users.users = {
     greysilly7 = {
       isNormalUser = true;
-      shell = pkgs.fish;
+      shell = pkgs.bash;
       extraGroups = [
         "wheel"
         "networkmanager"

@@ -22,6 +22,9 @@
       userName = "greysilly7";
       userEmail = "greysilly7@gmail.com";
 
+      signing.key = "5C1E38659FCBCA18";
+      signing.signByDefault = true;
+
       lfs.enable = true;
 
       diff-so-fancy.enable = true;
