@@ -6,6 +6,7 @@
   kde = import ./desktop/kde.nix;
   gaming = import ./desktop/gaming/default.nix;
   steam = import ./desktop/gaming/steam.nix;
+  random-apps = import ./desktop/random-apps.nix;
 
   battery = import ./hardware/battery.nix;
   bluetooth = import ./hardware/bluetooth.nix;
