@@ -10,7 +10,7 @@
 {
   options.module.desktop.gaming.enable = lib.mkEnableOption "Enable Gaming Configs and Packages";
 
-  config = lib.mkIf config.desktop.gaming.enable {
+  config = lib.mkIf config.module.desktop.gaming.enable {
     environment.systemPackages = with pkgs; [
       # cockatrice
       lutris
