@@ -17,7 +17,7 @@
   };
 
   config = {
-    programs.git = lib.mkIf config.options.git {
+    programs.git = lib.mkIf config.git {
       enable = true;
       userName = "Scott Gould";
       userEmail = "greysilly7@gmail.com";

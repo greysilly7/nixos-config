@@ -16,7 +16,7 @@
     };
   };
 
-  config = lib.mkIf config.options.gnupg {
+  config = lib.mkIf config.gnupg {
     programs.gnupg.agent = {
       enable = true;
       # enableSSHSupport = true;

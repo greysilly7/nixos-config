@@ -16,7 +16,7 @@
     };
   };
 
-  config = lib.mkIf config.options.kde {
+  config = lib.mkIf config.kde {
     services.xserver.enable = true;
 
     services.xserver.displayManager.sddm = {

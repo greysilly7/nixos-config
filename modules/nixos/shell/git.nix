@@ -16,5 +16,5 @@
     };
   };
 
-  config = lib.mkIf config.options.git { environment.systemPackages = [ pkgs.git ]; };
+  config = lib.mkIf config.git { environment.systemPackages = [ pkgs.git ]; };
 }

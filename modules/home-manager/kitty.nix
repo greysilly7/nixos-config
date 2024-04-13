@@ -16,7 +16,7 @@
     };
   };
 
-  config = lib.mkIf config.options.kitty {
+  config = lib.mkIf config.kitty {
     programs.kitty = {
       enable = true;
       shellIntegration.enableBashIntegration = true;

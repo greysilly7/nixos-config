@@ -16,7 +16,7 @@
     };
   };
 
-  config = lib.mkIf config.options.steam {
+  config = lib.mkIf config.steam {
     programs.steam.enable = true;
 
     environment.systemPackages = with pkgs; [ steamPackages.steamcmd ];

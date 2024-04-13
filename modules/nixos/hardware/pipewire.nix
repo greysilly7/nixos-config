@@ -18,7 +18,7 @@
     };
   };
 
-  config = lib.mkIf config.options.pipewire {
+  config = lib.mkIf config.pipewire {
     # Enable sound with pipewire.
     sound.enable = true;
     hardware.pulseaudio.enable = false;
