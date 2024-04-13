@@ -19,7 +19,7 @@
   config = {
     programs.git = {
       enable = true;
-      userName = "greysilly7";
+      userName = "Scott Gould";
       userEmail = "greysilly7@gmail.com";
 
       signing.key = "5C1E38659FCBCA18";
