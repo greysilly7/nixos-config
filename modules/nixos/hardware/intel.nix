@@ -8,9 +8,9 @@
 }:
 
 {
-  options.hardware.intel.enable = lib.mkEnableOption "Enable Intel Support";
+  options.module.hardware.intel.enable = lib.mkEnableOption "Enable Intel Support";
 
-  config = lib.mkIf config.hardware.intel.enable {
+  config = lib.mkIf config.module.hardware.intel.enable {
     services.xserver.videoDrivers = [ "intel" ];
 
     environment.variables.LIBVA_DRIVER_NAME = "iHD";

@@ -8,9 +8,9 @@
 }:
 
 {
-  options.hardware.battery.enable = lib.mkEnableOption "Enable Battery Optimization";
+  options.module.hardware.battery.enable = lib.mkEnableOption "Enable Battery Optimization";
 
-  config = lib.mkIf config.hardware.battery.enable {
+  config = lib.mkIf config.module.hardware.battery.enable {
     # Battery Life Tuning
     services.tlp = {
       enable = true;

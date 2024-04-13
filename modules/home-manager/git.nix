@@ -8,9 +8,9 @@
 }:
 
 {
-  options.git.enable = lib.mkEnableOption "Enable git";
+  options.module.git.enable = lib.mkEnableOption "Enable git";
 
-  config = mkIf config.git.enable {
+  config = mkIf config.module.git.enable {
     programs.git = lib.mkIf config.git.enable {
       enable = true;
       userName = "Scott Gould";

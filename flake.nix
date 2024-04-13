@@ -49,22 +49,21 @@
           modules = [
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
-            self.nixosModules
             (
               { pkgs, ... }:
               {
-                hardware.battery.enable = true;
-                hardware.bluetooth.enable = true;
-                hardware.intel.enable = true;
-                hardware.lanzaboote.enable = true;
-                hardware.pipewire.enable = true;
+                # hardware.battery.enable = true;
+                module.hardware.bluetooth.enable = true;
+                module.hardware.intel.enable = true;
+                module.hardware.lanzaboote.enable = true;
+                module.hardware.pipewire.enable = true;
 
-                desktop.kde.enable = true;
-                desktop.gaming.enable = true;
-                desktop.gaming.steam.enable = true;
+                module.desktop.kde.enable = true;
+                module.desktop.gaming.enable = true;
+                module.desktop.gaming.steam.enable = true;
 
-                shell.gnupg.enable = true;
-                shell.git.enable = true;
+                module.shell.gnupg.enable = true;
+                module.shell.git.enable = true;
               }
             )
           ] ++ builtins.attrValues self.nixosModules;
@@ -86,8 +85,8 @@
             (
               { pkgs, ... }:
               {
-                gnupg.enable = true;
-                git.enableBashIntegration = true;
+                module.gnupg.enable = true;
+                module.git.enableBashIntegration = true;
               }
             )
           ] ++ builtins.attrValues self.homeManagerModules;

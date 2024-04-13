@@ -8,9 +8,9 @@
 }:
 
 {
-  options.kitty.enable = lib.mkEnableOption "Enable kitty";
+  options.module.kitty.enable = lib.mkEnableOption "Enable kitty";
 
-  config = lib.mkIf config.kitty.enable {
+  config = lib.mkIf config.module.kitty.enable {
     programs.kitty = {
       enable = true;
       shellIntegration.enableBashIntegration = true;
