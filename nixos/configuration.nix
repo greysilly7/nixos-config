@@ -29,7 +29,7 @@
   ];
 
   boot.initrd.luks.devices."luks-66160d5a-eacb-472a-a782-401e1e126ed2".device = "/dev/disk/by-uuid/66160d5a-eacb-472a-a782-401e1e126ed2";
-  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   # Network Manager
   networking.networkmanager.enable = true;
