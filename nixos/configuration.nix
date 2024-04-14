@@ -29,6 +29,7 @@
   ];
 
   boot.initrd.luks.devices."luks-66160d5a-eacb-472a-a782-401e1e126ed2".device = "/dev/disk/by-uuid/66160d5a-eacb-472a-a782-401e1e126ed2";
+  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_zen;
 
   # Network Manager
   networking.networkmanager.enable = true;
@@ -39,11 +40,6 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
-  };
-
-  environment.variables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

@@ -14,7 +14,6 @@
     environment.systemPackages = with pkgs; [
       wget
       curl
-      vim
 
       unzip
       zip
