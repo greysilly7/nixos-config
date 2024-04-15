@@ -16,4 +16,5 @@
 
   git = import ./shell/git.nix;
   gnupg = import ./shell/gnupg.nix;
+  vim = import ./shell/vim.nix;
 }

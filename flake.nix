@@ -65,6 +65,7 @@
 
                 module.shell.gnupg.enable = true;
                 module.shell.git.enable = true;
+                module.shell.vim.enable = true;
               }
             )
           ] ++ builtins.attrValues self.nixosModules;
