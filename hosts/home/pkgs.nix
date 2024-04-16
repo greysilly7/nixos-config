@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # hardware.battery.enable = true;
+  hardware.battery.enable = true;
   module.hardware.bluetooth.enable = true;
   module.hardware.intel.enable = true;
   module.hardware.lanzaboote.enable = true;
