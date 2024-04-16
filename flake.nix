@@ -57,7 +57,7 @@
       # Available through 'home-manager --flake .#greysilly7@greypersonal'
       homeConfigurations = {
         "greysilly7@greypersonal" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          pkgs = nixpkgs.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = {
             inherit inputs outputs;
           };
