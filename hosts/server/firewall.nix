@@ -8,6 +8,7 @@
 }:
 {
   networking.firewall.enable = true;
+  networking.nftables.enable = true;
 
   # Allow PMTU / DHCP
   networking.firewall.allowPing = true;

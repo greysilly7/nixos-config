@@ -15,4 +15,7 @@
     settings.KbdInteractiveAuthentication = false;
     #settings.PermitRootLogin = "yes";
   };
+
+  # Allow 22 in firewall
+  networking.firewall.allowedTCPPorts = [ 22 ];
 }
