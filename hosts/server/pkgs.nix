@@ -8,4 +8,6 @@
   module.shell.gnupg.enable = true;
   module.shell.git.enable = true;
   module.shell.vim.enable = true;
+
+  module.server.iremia.enable = true;
 }
