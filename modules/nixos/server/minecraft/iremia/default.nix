@@ -23,6 +23,7 @@
         server-port = 25565;
       };
       symlinks = {
+        configs = "./configs";
         mods = pkgs.linkFarmFromDrvs "mods" (
           builtins.attrValues {
             AntiXray = fetchurl {

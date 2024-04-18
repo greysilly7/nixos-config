@@ -18,5 +18,5 @@
   gnupg = import ./shell/gnupg.nix;
   vim = import ./shell/vim.nix;
 
-  Iremia = import ./server/minecraft/iremia.nix;
+  iremia = import ./server/minecraft/iremia;
 }
