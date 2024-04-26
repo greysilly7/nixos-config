@@ -17,5 +17,6 @@
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
+  boot.initrd.availableKernelModules = ["tpm_crb"]; # You may need a different module
   environment.systemPackages = with pkgs; [sbctl];
 }
