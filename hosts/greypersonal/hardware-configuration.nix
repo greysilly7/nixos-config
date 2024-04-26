@@ -31,9 +31,6 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F22C-32E9";
     fsType = "vfat";
-    options = [
-      "default"
-    ];
   };
 
   # Switched to ZRAM
