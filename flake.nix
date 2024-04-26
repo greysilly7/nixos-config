@@ -1,6 +1,6 @@
-{
+{ 
   description = "A very basic flake";
-
+  
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # will be appended to the system-level substituters
@@ -18,6 +18,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +37,7 @@
     self,
     nixpkgs,
     home-manager,
+    chaotic,
     ...
   } @ inputs: {
     nixosConfigurations.greypersonal = nixpkgs.lib.nixosSystem {
@@ -46,7 +48,7 @@
 
       modules = [
         ./hosts/greypersonal/configuration.nix
-
+        inputs.chaotic.nixosModules.default
         home-manager.nixosModule
         {
           home-manager.useGlobalPkgs = true;
