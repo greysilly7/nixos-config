@@ -7,6 +7,13 @@
   ...
 }: {
   config = {
+    home.packages = with pkgs; [
+      fira-code
+      fira-code-symbols
+    ];
+
+    fonts.fontconfig.enable = true;
+
     programs.kitty = {
       enable = true;
       shellIntegration.enableBashIntegration = true;
@@ -19,7 +26,7 @@
         font_size 12.0
 
         # Enable ligatures
-        symbol_map U + E100-U + E16F FiraCodeSymbols
+        symbol_map U+E100-U+E16F FiraCodeSymbols
 
         # Set colorscheme
         color0 #282a36
