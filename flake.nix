@@ -1,6 +1,6 @@
-{ 
+{
   description = "A very basic flake";
-  
+
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # will be appended to the system-level substituters
@@ -31,6 +31,9 @@
 
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -38,6 +41,7 @@
     nixpkgs,
     home-manager,
     chaotic,
+    sops-nix,
     ...
   } @ inputs: {
     nixosConfigurations.greypersonal = nixpkgs.lib.nixosSystem {
@@ -48,7 +52,8 @@
 
       modules = [
         ./hosts/greypersonal/configuration.nix
-        inputs.chaotic.nixosModules.default
+        chaotic.nixosModules.default
+        sops-nix.nixosModules.sops
         home-manager.nixosModule
         {
           home-manager.useGlobalPkgs = true;
