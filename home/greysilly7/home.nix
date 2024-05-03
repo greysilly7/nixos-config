@@ -9,6 +9,7 @@
     ./bash.nix
     ./kitty.nix
   ];
+
   # List of packages to install
   home.packages = with pkgs; [
     neofetch
@@ -26,12 +27,19 @@
 
     file
     which
+
     gnupg
+    sops
     nixd
 
     pciutils
     usbutils
   ];
+
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

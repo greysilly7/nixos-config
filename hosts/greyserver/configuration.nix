@@ -10,19 +10,17 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common.nix
-    ./secureboot.nix
+    # ./secureboot.nix
     ./networking.nix
 
-    ../../modules/desktop/kde.nix
-    # ../../modules/desktop/gaming
-    # ../../modules/desktop/gaming/steam.nix
-
-    ../../modules/hardware/intel.nix
     ../../modules/hardware/pipewire.nix
     ../../modules/hardware/power.nix
 
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
+    ../../modules/services/nginx.nix
+    ../../modules/services/podman.nix
+    ../../modules/services/cloudflared.nix
   ];
 
   networking.hostName = "greypersonal";
