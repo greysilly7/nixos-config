@@ -14,12 +14,13 @@
     ./networking.nix
 
     ../../modules/desktop/kde.nix
-    # ../../modules/desktop/gaming
-    # ../../modules/desktop/gaming/steam.nix
+    ../../modules/desktop/gaming
+    ../../modules/desktop/gaming/steam.nix
 
     ../../modules/hardware/intel.nix
     ../../modules/hardware/pipewire.nix
     ../../modules/hardware/power.nix
+    ../../modules/hardware/bluetooth.nix
 
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
