@@ -8,12 +8,24 @@
   config = {
     services.nginx = {
       enable = true;
+      package = pkgs.nginxQuic;
 
       # Use recommended settings
       recommendedGzipSettings = true;
+      recommendedBrotliSettings = true;
+      recommendedZstdSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
+
+      # Enable QUiC support
+      enableQuicBPF = true;
+
+      # Set Max Body Size to 100M
+      clientMaxBodySize = "100M";
+
+      # Enable the status page
+      statusPage = true;
 
       # Only allow PFS-enabled ciphers with AES256
       sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
@@ -41,6 +53,19 @@
         # This might create errors
         proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
       '';
+
+      virtualHosts."vaultwarden.greysilly7.net" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+          http2 = true;
+          http3 = true;
+          extraConfig = ''
+            add_header Alt-Svc 'h3=":$server_port"; ma=86400';
+          '';
+        };
+      };
     };
     security.acme = {
       acceptTerms = true;
