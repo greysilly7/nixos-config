@@ -26,6 +26,8 @@
     ../../modules/services/ssh.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+
   networking.hostName = "greypersonal";
 
   boot.loader.systemd-boot.enable = true;
