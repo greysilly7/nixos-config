@@ -4,6 +4,8 @@
   lib,
   ...
 }: {
+  sops.secrets.grey_pass.neededForUsers = true;
+
   users.users = {
     greysilly7 = {
       isNormalUser = true;
@@ -15,7 +17,7 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"
       ];
-      hashedPassword = "$y$j9T$udZLuDN7IAY6sszOXRezX/$Uex5bkGui/hngWcQE6D1buzSMheTKml4igH73JNzZSA";
+      hashedPasswordFile = config.sops.secrets.grey_pass.path;
     };
   };
 

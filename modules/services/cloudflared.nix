@@ -21,7 +21,7 @@
         Type = "simple";
         DynamicUser = true;
         StateDirectory = "cloudflare-dyndns";
-        Environment = ["CLOUDFLARE_API_TOKEN=${sops.cftoken}"];
+        Environment = ["CLOUDFLARE_API_TOKEN=${config.sops.secrets.cftoken}"];
         ExecStart = let
           args = ["--cache-file /var/lib/cloudflare-dyndns/ip.cache" "-4" "-6"];
         in "${pkgs.cloudflare-dyndns}/bin/cloudflare-dyndns ${toString args}";
