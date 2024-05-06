@@ -6,10 +6,6 @@
     '';
     plugins = [
       {
-        name = "grc";
-        src = pkgs.fishPlugins.grc.src;
-      }
-      {
         name = "pure";
         src = pkgs.fishPlugins.pure.src;
       }

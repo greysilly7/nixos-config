@@ -18,8 +18,6 @@
     vscode
     vesktop
 
-    grc
-
     zip
     unzip
     p7zip
