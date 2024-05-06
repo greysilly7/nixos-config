@@ -12,7 +12,7 @@
 
   # List of packages to install
   home.packages = with pkgs; [
-    neofetch
+    fastfetch
     firefox
     vscode
     vesktop
