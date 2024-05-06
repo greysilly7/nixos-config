@@ -6,6 +6,7 @@
   imports = [
     ./neovim.nix
     ./git.nix
+    ./fish.nix
     ./bash.nix
     ./kitty.nix
   ];
