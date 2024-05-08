@@ -29,6 +29,8 @@
     file
     which
 
+    node2nix
+
     gnupg
     sops
     nixd
