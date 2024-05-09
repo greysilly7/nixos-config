@@ -24,6 +24,7 @@
 
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
+    ../../modules/services/printing.nix
   ];
 
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
