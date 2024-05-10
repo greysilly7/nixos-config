@@ -12,10 +12,10 @@
     services.openssh = {
       enable = true;
       settings = {
-        X11Forwarding = true;
+        X11Forwarding = lib.mkForce true;
         # root user is used for remote deployment, so we need to allow it
-        PermitRootLogin = "prohibit-password";
-        PasswordAuthentication = false; # disable password login
+        PermitRootLogin = lib.mkForce "prohibit-password";
+        PasswordAuthentication = lib.mkForce false; # disable password login
       };
       openFirewall = true;
     };

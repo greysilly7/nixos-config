@@ -40,10 +40,8 @@
     enableRedistributableFirmware = true;
   };
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-  };
+  # Enable network manager
+  networking.networkmanager.enable = true;
 
   environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
 
