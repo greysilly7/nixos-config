@@ -11,10 +11,10 @@
 
     services.avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       openFirewall = true;
     };
 
-    services.printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip];
+    services.printing.drivers = [pkgs.gutenprint pkgs.gutenprintBin pkgs.hplip pkgs.cups-kyodialog];
   };
 }
