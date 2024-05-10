@@ -9,9 +9,11 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/common.nix
     ./secureboot.nix
-    ./networking.nix
+    ./i18n.nix
+    ./sops.nix
+
+    ../../modules/common.nix
 
     ../../modules/desktop/kde.nix
     ../../modules/desktop/gaming
@@ -26,22 +28,6 @@
     ../../modules/services/ssh.nix
     ../../modules/services/printing.nix
   ];
-
-  sops.defaultSopsFile = ../../secrets/secrets.yaml;
-  sops.age.sshKeyPaths = [
-    "/etc/ssh/ssh_host_ed25519_key"
-  ];
-  sops.age.keyFile = "/var/lib/sops-nix/key.txt";
-  # This will generate a new key if the key specified above does not exist
-  sops.age.generateKey = true;
-
-  sops.secrets = {
-    grey_pass = {};
-    cftoken = {};
-    "vaultwarden/admin_password" = {};
-    "vaultwarden/db_pass" = {};
-  };
-
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
   networking.hostName = "greypersonal";
@@ -60,24 +46,6 @@
   };
 
   environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
-
-  # Set your time zone.
-  time.timeZone = "America/Detroit";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
 
   system.stateVersion = "24.05";
 }

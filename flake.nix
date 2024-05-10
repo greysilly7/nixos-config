@@ -1,21 +1,6 @@
 {
   description = "A very basic flake";
 
-  # the nixConfig here only affects the flake itself, not the system configuration!
-  nixConfig = {
-    # will be appended to the system-level substituters
-    extra-substituters = [
-      # nix community's cache server
-      "https://nix-community.cachix.org"
-    ];
-
-    # will be appended to the system-level trusted-public-keys
-    extra-trusted-public-keys = [
-      # nix community's cache server public key
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -34,6 +19,9 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    srvos.url = "github:nix-community/srvos";
+    srvos.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -42,6 +30,7 @@
     home-manager,
     chaotic,
     sops-nix,
+    srvos,
     ...
   } @ inputs: {
     nixosConfigurations.greypersonal = nixpkgs.lib.nixosSystem {
@@ -51,8 +40,31 @@
       };
 
       modules = [
+        srvos.nixosModules.desktop
         ./hosts/greypersonal/configuration.nix
         chaotic.nixosModules.default
+        sops-nix.nixosModules.sops
+        home-manager.nixosModule
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          home-manager.users.greysilly7 = import ./home/greysilly7/home.nix;
+
+          nix.settings.trusted-users = ["greysilly7"];
+        }
+      ];
+    };
+
+    nixosConfigurations.greyServer = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        inherit inputs;
+      };
+
+      modules = [
+        srvos.nixosModules.server
+        ./hosts/greyserver/configuration.nix
         sops-nix.nixosModules.sops
         home-manager.nixosModule
         {
