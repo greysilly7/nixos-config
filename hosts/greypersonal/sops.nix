@@ -16,7 +16,7 @@
   sops.secrets = {
     grey_pass = {};
     cftoken = {};
-    "vaultwarden/admin_password" = {};
+    "vaultwarden/admin_token" = {};
     "vaultwarden/db_pass" = {};
   };
 }
