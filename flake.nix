@@ -56,7 +56,7 @@
       ];
     };
 
-    nixosConfigurations.greyServer = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.greyserver = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
         inherit inputs;

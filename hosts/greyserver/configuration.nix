@@ -23,7 +23,7 @@
     # ../../modules/services/cloudflared.nix
   ];
 
-  networking.hostName = "greypersonal";
+  networking.hostName = "greyserver";
   networking.networkmanager.enable = true;
 
   boot.loader.systemd-boot.enable = true;
