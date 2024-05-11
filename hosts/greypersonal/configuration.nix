@@ -43,6 +43,14 @@
   # Enable network manager
   networking.networkmanager.enable = true;
 
+  # WE want NYX Cache
+  chaotic.nyx.cache.enable = true;
+
+  # MESA Git
+  chaotic.mesa-git.enable = true;
+  chaotic.mesa-git.extraPackages = with pkgs; [mesa_git.opencl intel-media-driver intel-ocl vaapiIntel];
+
+  # Fomatting
   environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
 
   system.stateVersion = "24.05";
