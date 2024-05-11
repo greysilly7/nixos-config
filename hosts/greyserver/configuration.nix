@@ -9,9 +9,9 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/common.nix
+    # ../../modules/common.nix
     # ./secureboot.nix
-    ./sops.nix
+    # ./sops.nix
 
     ../../modules/hardware/pipewire.nix
     ../../modules/hardware/power.nix
