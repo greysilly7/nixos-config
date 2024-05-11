@@ -14,7 +14,7 @@
       # dbBackend = "postgresql";
 
       config = {
-        DOMAIN = "vaultwarden.greysilly7.xyz";
+        DOMAIN = "https://vaultwarden.greysilly7.xyz";
 
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
