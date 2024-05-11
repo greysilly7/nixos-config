@@ -55,7 +55,6 @@
       '';
 
       virtualHosts."vaultwarden.greysilly7.xyz" = {
-        addSSL = true;
         enableACME = true;
         forceSSL = true;
         locations."/" = {
