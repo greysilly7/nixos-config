@@ -65,7 +65,6 @@
     security.acme = {
       acceptTerms = true;
       defaults.email = "greysilly7@gmail.com";
-      defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
 
     # Open Firewall for HTTP and HTTPS
