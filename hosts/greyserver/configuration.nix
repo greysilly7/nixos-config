@@ -24,6 +24,7 @@
   ];
 
   networking.hostName = "greypersonal";
+  networking.networkmanager.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -52,34 +53,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  users.users = {
-    greysilly7 = {
-      isNormalUser = true;
-      shell = pkgs.bash;
-      extraGroups = [
-        "wheel"
-        "networkmanager"
-      ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"
-      ];
-      hashedPassword = "$y$j9T$9OOwsG.xmn05RX3SwVZRN1$j7ItlMfGtaOI/nSwBYoHkMHGx57cwV16zAmT6DQnOO1";
-    };
-  };
-
-  nixpkgs.config.allowUnfree = lib.mkForce true;
-
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
-  };
-
-  # Manual optimise storage: nix-store --optimise
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-  nix.settings.auto-optimise-store = true;
 
   system.stateVersion = "24.05";
 }
