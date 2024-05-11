@@ -33,11 +33,6 @@
     enableRedistributableFirmware = true;
   };
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-  };
-
   environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
 
   # Set your time zone.
