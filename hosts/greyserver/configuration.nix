@@ -21,6 +21,7 @@
     ../../modules/services/nginx.nix
     ../../modules/services/podman.nix
     ../../modules/services/cloudflared.nix
+    ../../modules/services/vaultwarden.nix
   ];
 
   networking.hostName = "greyserver";
