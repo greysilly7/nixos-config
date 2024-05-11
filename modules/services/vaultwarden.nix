@@ -11,7 +11,7 @@
       enable = true;
 
       environmentFile = config.sops.secrets.vaultwarden.path;
-      dbBackend = "postgresql";
+      # dbBackend = "postgresql";
 
       config = {
         DOMAIN = "vaultwarden.greysilly7.xyz";
@@ -20,7 +20,7 @@
         ROCKET_PORT = 8222;
         ROCKET_LOG = "critical";
 
-        DATABASE_URL = "postgresql://vaultwarden@127.0.0.1:5432/vaultwarden";
+        # DATABASE_URL = "postgresql://vaultwarden@127.0.0.1:5432/vaultwarden";
       };
     };
   };
