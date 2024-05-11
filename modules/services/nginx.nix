@@ -59,11 +59,6 @@
         forceSSL = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-          http2 = true;
-          http3 = true;
-          extraConfig = ''
-            add_header Alt-Svc 'h3=":$server_port"; ma=86400';
-          '';
         };
       };
     };
