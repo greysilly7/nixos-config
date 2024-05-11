@@ -15,7 +15,7 @@
       ROCKET_PORT = 8222;
       ROCKET_LOG = "critical";
 
-      ADMIN_TOKEN = toString config.sops.secrets.vaultwarden.admin_token;
+      ADMIN_TOKEN = toString config.sops.secrets."vaultwarden/admin_token";
     };
   };
 }
