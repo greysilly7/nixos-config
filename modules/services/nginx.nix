@@ -54,7 +54,7 @@
         proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
       '';
 
-      virtualHosts."vaultwarden.greysilly7.net" = {
+      virtualHosts."vaultwarden.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {

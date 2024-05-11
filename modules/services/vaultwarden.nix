@@ -9,13 +9,13 @@
   config = {
     services.vaultwarden.enable = true;
     services.vaultwarden.config = {
-      DOMAIN = "vaultwarden.greysilly7.net";
+      DOMAIN = "vaultwarden.greysilly7.xyz";
 
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8222;
       ROCKET_LOG = "critical";
 
-      # ADMIN_TOKEN = toString config.sops.secrets."vaultwarden/admin_token";
+      ADMIN_TOKEN = toString config.sops.secrets."vaultwarden/admin_token";
     };
   };
 }
