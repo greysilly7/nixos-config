@@ -65,6 +65,14 @@
     security.acme = {
       acceptTerms = true;
       defaults.email = "greysilly7@gmail.com";
+
+      certs = {
+        "vaultwarden.greysilly7.xyz" = {
+          domain = "vaultwarden.greysilly7.xyz";
+          dnsProvider = "cloudflare";
+          credentialsFile = config.sops.secrets.cf_acme.path;
+        };
+      };
     };
 
     # Open Firewall for HTTP and HTTPS

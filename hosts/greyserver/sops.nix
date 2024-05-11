@@ -16,6 +16,7 @@
   sops.secrets = {
     grey_pass = {};
     cftoken = {};
-    "vaultwarden" = {};
+    vaultwarden = {};
+    cf_acme = {};
   };
 }
