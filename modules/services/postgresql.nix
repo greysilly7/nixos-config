@@ -9,6 +9,8 @@
   config = {
     services.postgresql = {
       enable = true;
+      enableTCPIP = true;
+
       ensureDatabases = ["vaultwarden"];
       ensureUsers = [
         {

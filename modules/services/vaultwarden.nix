@@ -7,16 +7,21 @@
   ...
 }: {
   config = {
-    services.vaultwarden.enable = true;
-    services.vaultwarden.config = {
-      DOMAIN = "vaultwarden.greysilly7.xyz";
+    services.vaultwarden = {
+      enable = true;
 
-      ROCKET_ADDRESS = "127.0.0.1";
-      ROCKET_PORT = 8222;
-      ROCKET_LOG = "critical";
       environmentFile = config.sops.secrets.vaultwarden.path;
+      dbBackend = "postgresql";
 
-      # ADMIN_TOKEN = toString config.sops.secrets."vaultwarden/admin_token";
+      config = {
+        DOMAIN = "vaultwarden.greysilly7.xyz";
+
+        ROCKET_ADDRESS = "127.0.0.1";
+        ROCKET_PORT = 8222;
+        ROCKET_LOG = "critical";
+
+        DATABASE_URL = "postgresql://vaultwarden@127.0.0.1:5432/vaultwarden";
+      };
     };
   };
 }
