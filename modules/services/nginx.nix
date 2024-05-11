@@ -57,7 +57,6 @@
       virtualHosts."vaultwarden.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
-        useACMEHost = "https://acme-staging-v02.api.letsencrypt.org/directory";
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
         };
@@ -66,6 +65,7 @@
     security.acme = {
       acceptTerms = true;
       defaults.email = "greysilly7@gmail.com";
+      defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
     };
 
     # Open Firewall for HTTP and HTTPS
