@@ -18,7 +18,7 @@
 
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
-    # ../../modules/services/nginx.nix
+    ../../modules/services/nginx.nix
     ../../modules/services/podman.nix
     ../../modules/services/cloudflared.nix
   ];
