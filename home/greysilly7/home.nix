@@ -17,6 +17,7 @@
     firefox
     vscode
     vesktop
+    isoimagewriter
 
     zip
     unzip
