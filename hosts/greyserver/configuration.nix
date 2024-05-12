@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common.nix
-    # ./secureboot.nix
+    ./secureboot.nix
     ./sops.nix
 
     ../../modules/hardware/pipewire.nix
