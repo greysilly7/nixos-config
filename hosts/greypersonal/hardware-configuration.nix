@@ -31,14 +31,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F22C-32E9";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
-  # Switched to ZRAM
-  /*
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/4f6e79b7-34dc-4e9d-9b50-0cb88c34aeac";}
-  ];
-  */
+  swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
