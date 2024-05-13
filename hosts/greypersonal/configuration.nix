@@ -9,9 +9,9 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./secureboot.nix
+    ../../modules/hardware/secureboot.nix
     ./i18n.nix
-    ./sops.nix
+    ../../modules/sops.nix
 
     ../../modules/common.nix
 
