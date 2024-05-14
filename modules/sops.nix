@@ -18,5 +18,6 @@
     cftoken = {};
     vaultwarden = {};
     cf_acme = {};
+    tailscale_srv_key = {};
   };
 }

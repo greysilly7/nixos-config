@@ -9,6 +9,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./tailscale.nix
+
     ../../modules/common.nix
     ../../modules/hardware/secureboot.nix
     ../../modules/sops.nix
