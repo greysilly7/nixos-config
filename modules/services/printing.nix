@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  sops,
-  ...
-}: {
+{pkgs, ...}: {
   config = {
     services.printing.enable = true;
 

@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  sops,
-  ...
-}: {
+{config, ...}: {
   config = {
     services.cloudflare-dyndns = {
       enable = true;
