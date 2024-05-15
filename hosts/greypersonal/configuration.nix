@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ../../modules/hardware/secureboot.nix
     ./i18n.nix
+    ./tailscale.nix
     ../../modules/sops.nix
 
     ../../modules/common.nix
