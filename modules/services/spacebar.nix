@@ -18,7 +18,7 @@
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       serviceConfig = {
-        ExecStart = "${inputs.spacebar}/bin/start-spacebar";
+        ExecStart = "${inputs.spacebar.packages.${"x86_64-linux"}.default}/bin/start-bundle";
         Restart = "always";
         User = "spacebar";
         Group = "spacebar";
