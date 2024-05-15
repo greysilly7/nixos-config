@@ -24,8 +24,19 @@
         Group = "spacebar";
         AmbientCapabilities = lib.mkForce "CAP_NET_BIND_SERVICE";
         CapabilityBoundingSet = lib.mkForce "CAP_NET_BIND_SERVICE";
-        Environment = "DATABASE=postgresql://%%2Frun%%2Fpostgresql/.s.PGSQL.5432/spacebar";
+        Environment = [
+          "DATABASE=postgresql://%%2Frun%%2Fpostgresql/.s.PGSQL.5432/spacebar"
+          "STORAGE_LOCATION=/var/lib/spacebar"
+        ];
       };
+    };
+
+    system.activationScripts.spacebarStorage = {
+      text = ''
+        mkdir -p /var/lib/spacebar
+        chown spacebar:spacebar /var/lib/spacebar
+        chmod 700 /var/lib/spacebar
+      '';
     };
   };
 }
