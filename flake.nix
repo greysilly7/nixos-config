@@ -34,6 +34,7 @@
     chaotic,
     sops-nix,
     srvos,
+    spacebar,
     ...
   } @ inputs: {
     nixosConfigurations.greypersonal = nixpkgs.lib.nixosSystem {
