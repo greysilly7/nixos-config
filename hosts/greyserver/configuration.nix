@@ -25,6 +25,7 @@
     ../../modules/services/cloudflared.nix
     ../../modules/services/vaultwarden.nix
     ../../modules/services/postgresql.nix
+    ../../modules/services/spacebar.nix
   ];
 
   networking.hostName = "greyserver";
