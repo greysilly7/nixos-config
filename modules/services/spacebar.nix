@@ -25,7 +25,7 @@
         AmbientCapabilities = lib.mkForce "CAP_NET_BIND_SERVICE";
         CapabilityBoundingSet = lib.mkForce "CAP_NET_BIND_SERVICE";
         Environment = [
-          "DATABASE=postgres://spacebar@127.0.0.1/spacebar"
+          "DATABASE=socket://spacebar@/run/postgresql/.s.PGSQL.5432?db=spacebar"
           "STORAGE_LOCATION=/var/lib/spacebar"
         ];
       };
