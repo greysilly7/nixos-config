@@ -15,6 +15,7 @@
     ../../modules/sops.nix
 
     ../../modules/common.nix
+    ../../modules/nh.nix
 
     ../../modules/desktop/kde.nix
     ../../modules/desktop/gaming
