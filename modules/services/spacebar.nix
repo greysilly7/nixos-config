@@ -24,7 +24,7 @@
         Group = "spacebar";
         AmbientCapabilities = lib.mkForce "CAP_NET_BIND_SERVICE";
         CapabilityBoundingSet = lib.mkForce "CAP_NET_BIND_SERVICE";
-        Environment = "DATABASE=postgresql://%2Frun%2Fpostgresql/.s.PGSQL.5432/spacebar";
+        Environment = "DATABASE=postgresql://%%2Frun%%2Fpostgresql/.s.PGSQL.5432/spacebar";
       };
     };
   };
