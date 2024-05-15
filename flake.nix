@@ -22,6 +22,9 @@
 
     srvos.url = "github:nix-community/srvos";
     srvos.inputs.nixpkgs.follows = "nixpkgs";
+
+    spacebar.url = "github:spacebarchat/server";
+    spacebar.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {

@@ -11,10 +11,14 @@
       enable = true;
       enableTCPIP = true;
 
-      ensureDatabases = ["vaultwarden"];
+      ensureDatabases = ["vaultwarden" "spacebar"];
       ensureUsers = [
         {
           name = "vaultwarden";
+          ensureDBOwnership = true;
+        }
+        {
+          name = "spacebar";
           ensureDBOwnership = true;
         }
       ];
