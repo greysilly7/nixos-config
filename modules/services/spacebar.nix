@@ -8,7 +8,8 @@
   config = {
     users.users.spacebar = {
       isSystemUser = true;
-      extraGroups = ["spacebar" "postgres"];
+      group = "spacebar";
+      extraGroups = ["postgres"];
     };
 
     users.groups.spacebar = {};
