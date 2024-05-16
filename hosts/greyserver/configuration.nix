@@ -12,6 +12,8 @@
     ./tailscale.nix
 
     ../../modules/common.nix
+    ../../modules/nh.nix
+
     ../../modules/hardware/secureboot.nix
     ../../modules/sops.nix
 
