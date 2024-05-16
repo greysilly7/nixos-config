@@ -2,6 +2,7 @@
   config = {
     services.tabby = {
       enable = true;
+      port = 11029;
     };
 
     # Open Firewall for HTTP and HTTPS
