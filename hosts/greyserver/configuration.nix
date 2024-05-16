@@ -26,6 +26,7 @@
     ../../modules/services/vaultwarden.nix
     ../../modules/services/postgresql.nix
     ../../modules/services/spacebar.nix
+    ../../modules/services/tabby.nix
   ];
 
   networking.hostName = "greyserver";
