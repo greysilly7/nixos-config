@@ -960,6 +960,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1716523444,
+        "narHash": "sha256-cbdWh0ggKoKdXHcqBURhT2p0vu5b5aZ8eyiOIS9+5aY=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "af7c0410ff8c9ae289df925f946f63c0dc3bd724",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -1022,6 +1037,7 @@
         "lanzaboote": "lanzaboote",
         "nix-gaming": "nix-gaming",
         "nixpkgs": "nixpkgs_4",
+        "nur": "nur",
         "sops-nix": "sops-nix",
         "srvos": "srvos"
       }

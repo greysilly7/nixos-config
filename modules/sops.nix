@@ -13,8 +13,6 @@
     vaultwarden = {};
     cf_acme = {};
     tailscale_srv_key = {};
-    adguardhomewebpass = {
-      owner = "nginx";
-    };
+    adguardhomewebpass = {};
   };
 }

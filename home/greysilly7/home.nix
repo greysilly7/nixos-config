@@ -11,7 +11,7 @@
     ./kitty.nix
     ./bat.nix
     ./gtk.nix
-    ./hyperland
+    ./hyprland
     ./swaylock.nix
     ./waybar
     ./wofi.nix

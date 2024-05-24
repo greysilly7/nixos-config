@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }: {
   sops.secrets.grey_pass.neededForUsers = true;

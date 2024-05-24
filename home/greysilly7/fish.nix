@@ -3,6 +3,7 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      zoxide init fish | source
     '';
     plugins = [
       {
@@ -17,15 +18,10 @@
         name = "async-prompt";
         src = pkgs.fishPlugins.async-prompt.src;
       }
-      {
-        name = "zoxide";
-        src = pkgs.fishPlugins.zoxide.src;
-      }
     ];
     shellAliases = {
       cd = "z";
       cat = "bat";
-      
     };
   };
   programs.zoxide = {
