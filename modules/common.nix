@@ -25,6 +25,9 @@
   };
   environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
 
+  # Fix for swaylock
+  security.pam.services.swaylock = {};
+
   programs.adb.enable = true;
   # Manual optimise storage: nix-store --optimise
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
