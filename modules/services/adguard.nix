@@ -8,6 +8,7 @@
 
       settings = {
         dns = {
+          port = 5353;
           ratelimit = 60;
           upstream_dns = [
             "1.0.0.1"
@@ -38,7 +39,7 @@
         ];
       };
     };
-    networking.firewall.allowedTCPPorts = [3000 53];
-    networking.firewall.allowedUDPPorts = [3000 53];
+    networking.firewall.allowedTCPPorts = [3000 5353];
+    networking.firewall.allowedUDPPorts = [3000 5353];
   };
 }
