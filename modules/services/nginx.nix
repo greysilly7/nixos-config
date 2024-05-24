@@ -57,6 +57,21 @@
         forceSSL = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
+          proxyWebsockets = true;
+        };
+      };
+      virtualHosts."adgaurdhome.greysilly7.xyz" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = config.services.adguardhome.settings.http.address;
+          proxyWebsockets = true;
+          extraConfig = ''
+            allow 192.168.0.0/24;
+            allow 100.74.70.66;
+            allow 100.81.88.100;
+            deny all;
+          '';
         };
       };
     };

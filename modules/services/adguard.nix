@@ -3,10 +3,12 @@
     services.adguardhome = {
       enable = true;
       mutableSettings = false;
-      host = "0.0.0.0";
-      port = 3000;
 
       settings = {
+        http = {
+          address = "127.0.0.1:3000";
+        };
+
         dns = {
           port = 5353;
           ratelimit = 60;
@@ -19,6 +21,7 @@
             "1.0.0.1"
           ];
           dhcp.enabled = false;
+          enable_dnssec = true;
         };
         filters = [
           {
