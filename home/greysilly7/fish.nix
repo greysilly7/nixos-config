@@ -3,7 +3,6 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
-      zoxide init fish | source
     '';
     plugins = [
       {
@@ -23,9 +22,5 @@
       cd = "z";
       cat = "bat";
     };
-  };
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
   };
 }
