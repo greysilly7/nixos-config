@@ -1,8 +1,6 @@
-{ ... }: 
-{
+{...}: {
   wayland.windowManager.hyprland = {
     settings = {
-      
       # autostart
       exec-once = [
         "systemctl --user import-environment &"
@@ -277,11 +275,10 @@
         "float,title:^(Confirm to replace files)$"
         "float,title:^(File Operation Progress)$"
       ];
-
     };
 
     extraConfig = "
-      monitor=,preferred,auto,auto
+      monitor=eDP-1,1920x1080@60,0x0,1
 
       xwayland {
         force_zero_scaling = true
