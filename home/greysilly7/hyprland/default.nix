@@ -1,8 +1,8 @@
-{inputs, ...}: {
+{pkgs, ...}: {
   imports = [
     ./hyprland.nix
     ./config.nix
     ./variables.nix
-    inputs.hyprland.homeManagerModules.default
+    # inputs.hyprland.homeManagerModules.default
   ];
 }
