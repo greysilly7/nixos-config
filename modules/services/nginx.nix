@@ -64,7 +64,7 @@
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-          proxyPass = config.services.adguardhome.settings.http.address;
+          proxyPass = "http://${toString config.services.adguardhome.settings.http.address}";
           proxyWebsockets = true;
           extraConfig = ''
             allow 192.168.0.0/24;
