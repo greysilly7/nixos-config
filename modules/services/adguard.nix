@@ -20,7 +20,6 @@
             "1.1.1.1"
             "1.0.0.1"
           ];
-          dhcp.enabled = false;
           enable_dnssec = true;
         };
         filters = [
@@ -40,6 +39,12 @@
             enabled = true;
           }
         ];
+        tls = {
+          enabled = true;
+          server_name = "adgaurdhome.greysilly7.xyz";
+          port_https = 0;
+          allow_unencrypted_doh = true;
+        };
       };
     };
     networking.firewall.allowedTCPPorts = [3000 5353];
