@@ -21,11 +21,6 @@
     ./scripts/scripts.nix
   ];
 
-  services.gpg-agent = {
-    enable = true;
-    pinentryPackage = pkgs.pinentry-curses;
-  };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
