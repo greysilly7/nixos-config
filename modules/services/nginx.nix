@@ -64,7 +64,7 @@
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-          proxyPass = "http://${toString config.services.adguardhome.settings.http.address}";
+          proxyPass = "http://127.0.0.1:3000";
           proxyWebsockets = true;
           extraConfig = ''
             allow 192.168.0.0/24;
@@ -72,6 +72,9 @@
             allow 100.81.88.100;
             deny all;
           '';
+        };
+        location."/dns-query" = {
+          proxyPass = "http://127.0.0.1:3000/dns-query";
         };
       };
     };
