@@ -49,7 +49,7 @@
         };
       };
     };
-    networking.firewall.allowedTCPPorts = [3000 5353];
-    networking.firewall.allowedUDPPorts = [3000 5353];
+    networking.firewall.allowedTCPPorts = [3000 853 5353];
+    networking.firewall.allowedUDPPorts = [3000 853 5353];
   };
 }

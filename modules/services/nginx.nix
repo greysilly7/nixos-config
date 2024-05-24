@@ -72,7 +72,7 @@
           basicAuthFile = config.sops.secrets.adguardhomewebpass.path;
         };
         locations."/dns-query" = {
-          proxyPass = "http://127.0.0.1:3000/dns-query";
+          proxyPass = "http://127.0.0.1:853/dns-query";
         };
       };
     };
