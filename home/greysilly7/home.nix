@@ -17,6 +17,7 @@
     ./wofi.nix
     ./audacious/audacious.nix
     ./packages.nix
+    ./scripts/scripts.nix
   ];
 
   services.gpg-agent = {
