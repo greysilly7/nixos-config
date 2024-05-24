@@ -60,6 +60,7 @@
           proxyWebsockets = true;
         };
       };
+      /*
       virtualHosts."adgaurdhome.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
@@ -75,6 +76,7 @@
           proxyPass = "http://127.0.0.1:853/dns-query";
         };
       };
+      */
     };
     security.acme = {
       acceptTerms = true;

@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   config = {
     services.adguardhome = {
-      enable = true;
+      enable = false;
       mutableSettings = false;
 
       settings = {
@@ -44,8 +44,6 @@
           server_name = "adgaurdhome.greysilly7.xyz";
           port_https = 0;
           allow_unencrypted_doh = true;
-          certificate_chain = "/var/lib/acme/adgaurdhome.greysilly7.xyz/fullchain.pem";
-          private_key = "/var/lib/acme/adgaurdhome.greysilly7.xyz/key.pem";
         };
       };
     };
