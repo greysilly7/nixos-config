@@ -66,12 +66,7 @@
         locations."/" = {
           proxyPass = "http://127.0.0.1:3000";
           proxyWebsockets = true;
-          extraConfig = ''
-            allow  24.176.54.191;
-            allow 100.74.70.66;
-            allow 100.81.88.100;
-            deny all;
-          '';
+          basicAuthFile = config.sops.secrets.adguardhomewebpass.path;
         };
         locations."/dns-query" = {
           proxyPass = "http://127.0.0.1:3000/dns-query";
