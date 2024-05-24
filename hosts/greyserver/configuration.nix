@@ -17,9 +17,6 @@
     ../../modules/hardware/secureboot.nix
     ../../modules/sops.nix
 
-    ../../modules/hardware/pipewire.nix
-    ../../modules/hardware/power.nix
-
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
     ../../modules/services/nginx.nix
@@ -27,8 +24,8 @@
     ../../modules/services/cloudflared.nix
     ../../modules/services/vaultwarden.nix
     ../../modules/services/postgresql.nix
-    ../../modules/services/spacebar.nix
-    ../../modules/services/tabby.nix
+    # ../../modules/services/spacebar.nix
+    ../../modules/services/adguard.nix
   ];
 
   networking.hostName = "greyserver";
