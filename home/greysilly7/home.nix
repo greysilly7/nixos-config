@@ -9,6 +9,7 @@
     ./fish.nix
     ./bash.nix
     ./kitty.nix
+    ./discord.nix
     ./bat.nix
     ./gtk.nix
     ./hyprland
