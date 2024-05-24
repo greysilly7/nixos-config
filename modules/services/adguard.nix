@@ -2,16 +2,38 @@
   config = {
     services.adguardhome = {
       enable = true;
+      mutableSettings = false;
 
       settings = {
-        http = {
-          address = "0.0.0.0:3000";
+        dns = {
+          ratelimit = 60;
+          upstream_dns = [
+            "1.0.0.1"
+            "1.1.1.1"
+          ];
+          bootstrap_dns = [
+            "1.1.1.1"
+            "1.0.0.1"
+          ];
+          dhcp.enabled = false;
         };
-        users =
-          - {
-            name = "admin";
-            password = "$2a$12$VCHIjSdvMSa.x1ICJZCPwO5s0y4CbROIx73zE8rY8nU980R2OkDai";
-          };
+        filters = [
+          {
+            name = "AdGuard DNS filter";
+            url = "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt";
+            enabled = true;
+          }
+          {
+            name = "AdAway Default Blocklist";
+            url = "https://adaway.org/hosts.txt";
+            enabled = true;
+          }
+          {
+            name = "OISD (Big)";
+            url = "https://big.oisd.nl";
+            enabled = true;
+          }
+        ];
       };
 
       openFirewall = true;
