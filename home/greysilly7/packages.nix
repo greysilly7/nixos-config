@@ -40,5 +40,7 @@
     wget
     xdg-utils
     xxd
+
+    brightnessctl
   ];
 }
