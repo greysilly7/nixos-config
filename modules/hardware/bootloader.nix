@@ -11,6 +11,7 @@
   # generated at installation time. So we force it to false
   # for now.
   boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   boot.lanzaboote = {
     enable = true;

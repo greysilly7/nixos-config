@@ -9,35 +9,14 @@
     ./fish.nix
     ./bash.nix
     ./kitty.nix
-  ];
-
-  # List of packages to install
-  home.packages = with pkgs; [
-    fastfetch
-    firefox
-    vscode
-    vesktop
-    isoimagewriter
-
-    zip
-    unzip
-    p7zip
-
-    iperf3
-    dnsutils
-    nmap
-
-    file
-    which
-
-    node2nix
-
-    gnupg
-    sops
-    nixd
-
-    pciutils
-    usbutils
+    ./bat.nix
+    ./gtk.nix
+    ./hyperland
+    ./swaylock.nix
+    ./waybar
+    ./wofi.nix
+    ./audacious/audacious.nix
+    ./packages.nix
   ];
 
   services.gpg-agent = {

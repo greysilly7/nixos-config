@@ -1,58 +1,45 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  config = {
-    home.packages = with pkgs; [
-      fira-code
-      fira-code-symbols
-    ];
+{pkgs, ...}: {
+  programs.kitty = {
+    enable = true;
+    shellIntegration.enableFishIntegration = true;
 
-    fonts.fontconfig.enable = true;
+    theme = "Catppuccin-Mocha";
 
-    programs.kitty = {
-      enable = true;
-      shellIntegration.enableBashIntegration = true;
-      extraConfig = ''
-        # Enable transparency
-        background_opacity 0.8
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 13;
+    };
 
-        # Set font and size
-        font_family Fira Code
-        font_size 12.0
+    settings = {
+      confirm_os_window_close = 0;
+      background_opacity = "0.55";
+      window_padding_width = 10;
+      scrollback_lines = 10000;
+      enable_audio_bell = false;
+      mouse_hide_wait = 60;
 
-        # Enable ligatures
-        symbol_map U+E100-U+E16F FiraCodeSymbols
+      ## Tabs
+      tab_title_template = "{index}";
+      active_tab_font_style = "normal";
+      inactive_tab_font_style = "normal";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "round";
+      active_tab_foreground = "#1e1e2e";
+      active_tab_background = "#cba6f7";
+      inactive_tab_foreground = "#bac2de";
+      inactive_tab_background = "#313244";
+    };
 
-        # Set colorscheme
-        color0 #282a36
-        color1 #ff5c57
-        color2 #5af78e
-        color3 #f3f99d
-        color4 #57c7ff
-        color5 #ff6ac1
-        color6 #9aedfe
-        color7 #f1f1f0
-        color8 #686868
-        color9 #ff5c57
-        color10 #5af78e
-        color11 #f3f99d
-        color12 #57c7ff
-        color13 #ff6ac1
-        color14 #9aedfe
-        color15 #eff0eb
+    keybindings = {
+      ## Tabs
+      "alt+1" = "goto_tab 1";
+      "alt+2" = "goto_tab 2";
+      "alt+3" = "goto_tab 3";
+      "alt+4" = "goto_tab 4";
 
-        # Set cursor color
-        cursor #97979b
-
-        # Enable copy to clipboard
-        map ctrl + shift + c copy_to_clipboard
-        map ctrl + shift + v paste_from_clipboard
-      '';
+      ## Unbind
+      "ctrl+shift+left" = "no_op";
+      "ctrl+shift+right" = "no_op";
     };
   };
 }

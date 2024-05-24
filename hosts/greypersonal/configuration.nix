@@ -9,7 +9,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/hardware/secureboot.nix
+    ../../modules/hardware/bootloader.nix
     ./i18n.nix
     ./tailscale.nix
     ../../modules/sops.nix
@@ -17,7 +17,7 @@
     ../../modules/common.nix
     ../../modules/nh.nix
 
-    ../../modules/desktop/kde.nix
+    ../../modules/desktop
     ../../modules/desktop/gaming
     ../../modules/desktop/gaming/steam.nix
 
@@ -44,12 +44,12 @@
 
   # Enable network manager
   networking.networkmanager.enable = true;
+  environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+  ];
 
   # WE want NYX Cache
   chaotic.nyx.cache.enable = true;
-
-  # Fomatting
-  environment.systemPackages = with pkgs; [inputs.alejandra.defaultPackage.${system}];
 
   system.stateVersion = "24.05";
 }

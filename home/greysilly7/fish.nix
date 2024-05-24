@@ -17,6 +17,19 @@
         name = "async-prompt";
         src = pkgs.fishPlugins.async-prompt.src;
       }
+      {
+        name = "zoxide";
+        src = pkgs.fishPlugins.zoxide.src;
+      }
     ];
+    shellAliases = {
+      cd = "z";
+      cat = "bat";
+      
+    };
+  };
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }

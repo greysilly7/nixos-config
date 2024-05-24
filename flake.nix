@@ -23,8 +23,29 @@
     srvos.url = "github:nix-community/srvos";
     srvos.inputs.nixpkgs.follows = "nixpkgs";
 
-    spacebar.url = "github:spacebarchat/server";
-    spacebar.inputs.nixpkgs.follows = "nixpkgs";
+    # spacebar.url = "github:spacebarchat/server";
+    # spacebar.inputs.nixpkgs.follows = "nixpkgs";
+
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hyprpicker.url = "github:hyprwm/hyprpicker";
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin-bat = {
+      url = "github:catppuccin/bat";
+      flake = false;
+    };
+    catppuccin-cava = {
+      url = "github:catppuccin/cava";
+      flake = false;
+    };
+    catppuccin-starship = {
+      url = "github:catppuccin/starship";
+      flake = false;
+    };
   };
 
   outputs = {
