@@ -29,6 +29,7 @@
     ../../modules/services/zram.nix
     ../../modules/services/ssh.nix
     ../../modules/services/printing.nix
+    ../../modules/services/encrypted_dns.nix
   ];
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
