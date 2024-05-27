@@ -72,38 +72,6 @@
         "type": "github"
       }
     },
-    "catppuccin-cava": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712008423,
-        "narHash": "sha256-FNNEYFurT6Y6rkKrvyAGt+3a+7GO4UE5el2sJ2ZKX2k=",
-        "owner": "catppuccin",
-        "repo": "cava",
-        "rev": "56c1e69318856a853b28e3ccce500c00099dc051",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "cava",
-        "type": "github"
-      }
-    },
-    "catppuccin-starship": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1689246850,
-        "narHash": "sha256-nsRuxQFKbQkyEI4TXgvAjcroVdG+heKX5Pauq/4Ota0=",
-        "owner": "catppuccin",
-        "repo": "starship",
-        "rev": "5629d2356f62a9f2f8efad3ff37476c19969bd4f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "starship",
-        "type": "github"
-      }
-    },
     "chaotic": {
       "inputs": {
         "attic": "attic",
@@ -1027,8 +995,6 @@
       "inputs": {
         "alejandra": "alejandra",
         "catppuccin-bat": "catppuccin-bat",
-        "catppuccin-cava": "catppuccin-cava",
-        "catppuccin-starship": "catppuccin-starship",
         "chaotic": "chaotic",
         "home-manager": "home-manager_2",
         "hypr-contrib": "hypr-contrib",
