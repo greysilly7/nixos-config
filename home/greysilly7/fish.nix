@@ -19,8 +19,12 @@
       }
     ];
     shellAliases = {
-      cd = "z";
       cat = "bat";
     };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
   };
 }
