@@ -1,16 +1,19 @@
-{pkgs, ...}: {
+{lib, ...}: {
   config = {
     # Tell network manager to not manage DNS
     networking = {
-      nameservers = ["127.0.0.1" "::1"];
-      networkmanager.dns = "none";
+      nameservers = lib.mkForce ["127.0.0.1" "::1"];
+      networkmanager.dns = lib.mkForce "none";
     };
 
     services.dnscrypt-proxy2 = {
       enable = true;
       settings = {
+        ipv4_servers = true;
         ipv6_servers = true;
         require_dnssec = true;
+        require_nofilter = true;
+        require_nolog = true;
 
         sources.public-resolvers = {
           urls = [
@@ -22,7 +25,7 @@
         };
 
         # Use the Cloudflare DNS server
-        server_names = ["cloudflare" "cloudflare-ipv6"];
+        server_names = [];
       };
     };
 
