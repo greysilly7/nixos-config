@@ -8,6 +8,7 @@
         "dbus-update-activation-environment --systemd &"
         "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
         "nm-applet &"
+        "blueman-applet &"
         "wl-clip-persist --clipboard both"
         "swaybg -m fill -i $(find ~/Pictures/wallpapers/ -maxdepth 1 -type f) &"
         "sleep 1 && swaylock"
