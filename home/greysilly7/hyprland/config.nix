@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     settings = {
       # autostart
@@ -6,6 +6,7 @@
         "systemctl --user import-environment &"
         "hash dbus-update-activation-environment 2>/dev/null &"
         "dbus-update-activation-environment --systemd &"
+        "${pkgs.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1"
         "nm-applet &"
         "wl-clip-persist --clipboard both"
         "swaybg -m fill -i $(find ~/Pictures/wallpapers/ -maxdepth 1 -type f) &"
