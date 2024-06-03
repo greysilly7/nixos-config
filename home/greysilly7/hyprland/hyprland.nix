@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [
     # swww
-    swaybg
+    hyprpaper
     inputs.hypr-contrib.packages.${system}.grimblast
     hyprpicker
     grim

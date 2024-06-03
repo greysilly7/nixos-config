@@ -1,17 +1,21 @@
 {pkgs, ...}: {
   config = {
-    services.xserver.videoDrivers = ["intel"];
-
-    boot.initrd.kernelModules = ["i915"];
-
+    boot.initrd.kernelModules = ["xe"];
+    environment.variables = {
+      VDPAU_DRIVER = "va_gl";
+      LIBVA_DRIVER_NAME = "iHD";
+    };
+    nixpkgs.config.packageOverrides = pkgs: {
+      intel-vaapi-driver = pkgs.intel-vaapi-driver.override {enableHybridCodec = true;};
+    };
     hardware.opengl = {
       enable = true;
       extraPackages = with pkgs; [
-        libva
-        intel-vaapi-driver
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
         libvdpau-va-gl
-        intel-media-driver
       ];
     };
+    # environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
   };
 }

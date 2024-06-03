@@ -13,6 +13,9 @@
     ./hardware-configuration.nix
     ./tailscale.nix
     ./i18n.nix
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-acpi_call
 
     # Common and Nix Home Manager configurations
     ../../modules/common.nix
@@ -59,6 +62,8 @@
     cpu.intel.updateMicrocode = true; # Enable Intel microcode updates
     enableRedistributableFirmware = true; # Enable redistributable firmware
   };
+
+  services.fwupd.enable = true; # Enable fwupd service
 
   # Cache configurations
   chaotic.nyx.cache.enable = true; # Enable NYX cache

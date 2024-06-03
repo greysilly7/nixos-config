@@ -25,5 +25,18 @@
     services.power-profiles-daemon.enable = false;
 
     services.thermald.enable = true;
+
+    systemd = {
+      targets = {
+        hibernate = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+        "hybrid-sleep" = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+      };
+    };
   };
 }
