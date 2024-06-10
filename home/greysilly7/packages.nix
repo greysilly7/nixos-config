@@ -53,5 +53,7 @@
     qalculate-gtk # calculator
     wget
     xdg-utils
+    cinnamon.nemo
+    xorg.xhost
   ];
 }
