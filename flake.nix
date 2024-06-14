@@ -40,7 +40,12 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
-  outputs = inputs @ {flake-parts, ...}:
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-parts,
+    ...
+  }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         # To import a flake module
@@ -68,6 +73,8 @@
         # The usual flake attributes can be defined here, including system-
         # agnostic ones like nixosModule and system-enumerating ones, although
         # those are more easily expressed in perSystem.
+
+        nixosConfigurations = import ./hosts inputs;
       };
     };
 }

@@ -4,7 +4,7 @@
 {
   config,
   lib,
-  pkgs,
+  nixpkgs,
   modulesPath,
   ...
 }: {
@@ -23,7 +23,7 @@
   };
 
   boot.initrd.luks.devices.luksroot = {
-    device = "/dev/disk/by-label/NIXCRYPT";
+    device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
     preLVM = true;
     allowDiscards = true;
   };
@@ -31,32 +31,32 @@
   #  btrfs filesystem mkswapfile --size 16g --uuid clear /persist/swap
   swapDevices = [
     {
-      device = "/persist/swap";
+      device = lib.mkForce "/persist/swap";
     }
   ];
 
   fileSystems."/" = {
-    device = "none";
+    device = lib.mkForce "none";
     fsType = "tmpfs";
     options = ["size=8G" "mode=755"];
   };
 
   fileSystems."/persist" = {
     neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
   };
 
   fileSystems."/nix" = {
     neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXBOOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
     options = ["noatime" "discard"];
   };

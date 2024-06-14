@@ -1,6 +1,6 @@
 {
   self,
-  pkgs,
+  nixpkgs,
   ...
 }: let
   inherit (self) inputs;
@@ -8,7 +8,7 @@
   bootloader = ../system/core/bootloader.nix;
   impermanence = ../system/core/impermanence.nix;
   # server = ../system/server;
-  # wayland = ../system/wayland;
+  wayland = ../system/wayland;
   hw = inputs.nixos-hardware.nixosModules;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
@@ -30,7 +30,7 @@
   };
 in {
   # My personal laptop
-  greypersonal = pkgs.lib.nixosSystem {
+  greypersonal = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules =
       [
@@ -39,6 +39,7 @@ in {
         hmModule
         bootloader
         impermanence
+        wayland
 
         {inherit home-manager;}
       ]
@@ -47,7 +48,8 @@ in {
   };
 
   # My Future Potential Raspberry PI 4 System
-  greyrpi = pkgs.lib.nixosSystem {
+  /*
+  greyrpi = nixpkgs.lib.nixosSystem {
     system = "aarch64-linux";
     modules =
       [
@@ -60,4 +62,5 @@ in {
       ++ shared;
     specialArgs = {inherit inputs;};
   };
+  */
 }

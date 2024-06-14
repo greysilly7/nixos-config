@@ -1,5 +1,5 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
+{nixpkgs, ...}: {
+  home.packages = with nixpkgs; [
     (discord.override {
       withVencord = true;
       withOpenASAR = true;
