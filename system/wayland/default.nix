@@ -3,7 +3,13 @@
   pkgs,
   ...
 }: {
-  imports = [./services.nix ./pipewire.nix ./xserver.nix];
+  imports = [
+    ./services.nix
+    ./pipewire.nix
+    /*
+    ./xserver.nix
+    */
+  ];
   environment = {
     variables = {
       NIXOS_OZONE_WL = "1";
@@ -35,6 +41,7 @@
     enable = true;
     wlr.enable = lib.mkForce true;
     xdgOpenUsePortal = true;
+    config.common.default = "*";
     extraPortals = [
       pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk

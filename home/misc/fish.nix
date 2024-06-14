@@ -1,4 +1,4 @@
-{nixpkgs, ...}: {
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -7,15 +7,15 @@
     plugins = [
       {
         name = "pure";
-        src = nixpkgs.fishPlugins.pure.src;
+        src = pkgs.fishPlugins.pure.src;
       }
       {
         name = "sponge";
-        src = nixpkgs.fishPlugins.sponge.src;
+        src = pkgs.fishPlugins.sponge.src;
       }
       {
         name = "async-prompt";
-        src = nixpkgs.fishPlugins.async-prompt.src;
+        src = pkgs.fishPlugins.async-prompt.src;
       }
     ];
     shellAliases = {

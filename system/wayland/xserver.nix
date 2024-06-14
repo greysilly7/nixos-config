@@ -1,12 +1,14 @@
 {...}: {
+  services.displayManager.sddm.enable = true;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "greysilly7";
+  };
+
   services.xserver = {
     enable = true;
     xkb.layout = "us";
 
-    displayManager.autoLogin = {
-      enable = true;
-      user = "greysilly7";
-    };
     libinput = {
       enable = true;
       # mouse = {
