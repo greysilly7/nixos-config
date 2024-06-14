@@ -17,55 +17,28 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  fileSystems."/etc/ssh" = {
-    depends = ["/persist"];
-    neededForBoot = true;
-  };
-
-  boot.initrd.luks.devices.luksroot = {
-    device = "/dev/disk/by-label/NIXCRYPT";
-    preLVM = true;
-    allowDiscards = true;
-  };
-
-  #  btrfs filesystem mkswapfile --size 16g --uuid clear /persist/swap
-  swapDevices = [
-    {
-      device = "/persist/swap";
-    }
-  ];
-
   fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["size=8G" "mode=755"];
+    device = "/dev/disk/by-uuid/318e2a6c-8670-444d-bc45-b47c5daa250d";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+    ];
   };
 
-  fileSystems."/persist" = {
-    neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
-    fsType = "btrfs";
-    options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
-  };
-
-  fileSystems."/nix" = {
-    neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
-    fsType = "btrfs";
-    options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
-  };
+  boot.initrd.luks.devices."luks-a5c9c229-75d2-46e8-b51f-5e8ededcd170".device = "/dev/disk/by-uuid/a5c9c229-75d2-46e8-b51f-5e8ededcd170";
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXBOOT";
+    device = "/dev/disk/by-uuid/F22C-32E9";
     fsType = "vfat";
-    options = ["noatime" "discard"];
+    options = ["fmask=0022" "dmask=0022"];
   };
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
