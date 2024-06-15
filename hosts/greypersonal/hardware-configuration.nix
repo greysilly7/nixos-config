@@ -22,7 +22,7 @@
     neededForBoot = true;
   };
 
-  boot.initrd.luks.devices."crypted".device = {
+  boot.initrd.luks.devices."crypted" = {
     device = lib.mkForce "/dev/disk/by-uuid/101d60d6-1374-4438-b717-8f48b970f256";
     preLVM = true;
     allowDiscards = true;
