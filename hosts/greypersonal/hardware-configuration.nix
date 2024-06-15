@@ -23,10 +23,10 @@
   };
 
   boot.initrd.luks.devices."crypted" = {
-    device = lib.mkForce "/dev/disk/by-uuid/101d60d6-1374-4438-b717-8f48b970f256";
+    device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
     preLVM = true;
     allowDiscards = true;
-  };
+};
 
   #  btrfs filesystem mkswapfile --size 16g --uuid clear /persist/swap
   swapDevices = [
@@ -43,24 +43,25 @@
     options = ["size=8G" "mode=755"];
   };
 
+
   fileSystems."/persist" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-uuid/854fc786-bb10-47e7-b216-ad83054bcd6b";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
   };
 
   fileSystems."/nix" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-uuid/854fc786-bb10-47e7-b216-ad83054bcd6b";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-uuid/EA82-583F";
+    device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
-    options = ["noatime" "discard" "fmask=0022" "dmask=0022"];
+    options = ["noatime" "discard"];
   };
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
