@@ -22,11 +22,11 @@
     neededForBoot = true;
   };
 
-  boot.initrd.luks.devices."crypted" = {
-    device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
+  boot.initrd.luks.devices.luksroot = {
+    device = "/dev/disk/by-label/NIXCRYPT";
     preLVM = true;
     allowDiscards = true;
-};
+  };
 
   #  btrfs filesystem mkswapfile --size 16g --uuid clear /persist/swap
   swapDevices = [
@@ -38,31 +38,31 @@
   ];
 
   fileSystems."/" = {
-    device = lib.mkForce "none";
+    device = "none";
     fsType = "tmpfs";
     options = ["size=8G" "mode=755"];
   };
 
-
   fileSystems."/persist" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
+    device = "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
   };
 
   fileSystems."/nix" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
+    device = "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
+    device = "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
     options = ["noatime" "discard"];
   };
+  
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
