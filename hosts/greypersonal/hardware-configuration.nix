@@ -22,8 +22,9 @@
     neededForBoot = true;
   };
 
-  boot.initrd.luks.devices.luksroot = {
-    device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
+  boot.initrd.luks.devices."enc" = {
+    # device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
+    device = lib.mkForce "/dev/disk/by-uuid/868ef7ba-3954-44cd-9f26-0d4eec80780d";
     preLVM = true;
     allowDiscards = true;
   };
@@ -60,7 +61,7 @@
   fileSystems."/boot" = {
     device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
-    options = ["noatime" "discard"];
+    options = ["noatime" "discard" "fmask=0022" "dmask=0022" ];
   };
   
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
