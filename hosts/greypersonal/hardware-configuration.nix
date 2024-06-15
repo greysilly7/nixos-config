@@ -23,7 +23,7 @@
   };
 
   boot.initrd.luks.devices.luksroot = {
-    device = "/dev/disk/by-label/NIXCRYPT";
+    device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
     preLVM = true;
     allowDiscards = true;
   };
@@ -45,20 +45,20 @@
 
   fileSystems."/persist" = {
     neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
   };
 
   fileSystems."/nix" = {
     neededForBoot = true;
-    device = "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXBOOT";
+    device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
     options = ["noatime" "discard"];
   };
