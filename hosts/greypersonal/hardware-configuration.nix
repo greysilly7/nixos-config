@@ -28,7 +28,7 @@ fileSystems."/etc/ssh" = {
       options = [ "subvol=@swap" ];
     };
 
-  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/b2496f93-f97a-4137-8879-a4fe6be270bd";
+  boot.initrd.luks.devices."crypted".device = lib.mkForce "/dev/disk/by-uuid/b2496f93-f97a-4137-8879-a4fe6be270bd";
 
   fileSystems."/" = {
     device = "none";
