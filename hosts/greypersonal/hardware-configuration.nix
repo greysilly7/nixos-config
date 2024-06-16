@@ -23,7 +23,7 @@ fileSystems."/etc/ssh" = {
   };
 
   fileSystems."/.swapvol" =
-    { device = "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
+    { device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
       fsType = "btrfs";
       options = [ "subvol=@swap" ];
     };
