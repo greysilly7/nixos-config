@@ -17,26 +17,18 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/etc/ssh" = {
+fileSystems."/etc/ssh" = {
     depends = ["/persist"];
     neededForBoot = true;
   };
 
-  boot.initrd.luks.devices."enc" = {
-    # device = lib.mkForce "/dev/disk/by-label/NIXCRYPT";
-    device = lib.mkForce "/dev/disk/by-uuid/868ef7ba-3954-44cd-9f26-0d4eec80780d";
-    preLVM = true;
-    allowDiscards = true;
-  };
+  fileSystems."/.swapvol" =
+    { device = "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ];
+    };
 
-  #  btrfs filesystem mkswapfile --size 16g --uuid clear /persist/swap
-  swapDevices = [
-    /*
-    {
-      device = lib.mkForce "/persist/swap";
-    }
-    */
-  ];
+  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/b2496f93-f97a-4137-8879-a4fe6be270bd";
 
   fileSystems."/" = {
     device = "none";
@@ -46,24 +38,26 @@
 
   fileSystems."/persist" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
   };
 
   fileSystems."/nix" = {
     neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-label/NIXROOT";
+    device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
     fsType = "btrfs";
     options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
   };
 
   fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-label/NIXBOOT";
+    device = lib.mkForce "/dev/disk/by-uuid/9B6B-A0B6";
     fsType = "vfat";
     options = ["noatime" "discard" "fmask=0022" "dmask=0022" ];
   };
-  
+
+  swapDevices = [ ];
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
