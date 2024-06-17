@@ -6,9 +6,9 @@
   home.packages = with pkgs; [
     # swww
     hyprpaper
-    network-manager-applet
     inputs.hypr-contrib.packages.${system}.grimblast
     poweralertd
+    networkmanagerapplet
     mako
     hyprpicker
     grim
