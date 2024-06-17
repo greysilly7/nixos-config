@@ -1,23 +1,19 @@
 {lib, ...}: {
   home.persistence."/persist/home/greysilly7" = {
     allowOther = true;
+    # directories = [".ssh" ".mozilla" ".config/hypr" ".config/kitty" ".cache/nix" ".cache/mozilla"];
     directories =
       [
-        "download"
-        "music"
-        "dev"
-        "docs"
-        "pics"
-        "vids"
-        "other"
+        "Downloads"
       ]
-      ++ lib.forEach ["syncthing" "Caprine" "VencordDesktop" "obs-studio" "Signal" "niri" "BraveSoftware" "nicotine" "ags"] (
+      ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi"] (
         x: ".config/${x}"
       )
-      ++ lib.forEach ["tealdeer" "keepassxc" "nix" "starship" "nix-index" "mozilla" "go-build" "BraveSoftware"] (
+      ++ lib.forEach ["nix" "mozilla"] (
         x: ".cache/${x}"
       )
-      ++ lib.forEach ["direnv" "TelegramDesktop" "PrismLauncher" "keyrings" "nicotine"] (x: ".local/share/${x}")
-      ++ [".ssh" ".keepass" ".mozilla" ".thunderbird"];
+      ++ lib.forEach ["PrismLauncher" "keyrings"] (x: ".local/share/${x}")
+      ++ [".ssh" ".keepass" ".mozilla" ".vscode"];
+      files = [ ".bash_history" ];
   };
 }

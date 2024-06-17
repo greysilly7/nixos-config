@@ -23,6 +23,7 @@
     usbutils
     brightnessctl
     libnotify
+    dconf
 
     # Node.js Tools
     node2nix

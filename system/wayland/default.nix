@@ -6,9 +6,7 @@
   imports = [
     ./services.nix
     ./pipewire.nix
-    /*
     ./xserver.nix
-    */
   ];
   environment = {
     variables = {
@@ -27,15 +25,16 @@
       DISABLE_QT_COMPAT = "0";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       MOZ_ENABLE_WAYLAND = "1";
-      WLR_BACKEND = "vulkan";
-      WLR_RENDERER = "vulkan";
+      # WLR_BACKEND = "vulkan";
+      # `WLR_RENDERER = "vulkan";
       XDG_SESSION_TYPE = "wayland";
       SDL_VIDEODRIVER = "wayland";
-      XDG_CACHE_HOME = "/home/sioodmy/.cache";
+      XDG_CACHE_HOME = "/home/greysilly7/.cache";
       CLUTTER_BACKEND = "wayland";
       WLR_DRM_DEVICES = "/dev/dri/card1";
     };
   };
+ programs.hyprland.enable = true;
 
   xdg.portal = {
     enable = true;

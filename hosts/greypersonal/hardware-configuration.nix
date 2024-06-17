@@ -17,11 +17,6 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-fileSystems."/etc/ssh" = {
-    depends = ["/persist"];
-    neededForBoot = true;
-  };
-
   fileSystems."/.swapvol" =
     { device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
       fsType = "btrfs";

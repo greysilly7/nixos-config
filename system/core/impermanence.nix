@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [inputs.impermanence.nixosModule];
+  programs.fuse.userAllowOther = true;
   fileSystems."/etc/ssh" = {
     depends = ["/persist"];
     neededForBoot = true;
