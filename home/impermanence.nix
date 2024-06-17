@@ -5,6 +5,7 @@
     directories =
       [
         "Downloads"
+        "nixos-config"
       ]
       ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi"] (
         x: ".config/${x}"
