@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   time = {
     timeZone = "America/Detroit";
     hardwareClockInLocalTime = true;
@@ -20,5 +20,12 @@
   };
 
   security.polkit.enable = true;
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
   # security.pam.services.hyprlock = {};
 }

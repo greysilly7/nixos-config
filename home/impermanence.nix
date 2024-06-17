@@ -8,7 +8,7 @@
         "nixos-config"
         "Pictures"
       ]
-      ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi"] (
+      ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi" "sops"] (
         x: ".config/${x}"
       )
       ++ lib.forEach ["nix" "mozilla"] (
