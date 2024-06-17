@@ -1,8 +1,17 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
+  environment.systemPackages = with pkgs; [
+    git
+    deadnix
+    alejandra
+    statix
+    nix-output-monitor
+  ];
+
   nixpkgs = {
     config = {
       allowUnfree = true;

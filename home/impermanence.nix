@@ -16,6 +16,6 @@
       )
       ++ lib.forEach ["PrismLauncher" "keyrings"] (x: ".local/share/${x}")
       ++ [".ssh" ".keepass" ".mozilla" ".vscode"];
-      files = [ ".bash_history" ];
+    files = [".bash_history"];
   };
 }

@@ -5,11 +5,11 @@
     user = "greysilly7";
   };
   services.libinput = {
-      enable = true;
-      # mouse = {
-      #   accelProfile = "flat";
-      # };
-    };
+    enable = true;
+    # mouse = {
+    #   accelProfile = "flat";
+    # };
+  };
 
   services.xserver = {
     enable = true;

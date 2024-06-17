@@ -34,7 +34,7 @@
       WLR_DRM_DEVICES = "/dev/dri/card1";
     };
   };
- programs.hyprland.enable = true;
+  programs.hyprland.enable = true;
 
   xdg.portal = {
     enable = true;

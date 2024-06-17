@@ -28,10 +28,10 @@
     };
     loader.efi.canTouchEfiVariables = true;
   };
-/*
+  /*
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
-*/
+  */
 }
