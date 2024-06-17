@@ -50,7 +50,6 @@
 
     # Miscellaneous Tools
     fastfetch
-    poweralertd
     qalculate-gtk # calculator
     wget
     xdg-utils
