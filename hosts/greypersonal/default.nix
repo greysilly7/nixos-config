@@ -1,14 +1,9 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
   ];
-  services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = false;
   services.fwupd.enable = true; # Enable fwupd service
   services.auto-cpufreq = {
     enable = true;

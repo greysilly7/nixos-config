@@ -11,6 +11,13 @@
     statix
     nix-output-monitor
   ];
+  
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/greysilly7/nixos-config";
+  };
 
   nixpkgs = {
     config = {

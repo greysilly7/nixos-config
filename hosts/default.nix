@@ -48,6 +48,21 @@ in {
     specialArgs = {inherit inputs;};
   };
 
+  greyserver = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules =
+      [
+        {networking.hostName = "greyserver";}
+        ./greyserver
+        hmModule
+        bootloader
+
+        {inherit home-manager;}
+      ]
+      ++ shared;
+    specialArgs = {inherit inputs;};
+  };
+
   # My Future Potential Raspberry PI 4 System
   /*
   greyrpi = nixpkgs.lib.nixosSystem {

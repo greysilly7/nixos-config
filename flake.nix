@@ -38,6 +38,9 @@
     };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
+    greysilly7-xyz.url = "github:greysilly7/greysilly7.xyz";
 
     hypr-contrib.url = "github:hyprwm/contrib";
     hyprpicker.url = "github:hyprwm/hyprpicker";

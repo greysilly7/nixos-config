@@ -3,8 +3,12 @@
     # Browsers
     firefox
 
+    # VM
+    quickemu
+
     # Code Editors
     vscode
+    zed-editor
 
     # Compression Tools
     zip
