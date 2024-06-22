@@ -11,14 +11,14 @@
     ./vaultwarden.nix
 
     # Mincraft Servers being hosted on this machine
-    ./iremia
+    ./mc
   ];
   nixpkgs.overlays = [inputs.nix-minecraft.overlay];
 
   services.openssh = {
     enable = true;
     settings = {
-      # root user is used for remote deployment, so we need to allow it
+      # root user is used for remote deployment, so we need to allow it\1
       PermitRootLogin = lib.mkForce "prohibit-password";
       PasswordAuthentication = lib.mkForce false; # disable password login
     };
