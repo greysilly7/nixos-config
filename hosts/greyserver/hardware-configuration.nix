@@ -17,17 +17,6 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/3ac57de0-f092-4548-a758-aeb3f9f5d3b8";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/F0B8-FF71";
-    fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
-  };
-
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
