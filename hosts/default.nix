@@ -7,7 +7,7 @@
   core = ../system/core;
   bootloader = ../system/core/bootloader.nix;
   impermanence = ../system/core/impermanence.nix;
-  # server = ../system/server;
+  server = ../system/server;
   wayland = ../system/wayland;
   hw = inputs.nixos-hardware.nixosModules;
   sops-nix = inputs.sops-nix.nixosModules.sops;
@@ -56,6 +56,7 @@ in {
         ./greyserver
         hmModule
         bootloader
+        server
 
         {inherit home-manager;}
       ]

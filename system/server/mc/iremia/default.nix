@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/Alpaca-Industries/iremia-comeback/raw/1.0.0/pack.toml";
-    packHash = "1edbfcc012b805d60217bac4ed5903cc6854f24bf84d6ef9c1e7a7c38d3855bb";
+    packHash = "sha256-i+W0WA/eH/tNmYzguP2/v/rJb1LUnCV4WmMO9FpjcdI=";
   };
 in {
   services.minecraft-servers.servers.iremia = {

@@ -53,6 +53,7 @@
     pavucontrol # pulseaudio volume control (GUI)
 
     # Miscellaneous Tools
+    packwiz
     fastfetch
     qalculate-gtk # calculator
     wget
