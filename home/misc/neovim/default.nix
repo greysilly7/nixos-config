@@ -9,10 +9,11 @@
     };
   };
 
-  home.packsges = with pkgs; [
+  home.packages = with pkgs; [
     ripgrep
     gnumake
     gcc
+    luaformatter
   ];
 
   home.file.".config/nvim/init.lua" = {
@@ -22,7 +23,7 @@
 
   home.file.".config/nvim/lua" = {
     source = ./lua;
-    recusrive = true;
+    recursive = true;
     force = true;
   };
 }
