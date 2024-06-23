@@ -11,7 +11,7 @@
     statix
     nix-output-monitor
   ];
-  
+
   programs.nh = {
     enable = true;
     clean.enable = true;

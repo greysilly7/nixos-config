@@ -1,12 +1,12 @@
-{pkgs, ...}: {
+{...}: {
   config = {
     services.adguardhome = {
-      enable = false;
+      enable = true;
       mutableSettings = false;
 
       settings = {
         http = {
-          address = "127.0.0.1:3000";
+          address = "0.0.0.0:3000";
         };
 
         dns = {
@@ -39,15 +39,17 @@
             enabled = true;
           }
         ];
+        /*
         tls = {
           enabled = true;
           server_name = "adgaurdhome.greysilly7.xyz";
           port_https = 0;
           allow_unencrypted_doh = true;
         };
+        */
       };
     };
-    networking.firewall.allowedTCPPorts = [3000 853 5353];
-    networking.firewall.allowedUDPPorts = [3000 853 5353];
+    networking.firewall.allowedTCPPorts = [3000 5353];
+    networking.firewall.allowedUDPPorts = [3000 5353];
   };
 }
