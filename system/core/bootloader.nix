@@ -1,9 +1,10 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
-  # imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
   environment.systemPackages = [
     # For debugging and troubleshooting Secure Boot.
     pkgs.sbctl
@@ -21,16 +22,14 @@
 
     bootspec.enable = lib.mkDefault true;
     loader = {
-      systemd-boot.enable = lib.mkForce true;
+      systemd-boot.enable = lib.mkForce false;
       # spam space to get to boot menu
       timeout = 0;
     };
     loader.efi.canTouchEfiVariables = true;
   };
-  /*
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
   };
-  */
 }
