@@ -16,6 +16,10 @@
                 mountpoint = "/boot";
                 mountOptions = [
                   "defaults"
+                  "noatime"
+                  "discard"
+                  "fmask=0022"
+                  "dmask=0022"
                 ];
               };
             };
@@ -35,15 +39,15 @@
                   subvolumes = {
                     "/@persist" = {
                       mountpoint = "/persist";
-                      mountOptions = ["compress=zstd" "noatime"];
+                      mountOptions = ["compress=zstd" "noatime" "discard"];
                     };
                     "/@nix" = {
                       mountpoint = "/nix";
-                      mountOptions = ["compress=zstd" "noatime"];
+                      mountOptions = ["compress=zstd" "noatime" "discard"];
                     };
                     "/@swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "20M";
+                      swap.swapfile.size = "16GB";
                     };
                   };
                 };
