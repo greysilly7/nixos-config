@@ -24,7 +24,7 @@
     package = pkgs.bluez5-experimental;
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     extraPackages = with pkgs; [vaapiIntel libva libvdpau-va-gl vaapiVdpau ocl-icd intel-compute-runtime];
     extraPackages32 = with pkgs.pkgsi686Linux; [
       vaapiVdpau
