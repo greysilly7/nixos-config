@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  nixpkgs,
   modulesPath,
   ...
 }: {
