@@ -8,13 +8,13 @@
         "nixos-config"
         "Pictures"
       ]
-      ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi" "sops" "nvim"] (
+      ++ lib.forEach ["audacios" "bat" "Code" "dconf" "discord" "enviorment.d" "fish" "fontconfig" "git" "hypr" "kitty" "pulse" "swaylock" "Vencord" "waybar" "wofi" "sops" "nvim" "TabNineb"] (
         x: ".config/${x}"
       )
       ++ lib.forEach ["nix" "mozilla"] (
         x: ".cache/${x}"
       )
-      ++ lib.forEach ["PrismLauncher" "keyrings"] (x: ".local/share/${x}")
+      ++ lib.forEach ["PrismLauncher" "keyrings" "steam"] (x: ".local/share/${x}")
       ++ [".ssh" ".keepass" ".mozilla" ".vscode"];
     files = [".bash_history"];
   };

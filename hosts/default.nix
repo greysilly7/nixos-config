@@ -9,6 +9,7 @@
   impermanence = ../system/core/impermanence.nix;
   server = ../system/server;
   wayland = ../system/wayland;
+  gaming = ../system/gaming;
   hw = inputs.nixos-hardware.nixosModules;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
@@ -41,6 +42,7 @@ in {
         bootloader
         impermanence
         wayland
+        gaming
 
         {inherit home-manager;}
       ]
