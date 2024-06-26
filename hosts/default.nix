@@ -11,12 +11,13 @@
   wayland = ../system/wayland;
   gaming = ../system/gaming;
   hw = inputs.nixos-hardware.nixosModules;
+  chaotic = inputs.chaotic.nixosModules.default;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   # Shared Modules
-  shared = [core sops-nix disko];
+  shared = [core sops-nix disko chaotic];
 
   home-manager = {
     useUserPackages = true;

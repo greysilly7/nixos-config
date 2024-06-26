@@ -3,6 +3,10 @@
     ./hardware-configuration.nix
     ./disko.nix
   ];
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+
   services.power-profiles-daemon.enable = false;
   services.fwupd.enable = true; # Enable fwupd service
   services.auto-cpufreq = {

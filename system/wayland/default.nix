@@ -31,11 +31,10 @@
       SDL_VIDEODRIVER = "wayland";
       XDG_CACHE_HOME = "/home/greysilly7/.cache";
       CLUTTER_BACKEND = "wayland";
-      WLR_DRM_DEVICES = "/dev/dri/card1";
+      WLR_DRM_DEVICES = "/dev/dri/card0";
     };
   };
   programs.hyprland.enable = true;
-
   xdg.portal = {
     enable = true;
     wlr.enable = lib.mkForce true;
