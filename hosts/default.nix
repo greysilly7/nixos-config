@@ -61,7 +61,7 @@ in {
         bootloader
         # server
 
-        {inherit home-manager;}
+        # {inherit home-manager;}
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
