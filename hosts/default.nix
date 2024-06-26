@@ -57,7 +57,7 @@ in {
       [
         {networking.hostName = "greyserver";}
         ./greyserver
-        hmModule
+        # hmModule
         bootloader
         # server
 
