@@ -59,7 +59,7 @@ in {
         ./greyserver
         hmModule
         bootloader
-        server
+        # server
 
         {inherit home-manager;}
       ]
