@@ -57,11 +57,8 @@ in {
       [
         {networking.hostName = "greyserver";}
         ./greyserver
-        hmModule
         bootloader
         server
-
-        {inherit home-manager;}
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
