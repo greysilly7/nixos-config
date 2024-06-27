@@ -16,9 +16,8 @@ in {
     autoStart = true;
     package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
 
-    /*
     serverProperties = {
-      server-port = 43000;
+      server-port = 18611;
       difficulty = 3;
       gamemode = 1;
       max-players = 5;
@@ -30,8 +29,7 @@ in {
 
     symlinks = {
       "mods" = "${modpack}/mods";
-      # "config" = "${modpack}/config";
+      "config" = "${modpack}/config";
     };
-    */
   };
 }
