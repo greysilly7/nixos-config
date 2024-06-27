@@ -6,6 +6,6 @@
     ./secrets.nix
     ./nix.nix
     ./users.nix
-    # ./openssh.nix
+    ./openssh.nix
   ];
 }
