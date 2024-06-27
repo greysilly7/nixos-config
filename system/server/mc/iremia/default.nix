@@ -16,6 +16,7 @@ in {
     autoStart = true;
     package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
 
+    /*
     serverProperties = {
       server-port = 43000;
       difficulty = 3;
@@ -31,5 +32,6 @@ in {
       "mods" = "${modpack}/mods";
       # "config" = "${modpack}/config";
     };
+    */
   };
 }
