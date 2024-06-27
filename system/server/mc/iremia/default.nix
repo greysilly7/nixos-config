@@ -16,17 +16,6 @@ in {
     autoStart = true;
     package = pkgs.fabricServers.${serverVersion}.override {loaderVersion = fabricVersion;};
 
-    serverProperties = {
-      server-port = 18611;
-      difficulty = 3;
-      gamemode = 1;
-      max-players = 5;
-      motd = "IREMIA!";
-      white-list = false;
-      enable-rcon = true;
-      "rcon.password" = "password";
-    };
-
     symlinks = {
       "mods" = "${modpack}/mods";
       "config" = "${modpack}/config";
