@@ -1,6 +1,7 @@
 {
   inputs,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
@@ -15,6 +16,10 @@
     ./mc
   ];
   nixpkgs.overlays = [inputs.nix-minecraft.overlay];
+
+  environment.systemPackages = with pkgs; [
+    tmux
+  ];
 
   services.openssh = {
     enable = true;
