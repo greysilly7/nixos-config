@@ -1,4 +1,8 @@
-{inputs, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
@@ -11,6 +15,14 @@
     flavor = "mocha";
   };
 
+  environment.systemPackages = with pkgs; [
+    lxqt.lxqt-openssh-askpass
+  ];
+
+  programs.ssh = {
+    enableAskPassword = true;
+    askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   chaotic.scx.enable = true; # by default uses scx_rustland scheduler

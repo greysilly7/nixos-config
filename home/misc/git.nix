@@ -1,5 +1,9 @@
-{...}: {
+{pkgs, ...}: {
   home.file.".ssh/allowed_signers".text = "* ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com";
+
+  home.sessionVariables = {
+    SSH_ASKPASS = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
+  };
 
   programs.git = {
     enable = true;
