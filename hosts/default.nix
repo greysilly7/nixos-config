@@ -59,6 +59,7 @@ in {
         ./greyserver
         bootloader
         server
+        wayland
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
