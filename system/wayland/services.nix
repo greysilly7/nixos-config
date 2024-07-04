@@ -5,6 +5,7 @@
     dbus.enable = true;
     fstrim.enable = true;
     printing.enable = true;
+    blueman.enable = true;
   };
   services.logind.extraConfig = ''
     # don't shutdown when power button is short-pressed

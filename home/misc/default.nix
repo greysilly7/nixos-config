@@ -6,6 +6,6 @@
     ./fish.nix
     ./git.nix
     ./kitty.nix
-    ./neovim
+    # ./neovim
   ];
 }

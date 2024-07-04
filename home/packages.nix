@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     # Browsers
     firefox
@@ -9,6 +13,7 @@
     # Code Editors
     vscode
     zed-editor
+    inputs.nvix.packages.${system}.default
 
     # Compression Tools
     zip

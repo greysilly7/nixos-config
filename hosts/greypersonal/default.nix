@@ -1,8 +1,16 @@
-{pkgs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
+
+    inputs.catppuccin.nixosModules.catppuccin
   ];
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
+
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos;
   chaotic.scx.enable = true; # by default uses scx_rustland scheduler

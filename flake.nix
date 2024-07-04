@@ -6,10 +6,7 @@
       url = "github:kamadorueda/alejandra/3.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin-bat = {
-      url = "github:catppuccin/bat";
-      flake = false;
-    };
+    catppuccin.url = "github:catppuccin/nix";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,6 +41,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nvix = {
+      url = "github:niksingh710/nvix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
