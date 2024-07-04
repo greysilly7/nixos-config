@@ -5,7 +5,7 @@
 }: let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://github.com/Alpaca-Industries/iremia-comeback/raw/1.0.2/pack.toml";
-    packHash = "sha256-WFW1YtuQL4rBYPlYR+Wjq9O0L7OET0usYU42nZonYgI=";
+    packHash = "sha256-/G6+BjhdesnQf/OzY+4qx9NPECvWlkpKe1VgZVZM9Is=";
   };
   mcVersion = modpack.manifest.versions.minecraft;
   fabricVersion = modpack.manifest.versions.fabric;
