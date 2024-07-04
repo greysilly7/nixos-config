@@ -65,5 +65,6 @@
     xdg-utils
     cinnamon.nemo
     xorg.xhost
+    moonlight-qt
   ];
 }
