@@ -1,4 +1,13 @@
 {pkgs, ...}: {
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "unlimited";
+    }
+  ];
+
   time = {
     timeZone = "America/Detroit";
     hardwareClockInLocalTime = true;
