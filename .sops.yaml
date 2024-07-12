@@ -1,6 +1,6 @@
 keys:
   - &admin_greysilly7 age1f0yw5e9w55r5zwun8nfqzezpze6gsez4lkyw44z26efc87na8dhq56yztk
-  - &computer_laptop age1kwvkrkzrtwg66yzjn6hlhxj6dyguxn2vypumpr06a6ypf49cf3gswgrrnk
+  - &computer_laptop age18z3vwegyl382n8zrujrvtg5pwfmj5649u3wcedmke5dnvne8y5ws3cspa4
   - &computer_server age1dlkt44dm4t5q9uqvnc3yf7aw6zy7cnaczm0ex5rgaatxfxtj2p9q6knnyr
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$

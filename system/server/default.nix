@@ -11,7 +11,6 @@
     ./nginx.nix
     ./vaultwarden.nix
     ./adguard.nix
-    ./sunshine.nix
 
     # Mincraft Servers being hosted on this machine
     ./mc
