@@ -15,8 +15,6 @@
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
   hmModule = inputs.home-manager.nixosModules.home-manager;
-  lancache_dns = inputs.lancache.nixosModules.dns;
-  lancache_cache = inputs.lancache.nixosModules.cache;
 
   # Shared Modules
   shared = [core sops-nix disko chaotic];
@@ -62,9 +60,6 @@ in {
         bootloader
         server
         wayland
-
-        lancache_dns
-        lancache_cache
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
