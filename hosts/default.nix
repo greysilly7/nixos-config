@@ -6,11 +6,10 @@
   inherit (self) inputs;
   core = ../system/core;
   bootloader = ../system/core/bootloader.nix;
-  impermanence = ../system/core/impermanence.nix;
+  # impermanence = ../system/core/impermanence.nix;
   server = ../system/server;
   wayland = ../system/wayland;
   gaming = ../system/gaming;
-  hw = inputs.nixos-hardware.nixosModules;
   chaotic = inputs.chaotic.nixosModules.default;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
@@ -41,7 +40,7 @@ in {
         ./greypersonal
         hmModule
         bootloader
-        impermanence
+        # impermanence
         wayland
         gaming
 
@@ -59,7 +58,7 @@ in {
         ./greyserver
         bootloader
         server
-        wayland
+        # wayland
       ]
       ++ shared;
     specialArgs = {inherit inputs;};

@@ -6,8 +6,8 @@
   imports = [
     ./services.nix
     ./pipewire.nix
-    ./xserver.nix
   ];
+  /*
   environment = {
     variables = {
       NIXOS_OZONE_WL = "1";
@@ -31,7 +31,7 @@
       SDL_VIDEODRIVER = "wayland";
       XDG_CACHE_HOME = "/home/greysilly7/.cache";
       CLUTTER_BACKEND = "wayland";
-      WLR_DRM_DEVICES = "/dev/dri/card0";
+      WLR_DRM_DEVICES = "/dev/dri/card1";
     };
   };
   programs.hyprland.enable = true;
@@ -45,4 +45,6 @@
       pkgs.xdg-desktop-portal-gtk
     ];
   };
+  */
+  systemd.extraConfig = "DefaultTimeoutStopSec=10s";
 }

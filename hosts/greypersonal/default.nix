@@ -15,17 +15,19 @@
     flavor = "mocha";
   };
 
-  environment.systemPackages = with pkgs; [
-    lxqt.lxqt-openssh-askpass
-  ];
-
-  programs.ssh = {
-    enableAskPassword = true;
-    askPassword = "${pkgs.lxqt.lxqt-openssh-askpass}/bin/lxqt-openssh-askpass";
+  # MESA Git
+  chaotic.mesa-git = {
+    enable = true;
+    extraPackages = with pkgs; [mesa_git.opencl intel-media-driver intel-ocl intel-vaapi-driver];
+    extraPackages32 = with pkgs.pkgsi686Linux; [pkgs.mesa32_git.opencl intel-media-driver intel-vaapi-driver];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  chaotic.scx.enable = true; # by default uses scx_rustland scheduler
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+
+  # boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  # chaotic.scx.enable = true; # by default uses scx_rustland scheduler
 
   services.power-profiles-daemon.enable = false;
   services.fwupd.enable = true; # Enable fwupd service
@@ -48,6 +50,7 @@
     package = pkgs.bluez5-experimental;
   };
 
+  /*
   hardware.graphics = {
     extraPackages = with pkgs; [vaapiIntel libva libvdpau-va-gl vaapiVdpau ocl-icd intel-compute-runtime];
     extraPackages32 = with pkgs.pkgsi686Linux; [
@@ -55,4 +58,5 @@
       libvdpau-va-gl
     ];
   };
+  */
 }

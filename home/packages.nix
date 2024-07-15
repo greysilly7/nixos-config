@@ -65,6 +65,7 @@
     xdg-utils
     cinnamon.nemo
     xorg.xhost
-    moonlight-qt
+    termius
+    vesktop
   ];
 }

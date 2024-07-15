@@ -11,6 +11,6 @@
   environment.systemPackages = with pkgs; [steamPackages.steamcmd];
 
   # better for steam proton games
-  systemd.extraConfig = "DefaultLimitNOFILE=unlimited";
+  systemd.extraConfig = "DefaultLimitNOFILE=524288";
   # systemd.services."user@1000".serviceConfig.LimitNOFILE = "unlimited";
 }

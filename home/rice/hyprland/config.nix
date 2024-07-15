@@ -20,6 +20,10 @@
         "mako &"
       ];
 
+      debug = {
+        disable_logs = false;
+      };
+
       input = {
         kb_layout = "us";
         numlock_by_default = true;

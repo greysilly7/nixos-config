@@ -1,14 +1,14 @@
 {inputs, ...}: {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
+    # inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.catppuccin.homeManagerModules.catppuccin
     ./packages.nix
-    ./impermanence.nix
+    # ./impermanence.nix
     ./misc
-    ./rice
+    # ./rice
     ./scripts
   ];
-  
+
   catppuccin = {
     enable = true;
     flavor = "mocha";

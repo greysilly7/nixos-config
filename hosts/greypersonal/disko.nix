@@ -34,22 +34,9 @@
                   allowDiscards = true;
                 };
                 content = {
-                  type = "btrfs";
-                  extraArgs = ["-f"];
-                  subvolumes = {
-                    "/@persist" = {
-                      mountpoint = "/persist";
-                      mountOptions = ["compress=zstd" "noatime" "discard"];
-                    };
-                    "/@nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = ["compress=zstd" "noatime" "discard"];
-                    };
-                    "/@swap" = {
-                      mountpoint = "/.swapvol";
-                      swap.swapfile.size = "16G";
-                    };
-                  };
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/";
                 };
               };
             };
