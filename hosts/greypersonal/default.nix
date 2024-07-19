@@ -26,7 +26,7 @@
   services.xserver.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
-  # boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   # chaotic.scx.enable = true; # by default uses scx_rustland scheduler
 
   services.power-profiles-daemon.enable = false;

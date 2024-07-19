@@ -1,5 +1,4 @@
 {
-  chaotic,
   pkgs,
   ...
 }: {
@@ -7,16 +6,15 @@
 
   environment.systemPackages = with pkgs; [
     lutris
+    heroic
     (prismlauncher.override {withWaylandGLFW = true;})
   ];
 
   # Gamemode
   programs.gamemode.enable = true;
 
-  # Steam ontroller support
+  # Steam Controller support
   hardware.steam-hardware.enable = true;
   # Xbox controller
   hardware.xpadneo.enable = true;
-  # Joycon and Pro Controller support
-  services.joycond.enable = true;
 }
