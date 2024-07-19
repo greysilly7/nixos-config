@@ -16,54 +16,6 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["size=8G" "mode=755"];
-  };
-
-  fileSystems."/persist".neededForBoot = true;
-  fileSystems."/nix".neededForBoot = true;
-
-  /*
-
-  fileSystems."/.swapvol" = {
-    device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
-    fsType = "btrfs";
-    options = ["subvol=@swap"];
-  };
-
-  boot.initrd.luks.devices."crypted".device = lib.mkForce "/dev/disk/by-uuid/b2496f93-f97a-4137-8879-a4fe6be270bd";
-
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["size=8G" "mode=755"];
-  };
-
-  fileSystems."/persist" = {
-    neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
-    fsType = "btrfs";
-    options = ["noatime" "discard" "subvol=@persist" "compress=zstd"];
-  };
-
-  fileSystems."/nix" = {
-    neededForBoot = true;
-    device = lib.mkForce "/dev/disk/by-uuid/b6c18f9c-310d-4856-b55d-55deff6b3949";
-    fsType = "btrfs";
-    options = ["noatime" "discard" "subvol=@nix" "compress=zstd"];
-  };
-
-  fileSystems."/boot" = {
-    device = lib.mkForce "/dev/disk/by-uuid/9B6B-A0B6";
-    fsType = "vfat";
-    options = ["noatime" "discard" "fmask=0022" "dmask=0022"];
-  };
-
-  swapDevices = [];
-  */
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
