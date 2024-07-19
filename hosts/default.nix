@@ -64,6 +64,16 @@ in {
     specialArgs = {inherit inputs;};
   };
 
+  iso-installer = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      {networking.hostName = "iso-installer";}
+      ./iso-installer
+      disko
+    ];
+    specialArgs = {inherit inputs;};
+  };
+
   # My Future Potential Raspberry PI 4 System
   /*
   greyrpi = nixpkgs.lib.nixosSystem {
