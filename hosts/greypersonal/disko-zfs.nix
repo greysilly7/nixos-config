@@ -49,9 +49,11 @@
         datasets = {
           "local" = {
             type = "zfs_fs";
-            options.mountpoint = "none";
-            encryption = "aes-256-gcm";
-            keyformat = "passphrase";
+            options = {
+              mountpoint = "none";
+              encryption = "aes-256-gcm";
+              keyformat = "passphrase";
+            };
             # keylocation = "file:///tmp/secret.key";
           };
           "local/home" = {
