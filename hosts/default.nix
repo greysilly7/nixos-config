@@ -36,7 +36,12 @@ in {
     system = "x86_64-linux";
     modules =
       [
-        {networking.hostName = "greypersonal";}
+        {
+          networking = {
+            hostName = "greypersonal";
+            hostId = "5a8a3fd9";
+          };
+        }
         ./greypersonal
         hmModule
         bootloader
@@ -66,8 +71,11 @@ in {
 
   iso-installer = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
+
     modules = [
       {networking.hostName = "iso-installer";}
+      "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+
       ./iso-installer
       disko
     ];

@@ -20,7 +20,7 @@
         "/var/db/sudo"
       ]
       ++ lib.forEach ["nixos" "NetworkManager" "nix" "ssh" "secureboot"] (x: "/etc/${x}")
-      ++ lib.forEach ["bluetooth" "nixos" "pipewire" "libvirt" "fail2ban" "fprint"] (x: "/var/lib/${x}");
+      ++ lib.forEach ["bluetooth" "nixos" "pipewire" "libvirt" "fail2ban" "fprint" "sops-nix" "sddm" "cups" "upower" "fwupd"] (x: "/var/lib/${x}");
     files = ["/etc/machine-id"];
   };
   # for some reason *this* is what makes networkmanager not get screwed completely instead of the impermanence module
