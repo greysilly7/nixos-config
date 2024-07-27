@@ -66,6 +66,7 @@ in {
         server
         wayland
         sunshine
+        gaming
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
