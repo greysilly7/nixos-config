@@ -64,7 +64,7 @@ in {
         ./greyserver
         bootloader
         server
-        # wayland
+        wayland
         sunshine
       ]
       ++ shared;
