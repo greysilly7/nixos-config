@@ -8,6 +8,6 @@
 
   services.udev.extraRules = ''
     # Allow users in the input group to access the /dev/input/event* devices
-    KERNEL=="event*", GROUP="input", MODE="660"
+    KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput", GROUP="input", MODE="0660"
   '';
 }
