@@ -67,5 +67,6 @@
     xorg.xhost
     termius
     vesktop
+    moonlight-qt
   ];
 }

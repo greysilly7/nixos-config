@@ -10,6 +10,7 @@
   server = ../system/server;
   wayland = ../system/wayland;
   gaming = ../system/gaming;
+  sunshine = ../system/gaming/sunshine.nix;
   chaotic = inputs.chaotic.nixosModules.default;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
@@ -64,6 +65,7 @@ in {
         bootloader
         server
         # wayland
+        sunshine
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
