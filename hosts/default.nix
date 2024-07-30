@@ -27,9 +27,6 @@
       inherit inputs;
       inherit self;
     };
-    users.greysilly7 = {
-      imports = [../home];
-    };
   };
 in {
   # My personal laptop
@@ -50,7 +47,11 @@ in {
         wayland
         gaming
 
-        {inherit home-manager;}
+        {
+          home-manager.users.greysilly7 = {
+            imports = ["../homes/greysilly7@greypersonal"];
+          };
+        }
       ]
       ++ shared;
     specialArgs = {inherit inputs;};

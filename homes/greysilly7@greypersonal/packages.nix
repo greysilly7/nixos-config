@@ -68,5 +68,6 @@
     termius
     vesktop
     moonlight-qt
+    northstar-proton
   ];
 }

@@ -7,16 +7,13 @@
   config = {
     services.nginx = {
       enable = true;
-      package = pkgs.nginxQuic;
+      package = pkgs.angieQuic.override {openssl = pkgs.libressl;};
 
-      # Use recommended settings
-      recommendedGzipSettings = true;
-      recommendedBrotliSettings = true;
-      recommendedZstdSettings = true;
-      recommendedOptimisation = true;
-      recommendedProxySettings = true;
       recommendedTlsSettings = true;
-
+      recommendedOptimisation = true;
+      recommendedGzipSettings = true;
+      recommendedProxySettings = true;
+      recommendedZstdSettings = true;
       # Enable QUiC support
       enableQuicBPF = true;
 
@@ -57,6 +54,7 @@
         enableACME = true;
         forceSSL = true;
         root = "${inputs.greysilly7-xyz}";
+        quic = true;
       };
 
       virtualHosts."vaultwarden.greysilly7.xyz" = {
@@ -66,6 +64,7 @@
           proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
           proxyWebsockets = true;
         };
+        quic = true;
       };
       /*
       virtualHosts."adgaurdhome.greysilly7.xyz" = {
