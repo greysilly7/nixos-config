@@ -49,7 +49,9 @@ in {
 
         {
           home-manager.users.greysilly7 = {
-            imports = ["../homes/greysilly7@greypersonal"];
+            imports = [
+              ../homes/greysilly7_greypersonal
+            ];
           };
         }
       ]
