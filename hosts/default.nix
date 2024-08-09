@@ -48,11 +48,7 @@ in {
         gaming
 
         {
-          home-manager.users.greysilly7 = {
-            imports = [
-              ../homes/greysilly7_greypersonal
-            ];
-          };
+          inherit home-manager;
         }
       ]
       ++ shared;

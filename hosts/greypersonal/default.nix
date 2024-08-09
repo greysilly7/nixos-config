@@ -10,6 +10,12 @@
     inputs.catppuccin.nixosModules.catppuccin
   ];
 
+  home-manager.users.greysilly7 = {
+    imports = [
+      ../../homes/greysilly7_greypersonal
+    ];
+  };
+
   catppuccin = {
     enable = true;
     flavor = "mocha";
@@ -29,7 +35,7 @@
 
   # VirtManager
   # Enable virtualization with qemu and virt-manager and add the admin user to the necessary groups
-  users.users."greysilly7".extraGroups = [ "kvm" "input" "libvirtd" ];
+  users.users."greysilly7".extraGroups = ["kvm" "input" "libvirtd"];
   environment.systemPackages = with pkgs; [
     virt-manager
     virt-viewer
@@ -48,7 +54,7 @@
       qemu = {
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        ovmf.packages = [pkgs.OVMFFull.fd];
       };
     };
   };

@@ -7,5 +7,6 @@
     ./nix.nix
     ./users.nix
     ./openssh.nix
+    ./hardening.nix
   ];
 }
