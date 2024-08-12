@@ -28,6 +28,7 @@
                 #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
+		  crypttabExtraOpts = ["fido2-device=auto" "token-timeout=10"];
                   # keyFile = "/tmp/secret.key";
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
@@ -35,8 +36,11 @@
                   type = "btrfs";
                   extraArgs = [ "-f" ];
                   postCreateHook = ''
-                    btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
-                  '';
+		     mntpoint=$(mktemp -d)
+		     mount "/dev/mapper/crypted" "$mntpoint" -o subvol=/
+		     trap 'umount $mntpoint; rm -rf $mntpoint' EXIT
+		     btrfs subvolume snapshot -r $mntpoint $mntpoint/root-blank	                  
+		  '';
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
