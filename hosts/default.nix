@@ -6,7 +6,7 @@
   inherit (self) inputs;
   core = ../system/core;
   bootloader = ../system/core/bootloader.nix;
-  # impermanence = ../system/core/impermanence.nix;
+  impermanence = ../system/core/impermanence.nix;
   server = ../system/server;
   wayland = ../system/wayland;
   gaming = ../system/gaming;
@@ -43,7 +43,7 @@ in {
         ./greypersonal
         hmModule
         bootloader
-        # impermanence
+        impermanence
         wayland
         gaming
 

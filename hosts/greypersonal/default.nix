@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -23,7 +24,7 @@
 
   # MESA Git
   chaotic.mesa-git = {
-    enable = true;
+    enable = false;
     extraPackages = with pkgs; [mesa_git.opencl intel-media-driver intel-ocl intel-vaapi-driver];
     extraPackages32 = with pkgs.pkgsi686Linux; [pkgs.mesa32_git.opencl intel-media-driver intel-vaapi-driver];
   };
@@ -59,7 +60,8 @@
     };
   };
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_zen;
   # chaotic.scx.enable = true; # by default uses scx_rustland scheduler
 
   services.power-profiles-daemon.enable = false;
@@ -82,14 +84,4 @@
     enable = true;
     package = pkgs.bluez5-experimental;
   };
-
-  /*
-  hardware.graphics = {
-    extraPackages = with pkgs; [vaapiIntel libva libvdpau-va-gl vaapiVdpau ocl-icd intel-compute-runtime];
-    extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-  };
-  */
 }
