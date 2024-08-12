@@ -2,6 +2,9 @@
 # fs-diff.sh
 set -euo pipefail
 
+sudo mkdir -p /mnt
+sudo mount /dev/mapper/crypted /mnt -o subvol=/
+
 OLD_TRANSID=$(sudo btrfs subvolume find-new /mnt/root-blank 9999999)
 OLD_TRANSID=${OLD_TRANSID#transid marker was }
 
@@ -20,3 +23,4 @@ while read path; do
     echo "$path"
   fi
 done
+umount /mnt
