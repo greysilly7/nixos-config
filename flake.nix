@@ -45,6 +45,10 @@
       url = "github:niksingh710/nvix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spacebarchat = {
+      url = "github:spacebarchat/server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {

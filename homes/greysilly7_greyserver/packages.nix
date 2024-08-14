@@ -8,8 +8,6 @@
     firefox
 
     # Code Editors
-    vscode
-    zed-editor
     inputs.nvix.packages.${system}.default
 
     # Compression Tools
@@ -30,9 +28,6 @@
     brightnessctl
     libnotify
     dconf
-
-    # Node.js Tools
-    node2nix
 
     # Security Tools
     gnupg

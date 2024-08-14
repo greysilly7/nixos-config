@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  sops.secrets.grey_pass.neededForUsers = true;
+  # sops.secrets.grey_pass.neededForUsers = true;
 
   users = {
     mutableUsers = false;
@@ -16,7 +16,8 @@
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"
         ];
-        hashedPasswordFile = config.sops.secrets.grey_pass.path;
+        hashedPassword = "$y$j9T$N42D8YMjY12EXyEveiXOC/$Ee8A7GxYSarUbyMwL3brXoiVRfbXVWHgmNKH7LoznE3";
+        # hashedPasswordFile = config.sops.secrets.grey_pass.path;
       };
       nixosvmtest = {
         isNormalUser = true;
