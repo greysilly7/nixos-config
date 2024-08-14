@@ -67,6 +67,10 @@ in {
         wayland
         sunshine
         gaming
+
+        {
+          inherit home-manager;
+        }
       ]
       ++ shared;
     specialArgs = {inherit inputs;};
