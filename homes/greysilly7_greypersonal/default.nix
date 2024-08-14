@@ -4,9 +4,9 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     ./packages.nix
     # ./impermanence.nix
-    ./misc
+    ../shared/misc
     # ./rice
-    ./scripts
+    ../shared/scripts
   ];
 
   catppuccin = {
