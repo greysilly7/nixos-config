@@ -12,7 +12,6 @@
         # dirty fix for "no storage left on device" while rebuilding
         # it gets wiped anyway
         "/tmp"
-        "/var/log"
         "/var/db/sudo"
       ]
       ++ lib.forEach ["nixos" "NetworkManager" "nix" "ssh" "secureboot"] (x: "/etc/${x}")

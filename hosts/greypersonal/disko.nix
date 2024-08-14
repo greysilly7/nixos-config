@@ -28,7 +28,7 @@
                 #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
-		  crypttabExtraOpts = ["fido2-device=auto" "token-timeout=10"];
+		  crypttabExtraOpts = ["tpm2-device=auto" "tpm2-pcrs=0+2+7+12"];
                   # keyFile = "/tmp/secret.key";
                 };
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
@@ -39,7 +39,7 @@
 		     mntpoint=$(mktemp -d)
 		     mount "/dev/mapper/crypted" "$mntpoint" -o subvol=/
 		     trap 'umount $mntpoint; rm -rf $mntpoint' EXIT
-		     btrfs subvolume snapshot -r $mntpoint $mntpoint/root-blank	                  
+		     btrfs subvolume snapshot -r $mntpoint/root $mntpoint/root-blank	                  
 		  '';
                   subvolumes = {
                     "/root" = {
@@ -59,7 +59,7 @@
                       mountOptions = [ "compress=zstd" "noatime" ];
                     };
                     "var/log" = {
-                      mountpoint = "/persist";
+                      mountpoint = "/var/log";
                       mountOptions = [ "compress=zstd" "noatime" ];
                     };
                     "/swap" = {
