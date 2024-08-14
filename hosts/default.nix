@@ -61,6 +61,7 @@ in {
       [
         {networking.hostName = "greyserver";}
         ./greyserver
+        hmModule
         bootloader
         server
         wayland
