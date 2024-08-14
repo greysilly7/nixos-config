@@ -2,7 +2,9 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+  device = "/dev/mapper/crypted";
+in {
   imports = [inputs.impermanence.nixosModule];
   programs.fuse.userAllowOther = true;
   environment.persistence."/persist" = {
@@ -25,6 +27,56 @@
     "L /var/lib/NetworkManager/timestamps - - - - /persist/var/lib/NetworkManager/timestamps"
   ];
 
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback BTRFS root subvolume to a pristine state";
+    wantedBy = ["initrd.target"];
+    after = ["systemd-cryptsetup@crypted.service"];
+    before = ["sysroot.mount"];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig.Type = "oneshot";
+    script = ''
+      set -x
+
+      echo "Creating mount directory..."
+      mkdir -p /mnt
+
+      echo "Mounting BTRFS filesystem..."
+      mount -t btrfs -o subvol=/ ${device} /mnt
+      if [ $? -ne 0 ]; then
+        echo "Failed to mount ${device} on /mnt"
+        exit 1
+      fi
+
+      echo "Listing and deleting subvolumes..."
+      btrfs subvolume list -o /mnt |
+        grep 'path' |
+        cut -f9 -d' ' |
+        while read subvolume; do
+          echo "Deleting /$subvolume subvolume..."
+          btrfs subvolume delete "/mnt/$subvolume"
+          if [ $? -ne 0 ]; then
+            echo "Failed to delete subvolume /mnt/$subvolume"
+          fi
+        done
+
+      echo "Deleting /root subvolume..."
+      btrfs subvolume delete /mnt/root
+      if [ $? -ne 0 ]; then
+        echo "Failed to delete /mnt/root subvolume"
+        exit 1
+      fi
+
+      echo "Restoring blank /root subvolume..."
+      btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+      echo "Unmounting /mnt..."
+      umount /mnt
+
+      echo "Rollback completed successfully."
+    '';
+  };
+
+  /*
   boot.initrd.postDeviceCommands = lib.mkBefore ''
     mkdir -p /mnt
 
@@ -63,4 +115,5 @@
     # we can unmount /mnt and continue on the boot process.
     umount /mnt
   '';
+  */
 }
