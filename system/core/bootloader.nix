@@ -22,14 +22,14 @@
 
     bootspec.enable = lib.mkDefault true;
     loader = {
-      systemd-boot.enable = lib.mkForce true;
+      systemd-boot.enable = lib.mkDefault true;
       # spam space to get to boot menu
       timeout = 0;
     };
     loader.efi.canTouchEfiVariables = true;
   };
   boot.lanzaboote = {
-    enable = false;
+    enable = lib.mkDefault false;
     pkiBundle = "/etc/secureboot";
   };
 }

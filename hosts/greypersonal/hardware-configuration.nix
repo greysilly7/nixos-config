@@ -16,6 +16,12 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.initrd.systemd.enable = true;
+  boot.initrd.systemd.enableTpm2 = true;
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote.enable = lib.mkForce true;
+
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/var/log".neededForBoot = true;
 
