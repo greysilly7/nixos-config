@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spacebarchat = {
-      url = "github:spacebarchat/server";
+      url = "github:greysilly7/server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
