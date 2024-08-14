@@ -11,6 +11,8 @@
     ./nginx.nix
     ./vaultwarden.nix
     ./adguard.nix
+    ./spacebarserver.nix
+    ./postgres.nix
 
     # Mincraft Servers being hosted on this machine
     # ./mc

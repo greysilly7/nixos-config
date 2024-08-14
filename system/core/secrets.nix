@@ -15,6 +15,7 @@
       cf_acme = {};
       tailscale_srv_key = {};
       adguardhomewebpass = {};
+      spacebardbpass = {};
     };
   };
 }
