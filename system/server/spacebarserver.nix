@@ -45,7 +45,7 @@
       http2 = true;
       http3 = true;
       extraConfig = ''
-        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        add_header_redefinition Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
       '';
       locations."/" = {
         proxyPass = "http://127.0.0.1:3001";
