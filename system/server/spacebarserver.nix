@@ -37,4 +37,19 @@
       chmod 700 /var/lib/spacebar
     '';
   };
+
+  services.nginx.virtualHosts = {
+    "spacebar.greysilly7.xyz" = {
+      forceSSL = true;
+      enableACME = true;
+      http2 = true;
+      http3 = true;
+      extraConfig = ''
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+      '';
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3001";
+      };
+    };
+  };
 }

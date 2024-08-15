@@ -60,11 +60,12 @@
       virtualHosts."vaultwarden.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
+        http2 = true;
+        http3 = true;
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
           proxyWebsockets = true;
         };
-        quic = true;
       };
       /*
       virtualHosts."adgaurdhome.greysilly7.xyz" = {

@@ -10,7 +10,7 @@
     # Code Editors
     vscode
     zed-editor
-    inputs.nvix.packages.${system}.default
+    # inputs.nvix.packages.${system}.default
 
     # Compression Tools
     zip
@@ -65,5 +65,6 @@
     termius
     vesktop
     moonlight-qt
+    inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
   ];
 }

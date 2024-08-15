@@ -131,6 +131,22 @@
         "type": "github"
       }
     },
+    "dbeaver-last": {
+      "locked": {
+        "lastModified": 1722166619,
+        "narHash": "sha256-bA2n89V9RhdTATbcNsw89bGBmAF0YfrVIMV+w2WpTB4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4d10225ee46c0ab16332a2450b493e0277d1741a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "4d10225ee46c0ab16332a2450b493e0277d1741a",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -1135,6 +1151,7 @@
         "alejandra": "alejandra",
         "catppuccin": "catppuccin",
         "chaotic": "chaotic",
+        "dbeaver-last": "dbeaver-last",
         "disko": "disko",
         "flake-parts": "flake-parts",
         "greysilly7-xyz": "greysilly7-xyz",
