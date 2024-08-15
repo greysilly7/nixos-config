@@ -48,7 +48,11 @@
       locations."/" = {
         proxyPass = "http://127.0.0.1:3001";
         extraConfig = ''
-          add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+          proxy_no_cache 1;
+          proxy_cache_bypass 1;
+
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
         '';
       };
     };
