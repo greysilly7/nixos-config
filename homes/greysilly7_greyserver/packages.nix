@@ -8,7 +8,7 @@
     firefox
 
     # Code Editors
-    inputs.nvix.packages.${system}.default
+    # inputs.nvix.packages.${system}.default
 
     # Compression Tools
     zip
