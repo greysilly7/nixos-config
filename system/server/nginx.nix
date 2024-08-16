@@ -53,8 +53,16 @@
       virtualHosts."greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
+        http2 = true;
+        http3 = true;
         root = "${inputs.greysilly7-xyz}";
-        quic = true;
+
+        locations."/.well-known/spacebar" = {
+          extraConfig = ''
+            default_type application/json;
+            return 200 '{"api": "https://spacebar.greysilly7.xyz/api/v9"}';
+          '';
+        };
       };
 
       virtualHosts."vaultwarden.greysilly7.xyz" = {
