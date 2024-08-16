@@ -45,15 +45,33 @@
       http2 = true;
       http3 = true;
 
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:3001";
-        extraConfig = ''
-          proxy_no_cache 1;
-          proxy_cache_bypass 1;
+      locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:3001";
+          extraConfig = ''
+            proxy_no_cache 1;
+            proxy_cache_bypass 1;
 
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-        '';
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+          '';
+        };
+        "/media" = {
+          proxyPass = "http://127.0.0.1:8000";
+        };
+      };
+    };
+  };
+
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      imagor = {
+        image = "shumc/imagor";
+        environmentFiles = config.sops.secrets.imagorenv.path;
+        ports = [
+          "8000:8000"
+        ];
       };
     };
   };
