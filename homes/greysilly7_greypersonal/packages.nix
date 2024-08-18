@@ -67,5 +67,7 @@
     moonlight-qt
     inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
     devbox
+    discord-canary
+    python3
   ];
 }
