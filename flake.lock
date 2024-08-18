@@ -849,11 +849,11 @@
         "umu": "umu"
       },
       "locked": {
-        "lastModified": 1723425928,
-        "narHash": "sha256-BFj0H0h3+hTCTsHTMCzmO7hQL3ym2MTgIdQe1SN1wPw=",
+        "lastModified": 1723945279,
+        "narHash": "sha256-3W+/u3v/e0dTOxht6wW6pL+kr44e8Amb8A1Z3Bx8BUE=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "cd19f284c40ce697db66314d0b7d29e41d47eb6b",
+        "rev": "bcf8116981cc332c2734d4c82a034f115780853d",
         "type": "github"
       },
       "original": {
@@ -892,11 +892,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1723772202,
-        "narHash": "sha256-e8nH/JfdW4OuaYcNnnRKaeB9fPRdCO3y4I3KzhXgE8k=",
+        "lastModified": 1723945251,
+        "narHash": "sha256-NbY1xC2ui3ng5ek9Sl99LVb2nf2RZgtepoAbVmLNgDc=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "77d0ca95f039e4e28f9b64c3f042c574d26a88e2",
+        "rev": "e47600234b01d3021680dfdf295c2b9d9eefb7ad",
         "type": "github"
       },
       "original": {
@@ -992,11 +992,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1723221148,
-        "narHash": "sha256-7pjpeQlZUNQ4eeVntytU3jkw9dFK3k1Htgk2iuXjaD8=",
+        "lastModified": 1723856861,
+        "narHash": "sha256-OTDg91+Zzs2SpU3csK4xVdSQFoG8cK1lNUwKmTqERyE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "154bcb95ad51bc257c2ce4043a725de6ca700ef6",
+        "rev": "cd7b95ee3725af7113bacbce91dd6549cee58ca5",
         "type": "github"
       },
       "original": {
@@ -1339,15 +1339,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1723718332,
-        "narHash": "sha256-No6dYNw/SaPyHCbQeeajJTrdUi8He3EpCyvA1ezHPJI=",
-        "owner": "spacebarchat",
+        "lastModified": 1723957579,
+        "narHash": "sha256-8WbsttEX0dtBOSOJ+ECr2g0zuYA1YP5HJLst/u7zrtI=",
+        "owner": "greysilly7",
         "repo": "server",
-        "rev": "771d6a2ab8574bc029f43af89ee2254f3d68484e",
+        "rev": "05cdd95120cb4ef6d99f3babb3a6b24eb0a7e45d",
         "type": "github"
       },
       "original": {
-        "owner": "spacebarchat",
+        "owner": "greysilly7",
         "repo": "server",
         "type": "github"
       }
