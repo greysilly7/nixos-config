@@ -7,9 +7,6 @@
     # Browsers
     firefox
 
-    # Code Editors
-    # inputs.nvix.packages.${system}.default
-
     # Compression Tools
     zip
     unzip
@@ -25,40 +22,26 @@
     which
     pciutils
     usbutils
-    brightnessctl
-    libnotify
-    dconf
 
     # Security Tools
     gnupg
     sops
-    nixd
     openssl
 
     # Disk Management Tools
-    gparted # partition manager
-    ncdu # disk space
+    gparted
+    ncdu
 
     # Media Tools
     ffmpeg
-    imv # image viewer
-    mpv # video player
-    playerctl # controller for media players
-
-    # Audio Tools
-    pamixer # pulseaudio command line mixer
-    pavucontrol # pulseaudio volume control (GUI)
 
     # Miscellaneous Tools
-    packwiz
-    fastfetch
-    qalculate-gtk # calculator
     wget
     xdg-utils
-    cinnamon.nemo
     xorg.xhost
     termius
-    vesktop
-    moonlight-qt
+    fastfetch
+    qalculate-gtk
+    python3
   ];
 }

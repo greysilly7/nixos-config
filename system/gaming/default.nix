@@ -1,13 +1,11 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./steam.nix];
 
   environment.systemPackages = with pkgs; [
     lutris
     heroic
     (prismlauncher.override {withWaylandGLFW = true;})
+    moonlight-qt
   ];
 
   # Gamemode

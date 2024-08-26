@@ -46,7 +46,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spacebarchat = {
-      url = "github:greysilly7/server/dev/remove-node-os-utils";
+      url = "github:greysilly7/server/fastbar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dbeaver-last.url = "github:nixos/nixpkgs/4d10225ee46c0ab16332a2450b493e0277d1741a";

@@ -10,7 +10,8 @@
     # Code Editors
     vscode
     zed-editor
-    # inputs.nvix.packages.${system}.default
+    #inputs.nvix.packages.${system}.default
+    neovim
 
     # Compression Tools
     zip
@@ -27,12 +28,6 @@
     which
     pciutils
     usbutils
-    brightnessctl
-    libnotify
-    dconf
-
-    # Node.js Tools
-    node2nix
 
     # Security Tools
     gnupg
@@ -46,28 +41,17 @@
 
     # Media Tools
     ffmpeg
-    imv # image viewer
-    mpv # video player
-    playerctl # controller for media players
 
-    # Audio Tools
-    pamixer # pulseaudio command line mixer
-    pavucontrol # pulseaudio volume control (GUI)
+    # Chat Clients
+    vesktop
+    discord-canary
 
     # Miscellaneous Tools
-    packwiz
     fastfetch
-    qalculate-gtk # calculator
     wget
     xdg-utils
-    cinnamon.nemo
     xorg.xhost
     termius
-    vesktop
-    moonlight-qt
     inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
-    devbox
-    discord-canary
-    python3
   ];
 }
