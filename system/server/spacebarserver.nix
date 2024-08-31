@@ -59,8 +59,8 @@
         "/media" = {
           proxyPass = "http://127.0.0.1:8000";
         };
-        "/images/icon.png" = {
-          tryFiles = "$uri ${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/images/icon.png";
+        "/images" = {
+          root = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/images";
         };
       };
     };
