@@ -61,6 +61,7 @@
         };
         "/images" = {
           root = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/images";
+          tryFiles = "$uri ${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/images/icon.png";
         };
       };
     };
