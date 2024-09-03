@@ -46,6 +46,9 @@
     vesktop
     discord-canary
 
+    # Office Tools
+    libreoffice
+
     # Miscellaneous Tools
     fastfetch
     wget
