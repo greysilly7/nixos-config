@@ -87,6 +87,7 @@
         "https://nix-community.cachix.org"
         "https://nixpkgs-unfree.cachix.org"
         "https://nyx.chaotic.cx"
+        "https://mynixconfig.cachix.org"
       ];
 
       trusted-public-keys = [
@@ -94,6 +95,7 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
         "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        "mynixconfig.cachix.org-1:vpnituvpFnvJGeGVUOn1EBW5ZxPAu0IVXNP2ySyCgtk="
       ];
     };
   };
