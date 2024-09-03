@@ -14,5 +14,5 @@ jobs:
         with:
           name: mynixconfig
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-      - run: nix-build
+      - run: nix-build --flake .#greypersonal
       - run: nix-shell --run "echo OK"
