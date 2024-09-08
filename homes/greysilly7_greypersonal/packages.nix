@@ -56,5 +56,6 @@
     xorg.xhost
     termius
     inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
+    ntfs3g
   ];
 }
