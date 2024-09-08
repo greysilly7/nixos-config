@@ -1,6 +1,4 @@
 {
-  inputs,
-  lib,
   pkgs,
   ...
 }: {
@@ -14,10 +12,7 @@
     ./spacebarserver.nix
     ./postgres.nix
 
-    # Mincraft Servers being hosted on this machine
-    # ./mc
   ];
-  # nixpkgs.overlays = [inputs.nix-minecraft.overlay];
 
   environment.systemPackages = with pkgs; [
     tmux

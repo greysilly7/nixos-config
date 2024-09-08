@@ -4,7 +4,8 @@
   environment.systemPackages = with pkgs; [
     lutris
     heroic
-    (prismlauncher.override {withWaylandGLFW = true;})
+    # (prismlauncher.override {withWaylandGLFW = true;})
+    prismlauncher
     moonlight-qt
   ];
 

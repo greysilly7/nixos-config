@@ -20,21 +20,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    /*
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprpicker.url = "github:hyprwm/hyprpicker";
-    */
     impermanence.url = "github:nix-community/impermanence";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";
