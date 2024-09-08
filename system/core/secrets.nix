@@ -9,7 +9,8 @@
       cftoken = {};
       vaultwarden = {};
       cf_acme = {};
-      tailscale_srv_key = {};
+      ts_srv_key = {};
+      ts_laptop_key = {};
       adguardhomewebpass = {};
       imagorenv = {};
     };

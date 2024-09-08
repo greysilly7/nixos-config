@@ -9,4 +9,5 @@
     ./openssh.nix
     ./hardening.nix
   ];
+  services.tailscale.enable = true;
 }
