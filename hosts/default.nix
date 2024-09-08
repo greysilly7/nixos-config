@@ -15,10 +15,9 @@
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
   hmModule = inputs.home-manager.nixosModules.home-manager;
-  lixModule = inputs.lix-module.nixosModules.default;
 
   # Shared Modules
-  shared = [core sops-nix disko chaotic lixModule];
+  shared = [core sops-nix disko chaotic];
 
   home-manager = {
     useUserPackages = true;
