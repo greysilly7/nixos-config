@@ -3,9 +3,7 @@
     # inputs.impermanence.nixosModules.home-manager.impermanence
     inputs.catppuccin.homeManagerModules.catppuccin
     ./packages.nix
-    # ./impermanence.nix
     ../shared/misc
-    # ./rice
     ../shared/scripts
   ];
 
