@@ -67,7 +67,6 @@ in {
         wayland
         sunshine
         gaming
-        inputs.github-nix-ci.nixosModules.default
 
         {
           inherit home-manager;
