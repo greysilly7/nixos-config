@@ -41,7 +41,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dbeaver-last.url = "github:nixos/nixpkgs/4d10225ee46c0ab16332a2450b493e0277d1741a";
-    github-nix-ci.url = "github:juspay/github-nix-ci";
   };
 
   outputs = inputs @ {
