@@ -59,7 +59,7 @@
         "/media" = {
           proxyPass = "http://127.0.0.1:8000";
         };
-        "/images/icon.png" = {
+        "/images/wallpaper.png" = {
           root = ../../wallpapers;
           tryFiles = "$uri wallpaper.png";
         };
