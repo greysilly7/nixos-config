@@ -59,7 +59,7 @@
 
         locations."/.well-known/spacebar" = {
           extraConfig = ''
-            add_header Access-Control-Allow-Origin *;
+            more_set_headers Access-Control-Allow-Origin *;
             default_type application/json;
             return 200 '{"api": "https://spacebar.greysilly7.xyz/api/v9"}';
           '';
