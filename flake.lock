@@ -479,6 +479,21 @@
         "type": "github"
       }
     },
+    "github-nix-ci": {
+      "locked": {
+        "lastModified": 1722637194,
+        "narHash": "sha256-TgqPg7FqhnhBqf0LsulwOIztwWRiGQgZu/zEhAfG4bw=",
+        "owner": "juspay",
+        "repo": "github-nix-ci",
+        "rev": "aa95c01a6f37f216b68f914ce494c4c9ae4e6fa1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juspay",
+        "repo": "github-nix-ci",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -1084,6 +1099,7 @@
         "dbeaver-last": "dbeaver-last",
         "disko": "disko",
         "flake-parts": "flake-parts",
+        "github-nix-ci": "github-nix-ci",
         "greysilly7-xyz": "greysilly7-xyz",
         "home-manager": "home-manager_2",
         "impermanence": "impermanence",

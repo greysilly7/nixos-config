@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # inputs.nix-minecraft.nixosModules.minecraft-servers
 
@@ -11,7 +8,6 @@
     ./adguard.nix
     ./spacebarserver.nix
     ./postgres.nix
-
   ];
 
   environment.systemPackages = with pkgs; [

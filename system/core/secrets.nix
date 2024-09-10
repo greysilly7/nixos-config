@@ -13,6 +13,7 @@
       ts_laptop_key = {};
       adguardhomewebpass = {};
       imagorenv = {};
+      github_ci_token = {};
     };
   };
 }

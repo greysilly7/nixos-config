@@ -41,6 +41,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dbeaver-last.url = "github:nixos/nixpkgs/4d10225ee46c0ab16332a2450b493e0277d1741a";
+    github-nix-ci.url = "github:juspay/github-nix-ci";
   };
 
   outputs = inputs @ {
@@ -49,9 +50,6 @@
     flake-parts,
     ...
   }:
-  let
-    conf = self.nixosConfigurations;
-  in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         # To import a flake module
@@ -81,15 +79,7 @@
         # those are more easily expressed in perSystem.
 
         nixosConfigurations = import ./hosts inputs;
-          colmena = {
-            meta = {
-              description = "my personal machines";
-              # This can be overriden by node nixpkgs
-              nixpkgs = import inputs.nixpkgs { system = "x86_64-linux"; };
-              nodeNixpkgs = builtins.mapAttrs (name: value: value.pkgs) conf;
-              nodeSpecialArgs = builtins.mapAttrs (name: value: value._module.specialArgs) conf;
-            };
-          } // builtins.mapAttrs (name: value: { imports = value._module.args.modules; }) conf;
-        };
+        formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+      };
     };
 }

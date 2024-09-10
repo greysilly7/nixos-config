@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   services.postgresql = {
     enable = true;
     ensureDatabases = ["spacebar"];
