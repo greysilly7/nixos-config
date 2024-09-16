@@ -8,6 +8,7 @@
     ./adguard.nix
     ./spacebarserver.nix
     ./postgres.nix
+    ./jankclient.nix
   ];
 
   environment.systemPackages = with pkgs; [
