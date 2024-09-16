@@ -39,6 +39,10 @@ in {
   };
   users.groups.jankclient = {};
 
+  systemd.tmpfiles.rules = [
+    "d ${writableDir} 0755 jankclient jankclient -"
+  ];
+
   services.nginx.virtualHosts = {
     "jankclient.greysilly7.xyz" = {
       forceSSL = true;
