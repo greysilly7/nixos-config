@@ -56,6 +56,7 @@ in {
           extraConfig = ''
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
+            more_set_headers 'Access-Control-Allow-Origin: *';
           '';
         };
       };
