@@ -25,11 +25,13 @@ in {
       Group = "jankclient";
     };
 
+    /*
     preStart = ''
       mkdir -p ${writableDir}
       cp -r ${jankClientSrc}/* ${writableDir}
       chown -R jankclient:jankclient ${writableDir}
     '';
+    */
   };
 
   users.users.jankclient = {
