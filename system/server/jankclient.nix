@@ -22,9 +22,10 @@ in {
         ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
         ${pkgs.coreutils}/bin/cp -r ${jankClientSrc}/* ${writableDir}
         ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
+        ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
       '';
-      ExecStart = "${pkgs.bun}/bin/bun index.js";
-      WorkingDirectory = "${jankClientSrc}";
+      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/index.js";
+      WorkingDirectory = "${writableDir}";
       Restart = "always";
       User = "jankclient";
       Group = "jankclient";
