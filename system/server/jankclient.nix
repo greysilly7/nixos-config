@@ -10,6 +10,7 @@
     rev = "main"; # You can specify a specific commit or branch
     sha256 = "sha256-DV89mfipDe4gZVa+M4Dbl2c4FhSI0ChTZsc+VewDRxI="; # Replace with the actual sha256
   };
+  writableDir = "/var/lib/jankclient";
 in {
   systemd.services.jankClient = {
     description = "Jank Client Service";
@@ -23,12 +24,18 @@ in {
       User = "jankclient";
       Group = "jankclient";
     };
+
+    preStart = ''
+      mkdir -p ${writableDir}
+      cp -r ${jankClientSrc}/* ${writableDir}
+      chown -R jankclient:jankclient ${writableDir}
+    '';
   };
 
   users.users.jankclient = {
     isSystemUser = true;
     group = "jankclient";
-    home = "/var/lib/jankclient";
+    home = writableDir;
   };
   users.groups.jankclient = {};
 
