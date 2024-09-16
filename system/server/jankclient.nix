@@ -18,18 +18,17 @@ in {
     wantedBy = ["multi-user.target"];
 
     serviceConfig = {
+      ExecStartPre = ''
+        mkdir -p ${writableDir}
+        cp -r ${jankClientSrc}/* ${writableDir}
+        chown -R jankclient:jankclient ${writableDir}
+      '';
       ExecStart = "${pkgs.bun}/bin/bun index.js";
       WorkingDirectory = "${jankClientSrc}";
       Restart = "always";
       User = "jankclient";
       Group = "jankclient";
     };
-
-    preStart = ''
-      mkdir -p ${writableDir}
-      cp -r ${jankClientSrc}/* ${writableDir}
-      chown -R jankclient:jankclient ${writableDir}
-    '';
   };
 
   users.users.jankclient = {
