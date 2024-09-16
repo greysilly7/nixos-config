@@ -19,9 +19,9 @@ in {
 
     serviceConfig = {
       ExecStartPre = ''
-        mkdir -p ${writableDir}
-        cp -r ${jankClientSrc}/* ${writableDir}
-        chown -R jankclient:jankclient ${writableDir}
+        ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
+        ${pkgs.coreutils}/bin/cp -r ${jankClientSrc}/* ${writableDir}
+        ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
       '';
       ExecStart = "${pkgs.bun}/bin/bun index.js";
       WorkingDirectory = "${jankClientSrc}";
