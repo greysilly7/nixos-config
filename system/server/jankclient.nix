@@ -8,7 +8,7 @@
     owner = "MathMan05";
     repo = "JankClient";
     rev = "main"; # You can specify a specific commit or branch
-    sha256 = "sha256-DV89mfipDe4gZVa+M4Dbl2c4FhSI0ChTZsc+VewDRxI="; # Replace with the actual sha256
+    sha256 = "sha256-ovXgwlmUeHhjVLHel90qf/GYNIBW2kVqdQ77b/BOQHo="; # Replace with the actual sha256
   };
   writableDir = "/var/lib/jankclient";
 in {
