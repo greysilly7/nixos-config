@@ -16,17 +16,17 @@ in {
     description = "Jank Client Service";
     after = ["network.target"];
     wantedBy = ["multi-user.target"];
+    preStart = ''
+      ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
+      ${pkgs.coreutils}/bin/cp -a -r ${jankClientSrc}/* ${writableDir}
+      ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
+      ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
+      ${pkgs.bun}/bin/bun install
+      ${pkgs.bun}/bin/bun run gulp --swc
+    '';
+    script = "${pkgs.bun}/bin/bun ${writableDir}/dist/index.js";
 
     serviceConfig = {
-      ExecStartPre = ''
-        ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
-        ${pkgs.coreutils}/bin/cp -a -r ${jankClientSrc}/* ${writableDir}
-        ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
-        ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
-        ${pkgs.bun}/bin/bun install
-        ${pkgs.bun}/bin/bun run gulp
-      '';
-      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/dist/index.js";
       WorkingDirectory = "${writableDir}";
       Restart = "always";
       User = "jankclient";
