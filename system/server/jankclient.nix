@@ -33,7 +33,7 @@ in {
       Group = "jankclient";
     };
 
-    path = with pkgs; [coreutils];
+    path = with pkgs; [coreutils bun nodejs_latest];
   };
 
   users.users.jankclient = {
@@ -65,6 +65,4 @@ in {
       };
     };
   };
-
-  environment.systemPackages = with pkgs; [bun];
 }
