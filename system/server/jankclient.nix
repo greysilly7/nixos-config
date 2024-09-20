@@ -18,14 +18,15 @@ in {
     wantedBy = ["multi-user.target"];
 
     serviceConfig = {
-      ExecStartPre = "${pkgs.coreutils}/bin/mkdir -p ${writableDir}";
-      ExecStartPre = "${pkgs.coreutils}/bin/cp -a -r ${jankClientSrc}/* ${writableDir}";
-      ExecStartPre = "${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}";
-      ExecStartPre = "${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}";
-      ExecStartPre = "${pkgs.bun}/bin/bun install";
-      ExecStartPre = "${pkgs.bun}/bin/bun run gulp";
-      ExecStartPre = "${pkgs.bun}/bin/bun ${writableDir}/dist/index.js";
-      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/src/index.ts";
+      ExecStartPre = ''
+        ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
+        ${pkgs.coreutils}/bin/cp -a -r ${jankClientSrc}/* ${writableDir}
+        ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
+        ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
+        ${pkgs.bun}/bin/bun install
+        ${pkgs.bun}/bin/bun run gulp
+      '';
+      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/dist/index.js";
       WorkingDirectory = "${writableDir}";
       Restart = "always";
       User = "jankclient";
