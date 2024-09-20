@@ -18,19 +18,20 @@ in {
     wantedBy = ["multi-user.target"];
 
     serviceConfig = {
-      ExecStart = ''
+      ExecStartPre = ''
         ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
-        ${pkgs.coreutils}/bin/cp -r ${jankClientSrc}/* ${writableDir}
+        ${pkgs.coreutils}/bin/cp -a ${jankClientSrc}/* ${jankClientSrc}/.[!.]* ${writableDir}
         ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
         ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
-
-        "${pkgs.bun}/bin/bun ${writableDir}/src/index.ts";
       '';
+      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/src/index.ts";
       WorkingDirectory = "${writableDir}";
       Restart = "always";
       User = "jankclient";
       Group = "jankclient";
     };
+
+    path = with pkgs; [coreutils];
   };
 
   users.users.jankclient = {
