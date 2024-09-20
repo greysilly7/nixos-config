@@ -8,7 +8,7 @@
     owner = "MathMan05";
     repo = "JankClient";
     rev = "main"; # You can specify a specific commit or branch
-    sha256 = "sha256-ovXgwlmUeHhjVLHel90qf/GYNIBW2kVqdQ77b/BOQHo="; # Replace with the actual sha256
+    sha256 = "sha256-t+zt8F8Zov7CJHBW3Mdvl1de6+ORkgsMpDXgd6ESg+Q="; # Replace with the actual sha256
   };
   writableDir = "/var/lib/jankclient";
 in {
@@ -18,13 +18,14 @@ in {
     wantedBy = ["multi-user.target"];
 
     serviceConfig = {
-      ExecStartPre = ''
+      ExecStart = ''
         ${pkgs.coreutils}/bin/mkdir -p ${writableDir}
         ${pkgs.coreutils}/bin/cp -r ${jankClientSrc}/* ${writableDir}
         ${pkgs.coreutils}/bin/chown -R jankclient:jankclient ${writableDir}
         ${pkgs.coreutils}/bin/chmod -R 755 ${writableDir}
+
+        "${pkgs.bun}/bin/bun ${writableDir}/src/index.ts";
       '';
-      ExecStart = "${pkgs.bun}/bin/bun ${writableDir}/index.js";
       WorkingDirectory = "${writableDir}";
       Restart = "always";
       User = "jankclient";
@@ -56,7 +57,6 @@ in {
           extraConfig = ''
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
-            more_set_headers 'Access-Control-Allow-Origin: *';
           '';
         };
       };
