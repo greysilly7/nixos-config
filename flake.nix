@@ -2,10 +2,6 @@
   description = "Description for the project";
 
   inputs = {
-    alejandra = {
-      url = "github:kamadorueda/alejandra/3.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin.url = "github:catppuccin/nix";
     disko = {
       url = "github:nix-community/disko";
@@ -32,8 +28,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    nvix = {
-      url = "github:niksingh710/nvix";
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spacebarchat = {

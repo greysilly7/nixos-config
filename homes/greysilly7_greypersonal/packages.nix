@@ -91,10 +91,9 @@ in {
     vesktop
     discord-canary
     webcord
-
     # CAD
-    freecad
-    slic3r
+    # freecad
+    # slic3r
 
     # Office Tools
     libreoffice
@@ -108,4 +107,9 @@ in {
     inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
     ntfs3g
   ];
+
+  programs.nvchad = {
+    enable = true;
+    gcc = pkgs.gcc;
+  };
 }
