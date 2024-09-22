@@ -25,6 +25,9 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
+  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
