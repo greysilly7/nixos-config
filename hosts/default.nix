@@ -29,6 +29,30 @@
     };
   };
 in {
+  # My personal workstation/ laptop
+  greyworkstation = nixpkgs.lib.nixosSystem {
+    system = "x86_64-linux";
+    modules =
+      [
+        {
+          networking = {
+            hostName = "greyworkstation";
+          };
+        }
+        ./greyworkstation
+        hmModule
+        bootloader
+        impermanence
+        wayland
+        gaming
+
+        {
+          inherit home-manager;
+        }
+      ]
+      ++ shared;
+    specialArgs = {inherit inputs;};
+  };
   # My personal laptop
   greypersonal = nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
@@ -37,7 +61,6 @@ in {
         {
           networking = {
             hostName = "greypersonal";
-            hostId = "5a8a3fd9";
           };
         }
         ./greypersonal
