@@ -34,7 +34,7 @@ in {
     system = "x86_64-linux";
     modules =
       [
-        nixos-wsl.nixosModules.default
+        inputs.nixos-wsl.nixosModules.default
         {
           networking = {
             hostName = "greyworkstation";
