@@ -4,8 +4,8 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
-    ./disko.nix
+    # ./hardware-configuration.nix
+    # ./disko.nix
   ];
 
   home-manager.users.greysilly7 = {
@@ -16,12 +16,18 @@
 
   sops.age = {
     sshKeyPaths = [
-      "/persist/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key"
     ];
-    keyFile = "/persist/var/lib/sops-nix/key.txt";
+    keyFile = "/var/lib/sops-nix/key.txt";
+  };
+
+  programs.nix-ld = {
+    enable = true;
+    package = pkgs.nix-ld-rs;
   };
 
   # KDE
+  /*
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -76,4 +82,5 @@
     enable = true;
     package = pkgs.bluez5-experimental;
   };
+  */
 }

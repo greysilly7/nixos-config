@@ -34,17 +34,18 @@ in {
     system = "x86_64-linux";
     modules =
       [
+        nixos-wsl.nixosModules.default
         {
           networking = {
             hostName = "greyworkstation";
+            system.stateVersion = "24.05";
+            wsl.enable = true;
+            wsl.useWindowsDriver = true;
+
           };
         }
         ./greyworkstation
         hmModule
-        bootloader
-        impermanence
-        wayland
-        gaming
 
         {
           inherit home-manager;

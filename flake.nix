@@ -37,6 +37,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     dbeaver-last.url = "github:nixos/nixpkgs/4d10225ee46c0ab16332a2450b493e0277d1741a";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs = inputs @ {
