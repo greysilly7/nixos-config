@@ -8,7 +8,7 @@
     owner = "MathMan05";
     repo = "JankClient";
     rev = "main"; # You can specify a specific commit or branch
-    sha256 = "sha256-t+zt8F8Zov7CJHBW3Mdvl1de6+ORkgsMpDXgd6ESg+Q="; # Replace with the actual sha256
+    sha256 = "sha256-WjigAqlqdY4uUIjvHEiVYD+uk/b/IphaqL0Ua+8Gcmw="; # Replace with the actual sha256
   };
   writableDir = "/var/lib/jankclient";
 in {
@@ -31,6 +31,9 @@ in {
       Restart = "always";
       User = "jankclient";
       Group = "jankclient";
+      Environment = [
+        "NODE_ENV=production"
+      ];
     };
 
     path = with pkgs; [coreutils bun nodejs_latest];
