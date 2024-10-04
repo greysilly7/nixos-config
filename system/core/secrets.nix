@@ -14,6 +14,7 @@
       adguardhomewebpass = {};
       imagorenv = {};
       github_ci_token = {};
+      pocbot_token = {};
     };
   };
 }
