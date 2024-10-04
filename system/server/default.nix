@@ -9,6 +9,7 @@
     ./spacebarserver.nix
     ./postgres.nix
     ./jankclient.nix
+    ./pocbot.nix
   ];
 
   environment.systemPackages = with pkgs; [
