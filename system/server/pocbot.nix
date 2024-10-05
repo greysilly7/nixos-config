@@ -1,7 +1,7 @@
 {
   config,
   inputs,
-  pkgs,
+  system,
   ...
 }: {
   systemd.services.pocbot = {
@@ -10,7 +10,7 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       EnvironmentFile = config.sops.secrets.pocbot_token.path;
-      ExecStart = "${inputs.pocbot}/target/release/pocbot";
+      ExecStart = "${inputs.pocbot.packages.default}/bin/pocbot";
       Restart = "always";
       User = "pocbot";
       Group = "pocbot";
