@@ -17,10 +17,12 @@
     };
   };
 
+  users.groups.pocbot = {};
   users.users.pocbot = {
     isSystemUser = true;
     description = "POCBot User";
     home = "/var/lib/pocbot";
+    group = "pocbot";
     createHome = true;
   };
 }
