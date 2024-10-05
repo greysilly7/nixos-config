@@ -3,7 +3,7 @@
     backend = "docker";
     containers = {
       pocbot = {
-        image = "ghcr.io/openplayverse/pocbot:latest ";
+        image = "ghcr.io/openplayverse/pocbot:latest";
         environmentFiles = [config.sops.secrets.pocbot_token.path];
       };
     };
