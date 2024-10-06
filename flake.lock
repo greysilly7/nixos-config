@@ -731,11 +731,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1728185256,
-        "narHash": "sha256-xw+6b0WgqEufvhW5MrEGhBT+0pReAaxKD5jg1K7zVvY=",
+        "lastModified": 1728185708,
+        "narHash": "sha256-npTATQjJ3fUmrYwmvYcMV2cvwboXu3oeTYdbViqul3Y=",
         "owner": "OpenPlayVerse",
         "repo": "POCBot",
-        "rev": "60d2c71082eb65dbaaa76bc849f32eee53901208",
+        "rev": "6b84368c0a16cd0357d7565d63a0113f975089c5",
         "type": "github"
       },
       "original": {
