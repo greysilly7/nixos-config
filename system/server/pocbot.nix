@@ -10,7 +10,7 @@
     wantedBy = ["multi-user.target"];
     serviceConfig = {
       EnvironmentFile = config.sops.secrets.pocbot_token.path;
-      ExecStart = "${inputs.pocbot.packages.${pkgs.system}.pocbot}/bin/pocbot";
+      ExecStart = "${inputs.pocbot.packages."${pkgs.system}".default}/bin/pocbot";
       Restart = "always";
       User = "pocbot";
       Group = "pocbot";
