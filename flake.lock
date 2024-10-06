@@ -731,11 +731,11 @@
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1728185708,
-        "narHash": "sha256-npTATQjJ3fUmrYwmvYcMV2cvwboXu3oeTYdbViqul3Y=",
+        "lastModified": 1728186848,
+        "narHash": "sha256-kcrXjiafNzfb2dbGvLag7GTU1HyZ6ReW5MJzuR48zb8=",
         "owner": "OpenPlayVerse",
         "repo": "POCBot",
-        "rev": "6b84368c0a16cd0357d7565d63a0113f975089c5",
+        "rev": "20dcc30c5673209ba98165c638a2df5de9764a60",
         "type": "github"
       },
       "original": {
@@ -868,11 +868,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728008962,
-        "narHash": "sha256-MjGMCVKqafsrqLQYJHHKXJkvocTjkxKjadBfN952/Zw=",
+        "lastModified": 1728181869,
+        "narHash": "sha256-sQXHXsjIcGEoIHkB+RO6BZdrPfB+43V1TEpyoWRI3ww=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "862d0c1e5fe2348a22044f225afef39b75df8cf0",
+        "rev": "cd46aa3906c14790ef5cbe278d9e54f2c38f95c0",
         "type": "github"
       },
       "original": {
