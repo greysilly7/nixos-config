@@ -10,7 +10,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    greysilly7-xyz.url = "github:greysilly7/greysilly7.xyz";
+    greysilly7-xyz = {
+      url = "github:greysilly7/greysilly7.xyz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +22,9 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.flake-parts.follows = "flake-parts";
     };
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -38,13 +44,25 @@
     spacebarchat = {
       url = "github:greysilly7/server/fastbar";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     pocbot = {
       url = "github:OpenPlayVerse/POCBot";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.cargo2nix.inputs.flake-utils.follows = "flake-utils";
+      inputs.cargo2nix.inputs.nixpkgs.follows = "nixpkgs";
+      inputs.cargo2nix.inputs.rust-overlay.follows = "rust-overlay";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
