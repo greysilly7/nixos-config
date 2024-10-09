@@ -7,8 +7,6 @@
   imports = [
     ./hardware-configuration.nix
     ./disko.nix
-
-    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   home-manager.users.greysilly7 = {
@@ -22,18 +20,6 @@
       "/persist/etc/ssh/ssh_host_ed25519_key"
     ];
     keyFile = "/persist/var/lib/sops-nix/key.txt";
-  };
-
-  catppuccin = {
-    enable = true;
-    flavor = "mocha";
-  };
-
-  # MESA Git
-  chaotic.mesa-git = {
-    enable = false;
-    extraPackages = with pkgs; [mesa_git.opencl intel-media-driver intel-ocl intel-vaapi-driver];
-    extraPackages32 = with pkgs.pkgsi686Linux; [pkgs.mesa32_git.opencl intel-media-driver intel-vaapi-driver];
   };
 
   # KDE

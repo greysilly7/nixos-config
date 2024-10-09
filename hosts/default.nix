@@ -11,13 +11,12 @@
   wayland = ../system/wayland;
   gaming = ../system/gaming;
   sunshine = ../system/gaming/sunshine.nix;
-  chaotic = inputs.chaotic.nixosModules.default;
   sops-nix = inputs.sops-nix.nixosModules.sops;
   disko = inputs.disko.nixosModules.default;
   hmModule = inputs.home-manager.nixosModules.home-manager;
 
   # Shared Modules
-  shared = [core sops-nix disko chaotic];
+  shared = [core sops-nix disko];
 
   home-manager = {
     useUserPackages = true;
@@ -88,9 +87,6 @@ in {
         hmModule
         bootloader
         server
-        wayland
-        sunshine
-        gaming
 
         {
           inherit home-manager;

@@ -104,7 +104,7 @@ in {
     xdg-utils
     xorg.xhost
     termius
-    inputs.dbeaver-last.legacyPackages.${system}.pkgs.dbeaver-bin
+    pkgs.dbeaver-bin
     ntfs3g
   ];
 
