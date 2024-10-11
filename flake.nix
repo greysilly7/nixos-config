@@ -2,20 +2,22 @@
   description = "My Personal Nixos Config";
 
   inputs = {
-    disko = {
-      url = "github:nix-community/disko";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    greysilly7-xyz = {
-      url = "github:greysilly7/greysilly7.xyz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
@@ -26,12 +28,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.flake-parts.follows = "flake-parts";
     };
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,11 +42,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+    greysilly7-xyz = {
+      url = "github:greysilly7/greysilly7.xyz";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
+
     pocbot = {
       url = "github:OpenPlayVerse/POCBot";
       inputs.nixpkgs.follows = "nixpkgs";
