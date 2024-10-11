@@ -21,6 +21,7 @@
 
     oh-my-zsh = {
       enable = true;
+      theme = "lukerandall";
       plugins = [
         "git"
         "sudo"
@@ -35,6 +36,6 @@
 
   programs.zoxide = {
     enable = true;
-    enableZshcIntegration = true;
+    enableZshIntegration = true;
   };
 }

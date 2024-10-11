@@ -6,8 +6,8 @@
     '';
     plugins = [
       {
-        name = "pure";
-        src = pkgs.fishPlugins.pure.src;
+        name = "hydro";
+        src = pkgs.fishPlugins.hydro.src;
       }
       {
         name = "sponge";
