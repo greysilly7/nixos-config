@@ -7,5 +7,6 @@
     ./zsh.nix
     ./git.nix
     ./kitty.nix
+    ./packages.nix
   ];
 }

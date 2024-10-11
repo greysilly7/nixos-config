@@ -27,7 +27,6 @@
           --prefix PATH : "${lib.makeBinPath extra-path}" \
           --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
 
-
         # Making Unity Rider plugin work!
         # The plugin expects the binary to be at /rider/bin/rider,
         # with bundled files at /rider/
@@ -47,64 +46,30 @@ in {
     firefox
     chromium
 
+    # Development Tools
     unityhub
     dotnet-sdk_8
     rider
-
-    # Code Editors
     vscode
     zed-editor
-    #inputs.nvix.packages.${system}.default
     neovim
 
-    # Compression Tools
-    zip
-    unzip
-    p7zip
-
-    # Network Tools
-    iperf3
-    dnsutils
-    nmap
-
-    # System Tools
-    file
-    which
-    pciutils
-    usbutils
-
-    # Security Tools
-    gnupg
-    sops
-    nixd
-    openssl
-
     # Disk Management Tools
-    gparted # partition manager
-    ncdu # disk space
-
-    # Media Tools
-    ffmpeg
+    gparted
 
     # Chat Clients
     vesktop
     discord-canary
     webcord
-    # CAD
-    # freecad
-    # slic3r
 
     # Office Tools
     libreoffice
 
     # Miscellaneous Tools
-    fastfetch
-    wget
     xdg-utils
     xorg.xhost
     termius
     pkgs.dbeaver-bin
-    ntfs3g
   ];
 
   programs.nvchad = {
