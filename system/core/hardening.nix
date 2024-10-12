@@ -1,21 +1,16 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
-  # disable coredump that could be exploited later
-  # and also slow down the system when something crash
+{pkgs, ...}: {
+  # Disable coredump that could be exploited later
+  # and also slow down the system when something crashes
   systemd.coredump.enable = false;
 
-  # enable firejail
+  # Enable firejail
   programs.firejail.enable = true;
 
-  # enable fail2ban
+  # Enable fail2ban
   services.fail2ban.enable = true;
 
-  # create system-wide executables firefox and chromium
-  # that will wrap the real binaries so everything
-  # work out of the box.
+  # Create system-wide executables for Firefox and Chromium
+  # that will wrap the real binaries so everything works out of the box.
   programs.firejail.wrappedBinaries = {
     firefox = {
       executable = "${pkgs.lib.getBin pkgs.firefox}/bin/firefox";
@@ -37,7 +32,7 @@
     "kernel.sysrq" = 4;
     # Protect against SYN flooding.
     "net.ipv4.tcp_syncookies" = 1;
-    # Protect against time-wait assasination.
+    # Protect against time-wait assassination.
     "net.ipv4.tcp_rfc1337" = 1;
 
     # Enable strict reverse path filtering (that is, do not attempt to route
@@ -52,7 +47,7 @@
     "net.ipv4.icmp_echo_ignore_all" = "1";
 
     # Ignore incoming ICMP redirects (note: default is needed to ensure that the
-    # setting is applied to interfaces added after the sysctls are set)
+    # setting is applied to interfaces added after the sysctls are set).
     "net.ipv4.conf.all.accept_redirects" = false;
     "net.ipv4.conf.all.secure_redirects" = false;
     "net.ipv4.conf.default.accept_redirects" = false;
@@ -60,13 +55,38 @@
     "net.ipv6.conf.all.accept_redirects" = false;
     "net.ipv6.conf.default.accept_redirects" = false;
 
-    # Ignore outgoing ICMP redirects (this is ipv4 only)
+    # Ignore outgoing ICMP redirects (this is IPv4 only).
     "net.ipv4.conf.all.send_redirects" = false;
     "net.ipv4.conf.default.send_redirects" = false;
 
-    # Restrict abritrary use of ptrace to the CAP_SYS_PTRACE capability.
+    # Restrict arbitrary use of ptrace to the CAP_SYS_PTRACE capability.
     "kernel.yama.ptrace_scope" = 2;
     "net.core.bpf_jit_enable" = false;
     "kernel.ftrace_enabled" = false;
+
+    # Additional hardening measures
+    # Disable IP source routing
+    "net.ipv4.conf.all.accept_source_route" = false;
+    "net.ipv4.conf.default.accept_source_route" = false;
+    "net.ipv6.conf.all.accept_source_route" = false;
+    "net.ipv6.conf.default.accept_source_route" = false;
+
+    # Disable packet forwarding
+    "net.ipv4.ip_forward" = 0;
+    "net.ipv6.conf.all.forwarding" = 0;
+    "net.ipv6.conf.default.forwarding" = 0;
+
+    # Enable ExecShield (if supported)
+    "kernel.exec-shield" = 1;
+
+    # Enable Address Space Layout Randomization (ASLR)
+    "kernel.randomize_va_space" = 2;
+
+    # Disable core dumps
+    "fs.suid_dumpable" = 0;
+
+    # Disable IPv6 router advertisements
+    "net.ipv6.conf.all.accept_ra" = 0;
+    "net.ipv6.conf.default.accept_ra" = 0;
   };
 }

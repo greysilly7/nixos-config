@@ -6,36 +6,30 @@
 }: {
   config = {
     services.nginx = {
-      enable = true;
-      package = pkgs.angieQuic.override {openssl = pkgs.libressl;};
+      enable = true; # Enable Nginx service
+      package = pkgs.angieQuic.override {openssl = pkgs.libressl;}; # Use Angie with QUIC support and LibreSSL
 
+      # Recommended settings for Nginx
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
       recommendedProxySettings = true;
       recommendedZstdSettings = true;
-      # Enable QUiC support
-      enableQuicBPF = true;
 
-      # Set Max Body Size to 100M
-      clientMaxBodySize = "100M";
+      enableQuicBPF = true; # Enable QUIC BPF support
 
-      # Enable the status page
-      statusPage = true;
+      clientMaxBodySize = "100M"; # Set max body size to 100M
 
-      # Only allow PFS-enabled ciphers with AES256
-      sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL";
+      statusPage = true; # Enable the status page
+
+      sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL"; # Only allow PFS-enabled ciphers with AES256
 
       appendHttpConfig = ''
         # Add HSTS header with preloading to HTTPS requests.
-        # Adding this header to HTTP requests is discouraged
         map $scheme $hsts_header {
             https   "max-age=31536000; includeSubdomains; preload";
         }
         add_header Strict-Transport-Security $hsts_header;
-
-        # Enable CSP for your services.
-        #add_header Content-Security-Policy "script-src 'self'; object-src 'none'; base-uri 'none';" always;
 
         # Minimize information leaked to other domains
         add_header 'Referrer-Policy' 'origin-when-cross-origin';
@@ -50,6 +44,7 @@
         proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
       '';
 
+      # Virtual host configuration for greysilly7.xyz
       virtualHosts."greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
@@ -66,6 +61,7 @@
         };
       };
 
+      # Virtual host configuration for vaultwarden.greysilly7.xyz
       virtualHosts."vaultwarden.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
@@ -76,27 +72,11 @@
           proxyWebsockets = true;
         };
       };
-      /*
-      virtualHosts."adgaurdhome.greysilly7.xyz" = {
-        enableACME = true;
-        forceSSL = true;
-        http2 = true;
-        http3 = true;
-
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:3000";
-          proxyWebsockets = true;
-          basicAuthFile = config.sops.secrets.adguardhomewebpass.path;
-        };
-        locations."/dns-query" = {
-          proxyPass = "http://127.0.0.1:853/dns-query";
-        };
-      };
-      */
     };
+
     security.acme = {
-      acceptTerms = true;
-      defaults.email = "greysilly7@gmail.com";
+      acceptTerms = true; # Accept ACME terms
+      defaults.email = "greysilly7@gmail.com"; # Set email for ACME
     };
 
     # Open Firewall for HTTP and HTTPS

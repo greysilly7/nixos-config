@@ -2,12 +2,13 @@
   config = {
     services.openssh = {
       enable = true;
-      settings = {
-        # root user is used for remote deployment, so we need to allow it
-        PermitRootLogin = lib.mkForce "prohibit-password";
-        PasswordAuthentication = lib.mkForce false; # disable password login
-      };
       openFirewall = true;
+      settings = {
+        # Root user is used for remote deployment, so we need to allow it
+        PermitRootLogin = lib.mkForce "prohibit-password";
+        # Disable password login
+        PasswordAuthentication = lib.mkForce false;
+      };
       hostKeys = [
         {
           bits = 4096;

@@ -3,23 +3,24 @@
   lib,
   ...
 }: let
-  quantom = 64;
+  quantum = 64;
   rate = 48000;
-  qr = "${toString 64}/${toString 48000}";
+  qr = "${toString rate}/${toString quantum}";
 in {
-  # Enable sound with pipewire.
+  # Enable sound with Pipewire
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    enable = true; # Enable Pipewire
+    alsa.enable = true; # Enable ALSA support
+    alsa.support32Bit = true; # Enable 32-bit ALSA support
+    pulse.enable = true; # Enable PulseAudio support
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # Uncomment to enable JACK applications
+    # jack.enable = true;
+
+    # Use the example session manager (enabled by default)
+    # media-session.enable = true;
+
     extraConfig.pipewire = {
       "99-lowlatency" = {
         context = {
@@ -59,15 +60,15 @@ in {
     };
 
     wireplumber = {
-      enable = true;
+      enable = true; # Enable WirePlumber
       configPackages = let
-        # generate "matches" section of the rules
+        # Generate "matches" section of the rules
         matches = lib.generators.toLua {
-          multiline = false; # looks better while inline
+          multiline = false; # Looks better while inline
           indent = false;
-        } [[["node.name" "matches" "alsa_output.*"]]]; # nested lists are to produce `{{{ }}}` in the output
+        } [[["node.name" "matches" "alsa_output.*"]]]; # Nested lists to produce `{{{ }}}` in the output
 
-        # generate "apply_properties" section of the rules
+        # Generate "apply_properties" section of the rules
         apply_properties = lib.generators.toLua {} {
           "audio.format" = "S32LE";
           "audio.rate" = rate * 2;

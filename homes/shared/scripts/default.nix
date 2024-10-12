@@ -3,10 +3,9 @@
   extract = pkgs.writeScriptBin "extract" (builtins.readFile ./scripts/extract.sh);
   fs-diff = pkgs.writeScriptBin "fs-diff" (builtins.readFile ./scripts/fs-diff.sh);
 in {
-  home.packages = with pkgs; [
+  home.packages = [
     compress
     extract
-
     fs-diff
   ];
 }

@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   inputs,
   ...
@@ -16,6 +17,11 @@
     description = "Spacebar Node.js application";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
+    preStart = ''
+      ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar
+      ${pkgs.coreutils}/bin/chown spacebar:spacebar /var/lib/spacebar
+      ${pkgs.coreutils}/bin/chmod 700 /var/lib/spacebar
+    '';
     serviceConfig = {
       ExecStart = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/bin/start-bundle";
       Restart = "always";
@@ -28,14 +34,6 @@
         "STORAGE_LOCATION=/var/lib/spacebar"
       ];
     };
-  };
-
-  system.activationScripts.spacebarStorage = {
-    text = ''
-      mkdir -p /var/lib/spacebar
-      chown spacebar:spacebar /var/lib/spacebar
-      chmod 700 /var/lib/spacebar
-    '';
   };
 
   services.nginx.virtualHosts = {

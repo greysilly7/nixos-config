@@ -1,31 +1,27 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
     # Compression Tools
-    zip
-    unzip
     p7zip
+    unzip
+    zip
 
     # Network Tools
-    iperf3
     dnsutils
+    iperf3
     nmap
 
     # System Tools
     file
-    which
     pciutils
     usbutils
+    which
 
     # Security Tools
     gnupg
-    sops
     openssl
+    sops
 
     # Media Tools
     ffmpeg
-
-    # Miscellaneous Tools
-    wget
-    fastfetch
   ];
 }

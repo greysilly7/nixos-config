@@ -1,6 +1,6 @@
 {lib, ...}: {
-  # Tell network manager to not manage DNS
   networking = {
+    # Tell NetworkManager to not manage DNS
     nameservers = lib.mkForce ["127.0.0.1" "::1"];
     networkmanager = {
       enable = true;
@@ -12,8 +12,8 @@
       };
     };
     firewall = {
-      enable = true;
       allowPing = false;
+      enable = true;
       logReversePathDrops = true;
     };
   };

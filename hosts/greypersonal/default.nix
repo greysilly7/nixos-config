@@ -22,13 +22,16 @@
     keyFile = "/persist/var/lib/sops-nix/key.txt";
   };
 
-  # KDE
+  # KDE Configuration
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.displayManager.sddm.wayland.enable = true;
 
+  # Power and Firmware Services
   services.power-profiles-daemon.enable = false;
   services.fwupd.enable = true; # Enable fwupd service
+
+  # CPU Frequency Management
   services.auto-cpufreq = {
     enable = true;
     settings = {
@@ -43,34 +46,36 @@
     };
   };
 
+  # Bluetooth Configuration
   hardware.bluetooth = {
     enable = true;
     package = pkgs.bluez5-experimental;
   };
 
+  # Tailscale Auto-Connect Service
   systemd.services.tailscale-autoconnect = {
     description = "Automatic connection to Tailscale";
 
-    # make sure tailscale is running before trying to connect to tailscale
+    # Ensure tailscale is running before trying to connect
     after = ["network-pre.target" "tailscale.service"];
     wants = ["network-pre.target" "tailscale.service"];
     wantedBy = ["multi-user.target"];
 
-    # set this service as a oneshot job
+    # Set this service as a oneshot job
     serviceConfig.Type = "oneshot";
 
-    # have the job run this shell script
+    # Run this shell script
     script = with pkgs; ''
-      # wait for tailscaled to settle
+      # Wait for tailscaled to settle
       sleep 2
 
-      # check if we are already authenticated to tailscale
+      # Check if we are already authenticated to tailscale
       status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
-      if [ $status = "Running" ]; then # if so, then do nothing
+      if [ $status = "Running" ]; then
         exit 0
       fi
 
-      # otherwise authenticate with tailscale
+      # Otherwise authenticate with tailscale
       ${tailscale}/bin/tailscale up -authkey file://${config.sops.secrets.ts_laptop_key.path}
     '';
   };

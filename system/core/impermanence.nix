@@ -4,21 +4,24 @@
   ...
 }: {
   imports = [inputs.impermanence.nixosModule];
+
   programs.fuse.userAllowOther = true;
+
   environment.persistence."/persist" = {
     hideMounts = true;
     directories =
       [
-        # dirty fix for "no storage left on device" while rebuilding
-        # it gets wiped anyway
+        # Dirty fix for "no storage left on device" while rebuilding
+        # It gets wiped anyway
         "/tmp"
         "/var/db/sudo"
       ]
       ++ lib.forEach ["nixos" "NetworkManager" "nix" "ssh" "secureboot"] (x: "/etc/${x}")
-      ++ lib.forEach ["bluetooth" "tailscale" "nixos" "pipewire" "libvirt" "fail2ban" "fprint" "sops-nix" "sddm" "cups" "upower" "fwupd"] (x: "/var/lib/${x}");
+      ++ lib.forEach ["bluetooth" "cups" "fail2ban" "fprint" "fwupd" "libvirt" "nixos" "pipewire" "sddm" "sops-nix" "tailscale" "upower"] (x: "/var/lib/${x}");
     files = ["/etc/machine-id"];
   };
-  # for some reason *this* is what makes networkmanager not get screwed completely instead of the impermanence module
+
+  # Ensure NetworkManager works correctly with impermanence
   systemd.tmpfiles.rules = [
     "L /var/lib/NetworkManager/secret_key - - - - /persist/var/lib/NetworkManager/secret_key"
     "L /var/lib/NetworkManager/seen-bssids - - - - /persist/var/lib/NetworkManager/seen-bssids"
@@ -35,25 +38,10 @@
     script = ''
       mkdir -p /mnt
 
-      # We first mount the btrfs root to /mnt
-      # so we can manipulate btrfs subvolumes.
+      # Mount the BTRFS root to /mnt to manipulate subvolumes
       mount -o subvol=/ /dev/mapper/crypted /mnt
 
-      # While we're tempted to just delete /root and create
-      # a new snapshot from /root-blank, /root is already
-      # populated at this point with a number of subvolumes,
-      # which makes `btrfs subvolume delete` fail.
-      # So, we remove them first.
-      #
-      # /root contains subvolumes:
-      # - /root/var/lib/portables
-      # - /root/var/lib/machines
-      #
-      # I suspect these are related to systemd-nspawn, but
-      # since I don't use it I'm not 100% sure.
-      # Anyhow, deleting these subvolumes hasn't resulted
-      # in any issues so far, except for fairly
-      # benign-looking errors from systemd-tmpfiles.
+      # Delete subvolumes under /root
       btrfs subvolume list -o /mnt/root |
       cut -f9 -d' ' |
       while read subvolume; do
@@ -63,11 +51,11 @@
       echo "deleting /root subvolume..." &&
       btrfs subvolume delete /mnt/root
 
+      # Restore blank /root subvolume
       echo "restoring blank /root subvolume..."
       btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
-      # Once we're done rolling back to a blank snapshot,
-      # we can unmount /mnt and continue on the boot process.
+      # Unmount /mnt and continue boot process
       umount /mnt
     '';
   };
@@ -76,25 +64,10 @@
   boot.initrd.postDeviceCommands = lib.mkBefore ''
     mkdir -p /mnt
 
-    # We first mount the btrfs root to /mnt
-    # so we can manipulate btrfs subvolumes.
+    # Mount the BTRFS root to /mnt to manipulate subvolumes
     mount -o subvol=/ /dev/mapper/crypted /mnt
 
-    # While we're tempted to just delete /root and create
-    # a new snapshot from /root-blank, /root is already
-    # populated at this point with a number of subvolumes,
-    # which makes `btrfs subvolume delete` fail.
-    # So, we remove them first.
-    #
-    # /root contains subvolumes:
-    # - /root/var/lib/portables
-    # - /root/var/lib/machines
-    #
-    # I suspect these are related to systemd-nspawn, but
-    # since I don't use it I'm not 100% sure.
-    # Anyhow, deleting these subvolumes hasn't resulted
-    # in any issues so far, except for fairly
-    # benign-looking errors from systemd-tmpfiles.
+    # Delete subvolumes under /root
     btrfs subvolume list -o /mnt/root |
     cut -f9 -d' ' |
     while read subvolume; do
@@ -104,11 +77,11 @@
     echo "deleting /root subvolume..." &&
     btrfs subvolume delete /mnt/root
 
+    # Restore blank /root subvolume
     echo "restoring blank /root subvolume..."
     btrfs subvolume snapshot /mnt/root-blank /mnt/root
 
-    # Once we're done rolling back to a blank snapshot,
-    # we can unmount /mnt and continue on the boot process.
+    # Unmount /mnt and continue boot process
     umount /mnt
   '';
   */
