@@ -22,6 +22,9 @@
     keyFile = "/persist/var/lib/sops-nix/key.txt";
   };
 
+  # Nix-LD
+  programs.nix-ld.enable = true;
+
   # KDE Configuration
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
