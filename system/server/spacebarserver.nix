@@ -57,10 +57,13 @@
         "/media" = {
           proxyPass = "http://127.0.0.1:8000";
         };
-        "/images/wallpaper.png" = {
-          root = ../../wallpapers;
-          tryFiles = "$uri wallpaper.png";
+        "/assets/public/logo.png" = {
+          root = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/assets/public";
+          tryFiles = "$uri logo.png";
         };
+        "/tos.txt" = {
+          root = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/assets/public";
+          tryFiles = "$uri TOS.txt";
       };
     };
   };
