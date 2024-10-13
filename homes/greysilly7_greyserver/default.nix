@@ -2,7 +2,7 @@
   imports = [
     ../shared/misc/bash.nix
     ../shared/misc/bat.nix
-    ../shared/misc/fish.nix
+    ../shared/misc/zsh.nix
     ../shared/misc/git.nix
 
     ../shared/scripts
