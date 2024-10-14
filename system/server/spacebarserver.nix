@@ -28,7 +28,7 @@
 
       # Create /var/lib directory and copy necessary files
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar/assets/public
-      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/logo.png /var/lib/spacebar/assets/public/logo.png
+      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/logo.png /var/lib/spacebar/assets/public/icon.png
       ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/lib/spacebar/assets/public/TOS.txt
       ${pkgs.coreutils}/bin/chown -R spacebar:spacebar /var/lib/spacebar
       ${pkgs.coreutils}/bin/chmod -R 755 /var/lib/spacebar
@@ -71,7 +71,7 @@
         };
         "/assets/public/logo.png" = {
           root = "/var/lib/spacebar";
-          tryFiles = "$uri /assets/public/logo.png";
+          tryFiles = "$uri /assets/public/icon.png";
         };
         "/tos.txt" = {
           root = "/var/lib/spacebar";
