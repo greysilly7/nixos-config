@@ -27,6 +27,7 @@
       ${pkgs.coreutils}/bin/chmod 700 /var/lib/spacebar
 
       # Create /var/lib directory and copy necessary files
+      rm -rf /var/lib/spacebar/assets
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar/assets/public
       ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/icon.png /var/lib/spacebar/assets/public/icon.png
       ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/lib/spacebar/assets/public/TOS.txt
