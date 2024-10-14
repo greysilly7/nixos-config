@@ -58,12 +58,10 @@
           proxyPass = "http://127.0.0.1:8000";
         };
         "/assets/public/logo.png" = {
-          root = "${inputs.spacebarchat}/assets/public";
-          tryFiles = "$uri logo.png";
+          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/logo.png";
         };
         "/tos.txt" = {
-          root = "${inputs.spacebarchat}/assets/public";
-          tryFiles = "$uri tos.txt";
+          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/tos.txt";
         };
       };
     };
