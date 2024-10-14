@@ -30,7 +30,7 @@
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar/assets/public
       ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/icon.png /var/lib/spacebar/assets/public/icon.png
       ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/lib/spacebar/assets/public/TOS.txt
-      ${pkgs.coreutils}/bin/chown -R spacebar:spacebar /var/lib/spacebar
+      ${pkgs.coreutils}/bin/chown -R nginx:nginx /var/lib/spacebar/assets
       ${pkgs.coreutils}/bin/chmod -R 755 /var/lib/spacebar
     '';
     serviceConfig = {
