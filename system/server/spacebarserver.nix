@@ -21,6 +21,14 @@
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar
       ${pkgs.coreutils}/bin/chown spacebar:spacebar /var/lib/spacebar
       ${pkgs.coreutils}/bin/chmod 700 /var/lib/spacebar
+
+      # Create /var/www directory and copy necessary files
+      ${pkgs.coreutils}/bin/mkdir -p /var/www/spacebar/assets/public
+      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/logo.png /var/www/spacebar/assets/public/logo.png
+      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/www/spacebar/assets/public/TOS.txt
+      ${pkgs.coreutils}/bin/chown -R spacebar:spacebar /var/www/spacebar
+      ${pkgs.coreutils}/bin/chmod -R 755 /var/www/spacebar
+
     '';
     serviceConfig = {
       ExecStart = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/bin/start-bundle";
@@ -58,10 +66,12 @@
           proxyPass = "http://127.0.0.1:8000";
         };
         "/assets/public/logo.png" = {
-          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/logo.png";
+          root = "/var/www/spacebar";
+          tryFiles = "$uri /assets/public/logo.png";
         };
         "/tos.txt" = {
-          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/TOS.txt";
+          root = "/var/www/spacebar";
+          tryFiles = "$uri /assets/public/TOS.txt";
         };
       };
     };
