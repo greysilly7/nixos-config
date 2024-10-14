@@ -59,11 +59,11 @@
         };
         "/assets/public/logo.png" = {
           root = "${inputs.spacebarchat}/assets/public";
-          tryFiles = "$uri /assets/public/logo.png";
+          tryFiles = "$uri logo.png";
         };
         "/tos.txt" = {
           root = "${inputs.spacebarchat}/assets/public";
-          tryFiles = "$uri /assets/public/tos.txt";
+          tryFiles = "$uri tos.txt";
         };
       };
     };
