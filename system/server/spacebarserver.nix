@@ -61,7 +61,7 @@
           tryFiles = "$uri ${inputs.spacebarchat}/assets/public/logo.png";
         };
         "/tos.txt" = {
-          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/tos.txt";
+          tryFiles = "$uri ${inputs.spacebarchat}/assets/public/TOS.txt";
         };
       };
     };
