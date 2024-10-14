@@ -5,30 +5,33 @@
   inputs,
   ...
 }: {
+  # Define the spacebar user
   users.users.spacebar = {
     isSystemUser = true;
     group = "spacebar";
     extraGroups = ["postgres"];
   };
 
+  # Define the spacebar group
   users.groups.spacebar = {};
 
+  # Define the systemd service for Spacebar
   systemd.services.spacebar = {
     description = "Spacebar Node.js application";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
+    before = ["nginx.service"];
     preStart = ''
       ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar
       ${pkgs.coreutils}/bin/chown spacebar:spacebar /var/lib/spacebar
       ${pkgs.coreutils}/bin/chmod 700 /var/lib/spacebar
 
-      # Create /var/www directory and copy necessary files
-      ${pkgs.coreutils}/bin/mkdir -p /var/www/spacebar/assets/public
-      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/logo.png /var/www/spacebar/assets/public/logo.png
-      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/www/spacebar/assets/public/TOS.txt
-      ${pkgs.coreutils}/bin/chown -R spacebar:spacebar /var/www/spacebar
-      ${pkgs.coreutils}/bin/chmod -R 755 /var/www/spacebar
-
+      # Create /var/lib directory and copy necessary files
+      ${pkgs.coreutils}/bin/mkdir -p /var/lib/spacebar/assets/public
+      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/logo.png /var/lib/spacebar/assets/public/logo.png
+      ${pkgs.coreutils}/bin/cp ${inputs.spacebarchat}/assets/public/TOS.txt /var/lib/spacebar/assets/public/TOS.txt
+      ${pkgs.coreutils}/bin/chown -R spacebar:spacebar /var/lib/spacebar
+      ${pkgs.coreutils}/bin/chmod -R 755 /var/lib/spacebar
     '';
     serviceConfig = {
       ExecStart = "${inputs.spacebarchat.packages.${"x86_64-linux"}.default}/bin/start-bundle";
@@ -44,6 +47,7 @@
     };
   };
 
+  # Nginx virtual host configuration for Spacebar
   services.nginx.virtualHosts = {
     "spacebar.greysilly7.xyz" = {
       forceSSL = true;
@@ -66,17 +70,18 @@
           proxyPass = "http://127.0.0.1:8000";
         };
         "/assets/public/logo.png" = {
-          root = "/var/www/spacebar";
+          root = "/var/lib/spacebar";
           tryFiles = "$uri /assets/public/logo.png";
         };
         "/tos.txt" = {
-          root = "/var/www/spacebar";
+          root = "/var/lib/spacebar";
           tryFiles = "$uri /assets/public/TOS.txt";
         };
       };
     };
   };
 
+  # OCI container configuration for Imagor
   virtualisation.oci-containers = {
     backend = "docker";
     containers = {
