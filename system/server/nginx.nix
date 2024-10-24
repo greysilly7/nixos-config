@@ -3,7 +3,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  rootSBDomain = "greysilly7.xyz";
+in {
   config = {
     services.nginx = {
       enable = true; # Enable Nginx service
@@ -56,7 +58,11 @@
           extraConfig = ''
             more_set_headers 'Access-Control-Allow-Origin: *';
             default_type application/json;
-            return 200 '{"api": "https://spacebar.greysilly7.xyz/api/v9"}';
+                    return 200 '${builtins.toJSON {
+              cdn = "cdn.${rootSBDomain}";
+              gateway = "gateway.${rootSBDomain}";
+              api = "api.${rootSBDomain}";
+            }}'
           '';
         };
       };
