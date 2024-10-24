@@ -24,8 +24,6 @@ in {
 
       statusPage = true; # Enable the status page
 
-      sslCiphers = "AES256+EECDH:AES256+EDH:!aNULL"; # Only allow PFS-enabled ciphers with AES256
-
       appendHttpConfig = ''
         # Add HSTS header with preloading to HTTPS requests.
         map $scheme $hsts_header {
