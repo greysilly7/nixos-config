@@ -100,23 +100,6 @@ in {
   */
 
   services.nginx.virtualHosts = {
-    "${rootDomain}" = {
-      enableACME = true;
-      forceSSL = true;
-      http2 = true;
-      http3 = true;
-
-      locations."/" = {
-        extraConfig = ''
-          return 200 '{
-            "cdn": "cdn.${rootDomain}",
-            "gateway": "gateway.${rootDomain}",
-            "api": "api.${rootDomain}"
-          }';
-
-        '';
-      };
-    };
     "api.${rootDomain}" = {
       enableACME = true;
       forceSSL = true;
