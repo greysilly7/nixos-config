@@ -100,26 +100,30 @@ in {
   */
 
   services.nginx.virtualHosts = {
-    "${rootDomain}".locations."/" = {
+    "${rootDomain}" = {
       enableACME = true;
       forceSSL = true;
       http2 = true;
       http3 = true;
-      extraConfig = ''
-        return 200 '{
-          "cdn": "cdn.${rootDomain}",
-          "gateway": "gateway.${rootDomain}",
-          "api": "api.${rootDomain}"
-        }';
 
-      '';
+      locations."/" = {
+        extraConfig = ''
+          return 200 '{
+            "cdn": "cdn.${rootDomain}",
+            "gateway": "gateway.${rootDomain}",
+            "api": "api.${rootDomain}"
+          }';
+
+        '';
+      };
     };
     "api.${rootDomain}" = {
+      enableACME = true;
+      forceSSL = true;
+      http2 = true;
+      http3 = true;
+
       locations."/" = {
-        enableACME = true;
-        forceSSL = true;
-        http2 = true;
-        http3 = true;
         proxyPass = "http://127.0.0.1:3001";
         extraConfig = ''
           if ($request_method = 'OPTIONS') {
@@ -141,11 +145,12 @@ in {
       };
     };
     "cdn.${rootDomain}" = {
+      enableACME = true;
+      forceSSL = true;
+      http2 = true;
+      http3 = true;
+
       locations."/" = {
-        enableACME = true;
-        forceSSL = true;
-        http2 = true;
-        http3 = true;
         proxyPass = "http://127.0.0.1:3003";
         extraConfig = ''
           if ($request_method = 'OPTIONS') {
@@ -167,11 +172,12 @@ in {
       };
     };
     "gateway.${rootDomain}" = {
+      enableACME = true;
+      forceSSL = true;
+      http2 = true;
+      http3 = true;
+
       locations."/" = {
-        enableACME = true;
-        forceSSL = true;
-        http2 = true;
-        http3 = true;
         proxyPass = "http://127.0.0.1:3002";
         extraConfig = ''
           if ($request_method = 'OPTIONS') {

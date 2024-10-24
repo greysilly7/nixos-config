@@ -13,11 +13,12 @@
   };
 
   services.nginx.virtualHosts."spacebar.greysilly7.xyz".locations = {
+    enableACME = true;
+    forceSSL = true;
+    http2 = true;
+    http3 = true;
+
     "/media" = {
-      enableACME = true;
-      forceSSL = true;
-      http2 = true;
-      http3 = true;
       proxyPass = "http://127.0.0.1:8000";
     };
   };
