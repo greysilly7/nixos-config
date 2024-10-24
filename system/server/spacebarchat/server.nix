@@ -102,11 +102,12 @@ in {
   services.nginx.virtualHosts = {
     "${rootDomain}".locations."/" = {
       extraConfig = ''
-        return 200 '${builtins.toJSON {
-          cdn = "cdn.${rootDomain}";
-          gateway = "gateway.${rootDomain}";
-          api = "api.${rootDomain}";
-        }}'
+        return 200 '{
+          "cdn": "cdn.${rootDomain}",
+          "gateway": "gateway.${rootDomain}",
+          "api": "api.${rootDomain}"
+        }';
+
       '';
     };
     "api.${rootDomain}" = {
