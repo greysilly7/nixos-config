@@ -12,7 +12,7 @@
     };
   };
 
-  services.nginx.virtualHosts."spacebar.greysilly7.xyz" = {
+  services.nginx.virtualHosts."spacebar.greysilly7.xyz".locations = {
     "/media" = {
       proxyPass = "http://127.0.0.1:8000";
     };
