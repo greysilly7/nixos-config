@@ -17,7 +17,7 @@
   boot.extraModulePackages = [];
 
   boot.initrd.systemd.enable = true;
-  boot.initrd.systemd.enableTpm2 = true;
+  boot.initrd.systemd.tpm2.enable = true;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.lanzaboote.enable = lib.mkForce true;
