@@ -58,6 +58,7 @@
             more_set_headers 'Content-Type application/json';
 
             return 200 '{"api":"https://spacebar.greysilly7.xyz/api/v9"}'
+            #OWO
           '';
         };
       };
