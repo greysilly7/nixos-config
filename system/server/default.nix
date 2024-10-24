@@ -6,7 +6,7 @@
     ./nginx.nix
     ./vaultwarden.nix
     ./adguard.nix
-    ./spacebarserver.nix
+    ./spacebarchat
     ./postgres.nix
     ./jankclient.nix
     ./pocbot.nix
