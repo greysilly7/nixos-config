@@ -70,10 +70,14 @@ in {
     xorg.xhost
     termius
     pkgs.dbeaver-bin
+    wget
+    nixd
   ];
 
   programs.nvchad = {
     enable = true;
     gcc = pkgs.gcc;
   };
+
+  programs.helix.enable = true;
 }

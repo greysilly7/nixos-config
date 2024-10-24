@@ -1,11 +1,11 @@
 {lib, ...}: {
   networking = {
     # Tell NetworkManager to not manage DNS
-    nameservers = lib.mkForce ["127.0.0.1" "::1"];
+    # nameservers = lib.mkForce ["127.0.0.1" "::1"];
     networkmanager = {
       enable = true;
       unmanaged = ["docker0" "rndis0"];
-      dns = lib.mkForce "none";
+      # dns = lib.mkForce "none";
       wifi = {
         macAddress = "random";
         powersave = true;
@@ -19,7 +19,7 @@
   };
 
   services.dnscrypt-proxy2 = {
-    enable = true;
+    enable = false;
     settings = {
       ipv4_servers = true;
       ipv6_servers = true;
