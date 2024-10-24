@@ -57,9 +57,7 @@
             more_set_headers 'Access-Control-Allow-Origin: *';
             more_set_headers 'Content-Type application/json';
 
-            return 200 '${builtins.toJSON {
-              api = "https://spacebar.greysilly7.xyz/api/v9";
-            }}'
+            return 200 '{"api":"https://spacebar.greysilly7.xyz/api/v9"}'
           '';
         };
       };
