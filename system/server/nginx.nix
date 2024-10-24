@@ -55,8 +55,11 @@
         locations."/.well-known/spacebar" = {
           extraConfig = ''
             more_set_headers 'Access-Control-Allow-Origin: *';
-            default_type application/json;
-            return 200 '{"api": "https://spacebar.greysilly7.xyz/api/v9"}';
+            more_set_headers 'Content-Type application/json';
+
+            return 200 '${builtins.toJSON {
+              api = "https://spacebar.greysilly7.xyz/api/v9";
+            }}'
           '';
         };
       };
@@ -75,8 +78,8 @@
     };
 
     security.acme = {
-      acceptTerms = true; # Accept ACME terms
-      defaults.email = "greysilly7@gmail.com"; # Set email for ACME
+      acceptTerms = true;
+      defaults.email = "greysilly7@gmail.com";
     };
 
     # Open Firewall for HTTP and HTTPS
