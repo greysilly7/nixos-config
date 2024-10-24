@@ -59,9 +59,7 @@ in {
             more_set_headers 'Access-Control-Allow-Origin: *';
             default_type application/json;
             return 200 '{
-              "cdn": "cdn.${rootSBDomain}",
-              "gateway": "gateway.${rootSBDomain}",
-              "api": "api.${rootSBDomain}"
+              "api": "https://api.${rootSBDomain}/api/v9"
             }';
           '';
         };
