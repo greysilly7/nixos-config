@@ -5,7 +5,7 @@
     ./cloudflared.nix
     ./nginx.nix
     ./vaultwarden.nix
-    ./adguard.nix
+    # ./adguard.nix
     ./spacebarchat
     ./postgres.nix
     ./jankclient.nix
