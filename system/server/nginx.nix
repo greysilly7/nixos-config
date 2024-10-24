@@ -58,11 +58,11 @@ in {
           extraConfig = ''
             more_set_headers 'Access-Control-Allow-Origin: *';
             default_type application/json;
-                    return 200 '${builtins.toJSON {
+            return 200 '${builtins.toJSON {
               cdn = "cdn.${rootSBDomain}";
               gateway = "gateway.${rootSBDomain}";
               api = "api.${rootSBDomain}";
-            }}'
+            }}';
           '';
         };
       };
