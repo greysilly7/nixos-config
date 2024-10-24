@@ -79,7 +79,7 @@
       fi
 
       # Otherwise authenticate with tailscale
-      ${tailscale}/bin/tailscale up -authkey file://${config.sops.secrets.ts_laptop_key.path}
+      ${tailscale}/bin/tailscale up -authkey file://${config.sops.secrets.ts_laptop_key.path} --accept-routes
     '';
   };
 }

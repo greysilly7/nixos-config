@@ -20,6 +20,9 @@
     keyFile = "/var/lib/sops-nix/key.txt";
   };
 
+  # Nix-LD
+  programs.nix-ld.enable = true;
+
   services.fwupd.enable = true; # Enable fwupd service
 
   systemd.services.tailscale-autoconnect = {
