@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  pkgs,
   ...
 }: let
   rootSBDomain = "spacebar.greysilly7.xyz";
@@ -9,7 +10,7 @@ in {
     enable = true; # Enable Caddy service
 
     # Caddyfile configuration
-    caddyfile = ''
+    configFile = pkgs.writeText "Caddyfile" ''
       {
         email greysilly7@gmail.com
         acme_ca https://acme-v02.api.letsencrypt.org/directory
