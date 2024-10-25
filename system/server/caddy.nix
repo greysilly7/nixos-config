@@ -14,13 +14,6 @@ in {
       {
         email greysilly7@gmail.com
         acme_ca https://acme-v02.api.letsencrypt.org/directory
-
-        tls {
-          protocols tls1.2 tls1.3
-          ciphers TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256
-          ciphers ECDHE-ECDSA-AES128-GCM-SHA256 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-CHACHA20-POLY1305
-          ciphers ECDHE-RSA-AES128-GCM-SHA256 ECDHE-RSA-AES256-GCM-SHA384 ECDHE-RSA-CHACHA20-POLY1305
-        }
       }
 
       # Virtual host configuration for greysilly7.xyz
