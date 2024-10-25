@@ -58,24 +58,4 @@ in {
   systemd.tmpfiles.rules = [
     "d ${writableDir} 0755 jankclient jankclient -"
   ];
-
-  # Configure Nginx virtual host for JankClient
-  services.nginx.virtualHosts = {
-    "jankclient.greysilly7.xyz" = {
-      forceSSL = true;
-      enableACME = true;
-      http2 = true;
-      http3 = true;
-
-      locations = {
-        "/" = {
-          proxyPass = "http://127.0.0.1:8080";
-          extraConfig = ''
-            proxy_set_header Upgrade $http_upgrade;
-            proxy_set_header Connection "upgrade";
-          '';
-        };
-      };
-    };
-  };
 }

@@ -3,7 +3,8 @@
     # inputs.nix-minecraft.nixosModules.minecraft-servers
 
     ./cloudflared.nix
-    ./nginx.nix
+    # ./nginx.nix
+    ./caddy.nix
     ./vaultwarden.nix
     # ./adguard.nix
     ./spacebarchat
