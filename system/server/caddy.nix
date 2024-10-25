@@ -43,6 +43,19 @@ in {
         log {
           output file /var/log/caddy/greysilly7.xyz.log
         }
+
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
       }
 
       # Virtual host configuration for vaultwarden.greysilly7.xyz
@@ -57,20 +70,19 @@ in {
         log {
           output file /var/log/caddy/vaultwarden.greysilly7.xyz.log
         }
-      }
 
-      # Handle OPTIONS requests for CORS preflight
-      @options {
-        method OPTIONS
-      }
-      handle @options {
-        header Access-Control-Allow-Origin "*"
-        header Access-Control-Allow-Methods "*"
-        header Access-Control-Allow-Headers "*"
-        header Access-Control-Max-Age "1728000"
-        header Content-Type "text/plain; charset=utf-8"
-        header Content-Length "0"
-        respond "" 204
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
       }
 
       # Virtual host configuration for spacebar.greysilly7.xyz
@@ -79,6 +91,19 @@ in {
 
         log {
           output file /var/log/caddy/spacebar.greysilly7.xyz.log
+        }
+
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
         }
       }
 
@@ -94,8 +119,20 @@ in {
         log {
           output file /var/log/caddy/jankclient.greysilly7.xyz.log
         }
-      }
 
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
+      }
     '';
   };
 
