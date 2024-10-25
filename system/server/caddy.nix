@@ -67,6 +67,10 @@ in {
           header_up X-Forwarded-Proto {scheme}
         }
 
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+        }
+
         log {
           output file /var/log/caddy/vaultwarden.greysilly7.xyz.log
         }
@@ -96,6 +100,10 @@ in {
 
         reverse_proxy /media http://127.0.0.1:8000
 
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+        }
+
         log {
           output file /var/log/caddy/spacebar.greysilly7.xyz.log
         }
@@ -114,13 +122,17 @@ in {
         }
       }
 
-            # Virtual host configuration for api.spacebar.greysilly7.xyz
+      # Virtual host configuration for api.spacebar.greysilly7.xyz
       api.spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3001 {
           header_up Host {host}
           header_up X-Real-IP {remote}
           header_up X-Forwarded-For {remote}
           header_up X-Forwarded-Proto {scheme}
+        }
+
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
         }
 
         log {
@@ -150,6 +162,10 @@ in {
           header_up X-Forwarded-Proto {scheme}
         }
 
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+        }
+
         log {
           output file /var/log/caddy/cdn.spacebar.greysilly7.xyz.log
         }
@@ -177,6 +193,10 @@ in {
           header_up X-Forwarded-Proto {scheme}
         }
 
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
+        }
+
         log {
           output file /var/log/caddy/gateway.spacebar.greysilly7.xyz.log
         }
@@ -202,6 +222,10 @@ in {
           header_up X-Real-IP {remote}
           header_up X-Forwarded-For {remote}
           header_up X-Forwarded-Proto {scheme}
+        }
+
+        header {
+          Strict-Transport-Security "max-age=31536000; includeSubdomains; preload"
         }
 
         log {
