@@ -16,6 +16,15 @@ in {
         acme_ca https://acme-v02.api.letsencrypt.org/directory
       }
 
+      # Global options
+      {
+        # Recommended TLS settings
+        tls {
+          protocols tls1.2 tls1.3
+          ciphers TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256
+        }
+      }
+
       # Virtual host configuration for greysilly7.xyz
       greysilly7.xyz {
         root * ${inputs.greysilly7-xyz}
