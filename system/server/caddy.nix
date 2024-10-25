@@ -23,7 +23,11 @@ in {
           protocols tls1.2 tls1.3
           ciphers TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256
         }
-      }
+
+        trusted_proxies cloudflare {
+          interval 12h
+          timeout 15s
+        }
 
       # Virtual host configuration for greysilly7.xyz
       greysilly7.xyz {
