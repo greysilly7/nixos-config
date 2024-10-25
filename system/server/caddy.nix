@@ -28,6 +28,7 @@ in {
           interval 12h
           timeout 15s
         }
+      }
 
       # Virtual host configuration for greysilly7.xyz
       greysilly7.xyz {
