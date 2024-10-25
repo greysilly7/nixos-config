@@ -135,7 +135,7 @@ in {
         }
       }
 
-      # Virtual host configuration for api.spacebar.greysilly7.xyz
+      # Virtual host configuration for api-spacebar.greysilly7.xyz
       api-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3001 {
           header_up Host {host}
@@ -149,7 +149,7 @@ in {
         }
 
         log {
-          output file /var/log/caddy/api.spacebar.greysilly7.xyz.log
+          output file /var/log/caddy/api-spacebar.greysilly7.xyz.log
         }
 
         @options {
@@ -166,7 +166,7 @@ in {
         }
       }
 
-      # Virtual host configuration for cdn.spacebar.greysilly7.xyz
+      # Virtual host configuration for cdn-spacebar.greysilly7.xyz
       cdn-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3003 {
           header_up Host {host}
@@ -180,7 +180,7 @@ in {
         }
 
         log {
-          output file /var/log/caddy/cdn.spacebar.greysilly7.xyz.log
+          output file /var/log/caddy/cdn-spacebar.greysilly7.xyz.log
         }
 
         @options {
@@ -197,7 +197,7 @@ in {
         }
       }
 
-      # Virtual host configuration for gateway.spacebar.greysilly7.xyz
+      # Virtual host configuration for gateway-spacebar.greysilly7.xyz
       gateway-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3002 {
           header_up Host {host}
@@ -211,7 +211,7 @@ in {
         }
 
         log {
-          output file /var/log/caddy/gateway.spacebar.greysilly7.xyz.log
+          output file /var/log/caddy/gateway-spacebar.greysilly7.xyz.log
         }
 
         @options {
