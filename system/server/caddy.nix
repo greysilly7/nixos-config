@@ -42,7 +42,7 @@ in {
           header Access-Control-Allow-Origin "*"
           header Content-Type application/json
           respond `{
-            "api": "https://api.${rootSBDomain}/api/v9"
+            "api": "https://api-${rootSBDomain}/api/v9"
           }`
         }
 
@@ -136,7 +136,7 @@ in {
       }
 
       # Virtual host configuration for api.spacebar.greysilly7.xyz
-      api.spacebar.greysilly7.xyz {
+      api-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3001 {
           header_up Host {host}
           header_up X-Real-IP {remote}
@@ -167,7 +167,7 @@ in {
       }
 
       # Virtual host configuration for cdn.spacebar.greysilly7.xyz
-      cdn.spacebar.greysilly7.xyz {
+      cdn-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3003 {
           header_up Host {host}
           header_up X-Real-IP {remote}
@@ -198,7 +198,7 @@ in {
       }
 
       # Virtual host configuration for gateway.spacebar.greysilly7.xyz
-      gateway.spacebar.greysilly7.xyz {
+      gateway-spacebar.greysilly7.xyz {
         reverse_proxy http://127.0.0.1:3002 {
           header_up Host {host}
           header_up X-Real-IP {remote}
