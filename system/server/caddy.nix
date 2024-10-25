@@ -87,10 +87,98 @@ in {
 
       # Virtual host configuration for spacebar.greysilly7.xyz
       spacebar.greysilly7.xyz {
+        reverse_proxy http://127.0.0.1:3001 {
+          header_up Host {host}
+          header_up X-Real-IP {remote}
+          header_up X-Forwarded-For {remote}
+          header_up X-Forwarded-Proto {scheme}
+        }
+
         reverse_proxy /media http://127.0.0.1:8000
 
         log {
           output file /var/log/caddy/spacebar.greysilly7.xyz.log
+        }
+
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
+      }
+
+            # Virtual host configuration for api.spacebar.greysilly7.xyz
+      api.spacebar.greysilly7.xyz {
+        reverse_proxy http://127.0.0.1:3001 {
+          header_up Host {host}
+          header_up X-Real-IP {remote}
+          header_up X-Forwarded-For {remote}
+          header_up X-Forwarded-Proto {scheme}
+        }
+
+        log {
+          output file /var/log/caddy/api.spacebar.greysilly7.xyz.log
+        }
+
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
+      }
+
+      # Virtual host configuration for cdn.spacebar.greysilly7.xyz
+      cdn.spacebar.greysilly7.xyz {
+        reverse_proxy http://127.0.0.1:3003 {
+          header_up Host {host}
+          header_up X-Real-IP {remote}
+          header_up X-Forwarded-For {remote}
+          header_up X-Forwarded-Proto {scheme}
+        }
+
+        log {
+          output file /var/log/caddy/cdn.spacebar.greysilly7.xyz.log
+        }
+
+        @options {
+          method OPTIONS
+        }
+        handle @options {
+          header Access-Control-Allow-Origin "*"
+          header Access-Control-Allow-Methods "*"
+          header Access-Control-Allow-Headers "*"
+          header Access-Control-Max-Age "1728000"
+          header Content-Type "text/plain; charset=utf-8"
+          header Content-Length "0"
+          respond "" 204
+        }
+      }
+
+      # Virtual host configuration for gateway.spacebar.greysilly7.xyz
+      gateway.spacebar.greysilly7.xyz {
+        reverse_proxy http://127.0.0.1:3002 {
+          header_up Host {host}
+          header_up X-Real-IP {remote}
+          header_up X-Forwarded-For {remote}
+          header_up X-Forwarded-Proto {scheme}
+        }
+
+        log {
+          output file /var/log/caddy/gateway.spacebar.greysilly7.xyz.log
         }
 
         @options {
