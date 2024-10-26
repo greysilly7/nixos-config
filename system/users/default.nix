@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   sops.secrets.grey_pass.neededForUsers = true;
   users = {
     mutableUsers = false;
@@ -18,6 +22,8 @@
           "nix"
           "adbusers"
         ];
+        homix = true;
+        shell = pkgs.callPackage ../../user/zsh {inherit pkgs;};
         hashedPasswordFile = config.sops.secrets.grey_pass.path;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"

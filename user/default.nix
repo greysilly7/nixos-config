@@ -33,7 +33,7 @@
     imports = [
       ./packages.nix
       ./git
-      # ./gtk
+      ./gtk
       ./gaming
     ];
   };

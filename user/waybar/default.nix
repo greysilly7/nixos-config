@@ -1,23 +1,8 @@
-{pkgs, ...}: let
-  theme = {
-    base00 = "1e1e2e"; # base
-    base01 = "181825"; # mantle
-    base02 = "313244"; # surface0
-    base03 = "45475a"; # surface1
-    base04 = "585b70"; # surface2
-    base05 = "cdd6f4"; # text
-    base06 = "f5e0dc"; # rosewater
-    base07 = "b4befe"; # lavender
-    base08 = "f38ba8"; # red
-    base09 = "fab387"; # peach
-    base0A = "f9e2af"; # yellow
-    base0B = "a6e3a1"; # green
-    base0C = "94e2d5"; # teal
-    base0D = "89b4fa"; # blue
-    base0E = "cba6f7"; # mauve
-    base0F = "f2cdcd"; # flamingo
-  };
-
+{
+  pkgs,
+  theme,
+  ...
+}: let
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     position = "bottom";
     layer = "top";
@@ -41,7 +26,6 @@
       "pulseaudio"
       "network"
       "battery"
-      "custom/notification"
     ];
     clock = {
       calendar = {
@@ -79,29 +63,29 @@
       };
     };
     cpu = {
-      format = "<span foreground='${theme.base0B}'> </span> {usage}%";
-      format-alt = "<span foreground='${theme.base0B}'> </span> {avg_frequency} GHz";
+      format = "<span foreground='#${theme.base0B}'> </span> {usage}%";
+      format-alt = "<span foreground='#${theme.base0B}'> </span> {avg_frequency} GHz";
       interval = 2;
       on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
     };
     memory = {
-      format = "<span foreground='${theme.base0C}'>󰟜 </span>{}%";
-      format-alt = "<span foreground='${theme.base0C}'>󰟜 </span>{used} GiB"; # 
+      format = "<span foreground='#${theme.base0C}'>󰟜 </span>{}%";
+      format-alt = "<span foreground='#${theme.base0C}'>󰟜 </span>{used} GiB"; # 
       interval = 2;
       on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
     };
     disk = {
       # path = "/";
-      format = "<span foreground='${theme.base09}'>󰋊 </span>{percentage_used}%";
+      format = "<span foreground='#${theme.base09}'>󰋊 </span>{percentage_used}%";
       interval = 60;
       on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
     };
     network = {
-      format-wifi = "<span foreground='${theme.base0E}'> </span> {signalStrength}%";
-      format-ethernet = "<span foreground='${theme.base0E}'>󰀂 </span>";
+      format-wifi = "<span foreground='#${theme.base0E}'> </span> {signalStrength}%";
+      format-ethernet = "<span foreground='#${theme.base0E}'>󰀂 </span>";
       tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
       format-linked = "{ifname} (No IP)";
-      format-disconnected = "<span foreground='${theme.base0E}'>󰖪 </span>";
+      format-disconnected = "<span foreground='#${theme.base0E}'>󰖪 </span>";
     };
     tray = {
       icon-size = 20;
@@ -109,19 +93,19 @@
     };
     pulseaudio = {
       format = "{icon} {volume}%";
-      format-muted = "<span foreground='${theme.base0D}'> </span> {volume}%";
+      format-muted = "<span foreground='#${theme.base0D}'> </span> {volume}%";
       format-icons = {
-        default = ["<span foreground='${theme.base0D}'> </span>"];
+        default = ["<span foreground='#${theme.base0D}'> </span>"];
       };
       scroll-step = 2;
       on-click = "pamixer -t";
     };
     battery = {
-      format = "<span foreground='${theme.base0A}'>{icon}</span> {capacity}%";
+      format = "<span foreground='#${theme.base0A}'>{icon}</span> {capacity}%";
       format-icons = [" " " " " " " " " "];
-      format-charging = "<span foreground='${theme.base0A}'> </span>{capacity}%";
-      format-full = "<span foreground='${theme.base0A}'> </span>{capacity}%";
-      format-warning = "<span foreground='${theme.base0A}'> </span>{capacity}%";
+      format-charging = "<span foreground='#${theme.base0A}'> </span>{capacity}%";
+      format-full = "<span foreground='#${theme.base0A}'> </span>{capacity}%";
+      format-warning = "<span foreground='#${theme.base0A}'> </span>{capacity}%";
       interval = 5;
       states = {
         warning = 20;
@@ -135,26 +119,6 @@
       on-click = "rofi -show drun";
       on-click-right = "wallpaper-picker";
       tooltip = "false";
-    };
-    "custom/notification" = {
-      tooltip = false;
-      format = "{icon} ";
-      format-icons = {
-        notification = "<span foreground='${theme.base08}'><sup></sup></span>  <span foreground='${theme.base08}'></span>";
-        none = "  <span foreground='${theme.base08}'></span>";
-        dnd-notification = "<span foreground='${theme.base08}'><sup></sup></span>  <span foreground='${theme.base08}'></span>";
-        dnd-none = "  <span foreground='${theme.base08}'></span>";
-        inhibited-notification = "<span foreground='${theme.base08}'><sup></sup></span>  <span foreground='${theme.base08}'></span>";
-        inhibited-none = "  <span foreground='${theme.base08}'></span>";
-        dnd-inhibited-notification = "<span foreground='${theme.base08}'><sup></sup></span>  <span foreground='${theme.base08}'></span>";
-        dnd-inhibited-none = "  <span foreground='${theme.base08}'></span>";
-      };
-      return-type = "json";
-      exec-if = "which swaync-client";
-      exec = "swaync-client -swb";
-      on-click = "swaync-client -t -sw";
-      on-click-right = "swaync-client -d -sw";
-      escape = true;
     };
   });
 

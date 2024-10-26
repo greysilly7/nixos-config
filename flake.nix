@@ -19,13 +19,19 @@
     };
   };
 
-  outputs = inputs @ {nixpkgs, ...}: let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
     theme = import ./theme;
     user = import ./user {
       inherit pkgs theme;
+      flake = self;
     };
   in {
+    packages = {};
     nixosConfigurations = import ./hosts inputs;
     nixosModules =
       {

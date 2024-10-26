@@ -29,6 +29,11 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.extraModprobeConfig = ''
+    options snd_hda_intel power_save=1
+    options iwlmvm power_scheme=3
+  '';
+
   boot.initrd.systemd.enable = true;
   boot.initrd.systemd.tpm2.enable = true;
 
@@ -44,5 +49,6 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.laptop.enable = true;
 }
