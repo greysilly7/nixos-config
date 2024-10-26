@@ -1,0 +1,15 @@
+name: "Build and Cache"
+on:
+  pull_request:
+  push:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: "DeterminateSystems/nix-installer-action@main"
+      - uses: cachix/cachix-action@v14
+        with:
+          name: mynixconfig
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build github:srid/devour-flake -L --no-link --print-out-paths --override-input flake .
