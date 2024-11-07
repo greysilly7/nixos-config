@@ -35,6 +35,7 @@
       ./git
       ./gtk
       ./gaming
+      ./spicetify
     ];
   };
 }

@@ -2,6 +2,18 @@
   description = "";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    hypr-contrib.url = "github:hyprwm/contrib";
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+    firefox = {
+      url = "github:nix-community/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    spicetify-nix = {
+      url = "github:gerg-l/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,8 +22,6 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hypr-contrib.url = "github:hyprwm/contrib";
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +49,13 @@
         user = user.module;
         disko = inputs.disko.nixosModules.default;
         sops-nix = inputs.sops-nix.nixosModules.sops;
+        spicetify-nix = inputs.spicetify-nix.nixosModules.default;
       }
       // import ./modules;
+
+    inherit theme;
+    packages.x86_64-linux = user.packages;
+    formatter.x86_64-linux = pkgs.alejandra;
+    devShells.x86_64-linux.default = user.shell;
   };
 }

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  packages,
-  ...
-}: let
+{pkgs, ...}: let
   inherit (builtins) attrValues;
 in {
   hardware.graphics = {
@@ -94,5 +90,7 @@ in {
     SDL_VIDEODRIVER = "wayland";
     CLUTTER_BACKEND = "wayland";
     # GTK_THEME = "Gruvbox-Green-Dark";
+    XCURSOR_THEME = "default"; # Use the default Hyprland cursor theme
+    XCURSOR_SIZE = "24"; # Set the cursor size
   };
 }

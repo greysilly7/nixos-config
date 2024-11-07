@@ -1,4 +1,8 @@
-{...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking = {
     # nameservers = ["127.0.0.1" "::1"];
     dhcpcd.extraConfig = "nohook resolv.conf";
@@ -37,6 +41,36 @@
     };
   };
   */
+
+  services.tailscale.enable = true;
+
+  # Tailscale Auto-Connect Service
+  systemd.services.tailscale-autoconnect = {
+    description = "Automatic connection to Tailscale";
+
+    # Ensure tailscale is running before trying to connect
+    after = ["network-pre.target" "tailscale.service"];
+    wants = ["network-pre.target" "tailscale.service"];
+    wantedBy = ["multi-user.target"];
+
+    # Set this service as a oneshot job
+    serviceConfig.Type = "oneshot";
+
+    # Run this shell script
+    script = ''
+      # Wait for tailscaled to settle
+      sleep 2
+
+      # Check if we are already authenticated to tailscale
+      status="$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)"
+      if [ $status = "Running" ]; then
+        exit 0
+      fi
+
+      # Otherwise authenticate with tailscale
+      ${pkgs.tailscale}/bin/tailscale up -authkey file://${config.sops.secrets.ts_laptop_key.path} --accept-routes
+    '';
+  };
 
   # slows down boot time
   systemd.services.NetworkManager-wait-online.enable = false;

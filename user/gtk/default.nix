@@ -44,11 +44,10 @@ in {
 
   environment = {
     systemPackages = [
-      pkgs.bibata-cursors
-      pkgs.adw-gtk3
+      pkgs.catppuccin-gtk
     ];
     variables = {
-      GTK_THEME = "adw-gtk3";
+      GTK_THEME = "catppuccin-gtk";
     };
   };
 }

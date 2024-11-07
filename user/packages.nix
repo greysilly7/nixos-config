@@ -38,7 +38,12 @@ in {
         wl-clip-persist
         hyprpicker
         brightnessctl
-        wf-recorder
+        # wf-recorder
+        
+        udiskie
+        cosmic-files
+        dolphin
+        cliphist
         grim
         networkmanagerapplet
         poweralertd
@@ -70,8 +75,26 @@ in {
         nixd
         alejandra
         dbeaver-bin
+        devenv
+        gnome-keyring
         ;
     }
-    ++ [inputs.hypr-contrib.packages.${pkgs.system}.grimblast dorion];
+    ++ [
+      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
+      dorion
+      inputs.hyprpanel.packages.${pkgs.system}.default
+      inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+    ];
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    xorg.libX11
+    xorg.libXcursor
+    xorg.libxcb
+    xorg.libXi
+    libxkbcommon
+    libGL
+    libxkbcommon
+    wayland
+  ];
+  programs.direnv.enable = true;
 }

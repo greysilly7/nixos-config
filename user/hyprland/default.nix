@@ -78,12 +78,16 @@
         "poweralertd &"
         "wl-clip-persist --clipboard both &"
         "wl-paste --watch cliphist store &"
-        "waybar &"
+        # "waybar &"
+        "udiskie &"
+        "hyprpanel &"
         "mako &"
         "hyprpaper &"
         "hyprlock"
       ];
     };
+
+    monitor = "eDP-1, 1920x1080@60, 0x0, 1";
 
     input = {
       kb_layout = "us,fr";
@@ -120,6 +124,7 @@
       focus_on_activate = true;
       new_window_takes_over_fullscreen = 2;
       middle_click_paste = false;
+      vfr = true;
     };
 
     dwindle = {
@@ -139,7 +144,7 @@
     decoration = {
       rounding = 0;
       blur = {
-        enabled = true;
+        enabled = false;
         size = 2;
         passes = 2;
         brightness = 1;
@@ -149,7 +154,7 @@
         new_optimizations = true;
         xray = true;
       };
-      drop_shadow = true;
+      drop_shadow = false;
       shadow_ignore_window = true;
       shadow_offset = "0 2";
       shadow_range = 20;
@@ -240,8 +245,8 @@
       ",XF86AudioNext,exec, playerctl next"
       ",XF86AudioPrev,exec, playerctl previous"
       ",XF86AudioStop,exec, playerctl stop"
-      ",XF86MonBrightnessUP,exec, backlight up"
-      ",XF86MonBrightnessDown,exec, backlight down"
+      ",XF86MonBrightnessUP,exec, brightness up"
+      ",XF86MonBrightnessDown,exec, brightness down"
       "$mainMod, mouse_down, workspace, e-1"
       "$mainMod, mouse_up, workspace, e+1"
       "$mainMod, V, exec, cliphist list | tofi -dmenu -theme-str 'window {width: 50%;}' | cliphist decode | wl-copy"
