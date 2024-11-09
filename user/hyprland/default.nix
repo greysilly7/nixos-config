@@ -83,6 +83,7 @@
         "hyprpanel &"
         "mako &"
         "hyprpaper &"
+        "systemctl --user start hyprpolkitagent &"
         "hyprlock"
       ];
     };
@@ -186,8 +187,9 @@
       "$mainMod, W,exec, wallpaper-picker"
       "$mainMod, N, exec, swaync-client -t -sw"
       "$mainMod SHIFT, W, exec, vm-start"
-      ", Print, exec, grimblast copy screen"
-      "SHIFT, Print, exec, grimblast copy area"
+      "$mainMod, PRINT, exec, hyprshot -m window"
+      ", PRINT, exec, hyprshot -m output"
+      "$shiftMod, PRINT, exec, hyprshot -m region"
       "$mainMod, left, movefocus, l"
       "$mainMod, right, movefocus, r"
       "$mainMod, up, movefocus, u"

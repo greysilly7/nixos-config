@@ -1,6 +1,6 @@
 {...}: {
   homix = {
-    ".config/kitty.kitty.conf" = ''
+    ".config/kitty/kitty.conf".text = ''
       # vim:ft=kitty
 
       ## name:     Catppuccin Kitty Mocha

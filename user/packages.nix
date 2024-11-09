@@ -40,6 +40,9 @@ in {
         brightnessctl
         # wf-recorder
         
+        hyprpolkitagent
+        hyprshot
+        gnupg
         udiskie
         cosmic-files
         dolphin
