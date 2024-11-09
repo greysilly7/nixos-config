@@ -8,6 +8,7 @@
         name = "greysilly7";
         signingKey = "~/.ssh/id_ed25519.pub";
       };
+      gpg.format = "ssh";
       init = {
         defaultBranch = "main";
       };
