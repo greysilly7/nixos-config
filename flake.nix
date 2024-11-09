@@ -50,6 +50,7 @@
         disko = inputs.disko.nixosModules.default;
         sops-nix = inputs.sops-nix.nixosModules.sops;
         spicetify-nix = inputs.spicetify-nix.nixosModules.default;
+        lanzaboote = inputs.lanzaboote.nixosModules.lanzaboote;
       }
       // import ./modules;
 

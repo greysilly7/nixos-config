@@ -36,6 +36,7 @@
       ./gtk
       ./gaming
       ./spicetify
+      ./kitty
     ];
   };
 }
