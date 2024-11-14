@@ -83,7 +83,6 @@ in {
         ;
     }
     ++ [
-      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       dorion
       inputs.hyprpanel.packages.${pkgs.system}.default
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin

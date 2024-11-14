@@ -3,8 +3,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    hypr-contrib.url = "github:hyprwm/contrib";
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
+
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +13,7 @@
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     disko = {
       url = "github:nix-community/disko";
@@ -51,6 +52,7 @@
         sops-nix = inputs.sops-nix.nixosModules.sops;
         spicetify-nix = inputs.spicetify-nix.nixosModules.default;
         lanzaboote = inputs.lanzaboote.nixosModules.lanzaboote;
+        factor = inputs.nixos-facter-modules.nixosModules.facter;
       }
       // import ./modules;
 

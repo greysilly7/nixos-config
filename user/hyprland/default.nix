@@ -4,6 +4,7 @@
   theme,
   ...
 }: let
+  hpyrPlugins = [pkgs.hyprlandPlugins.borders-plus-plus pkgs.hyprlandPlugins.hyprbars];
   toHyprconf = {
     attrs,
     indentLevel ? 0,
@@ -68,6 +69,19 @@
   in
     toHyprconf' initialIndent attrs;
 
+  pluginsToHyprconf = plugins:
+    toHyprconf {
+      attrs = {
+        plugin = let
+          mkEntry = entry:
+            if lib.types.package.check entry
+            then "${entry}/lib/lib${entry.pname}.so"
+            else entry;
+        in
+          map mkEntry hpyrPlugins;
+      };
+    };
+
   hyprlandConfigAttrs = {
     autostart = {
       exec-once = [
@@ -77,7 +91,8 @@
         "nm-applet &"
         "poweralertd &"
         "wl-clip-persist --clipboard both &"
-        "wl-paste --watch cliphist store &"
+        "wl-paste --type text --watch cliphist store &"
+        "wl-paste --type image --watch cliphist store &"
         # "waybar &"
         "udiskie &"
         "hyprpanel &"
@@ -174,19 +189,17 @@
       "$mainMod SHIFT, F, fullscreen, 1"
       "$mainMod, Space, exec, toggle_float"
       "$mainMod, D, exec, rofi -show drun || pkill rofi"
-      "$mainMod SHIFT, D, exec, vesktop --enable-features=UseOzonePlatform --ozone-platform=wayland"
+      "$mainMod SHIFT, D, exec, Dorion --enable-features=UseOzonePlatform --ozone-platform=wayland"
       "$mainMod SHIFT, S, exec, hyprctl dispatch exec '[workspace 5 silent] SoundWireServer'"
       "$mainMod, Escape, exec, hyprlock"
       "$mainMod SHIFT, Escape, exec, power-menu"
       "$mainMod, P, pseudo,"
       "$mainMod, X, togglesplit,"
       "$mainMod, T, exec, toggle_oppacity"
-      "$mainMod, E, exec, nemo"
-      "$mainMod SHIFT, B, exec, toggle_waybar"
+      "$mainMod, E, exec, cosmic-files"
       "$mainMod, C ,exec, hyprpicker -a"
       "$mainMod, W,exec, wallpaper-picker"
-      "$mainMod, N, exec, swaync-client -t -sw"
-      "$mainMod SHIFT, W, exec, vm-start"
+      # "$mainMod SHIFT, W, exec, vm-start"
       "$mainMod, PRINT, exec, hyprshot -m window"
       ", PRINT, exec, hyprshot -m output"
       "$shiftMod, PRINT, exec, hyprshot -m region"
@@ -242,16 +255,16 @@
       "$mainMod ALT, h, moveactive,  -80 0"
       "$mainMod ALT, j, moveactive, 0 80"
       "$mainMod ALT, k, moveactive, 0 -80"
-      "$mainMod ALT, l, moveactive, 80 0"
-      ",XF86AudioPlay,exec, playerctl play-pause"
-      ",XF86AudioNext,exec, playerctl next"
-      ",XF86AudioPrev,exec, playerctl previous"
-      ",XF86AudioStop,exec, playerctl stop"
+      # "$mainMod ALT, l, moveactive, 80 0"
+      # ",XF86AudioPlay,exec, playerctl play-pause"
+      # ",XF86AudioNext,exec, playerctl next"
+      # ",XF86AudioPrev,exec, playerctl previous"
+      # ",XF86AudioStop,exec, playerctl stop"
       ",XF86MonBrightnessUP,exec, brightness up"
       ",XF86MonBrightnessDown,exec, brightness down"
       "$mainMod, mouse_down, workspace, e-1"
       "$mainMod, mouse_up, workspace, e+1"
-      "$mainMod, V, exec, cliphist list | tofi -dmenu -theme-str 'window {width: 50%;}' | cliphist decode | wl-copy"
+      "$mainMod, V, exec, cliphist list | rofi -dmenu -theme-str 'window {width: 50%;}' | cliphist decode | wl-copy"
     ];
 
     bindm = [
@@ -271,7 +284,7 @@
       "tile,Aseprite"
       "size 1200 725,mpv"
       "float,audacious"
-      "pin,tofi"
+      "pin,rofi"
       "tile, neovide"
       "idleinhibit focus,mpv"
       "float,udiskie"
@@ -332,9 +345,33 @@
       "maxsize 1 1,class:^(xwaylandvideobridge)$"
       "noblur,class:^(xwaylandvideobridge)$"
     ];
+
+    plugin = {
+      hyprbars = {
+        bar_height = 20;
+
+        hyprbars-button = [
+          {
+            color = "rgb(ff4040)";
+            size = 10;
+            icon = "󰖭";
+            action = "hyprctl dispatch killactive";
+          }
+          {
+            color = "rgb(eeee11)";
+            size = 10;
+            icon = "";
+            action = "hyprctl dispatch fullscreen 1";
+          }
+        ];
+      };
+    };
   };
 
-  hyprlandConfig = pkgs.writeText "hyprland.conf" (toHyprconf {attrs = hyprlandConfigAttrs;});
+  hyprlandConfig = pkgs.writeText "hyprland.conf" (
+    toHyprconf {attrs = hyprlandConfigAttrs;}
+    + pluginsToHyprconf hpyrPlugins
+  );
 in
   pkgs.symlinkJoin {
     name = "hyprland-wrapped";

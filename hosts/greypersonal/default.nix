@@ -48,4 +48,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;
   hardware.laptop.enable = true;
+
+  facter.reportPath = ./facter.json;
 }
