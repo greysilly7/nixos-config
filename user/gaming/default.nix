@@ -12,7 +12,7 @@
   # Steam Controller support
   hardware.steam-hardware.enable = true;
   # Xbox controller
-  hardware.xpadneo.enable = true;
+  # hardware.xpadneo.enable = true;
 
   programs.steam = {
     enable = true;

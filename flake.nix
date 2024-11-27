@@ -26,7 +26,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
   };
 
@@ -51,7 +50,7 @@
         disko = inputs.disko.nixosModules.default;
         sops-nix = inputs.sops-nix.nixosModules.sops;
         spicetify-nix = inputs.spicetify-nix.nixosModules.default;
-        lanzaboote = inputs.lanzaboote.nixosModules.lanzaboote;
+        inherit (inputs.lanzaboote.nixosModules) lanzaboote;
         factor = inputs.nixos-facter-modules.nixosModules.facter;
       }
       // import ./modules;

@@ -13,4 +13,6 @@
 
   fileSystems."/persist".neededForBoot = true;
   fileSystems."/var/log".neededForBoot = true;
+
+  services.udisks2.enable = true;
 }

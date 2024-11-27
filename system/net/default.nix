@@ -23,8 +23,6 @@
   };
 
   # encrypted dns
-  # TODO: borken upstream
-  /*
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
@@ -40,7 +38,6 @@
       };
     };
   };
-  */
 
   services.tailscale.enable = true;
 

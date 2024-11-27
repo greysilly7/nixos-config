@@ -1,4 +1,4 @@
-{...}: {
+_: {
   sops = {
     # Path to the default SOPS file
     defaultSopsFile = ../../secrets/secrets.yaml;

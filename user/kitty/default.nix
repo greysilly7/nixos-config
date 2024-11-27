@@ -1,4 +1,4 @@
-{...}: {
+_: {
   homix = {
     ".config/kitty/kitty.conf".text = ''
       # vim:ft=kitty
