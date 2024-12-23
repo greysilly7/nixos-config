@@ -26,4 +26,5 @@
     };
 in {
   greypersonal = mkHost "greypersonal" "x86_64-linux";
+  gaminglaptop = mkHost "gaminglaptop" "x86_64-linux";
 }
