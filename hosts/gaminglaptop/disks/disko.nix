@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/nvme1n1";
         content = {
           type = "gpt";
           partitions = {
@@ -24,13 +24,15 @@
               content = {
                 type = "luks";
                 name = "crypted";
-                # disable settings.keyFile if you want to use interactive password entry
-                #passwordFile = "/tmp/secret.key"; # Interactive
+                # Uncomment the following line if you want to use a password file for LUKS
+                # passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
                   crypttabExtraOpts = ["tpm2-device=auto" "tpm2-pcrs=0+2+7+12"];
+                  # Uncomment the following line if you want to use a key file for LUKS
                   # keyFile = "/tmp/secret.key";
                 };
+                # Uncomment the following line if you want to use additional key files for LUKS
                 # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "btrfs";
@@ -73,24 +75,24 @@
           };
         };
       };
-    };
-    secondary = {
-      type = "disk";
-      device = "/dev/nvme1n1";
-      content = {
-        type = "gpt";
-        partitions = {
-          data = {
-            size = "100%";
-            type = "8300";
-            content = {
-              type = "filesystem";
-              format = "btrfs";
-              mountpoint = "/data";
-              mountOptions = [
-                "compress=zstd"
-                "noatime"
-              ];
+      secondary = {
+        type = "disk";
+        device = "/dev/nvme0n1";
+        content = {
+          type = "gpt";
+          partitions = {
+            data = {
+              size = "100%";
+              type = "8300";
+              content = {
+                type = "filesystem";
+                format = "btrfs";
+                mountpoint = "/data";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
             };
           };
         };

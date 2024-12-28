@@ -5,7 +5,9 @@
   pkgs,
   ...
 }: {
-
+  imports = [
+    ./disks
+  ];
 
   boot = {
     initrd.systemd = {

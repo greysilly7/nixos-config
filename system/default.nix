@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./net
-    ./disks
     ./boot
     ./fonts
     ./audio
