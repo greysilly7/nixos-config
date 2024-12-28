@@ -13,8 +13,11 @@
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
 
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,7 +37,13 @@
     nixpkgs,
     ...
   }: let
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [
+        inputs.hyprpanel.overlay
+      ];
+    };
     theme = import ./theme;
     user = import ./user {
       inherit pkgs theme;

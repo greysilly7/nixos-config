@@ -39,7 +39,6 @@ in {
         hyprpicker
         brightnessctl
         # wf-recorder
-        
         hyprpolkitagent
         hyprshot
         gnupg
@@ -84,8 +83,8 @@ in {
     }
     ++ [
       dorion
-      inputs.hyprpanel.packages.${pkgs.system}.default
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+      inputs.ghostty.packages.x86_64-linux.default
     ];
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

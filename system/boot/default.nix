@@ -5,7 +5,7 @@
 }: {
   boot = {
     lanzaboote = {
-      enable = true;
+      enable = false;
       pkiBundle = "/etc/secureboot";
     };
     tmp = {
@@ -28,7 +28,7 @@
     bootspec.enable = true;
     loader = {
       systemd-boot = {
-        enable = lib.mkForce false;
+        enable = lib.mkForce true;
         memtest86.enable = true;
         configurationLimit = 10;
         editor = false;

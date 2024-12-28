@@ -88,14 +88,14 @@
         "systemctl --user import-environment &"
         "hash dbus-update-activation-environment 2>/dev/null &"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &"
+        # "hyprpanel &"
         "nm-applet &"
         "poweralertd &"
         "wl-clip-persist --clipboard both &"
         "wl-paste --type text --watch cliphist store &"
         "wl-paste --type image --watch cliphist store &"
-        # "waybar &"
+        "waybar &"
         "udiskie &"
-        "hyprpanel &"
         "mako &"
         "hyprpaper &"
         "systemctl --user start hyprpolkitagent &"
@@ -103,7 +103,7 @@
       ];
     };
 
-    monitor = "eDP-1, 1920x1080@60, 0x0, 1";
+    monitor = ", preferred, auto, 1";
 
     input = {
       kb_layout = "us,fr";

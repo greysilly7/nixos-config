@@ -3,31 +3,14 @@
 # to /etc/nixos/configuration.nix instead.
 {
   config,
+  pkgs,
   lib,
   modulesPath,
   ...
 }: {
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
+    ./disks
   ];
-
-  boot.initrd.availableKernelModules =
-    [
-      "xhci_pci"
-      "vmd"
-      "ahci"
-      "nvme"
-      "usb_storage"
-      "sd_mod"
-      "xe"
-      "dm_mod"
-      "dm_crypt"
-      "cryptd"
-    ]
-    ++ config.boot.initrd.luks.cryptoModules;
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
 
   boot.extraModprobeConfig = ''
     options snd_hda_intel power_save=1
@@ -45,9 +28,22 @@
   # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = true;
   hardware.laptop.enable = true;
 
   facter.reportPath = ./facter.json;
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = lib.attrValues {
+      inherit
+        (pkgs)
+        vaapiIntel
+        libva
+        libvdpau-va-gl
+        vaapiVdpau
+        ocl-icd
+        intel-compute-runtime
+        ;
+    };
+  };
 }
