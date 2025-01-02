@@ -5,14 +5,14 @@
 }: let
   rofiTheme = pkgs.writeText "theme.rasi" ''
     * {
-        bg-col:  #1e1e2e;
-        bg-col-light: #1e1e2e;
-        border-col: #1e1e2e;
-        selected-col: #1e1e2e;
-        blue: #89b4fa;
-        fg-col: #cdd6f4;
-        fg-col2: #f38ba8;
-        grey: #6c7086;
+        bg-col:  #${theme.base00};
+        bg-col-light: #${theme.base01};
+        border-col: #${theme.base03};
+        selected-col: #${theme.base0D};
+        blue: #${theme.base0D};
+        fg-col: #${theme.base04};
+        fg-col2: #${theme.base05};
+        grey: #${theme.base03};
 
         width: 600;
         font: "JetBrainsMono Nerd Font 14";

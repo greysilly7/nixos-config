@@ -21,7 +21,7 @@ in {
       gtk-application-prefer-dark-theme = 1;
       gtk-font-name = "Lexend 11";
       gtk-icon-theme-name = "Papirus";
-      gtk-theme-name = "adw-gtk3";
+      gtk-theme-name = "catppuccin-gtk";
       gtk-xft-antialias = 1;
       gtk-xft-hinting = 1;
       gtk-xft-hintstyle = "hintslight";
