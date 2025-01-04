@@ -79,12 +79,12 @@ in {
         dbeaver-bin
         devenv
         gnome-keyring
+        sbctl
         ;
     }
     ++ [
       dorion
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
-      inputs.ghostty.packages.x86_64-linux.default
     ];
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

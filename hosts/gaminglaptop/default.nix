@@ -18,6 +18,14 @@
     extraModulePackages = [config.boot.kernelPackages.zenpower];
     kernelModules = ["zenpower"];
     kernelParams = ["amd_pstate=passive"];
+    lanzaboote = {
+      enable = lib.mkForce true;
+    };
+    loader = {
+      systemd-boot = {
+        enable = lib.mkForce false;
+      };
+    };
   };
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.tailscale0.useDHCP = lib.mkDefault true;

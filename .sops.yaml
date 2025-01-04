@@ -2,7 +2,7 @@ keys:
   - &admin_greysilly7 age1f0yw5e9w55r5zwun8nfqzezpze6gsez4lkyw44z26efc87na8dhq56yztk
   - &computer_laptop age18munwch7vcm3pt82l8z3lzcdk0vts2ekzt7c93h4epemeyxkgutshnu5rl
   - &computer_server age1qr3vtrhnjy9q0pvshy746zs2ghjh2c8kr0es9auxfpvqlqc83s8sn34tet
-  - &computer_gaming_laptop age1vw48t4mytnrucwqrtc37wc4vk4ehm2fm9f9yqrff3wx62wxqqftskutcvv
+  - &computer_gaming_laptop age1mjzqhnqlar0jkpkmudnt6pv8exjs6gwx2m8hm2xept7dlcrf5f9st2y7kf
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:

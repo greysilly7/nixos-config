@@ -28,7 +28,7 @@
     bootspec.enable = true;
     loader = {
       systemd-boot = {
-        enable = lib.mkForce true;
+        enable = lib.mkDefault true;
         memtest86.enable = true;
         configurationLimit = 10;
         editor = false;
