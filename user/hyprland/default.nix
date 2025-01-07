@@ -99,7 +99,8 @@
         "mako &"
         "hyprpaper &"
         "systemctl --user start hyprpolkitagent &"
-        "hyprlock"
+        "hyprlock &"
+        "hypridle"
       ];
     };
 

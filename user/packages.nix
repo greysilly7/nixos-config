@@ -80,6 +80,7 @@ in {
         devenv
         gnome-keyring
         sbctl
+        btop
         ;
     }
     ++ [
@@ -98,4 +99,5 @@ in {
     wayland
   ];
   programs.direnv.enable = true;
+  services.flatpak.enable = true;
 }

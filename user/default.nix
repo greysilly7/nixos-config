@@ -14,6 +14,7 @@
     desktop = {
       hyperland = callPackage ./hyprland {inherit theme;};
       hyprlock = callPackage ./hyprlock {inherit theme;};
+      hypridle = callPackage ./hypridle {};
       hyprpaper = callPackage ./hyprpaper {inherit theme;};
       waybar = callPackage ./waybar {inherit theme;};
       rofi = callPackage ./rofi {inherit theme;};
