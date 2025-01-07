@@ -1,8 +1,4 @@
-{
-  pkgs,
-  theme,
-  ...
-}: let
+{pkgs, ...}: let
   hypridleConfig = pkgs.writeText "hypridle.conf" ''
     general {
         lock_cmd = pidof hyprlock || hyprlock;       # avoid starting multiple hyprlock instances.
