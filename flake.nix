@@ -3,8 +3,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,9 +10,6 @@
     spicetify-nix = {
       url = "github:gerg-l/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
     };
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
@@ -40,9 +35,6 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [
-        inputs.hyprpanel.overlay
-      ];
     };
     theme = import ./theme;
     user = import ./user {

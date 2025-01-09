@@ -1,7 +1,7 @@
 {
   pkgs,
+  flake,
   theme,
-  ...
 }: rec {
   packages = let
     inherit (pkgs) callPackage;
@@ -12,7 +12,7 @@
       }
       // (import ./misc-scripts {inherit pkgs;});
     desktop = {
-      hyperland = callPackage ./hyprland {inherit theme;};
+      hyperland = callPackage ./hyprland {inherit theme flake;};
       hyprlock = callPackage ./hyprlock {inherit theme;};
       hypridle = callPackage ./hypridle {};
       hyprpaper = callPackage ./hyprpaper {inherit theme;};

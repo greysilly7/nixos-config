@@ -2,6 +2,7 @@
   pkgs,
   lib,
   theme,
+  flake,
   ...
 }: let
   hpyrPlugins = [pkgs.hyprlandPlugins.borders-plus-plus pkgs.hyprlandPlugins.hyprbars];
@@ -370,6 +371,7 @@
 in
   pkgs.symlinkJoin {
     name = "hyprland-wrapped";
+    # paths = [flake.inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland];
     paths = [pkgs.hyprland];
     buildInputs = [pkgs.makeWrapper];
     postBuild = ''

@@ -31,12 +31,12 @@
       # use binary cache, its not gentoo
       substituters = [
         "https://cache.nixos.org"
-        "https://mynixconfig.cachix.org"
+        "https://hyprland.cachix.org"
       ];
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "mynixconfig.cachix.org-1:vpnituvpFnvJGeGVUOn1EBW5ZxPAu0IVXNP2ySyCgtk="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
     };
   };
@@ -45,7 +45,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/greysilly7/git/nixos-config";
+    flake = "/home/greysilly7/nixos-config";
   };
 
   systemd.services.nix-daemon = {

@@ -16,7 +16,7 @@
       verbose = false;
       systemd.enable = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [
       # fix for suspend issues
       # see: https://www.reddit.com/r/archlinux/comments/e5oe4p/comment/fa8mzft/
