@@ -1,5 +1,5 @@
 {...}: let
-  wallpaper = ../../../../astronaut.jpg;
+  wallpaper = "${../../../../astronaut.jpg}";
 in {
   preload = wallpaper;
   wallpaper = wallpaper;

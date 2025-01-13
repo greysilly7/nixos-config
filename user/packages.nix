@@ -14,7 +14,7 @@
     version = dorionVersion;
     src = builtins.fetchurl {
       url = "https://github.com/SpikeHD/Dorion/releases/download/v${dorionVersion}/Dorion_${dorionVersion}_amd64.deb";
-      sha256 = "sha256:0hgzynwvimx3xfhq7xd2s5dzn87mdky1ylvpb1ns8hf0krbswd3r";
+      sha256 = "sha256:1v69pd77zy4y7q1par4asb1ri92vhyvpisflj1gy8igs6pg640kw";
     };
     buildInputs = [
       pkgs.openssl

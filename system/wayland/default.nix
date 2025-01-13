@@ -23,7 +23,7 @@
       enable = true;
       settings = rec {
         initial_session = {
-          command = "uwsm start ${flake.packages.${pkgs.system}.hype}/bin/Hyprland";
+          command = "uwsm start ${flake.packages.${pkgs.system}.hypr}/bin/Hyprland";
           user = "greysilly7";
         };
         default_session = initial_session;

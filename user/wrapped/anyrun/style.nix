@@ -1,5 +1,5 @@
 theme: let
-  inherit (theme) accent;
+  accent = theme.base0D;
 in ''
   window {
     background: transparent; /* rgba(0, 0, 0, 0.8);*/

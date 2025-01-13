@@ -40,7 +40,6 @@
     theme = import ./theme;
     user = import ./user {
       inherit pkgs theme;
-      flake = self;
     };
   in {
     nixosConfigurations = import ./hosts inputs;
