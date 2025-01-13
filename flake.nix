@@ -1,7 +1,8 @@
 {
-  description = "";
+  description = "My personal nixos config that is a mix of like three people's";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     firefox = {
       url = "github:nix-community/flake-firefox-nightly";
@@ -42,17 +43,18 @@
       flake = self;
     };
   in {
-    packages = {};
     nixosConfigurations = import ./hosts inputs;
     nixosModules =
       {
         system = import ./system;
         user = user.module;
+
         disko = inputs.disko.nixosModules.default;
         sops-nix = inputs.sops-nix.nixosModules.sops;
         spicetify-nix = inputs.spicetify-nix.nixosModules.default;
-        inherit (inputs.lanzaboote.nixosModules) lanzaboote;
+        lanzaboote = inputs.lanzaboote.nixosModules.lanzaboote;
         factor = inputs.nixos-facter-modules.nixosModules.facter;
+        chaotic = inputs.chaotic.nixosModules.default;
       }
       // import ./modules;
 

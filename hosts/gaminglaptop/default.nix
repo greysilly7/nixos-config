@@ -1,13 +1,19 @@
 {
   config,
   lib,
-  modulesPath,
   pkgs,
   ...
 }: {
   imports = [
     ./disks
   ];
+
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+  services.scx = {
+    enable = true;
+    package = pkgs.scx_git.full;
+    scheduler = "scx_lavd";
+  };
 
   boot = {
     initrd.systemd = {
@@ -47,6 +53,12 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
+  chaotic.mesa-git = {
+    enable = true;
+    extraPackages = [pkgs.rocmPackages.clr.icd pkgs.amdvlk];
+    extraPackages32 = [pkgs.driversi686Linux.amdvlk];
+  };
+  chaotic.hdr.enable = true;
   hardware.graphics = {
     enable = true;
     extraPackages = [pkgs.rocmPackages.clr.icd pkgs.amdvlk];

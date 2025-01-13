@@ -14,6 +14,18 @@
         else toString value;
     in "${escape ["="] key}=${value'}";
   };
+
+  catppuccin-gtk = pkgs.catppuccin-gtk.overrideAttrs {
+    src = pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "gtk";
+      rev = "v1.0.3";
+      fetchSubmodules = true;
+      hash = "sha256-q5/VcFsm3vNEw55zq/vcM11eo456SYE5TQA3g2VQjGc=";
+    };
+
+    postUnpack = "";
+  };
 in {
   homix = let
     css = import ./colors.nix {inherit theme;};
@@ -21,7 +33,7 @@ in {
       gtk-application-prefer-dark-theme = 1;
       gtk-font-name = "Lexend 11";
       gtk-icon-theme-name = "Papirus";
-      gtk-theme-name = "catppuccin-gtk";
+      gtk-theme-name = "catppuccin-mocha-mauve-compact";
       gtk-xft-antialias = 1;
       gtk-xft-hinting = 1;
       gtk-xft-hintstyle = "hintslight";
@@ -44,10 +56,10 @@ in {
 
   environment = {
     systemPackages = [
-      pkgs.catppuccin-gtk
+      catppuccin-gtk
     ];
     variables = {
-      GTK_THEME = "catppuccin-gtk";
+      GTK_THEME = "catppuccin-mocha-mauve-compact";
     };
   };
 }

@@ -1,35 +1,40 @@
 {
   pkgs,
-  flake,
   theme,
 }: rec {
   packages = let
     inherit (pkgs) callPackage;
   in {
-    cli =
-      {
-        zsh = callPackage ./zsh {};
-      }
-      // (import ./misc-scripts {inherit pkgs;});
-    desktop = {
-      hyperland = callPackage ./hyprland {inherit theme flake;};
-      hyprlock = callPackage ./hyprlock {inherit theme;};
-      hypridle = callPackage ./hypridle {};
-      hyprpaper = callPackage ./hyprpaper {inherit theme;};
-      waybar = callPackage ./waybar {inherit theme;};
-      rofi = callPackage ./rofi {inherit theme;};
-      mako = callPackage ./mako {inherit theme;};
-    };
+    zsh = callPackage ./wrapped/zsh {};
+    hypr = callPackage ./wrapped/hypr {inherit theme;};
+    waybar = callPackage ./wrapped/waybar {inherit theme;};
+    mako = callPackage ./wrapped/mako {inherit theme;};
+    anyrun = callPackage ./wrapped/anyrun {inherit theme;};
+    misc-scripts = callPackage ./misc-scripts {};
   };
 
   shell = pkgs.mkShell {
     name = "greysilly7-devshell";
-    buildInputs = builtins.attrValues packages.cli;
+    buildInputs = builtins.attrValues packages;
   };
 
   module = {
     config = {
-      environment.systemPackages = builtins.concatLists (map (x: builtins.attrValues x) (builtins.attrValues packages));
+      environment.systemPackages = builtins.attrValues packages;
+      programs.hyprland.enable = true;
+      programs.direnv.enable = true;
+      services.flatpak.enable = true;
+
+      programs.nix-ld.enable = true;
+      programs.nix-ld.libraries = with pkgs; [
+        xorg.libX11
+        xorg.libXcursor
+        xorg.libxcb
+        xorg.libXi
+        libxkbcommon
+        libGL
+        wayland
+      ];
     };
     imports = [
       ./packages.nix

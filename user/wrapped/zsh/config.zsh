@@ -4,7 +4,8 @@ export HISTSIZE=1000000000
 setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
-HISTFILE=~/.cache/zsh/history
+setopt SHARE_HISTORY
+HISTFILE=~/.cache/zsh-history
 
 export AUTO_NOTIFY_THRESHOLD=40
 export AUTO_NOTIFY_EXPIRE_TIME=5000
@@ -12,6 +13,7 @@ export AUTO_NOTIFY_EXPIRE_TIME=5000
 zvm_after_init_commands+=('eval "$(fzf --zsh)"')
 
 eval "$(fzf --zsh)"
+eval "$(direnv hook zsh)"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -66,4 +68,3 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-

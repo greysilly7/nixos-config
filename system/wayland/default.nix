@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  flake,
   ...
 }: {
   systemd.services = {
@@ -20,14 +21,13 @@
   services = {
     greetd = {
       enable = true;
-      settings = {
-        default_session = {
-          command = "uwsm start select";
-        };
+      settings = rec {
         initial_session = {
-          command = "uwsm start select";
+          command = "uwsm start ${flake.packages.${pkgs.system}.hype}/bin/Hyprland";
           user = "greysilly7";
         };
+        default_session = initial_session;
+        terminal.vt = 1;
       };
     };
     gnome.glib-networking.enable = true;
@@ -43,12 +43,9 @@
 
   programs.hyprland = {
     enable = true;
-    # set the flake package
-    # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
-    # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     withUWSM = true;
   };
+
   xdg.portal = {
     enable = true;
     config.common.default = "*";

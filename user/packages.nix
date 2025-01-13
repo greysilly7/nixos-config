@@ -7,7 +7,7 @@
   inherit (builtins) attrValues;
 
   # Define the desired version of dorion
-  dorionVersion = "6.2.0"; # Replace with the desired version
+  dorionVersion = "6.4.1"; # Replace with the desired version
 
   # Override the dorion package with the specified version
   dorion = pkgs.dorion.overrideAttrs (oldAttrs: {
@@ -31,24 +31,12 @@ in {
       inherit
         (pkgs)
         firefox
-        floorp
         kitty
-        swww
-        wl-clipboard
-        wl-clip-persist
-        hyprpicker
-        brightnessctl
-        # wf-recorder
-        hyprpolkitagent
-        hyprshot
         gnupg
         udiskie
         cosmic-files
-        dolphin
         cliphist
         grim
-        networkmanagerapplet
-        poweralertd
         libnotify
         gimp
         git
@@ -62,8 +50,6 @@ in {
         cpufetch
         microfetch
         tealdeer
-        ffmpeg-full
-        catimg
         nmap
         grex
         jq
@@ -77,8 +63,6 @@ in {
         nixd
         alejandra
         dbeaver-bin
-        devenv
-        gnome-keyring
         sbctl
         btop
         ;
@@ -87,17 +71,4 @@ in {
       dorion
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
     ];
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libxcb
-    xorg.libXi
-    libxkbcommon
-    libGL
-    libxkbcommon
-    wayland
-  ];
-  programs.direnv.enable = true;
-  services.flatpak.enable = true;
 }
