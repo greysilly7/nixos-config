@@ -16,7 +16,7 @@ in
 
     window#waybar {
       background-color: transparent;
-      color: #${theme.text};
+      color: #${theme.base05};
       opacity: 0.9;
     }
     window#waybar>box {
@@ -46,11 +46,11 @@ in
       margin: 0px 7px;
       font-family: JetBrains Mono Nerd Font;
       transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.68);
-      color: #${theme.text};
+      color: #${theme.base05};
     }
 
     #workspaces button.urgent {
-      color: #${theme.regular.red};
+      color: #${theme.base08};
     }
 
     #clock {
@@ -60,12 +60,12 @@ in
     }
 
     #battery.warning {
-      color: #${theme.regular.red};
+      color: #${theme.base08};
       background-color: inherit;
     }
 
     #battery.critical:not(.charging) {
-      color: #${theme.bright.red};
+      color: #${theme.base12};
       background-color: inherit;
     }
     tooltip {

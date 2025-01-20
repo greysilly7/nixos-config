@@ -13,6 +13,7 @@
     enable = true;
     package = pkgs.scx_git.full;
     scheduler = "scx_lavd";
+    extraArgs = ["--autopower"];
   };
 
   boot = {
@@ -23,7 +24,7 @@
     blacklistedKernelModules = ["k10temp"];
     extraModulePackages = [config.boot.kernelPackages.zenpower];
     kernelModules = ["zenpower"];
-    kernelParams = ["amd_pstate=passive"];
+    kernelParams = ["amd_pstate=guided" "rcutree.enable_rcu_lazy=1" "kernel.split_lock_mitigate=0"];
     lanzaboote = {
       enable = lib.mkForce true;
     };

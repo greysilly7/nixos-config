@@ -53,7 +53,6 @@
       services = {
         login = {
           enableGnomeKeyring = true;
-          fprintAuth = true;
         };
         sudo.fprintAuth = true;
         swaylock.fprintAuth = true;

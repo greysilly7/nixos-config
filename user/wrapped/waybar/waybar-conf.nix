@@ -23,7 +23,7 @@
     "custom/search" = {
       format = " ";
       tooltip = false;
-      on-click = "lib.getBin config.programs.anyrun.package/anyrun";
+      on-click = "anyrun";
     };
 
     "custom/power" = {

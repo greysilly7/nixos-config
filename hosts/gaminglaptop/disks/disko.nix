@@ -60,7 +60,7 @@
                       mountpoint = "/persist";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
-                    "var/log" = {
+                    "/var/log" = {
                       mountpoint = "/var/log";
                       mountOptions = ["compress=zstd" "noatime"];
                     };

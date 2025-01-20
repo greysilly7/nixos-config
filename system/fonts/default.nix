@@ -23,6 +23,7 @@ in {
           noto-fonts-cjk-sans
           noto-fonts-emoji
           jetbrains-mono
+          font-awesome
           ;
       }
       ++ [pkgs.nerd-fonts.jetbrains-mono];

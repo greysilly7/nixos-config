@@ -1,11 +1,9 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkDefault;
-  MHz = x: x * 1000;
+  inherit (lib) mkEnableOption mkIf;
 
   cfg = config.hardware.laptop;
 in {
@@ -16,7 +14,6 @@ in {
   config = mkIf cfg.enable {
     services = {
       thermald.enable = true;
-      fprintd.enable = true;
       upower = {
         enable = true;
         percentageLow = 15;
@@ -24,27 +21,25 @@ in {
         percentageAction = 3;
         criticalPowerAction = "Hibernate";
       };
-      auto-cpufreq = {
+      tlp = {
         enable = true;
         settings = {
-          battery = {
-            governor = "powersave";
-            scaling_min_freq = mkDefault (MHz 1700);
-            scaling_max_freq = mkDefault (MHz 2500);
-            turbo = "never";
-          };
-          charger = {
-            governor = "performance";
-            scaling_min_freq = mkDefault (MHz 2000);
-            scaling_max_freq = mkDefault (MHz 4100);
-            turbo = "auto";
-          };
+          CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+          CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+          CPU_MIN_PERF_ON_AC = 0;
+          CPU_MAX_PERF_ON_AC = 100;
+          CPU_MIN_PERF_ON_BAT = 0;
+          CPU_MAX_PERF_ON_BAT = 20;
+
+          #Optional helps save long term battery health
+          START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+          STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
         };
       };
-    };
-    hardware.bluetooth = {
-      enable = true;
-      package = pkgs.bluez5-experimental;
     };
   };
 }

@@ -30,7 +30,7 @@ in {
     attrValues {
       inherit
         (pkgs)
-        firefox
+	gcc
         kitty
         gnupg
         udiskie
@@ -65,10 +65,12 @@ in {
         dbeaver-bin
         sbctl
         btop
+        devenv
         ;
     }
     ++ [
       dorion
+      pkgs.jetbrains.rust-rover
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
     ];
 }

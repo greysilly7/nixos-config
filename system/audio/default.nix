@@ -11,15 +11,11 @@ in {
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true; # Enable Pipewire
-    alsa.enable = true; # Enable ALSA support
-    alsa.support32Bit = true; # Enable 32-bit ALSA support
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
     pulse.enable = true; # Enable PulseAudio support
-
-    # Uncomment to enable JACK applications
-    # jack.enable = true;
-
-    # Use the example session manager (enabled by default)
-    # media-session.enable = true;
 
     extraConfig.pipewire = {
       "99-lowlatency" = {
@@ -57,6 +53,14 @@ in {
           };
         };
       };
+      "10-bluez" = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.codecs" = ["sbc" "sbc_xq" "aac" "ldac" "aptx" "aptx_hd"];
+        };
+      };
     };
 
     wireplumber = {
@@ -85,6 +89,16 @@ in {
           }
         '')
       ];
+    };
+  };
+
+  hardware = {
+    pulseaudio.support32Bit = true;
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      package = pkgs.bluez5-experimental;
     };
   };
 }
