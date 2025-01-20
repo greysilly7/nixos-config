@@ -22,6 +22,7 @@
           "power"
           "nix"
           "adbusers"
+          "libvirtd"
         ];
         homix = true;
         shell = flake.packages.${pkgs.system}.zsh; # pkgs.callPackage ../../user/zsh {inherit pkgs;};
