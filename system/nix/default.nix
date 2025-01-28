@@ -65,4 +65,17 @@
       allowUnfree = true;
     };
   };
+
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libxcb
+      xorg.libXi
+      libxkbcommon
+      libGL
+      wayland
+    ];
+  };
 }

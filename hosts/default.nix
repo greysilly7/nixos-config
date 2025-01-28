@@ -12,6 +12,13 @@
             networking.hostName = name;
             nixpkgs.hostPlatform = system;
           }
+          inputs.disko.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
+          inputs.spicetify-nix.nixosModules.default
+          inputs.lanzaboote.nixosModules.lanzaboote
+          inputs.nixos-facter-modules.nixosModules.facter
+          inputs.chaotic.nixosModules.default
+
           ./${name}
         ]
         ++ builtins.attrValues self.nixosModules;

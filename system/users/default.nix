@@ -26,7 +26,8 @@
           "wireshark"
         ];
         homix = true;
-        shell = flake.packages.${pkgs.system}.zsh; # pkgs.callPackage ../../user/zsh {inherit pkgs;};
+        # shell = flake.packages.${pkgs.system}.zsh;
+        shell = pkgs.bash;
         hashedPasswordFile = config.sops.secrets.grey_pass.path;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"

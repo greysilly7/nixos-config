@@ -59,7 +59,6 @@
     extraPackages = [pkgs.rocmPackages.clr.icd pkgs.amdvlk];
     extraPackages32 = [pkgs.driversi686Linux.amdvlk];
   };
-  chaotic.hdr.enable = true;
   hardware.graphics = {
     enable = true;
     extraPackages = [pkgs.rocmPackages.clr.icd pkgs.amdvlk];

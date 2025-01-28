@@ -30,6 +30,7 @@
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs @ {
@@ -54,13 +55,6 @@
       {
         system = import ./system;
         user = user.module;
-
-        disko = inputs.disko.nixosModules.default;
-        sops-nix = inputs.sops-nix.nixosModules.sops;
-        spicetify-nix = inputs.spicetify-nix.nixosModules.default;
-        lanzaboote = inputs.lanzaboote.nixosModules.lanzaboote;
-        factor = inputs.nixos-facter-modules.nixosModules.facter;
-        chaotic = inputs.chaotic.nixosModules.default;
       }
       // import ./modules;
 
