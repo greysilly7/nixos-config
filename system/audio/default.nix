@@ -93,8 +93,6 @@ in {
   };
 
   hardware = {
-    pulseaudio.support32Bit = true;
-
     bluetooth = {
       enable = true;
       powerOnBoot = false;

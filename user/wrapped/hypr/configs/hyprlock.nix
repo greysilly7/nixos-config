@@ -8,7 +8,7 @@ theme: {
   background = [
     {
       monitor = "";
-      path = "${../../../../astronaut.jpg}";
+      path = theme.wallpaper;
       blur_passes = 2;
       blur_size = 5;
     }

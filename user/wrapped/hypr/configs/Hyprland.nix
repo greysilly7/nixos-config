@@ -22,7 +22,7 @@ in {
   exec-once = [
     "udiskie"
     "wl-clip-persist --clipboard both"
-    "wl-paste --type text --watch cliphist stor"
+    "wl-paste --type text --watch cliphist store"
     "wl-paste --type image --watch cliphist store"
 
     "nm-applet"
