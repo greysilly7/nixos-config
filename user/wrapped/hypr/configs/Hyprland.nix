@@ -119,8 +119,8 @@ in {
   ];
   bindr = [
     # launcher
-    "${mod}, Space, exec, anyrun"
-    ", XF86Search, exec, anyrun"
+    "${mod}, Space, exec, exec, rofi -show drun -show-icons"
+    ", XF86Search, exec, exec, rofi -show drun -show-icons"
   ];
 
   bindle = [
@@ -167,8 +167,8 @@ in {
     ++ workspaces;
 
   layerrule = [
-    "blur, anyrun"
-    " ignorealpha 0.6, anyrun"
+    "blur, rofi"
+    " ignorealpha 0.6, rofi"
   ];
   windowrulev2 = [
     "workspace 2, class:(firefox|librewolf|brave)"

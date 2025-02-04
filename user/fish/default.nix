@@ -17,8 +17,9 @@
     fish = {
       enable = true;
       useBabelfish = true;
-      promptInit = "${lib.getExe pkgs.starship} init fish | source";
-      vendor.completions = true;
+
+      shellInit = "${lib.getExe pkgs.starship} init fish | source";
+      vendor.completions.enable = true;
     };
   };
 

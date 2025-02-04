@@ -11,6 +11,7 @@
     waybar = callPackage ./wrapped/waybar {inherit theme;};
     mako = callPackage ./wrapped/mako {inherit theme;};
     anyrun = callPackage ./wrapped/anyrun {inherit theme;};
+    rofi = callPackage ./wrapped/rofi {inherit theme;};
   };
 
   shell = pkgs.mkShell {
@@ -21,15 +22,28 @@
   module = {
     config = {
       environment.systemPackages = builtins.attrValues packages;
-      programs.hyprland = {
-        enable = true;
-        withUWSM = true;
+      programs = {
+        hyprland = {
+          enable = true;
+          withUWSM = true;
+        };
+        direnv = {
+          enable = true;
+          enableFishIntegration = true;
+        };
+        adb.enable = true;
       };
-      programs.direnv = {
-        enable = true;
-        enableFishIntergration = true;
+      services = {
+        flatpak.enable = true;
+        ollama = {
+          enable = false;
+          acceleration = "rocm";
+          loadModels = ["deepseek-r1:8b"];
+        };
+        udev.packages = [
+          pkgs.android-udev-rules
+        ];
       };
-      services.flatpak.enable = true;
 
       homix = {
         ".config/uwsm/env-hyprland".text = ''

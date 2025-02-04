@@ -24,6 +24,8 @@
           "adbusers"
           "libvirtd"
           "wireshark"
+          "kvm"
+          "adbusers"
         ];
         homix = true;
         # shell = flake.packages.${pkgs.system}.zsh;

@@ -63,6 +63,9 @@
   nixpkgs = {
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "dotnet-runtime-6.0.36"
+      ];
     };
   };
 
