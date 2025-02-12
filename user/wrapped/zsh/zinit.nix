@@ -1,13 +1,14 @@
 {
   pkgs,
   aliasesStr,
+  lib,
 }:
 pkgs.writeShellScriptBin ".zshrc" ''
 
   source ${pkgs.zsh-defer}/share/zsh-defer/zsh-defer.plugin.zsh
 
-  eval "$( ${pkgs.starship}/bin/starship init zsh )"
-  eval "$( ${pkgs.zoxide}/bin/zoxide init zsh )"
+  eval "$( ${lib.getExe pkgs.starship} init zsh )"
+  eval "$( ${lib.getExe pkgs.zoxide} init zsh )"
 
   source ${./config.zsh}
 

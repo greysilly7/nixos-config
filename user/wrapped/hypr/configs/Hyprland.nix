@@ -119,8 +119,8 @@ in {
   ];
   bindr = [
     # launcher
-    "${mod}, Space, exec, exec, rofi -show drun -show-icons"
-    ", XF86Search, exec, exec, rofi -show drun -show-icons"
+    "${mod}, Space, exec, rofi -show drun -show-icons"
+    ", XF86Search, exec, rofi -show drun -show-icons"
   ];
 
   bindle = [

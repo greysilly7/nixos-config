@@ -1,11 +1,15 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   toml = pkgs.formats.toml {};
 
   starship-settings = import ./starship.nix;
 
   aliases = import ./aliases.nix {inherit pkgs;};
 
-  zconfig = import ./zinit.nix {inherit pkgs aliasesStr;};
+  zconfig = import ./zinit.nix {inherit pkgs aliasesStr lib;};
 
   aliasesStr =
     pkgs.lib.concatStringsSep "\n"

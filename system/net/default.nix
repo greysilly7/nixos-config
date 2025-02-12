@@ -69,13 +69,13 @@
       sleep 2
 
       # Check if we are already authenticated to tailscale
-      status="$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)"
+      status="$(${lib.getExe pkgs.tailscale} status -json | ${lib.getExe pkgs.jq} -r .BackendState)"
       if [ $status = "Running" ]; then
         exit 0
       fi
 
       # Otherwise authenticate with tailscale
-      ${pkgs.tailscale}/bin/tailscale up -authkey file://${config.sops.secrets.ts_laptop_key.path} --accept-routes
+      ${lib.getExe pkgs.tailscale} up -authkey file://${config.sops.secrets.ts_key.path} --accept-routes --exit-node=
     '';
   };
 

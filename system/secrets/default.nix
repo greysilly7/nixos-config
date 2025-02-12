@@ -20,8 +20,7 @@ _: {
       grey_pass = {};
       imagorenv = {};
       pocbot_token = {};
-      ts_laptop_key = {};
-      ts_srv_key = {};
+      ts_key = {};
       vaultwarden = {};
     };
   };

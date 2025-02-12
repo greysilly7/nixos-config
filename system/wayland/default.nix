@@ -8,7 +8,7 @@
     seatd = {
       enable = true;
       description = "Seat management daemon";
-      script = "${pkgs.seatd}/bin/seatd -g wheel";
+      script = "${lib.getExe pkgs.seatd} -g wheel";
       serviceConfig = {
         Type = "simple";
         Restart = "always";

@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   settings = {
     layer = "top";
     position = "top";
@@ -73,7 +77,7 @@
     pulseaudio = {
       scroll-step = 5;
       tooltip = true;
-      on-click = "${pkgs.killall}/bin/killall pavucontrol || ${pkgs.pavucontrol}/bin/pavucontrol";
+      on-click = "${lib.getExe pkgs.killall} pavucontrol || ${lib.getExe pkgs.pavucontrol}";
       format = "{icon}  {volume}%";
       format-muted = "󰝟 ";
       format-bluetooth = "󰂯";
@@ -82,7 +86,7 @@
       };
     };
     network = let
-      nm-editor = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+      nm-editor = "${lib.getExe pkgs.networkmanagerapplet}";
     in {
       format-wifi = "󰤨 {essid}";
       format-ethernet = "󰈀";

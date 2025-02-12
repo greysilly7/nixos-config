@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (builtins) attrValues;
+  /*
 
   extra-path = with pkgs; [
     dotnetCorePackages.sdk_9_0
@@ -42,6 +43,8 @@
       ''
       + attrs.postInstall or "";
   });
+
+  */
 in {
   environment.systemPackages =
     attrValues {
@@ -85,11 +88,12 @@ in {
         devenv
         vesktop
         unityhub
+        sops
         ;
     }
     ++ [
       pkgs.jetbrains.rust-rover
-      rider
+      # ider
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
     ];
 
@@ -102,6 +106,8 @@ in {
     pkgs.android-udev-rules
   ];
 
+  /*
+
   homix = {
     ".local/share/applications/jetbrains-rider.desktop".text = ''
       [Desktop Entry]
@@ -113,4 +119,6 @@ in {
       NoDisplay=true
     '';
   };
+
+  */
 }
