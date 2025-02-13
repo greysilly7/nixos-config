@@ -1,11 +1,16 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   nix = {
     gc.automatic = false;
     package = pkgs.lix;
 
     # Make builds run with low priority so my system stays responsive
-    daemonCPUSchedPolicy = "idle";
+    daemonCPUSchedPolicy = lib.mkDefault "batch";
     daemonIOSchedClass = "idle";
+    daemonIOSchedPriority = lib.mkDefault 7;
 
     settings = {
       flake-registry = "/etc/nix/registry.json";
@@ -81,4 +86,6 @@
       wayland
     ];
   };
+
+  environment.ldso32 = null;
 }

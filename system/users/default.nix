@@ -39,7 +39,7 @@
   };
 
   security = {
-    sudo = {
+    sudo-rs = {
       enable = true;
       extraRules = [
         {

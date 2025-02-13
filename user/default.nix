@@ -12,6 +12,7 @@
     mako = callPackage ./wrapped/mako {inherit theme;};
     anyrun = callPackage ./wrapped/anyrun {inherit theme;};
     rofi = callPackage ./wrapped/rofi {inherit theme;};
+    pixelflasher = callPackage ./pixelflasher {};
   };
 
   shell = pkgs.mkShell {

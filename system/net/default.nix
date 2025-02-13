@@ -80,7 +80,12 @@
   };
 
   # slows down boot time
-  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    wait-online.enable = false;
+    systemd-networkd.stopIfChanged = false;
+    systemd-resolved.stopIfChanged = false;
+  };
 
   services.openssh.enable = true;
 }
