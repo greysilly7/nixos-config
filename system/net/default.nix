@@ -20,6 +20,8 @@
       enable = true;
       allowPing = false;
       logReversePathDrops = true;
+      # open port
+      allowedTCPPorts = [6568];
     };
   };
 

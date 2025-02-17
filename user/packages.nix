@@ -89,10 +89,14 @@ in {
         vesktop
         unityhub
         sops
+        rquickshare
+        fastfetch
+        gitoxide
         ;
     }
     ++ [
       pkgs.jetbrains.rust-rover
+      pkgs.gitoxide.overrideAttrs
       # ider
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
     ];
