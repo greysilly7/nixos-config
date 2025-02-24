@@ -96,7 +96,7 @@ in {
     }
     ++ [
       pkgs.jetbrains.rust-rover
-      pkgs.gitoxide.overrideAttrs
+      pkgs.jetbrains.idea-community-bin
       # ider
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
     ];
