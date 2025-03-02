@@ -30,6 +30,7 @@
       url = "github:nix-community/nixpkgs-wayland";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
   };
 
   outputs = inputs @ {

@@ -18,6 +18,7 @@
           inputs.lanzaboote.nixosModules.lanzaboote
           inputs.nixos-facter-modules.nixosModules.facter
           inputs.chaotic.nixosModules.default
+          inputs.nixos-cosmic.nixosModules.default
 
           ./${name}
         ]

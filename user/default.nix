@@ -13,7 +13,6 @@
     anyrun = callPackage ./wrapped/anyrun {inherit theme;};
     rofi = callPackage ./wrapped/rofi {inherit theme;};
     pixelflasher = callPackage ./pixelflasher {};
-    unityhub = callPackage ../packages/unityhub-native {};
   };
 
   shell = pkgs.mkShell {
