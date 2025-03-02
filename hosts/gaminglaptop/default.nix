@@ -40,7 +40,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.laptop.enable = true;
+  hardware.laptop.enable = false;
 
   facter.reportPath = ./facter.json;
 

@@ -19,6 +19,7 @@
   };
 
   services = {
+    /*
     greetd = {
       enable = true;
       settings = rec {
@@ -30,6 +31,12 @@
         terminal.vt = 1;
       };
     };
+    */
+    # START COSMIC
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
+    power-profiles-daemon.enable = true;
+    # COSMIC END
     gnome.glib-networking.enable = true;
     logind = {
       lidSwitch = "suspend";
