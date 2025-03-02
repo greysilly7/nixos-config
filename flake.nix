@@ -1,7 +1,8 @@
 {
   description = "My personal nixos config that is a mix of like three people's";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixos-cosmic/nixpkgs";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     firefox = {
