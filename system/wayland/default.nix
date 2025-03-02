@@ -19,7 +19,6 @@
   };
 
   services = {
-    /*
     greetd = {
       enable = true;
       settings = rec {
@@ -31,10 +30,9 @@
         terminal.vt = 1;
       };
     };
-    */
     # START COSMIC
-    desktopManager.cosmic.enable = true;
-    displayManager.cosmic-greeter.enable = true;
+    desktopManager.cosmic.enable = false;
+    displayManager.cosmic-greeter.enable = false;
     power-profiles-daemon.enable = true;
     # COSMIC END
     gnome.glib-networking.enable = true;

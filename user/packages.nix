@@ -99,6 +99,9 @@ in {
       pkgs.jetbrains.idea-community-bin
       # ider
       inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+      pkgs.dotnetCorePackages.sdk_8_0
+      pkgs.dotnetPackages.Nuget
+      pkgs.mono
     ];
 
   programs.wireshark = {

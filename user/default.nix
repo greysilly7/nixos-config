@@ -6,12 +6,12 @@
   packages = let
     inherit (pkgs) callPackage;
   in {
-    zsh = callPackage ./wrapped/zsh {};
-    # hypr = callPackage ./wrapped/hypr {inherit theme;};
-    # waybar = callPackage ./wrapped/waybar {inherit theme;};
-    # mako = callPackage ./wrapped/mako {inherit theme;};
+    # zsh = callPackage ./wrapped/zsh {};
+    hypr = callPackage ./wrapped/hypr {inherit theme;};
+    waybar = callPackage ./wrapped/waybar {inherit theme;};
+    mako = callPackage ./wrapped/mako {inherit theme;};
     # anyrun = callPackage ./wrapped/anyrun {inherit theme;};
-    # rofi = callPackage ./wrapped/rofi {inherit theme;};
+    rofi = callPackage ./wrapped/rofi {inherit theme;};
     pixelflasher = callPackage ./pixelflasher {};
   };
 
@@ -24,12 +24,11 @@
     config = {
       environment.systemPackages = builtins.attrValues packages;
       programs = {
-        /*
         hyprland = {
           enable = true;
           withUWSM = true;
         };
-        */
+
         direnv = {
           enable = true;
           enableFishIntegration = true;
@@ -48,7 +47,6 @@
         ];
       };
 
-      /*
       homix = {
         ".config/uwsm/env-hyprland".text = ''
           export NIXOS_OZONE_WL="1"
@@ -79,7 +77,6 @@
           export XCURSOR_SIZE="24" # Set the cursor size
         '';
       };
-      */
     };
     imports = [
       ./packages.nix
