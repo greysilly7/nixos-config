@@ -92,6 +92,7 @@ in {
         rquickshare
         fastfetch
         gitoxide
+        endless-sky
         ;
     }
     ++ [
