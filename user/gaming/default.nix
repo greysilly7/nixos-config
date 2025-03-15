@@ -12,14 +12,16 @@
   # Steam Controller support
   hardware.steam-hardware.enable = true;
   # Xbox controller
-  # hardware.xpadneo.enable = true;
+  hardware.xpadneo.enable = true;
 
   programs.steam = {
     enable = true;
-    dedicatedServer.openFirewall = true;
+    # dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
     remotePlay.openFirewall = true;
     protontricks.enable = true;
-    # extraCompatPackages = [pkgs.proton-ge-bin];
+    gamescopeSession.enable = true;
+
+    extraCompatPackages = [pkgs.proton-ge-bin];
   };
 }

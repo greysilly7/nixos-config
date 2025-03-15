@@ -1,113 +1,168 @@
 {
   pkgs,
-  lib,
+  theme,
   ...
 }: let
   settings = {
+    position = "bottom";
     layer = "top";
-    position = "top";
-    height = 32;
-    spacing = 7;
-    fixed-center = false;
-    margin-left = null;
-    margin-top = null;
-    margin-bottom = null;
-    margin-right = null;
-    exclusive = true;
+    height = 28;
+    margin-top = 0;
+    margin-bottom = 0;
+    margin-left = 0;
+    margin-right = 0;
     modules-left = [
-      "custom/search"
+      "custom/launcher"
       "hyprland/workspaces"
-      "custom/lock"
+      "tray"
+    ];
+    modules-center = ["clock"];
+    modules-right = [
+      "cpu"
+      "memory"
+      "disk"
+      "pulseaudio"
+      "network"
       "backlight"
       "battery"
-      "idle_inhibitor"
+      "hyprland/language"
+      # "custom/notification"
     ];
-    modules-right = ["bluetooth" "pulseaudio" "network" "clock"];
-
-    "custom/search" = {
-      format = " ";
-      tooltip = false;
-      on-click = "anyrun";
-    };
-
-    "custom/power" = {
-      tooltip = false;
-      # TODO
-      format = "󰐥";
-    };
     clock = {
-      format = "{:%H:%M}";
-      tooltip-format = ''
-        <big>{:%Y %B}</big>
-        <tt><small>{calendar}</small></tt>'';
+      calendar = {
+        format = {
+          today = "<span color='#${theme.base05}'><b>{}</b></span>";
+        };
+      };
+      format = "  {:%H:%M}";
+      tooltip = "true";
+      tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+      format-alt = "  {:%d/%m}";
     };
-
-    "idle_inhibitor" = {
+    "hyprland/workspaces" = {
+      active-only = false;
+      disable-scroll = true;
       format = "{icon}";
+      on-click = "activate";
       format-icons = {
-        activated = "";
-        deactivated = "󰔟";
+        "1" = "I";
+        "2" = "II";
+        "3" = "III";
+        "4" = "IV";
+        "5" = "V";
+        "6" = "VI";
+        "7" = "VII";
+        "8" = "VIII";
+        "9" = "IX";
+        "10" = "X";
+        sort-by-number = true;
+      };
+      persistent-workspaces = {
+        "1" = [];
+        "2" = [];
+        "3" = [];
+        "4" = [];
+        "5" = [];
       };
     };
-
-    bluetooth = {
-      on-click = ''
-        bash -c 'bluetoothctl power $(bluetoothctl show | grep -q "Powered: yes" && echo off || echo on)'
-      '';
+    cpu = {
+      format = "<span foreground='#${theme.base05}'> </span> {usage}%";
+      format-alt = "<span foreground='#${theme.base05}'> </span> {avg_frequency} GHz";
+      interval = 2;
+      on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
+    };
+    memory = {
+      format = "<span foreground='#${theme.base09}'>󰟜 </span>{}%";
+      format-alt = "<span foreground='#${theme.base09}'>󰟜 </span>{used} GiB"; # 
+      interval = 2;
+      on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
+    };
+    disk = {
+      # path = "/";
+      format = "<span foreground='#${theme.base0A}'>󰋊 </span>{percentage_used}%";
+      interval = 60;
+      on-click-right = "hyprctl dispatch exec '[float; center; size 950 650] kitty --override font_size=14 --title float_kitty btop'";
+    };
+    network = {
+      format-wifi = "<span foreground='#${theme.base08}'> </span> {signalStrength}%";
+      format-ethernet = "<span foreground='#${theme.base08}'>󰀂 </span>";
+      tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
+      format-linked = "{ifname} (No IP)";
+      format-disconnected = "<span foreground='#${theme.base08}'>󰖪 </span>";
     };
     backlight = {
       format = "{icon} {percent}%";
       format-icons = ["" "" "" "" "" "" "" "" ""];
     };
-    cpu = {
-      interval = 5;
-      format = "  {}%";
-    };
-    battery = {
-      states = {
-        warning = 30;
-        critical = 15;
-      };
-      format = "{icon} {capacity}%";
-      format-charging = "󰂄 {capacity}%";
-      format-plugged = "󰂄 {capacity}%";
-      format-alt = "{icon}";
-      format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+
+    tray = {
+      icon-size = 20;
+      spacing = 8;
     };
     pulseaudio = {
-      scroll-step = 5;
+      format = "{icon} {volume}%";
+      format-muted = "<span foreground='#${theme.base07}'> </span> {volume}%";
+      format-icons = {
+        default = ["<span foreground='#${theme.base07}'> </span>"];
+      };
+      scroll-step = 2;
+      on-click = "pamixer -t";
+      on-click-right = "pavucontrol";
+    };
+    battery = {
+      format = "<span foreground='#${theme.base06}'>{icon}</span> {capacity}%";
+      format-icons = [
+        " "
+        " "
+        " "
+        " "
+        " "
+      ];
+      format-charging = "<span foreground='#${theme.base06}'> </span>{capacity}%";
+      format-full = "<span foreground='#${theme.base06}'> </span>{capacity}%";
+      format-warning = "<span foreground='#${theme.base06}'> </span>{capacity}%";
+      interval = 5;
+      states = {
+        warning = 20;
+      };
+      format-time = "{H}h{M}m";
       tooltip = true;
-      on-click = "${lib.getExe pkgs.killall} pavucontrol || ${lib.getExe pkgs.pavucontrol}";
-      format = "{icon}  {volume}%";
-      format-muted = "󰝟 ";
-      format-bluetooth = "󰂯";
+      tooltip-format = "{time}";
+    };
+    "hyprland/language" = {
+      format = "<span foreground='#${theme.base06}'> </span> {}";
+      format-fr = "FR";
+      format-en = "US";
+    };
+    "custom/launcher" = {
+      format = "";
+      on-click = "random-wallpaper";
+      on-click-right = "rofi -show drun";
+      tooltip = "true";
+      tooltip-format = "Random Wallpaper";
+    };
+    /*
+    "custom/notification" = {
+      tooltip = false;
+      format = "{icon} ";
       format-icons = {
-        default = ["" "" " "];
+        notification = "<span foreground='red'><sup></sup></span>  <span foreground='#${theme.base04}'></span>";
+        none = "  <span foreground='#${theme.base04}'></span>";
+        dnd-notification = "<span foreground='red'><sup></sup></span>  <span foreground='#${theme.base04}'></span>";
+        dnd-none = "  <span foreground='#${theme.base04}'></span>";
+        inhibited-notification = "<span foreground='red'><sup></sup></span>  <span foreground='#${theme.base04}'></span>";
+        inhibited-none = "  <span foreground='#${theme.base04}'></span>";
+        dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>  <span foreground='#${theme.base04}'></span>";
+        dnd-inhibited-none = "  <span foreground='#${theme.base04}'></span>";
       };
+      return-type = "json";
+      exec-if = "which swaync-client";
+      exec = "swaync-client -swb";
+      on-click = "swaync-client -t -sw";
+      on-click-right = "swaync-client -d -sw";
+      escape = true;
     };
-    network = let
-      nm-editor = "${lib.getExe pkgs.networkmanagerapplet}";
-    in {
-      format-wifi = "󰤨 {essid}";
-      format-ethernet = "󰈀";
-      format-alt = "󱛇";
-      format-disconnected = "󰤭";
-      tooltip-format = "{ipaddr}/{ifname} via {gwaddr} ({signalStrength}%)";
-      on-click-right = "${nm-editor}";
-    };
-    "hyprland/workspaces" = {
-      on-click = "activate";
-      format = "{icon}";
-      active-only = false;
-      format-icons = {
-        default = "";
-        active = "";
-      };
-
-      persistent_workspaces = {
-        "*" = 5;
-      };
-    };
+    */
   };
 in
   pkgs.writeText "waybar-config.json" (builtins.toJSON settings)

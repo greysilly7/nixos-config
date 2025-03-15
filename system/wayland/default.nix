@@ -31,9 +31,9 @@
       };
     };
     # START COSMIC
-    desktopManager.cosmic.enable = false;
-    displayManager.cosmic-greeter.enable = false;
-    power-profiles-daemon.enable = true;
+    # desktopManager.cosmic.enable = false;
+    # displayManager.cosmic-greeter.enable = false;
+    # power-profiles-daemon.enable = true;
     # COSMIC END
     gnome.glib-networking.enable = true;
     logind = {
