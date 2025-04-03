@@ -39,30 +39,34 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"
     ];
 
-    packages = builtins.attrValues {
-      inherit
-        (pkgs)
-        kitty
-        gimp
-        cpufetch
-        microfetch
-        vscode
-        libreoffice
-        dbeaver-bin
-        devenv
-        legcord
-        fastfetch
-        gitoxide
-        # zed-editor
-        mangohud
-        nexusmods-app
-        obsidian
-        ;
-    } ++ [
-      pkgs.jetbrains.rust-rover
-      pkgs.jetbrains.idea-community-bin
-      inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
-    ];
+    packages =
+      builtins.attrValues {
+        inherit
+          (pkgs)
+          kitty
+          gimp
+          cpufetch
+          microfetch
+          vscode
+          libreoffice
+          dbeaver-bin
+          devenv
+          legcord
+          fastfetch
+          gitoxide
+          # zed-editor
+          mangohud
+          nexusmods-app
+          obsidian
+          alejandra
+          nixd
+          ;
+      }
+      ++ [
+        pkgs.jetbrains.rust-rover
+        pkgs.jetbrains.idea-community-bin
+        inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+      ];
   };
 
   programs = {

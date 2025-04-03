@@ -1,4 +1,7 @@
-{pkgs, theme}: let
+{
+  pkgs,
+  theme,
+}: let
   mod = "Super";
   # credits: fufexan
   # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}

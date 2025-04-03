@@ -13,7 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs @ {self, nixpkgs, ...}: let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
     defaultSystem = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit inputs;

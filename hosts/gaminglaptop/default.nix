@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./disks
     ../../modules/base-hyprland.nix
@@ -31,5 +36,4 @@
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.laptop.enable = true;
-
 }

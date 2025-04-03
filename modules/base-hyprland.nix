@@ -1,4 +1,8 @@
-{pkgs, flake, ...}: {
+{
+  pkgs,
+  flake,
+  ...
+}: {
   imports = [
     ./base.nix
     ./system/wayland.nix

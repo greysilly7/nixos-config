@@ -23,7 +23,7 @@ in {
     }
     {
       timeout = timeout + 10;
-      on-timeout = "systemctl suspend";
+      on-timeout = "pidof steam || systemctl suspend || loginctl suspend";
     }
   ];
 }
