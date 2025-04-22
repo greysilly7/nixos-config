@@ -12,6 +12,7 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    cursor.url = "github:omarcresp/cursor-flake/main";
   };
   outputs = inputs @ {
     self,

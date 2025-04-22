@@ -5,6 +5,7 @@ in {
     lock_cmd = "pidof hyprlock || hyprlock";
     before_sleep_cmd = "loginctl lock-session";
     after_sleep_cmd = "hyprctl dispatch dpms on";
+    ignore_dbus_inhibit = false;
   };
 
   listener = [
@@ -23,7 +24,7 @@ in {
     }
     {
       timeout = timeout + 10;
-      on-timeout = "pidof steam || systemctl suspend || loginctl suspend";
+      on-timeout = "pidof steam || loginctl suspend";
     }
   ];
 }

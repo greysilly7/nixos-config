@@ -47,7 +47,6 @@
           gimp
           cpufetch
           microfetch
-          vscode
           libreoffice
           dbeaver-bin
           devenv
@@ -66,6 +65,15 @@
         pkgs.jetbrains.rust-rover
         pkgs.jetbrains.idea-community-bin
         inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+        ((pkgs.vscode.override {isInsiders = true;}).overrideAttrs (oldAttrs: {
+          src = builtins.fetchTarball {
+            url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
+            sha256 = "0az1a12lqa7gcal0la4zaijlxzsdsz3sn96i6ncxav8iqvkipf01";
+          };
+          version = "latest";
+
+          buildInputs = oldAttrs.buildInputs ++ [pkgs.krb5];
+        }))
       ];
   };
 

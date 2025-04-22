@@ -37,6 +37,7 @@
   };
   environment.systemPackages = [
     inputs.nvchad4nix.packages.${pkgs.system}.default
+    inputs.cursor.packages.${pkgs.system}.default
   ];
 
   environment.etc.machine-id.text = "d3a2b82456e943bfa10df0a0cb4830fa";
