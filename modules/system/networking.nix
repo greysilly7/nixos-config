@@ -49,7 +49,7 @@
       fi
 
       # Otherwise authenticate with tailscale
-      ${lib.getExe pkgs.tailscale} up -authkey file://${config.sops.secrets.ts_key.path} --accept-routes --exit-node=
+      ${lib.getExe pkgs.tailscale} up -authkey file://${config.sops.secrets.ts_key.path} --accept-routes --exit-node= --exit-node-allow-lan-access
     '';
   };
 
