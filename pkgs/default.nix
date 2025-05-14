@@ -6,4 +6,5 @@ in {
   waybar = callPackage ./wrapped/waybar {inherit theme;};
   mako = callPackage ./wrapped/mako {inherit theme;};
   rofi = callPackage ./wrapped/rofi {inherit theme;};
+  wifi-menu = callPackage ./wifi-menu {};
 }

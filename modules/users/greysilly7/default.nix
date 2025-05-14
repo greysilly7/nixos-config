@@ -59,6 +59,7 @@
           obsidian
           alejandra
           nixd
+          brave
           ;
       }
       ++ [

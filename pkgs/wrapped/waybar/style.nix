@@ -61,7 +61,7 @@ pkgs.writeText "style.css" ''
         padding: 1px;
       }
 
-      #pulseaudio, #network, #cpu, #memory, #disk, #battery, #language, #custom-notification {
+      #pulseaudio, #network, #cpu, #memory, #disk, #battery, #language, #custom-notification, #custom-lock {
         padding-left: 5px;
         padding-right: 5px;
         margin-right: 10px;
