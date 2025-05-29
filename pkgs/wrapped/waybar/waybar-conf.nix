@@ -89,6 +89,7 @@
       tooltip-format = "Connected to {essid} {ifname} via {gwaddr}";
       format-linked = "{ifname} (No IP)";
       format-disconnected = "<span foreground='#${theme.base08}'>󰖪 </span>";
+      on-click = "wifi-menu";
     };
     backlight = {
       format = "{icon} {percent}%";

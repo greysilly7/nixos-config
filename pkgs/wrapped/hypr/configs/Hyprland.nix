@@ -18,25 +18,6 @@
     )
     10);
 in {
-  plugin = {
-    path = "${pkgs.hyprlandPlugins.hyprbars}/lib/libhyprbars.so";
-    hyprbars = {
-      bar_height = 30;
-      bar_padding = 10;
-      bar_button_padding = 5;
-      bar_precedence_over_border = true;
-      bar_part_of_window = true;
-
-      bar_color = "rgba(${theme.base00}FF)";
-      col.text = "rgba(${theme.base05}FF)";
-
-      hyprbars-buttons = [
-        "rgb(${theme.base08}), 󰖭, hyprctl dispatch killactive"
-        "rgb(${theme.base0B}), 13, 󰖯, hyprctl dispatch fullscreen 1"
-        "rgb(${theme.base0D}), 13, 󰖰, hyprctl dispatch movetoworkspacesilent special"
-      ];
-    };
-  };
   env = [
     "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
   ];
@@ -47,7 +28,7 @@ in {
     "uwsm app -- wl-paste --type text --watch cliphist store"
     "uwsm app -- wl-paste --type image --watch cliphist store"
 
-    "uwsm app -- nm-applet"
+    # "uwsm app -- nm-applet"
     "uwsm app -- poweralertd"
 
     "uwsm app -- waybar"

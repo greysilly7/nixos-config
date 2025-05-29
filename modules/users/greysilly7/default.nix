@@ -30,7 +30,6 @@
       "libvirtd"
       "wireshark"
       "kvm"
-      "adbusers"
     ];
     homix = true;
     shell = pkgs.bash;
@@ -53,13 +52,15 @@
           legcord
           fastfetch
           gitoxide
-          # zed-editor
+          zed-editor
           mangohud
           nexusmods-app
           obsidian
           alejandra
           nixd
-          brave
+          nil
+          bun
+          nodejs_latest
           ;
       }
       ++ [
@@ -75,6 +76,14 @@
 
           buildInputs = oldAttrs.buildInputs ++ [pkgs.krb5];
         }))
+        (pkgs.fenix.complete.withComponents [
+          "cargo"
+          "clippy"
+          "rust-src"
+          "rustc"
+          "rustfmt"
+        ])
+        pkgs.rust-analyzer-nightly
       ];
   };
 
