@@ -48,7 +48,6 @@
           microfetch
           libreoffice
           dbeaver-bin
-          devenv
           legcord
           fastfetch
           gitoxide
@@ -56,17 +55,20 @@
           mangohud
           nexusmods-app
           obsidian
+          # Development tools
           alejandra
           nixd
           nil
           bun
           nodejs_latest
+          devenv
           ;
       }
       ++ [
-        pkgs.jetbrains.rust-rover
-        pkgs.jetbrains.idea-community-bin
         inputs.firefox.packages.${pkgs.system}.firefox-nightly-bin
+        inputs.cursor.packages.${pkgs.system}.default
+
+        # I don't really like this
         ((pkgs.vscode.override {isInsiders = true;}).overrideAttrs (oldAttrs: {
           src = builtins.fetchTarball {
             url = "https://code.visualstudio.com/sha/download?build=insider&os=linux-x64";
@@ -76,6 +78,8 @@
 
           buildInputs = oldAttrs.buildInputs ++ [pkgs.krb5];
         }))
+
+        # Rust
         (pkgs.fenix.complete.withComponents [
           "cargo"
           "clippy"

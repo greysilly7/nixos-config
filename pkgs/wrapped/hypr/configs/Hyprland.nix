@@ -28,7 +28,6 @@ in {
     "uwsm app -- wl-paste --type text --watch cliphist store"
     "uwsm app -- wl-paste --type image --watch cliphist store"
 
-    # "uwsm app -- nm-applet"
     "uwsm app -- poweralertd"
 
     "uwsm app -- waybar"
@@ -36,7 +35,7 @@ in {
 
     "uwsm app -- hyprpaper "
     "uwsm app -- hyprsunset -t 4000"
-    # "systemctl --user start hyprpolkitagent &"
+
     "uwsm app -- hyprlock"
     "uwsm app -- hypridle"
   ];
@@ -150,7 +149,7 @@ in {
       "${mod}, P, pseudo,"
       "${mod} ALT, ,resizeactive,"
 
-      "${mod}, Return, exec, kitty"
+      "${mod}, Return, exec, uwsm app -- kitty"
       "${mod} SHIFT, Return, exec, [fullscreen] uwsm app -- kitty"
       "${mod} SHIFT, L, exec, loginctl lock-session"
 

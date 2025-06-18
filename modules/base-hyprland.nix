@@ -13,5 +13,9 @@
     withUWSM = true;
   };
 
-  environment.systemPackages = builtins.attrValues flake.packages."${pkgs.system}";
+  environment.systemPackages =
+    builtins.attrValues flake.packages."${pkgs.system}"
+    ++ [
+      pkgs.yazi
+    ];
 }
