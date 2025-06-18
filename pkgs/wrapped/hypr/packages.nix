@@ -2,7 +2,8 @@ pkgs:
 builtins.attrValues {
   inherit
     (pkgs)
-    grimblastbrillo
+    grimblast
+    brillo
     grim
     hyprsunset
     wl-clipboard
