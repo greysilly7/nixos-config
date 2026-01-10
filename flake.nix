@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    spacebar-server = {
+    spacebar = {
       url = "github:spacebarchat/server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -95,18 +95,11 @@
             inherit greysilly7-xyz;
           };
         };
-        desktopserver = nixpkgs.lib.nixosSystem {
+        fastbar = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             lix-module.nixosModules.default
-            nixos-facter-modules.nixosModules.facter
-            disko.nixosModules.default
-            sops-nix.nixosModules.sops
-            spacebar-server.nixosModules.default
-            {
-              config.facter.reportPath = ./hosts/desktopserver/facter.json;
-            }
-            ./hosts/desktopserver/configuration.nix
+            ./hosts/fastbar/configuration.nix
 
             (
               { ... }:
@@ -120,7 +113,7 @@
           ];
           specialArgs = {
             flake = self;
-            inherit greysilly7-xyz;
+            inherit inputs spacebar;
           };
         };
 
