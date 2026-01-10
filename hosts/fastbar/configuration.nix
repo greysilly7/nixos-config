@@ -20,7 +20,7 @@
   services.openssh.enable = true;
 
   networking = {
-    hostname = lib.mkForce "fastbar";
+    hostName = lib.mkForce "fastbar";
     firewall = {
       allowedTCPPorts = [
         22
