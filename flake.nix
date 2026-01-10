@@ -74,7 +74,7 @@
             nixos-facter-modules.nixosModules.facter
             disko.nixosModules.default
             sops-nix.nixosModules.sops
-            spacebar-server.nixosModules.default
+            spacebar.nixosModules.default
             {
               config.facter.reportPath = ./hosts/poweredge-r720/facter.json;
             }
