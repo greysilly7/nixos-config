@@ -99,6 +99,7 @@
           system = "x86_64-linux";
           modules = [
             lix-module.nixosModules.default
+            sops-nix.nixosModules.sops
             ./hosts/fastbar/configuration.nix
 
             (

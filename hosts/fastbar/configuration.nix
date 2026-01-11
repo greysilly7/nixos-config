@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./spacebar.nix
     ../../system
+    ../../modules/secrets.nix
   ];
 
   boot.loader.grub = {

@@ -3,6 +3,7 @@ keys:
   - &gaminglaptop age1jgsytyqy782h05wszrqu496gtwvsccacgrdawf3kc8twgapuvcjq3sa7un
   - &server_dellpoweredge age1xgezes2cpmzzmd986hhr7vh4z7avzd6nwcxryjf2efwzrya6r9qqq6k4yg
   - &server_desktopserver age1kwa8ke9z8g9u9arwe4je46pmkdncq3hdryq406jj00x2p7hr59sqz3cza6
+  - &server_fastbar age14ue4m33pcp5pvgt79axulashdq3dywuydzwast3hqwtcstss258s4qrkeq
 
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
@@ -12,3 +13,4 @@ creation_rules:
           - *gaminglaptop
           - *server_dellpoweredge
           - *server_desktopserver
+          - *server_fastbar
