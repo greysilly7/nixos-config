@@ -11,52 +11,6 @@
     ./secrets.nix
   ];
 
-  boot = {
-    initrd.systemd.enable = true;
-    kernelParams = [
-      "kernel.core_pattern=/dev/null"
-      "vm.swappiness=10"
-    ];
-    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-    loader = {
-      timeout = lib.mkDefault 0;
-      systemd-boot.enable = true;
-    };
-    tmp = {
-      cleanOnBoot = true;
-      useTmpfs = true;
-    };
-
-  };
-
-  networking = {
-    firewall = {
-      enable = true;
-    };
-    nameservers = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "8.8.8.8"
-      "8.8.4.4"
-    ];
-  };
-
-  environment.etc."resolv.conf" = lib.mkDefault {
-    text = lib.concatStringsSep "\n" (
-      lib.optionals (config.networking ? nameservers) (
-        map (nameserver: "nameserver ${nameserver}") (config.networking.nameservers)
-      )
-      #++ lib.optionals (config.networking ? enableIPv6 && !config.networking.enableIPv6) [ "options no-aaaa" ]
-      ++ lib.optionals (config.networking ? enableIPv6 && config.networking.enableIPv6) [
-        "options single-request"
-        "options single-request-reopen"
-        "options inet6"
-      ]
-    );
-  };
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
   environment.systemPackages = [
     pkgs.neofetch
     pkgs.pciutils

@@ -8,8 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./spacebar.nix
-    ../../system/users
-    ../../system/net
+    ../../system
   ];
 
   boot.loader.grub = {
@@ -35,6 +34,37 @@
       ];
     };
   };
+
+  documentation.nixos.enable = false;
+  documentation.enable = false;
+  documentation.info.enable = false;
+  documentation.man.enable = false;
+
+  environment = {
+    variables.BROWSER = "echo";
+    stub-ld.enable = false;
+  };
+
+  zramSwap.enable = true;
+
+  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.network.wait-online.enable = false;
+  systemd.services.systemd-networkd.stopIfChanged = false;
+  systemd.services.systemd-resolved.stopIfChanged = false;
+
+  services.pulseaudio.enable = false;
+  fonts.fontconfig.enable = false;
+  programs.command-not-found.enable = false;
+  xdg.autostart.enable = false;
+  xdg.icons.enable = false;
+  xdg.menus.enable = false;
+  xdg.mime.enable = false;
+  xdg.sounds.enable = false;
+
+  hardware.enableAllFirmware = false;
+  hardware.enableRedistributableFirmware = false;
+  environment.ldso32 = null;
+
   time.timeZone = "UTC";
   system.stateVersion = "25.11";
 }
