@@ -22,7 +22,7 @@
     };
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
   security = {
     polkit.enable = true;
@@ -65,6 +65,6 @@
   };
 
   environment.etc.machine-id.text = "796f7520617265206175746973746963";
-  time.timeZone = "America/Detroit";
+  time.timeZone = lib.mkDefault "America/Detroit";
   system.stateVersion = "25.11";
 }

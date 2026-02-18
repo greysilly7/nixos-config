@@ -8,9 +8,8 @@ args@{
 {
   imports = [
     ./disko.nix
-    ../../modules/base.nix
-
-    ./programs.nix
+    ../../system
+    ../../modules
   ];
 
   staypls = {

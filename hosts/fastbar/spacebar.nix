@@ -17,7 +17,7 @@ in
   imports = [ spacebar.nixosModules.default ];
   services.spacebarchat-server = {
     enable = true;
-    serverName = "greysilly7.xyz";
+    serverName = "spacebar.greysilly7.xyz";
     apiEndpoint = mkEndpoint "api-spacebar.greysilly7.xyz" 3001 true;
     gatewayEndpoint = mkEndpoint "gateway-spacebar.greysilly7.xyz" 3002 true;
     cdnEndpoint = mkEndpoint "cdn-spacebar.greysilly7.xyz" 3003 true;
