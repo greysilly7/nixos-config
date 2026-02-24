@@ -9,6 +9,7 @@ args@{
   imports = [
     ./disko.nix
     ../../system
+    ../../modules
   ];
 
   staypls = {
@@ -24,7 +25,10 @@ args@{
   };
 
   boot = {
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+    };
     blacklistedKernelModules = [ "k10temp" ];
     extraModulePackages = [ config.boot.kernelPackages.zenpower ];
     kernelModules = [ "zenpower" ];

@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     powerManagement.enable = true;
     services = {
-      cpufreq.enable = true;
+      auto-cpufreq.enable = true;
     };
     # https://github.com/NixOS/nixpkgs/issues/114222
     systemd.user.services.telephony_client.enable = false;
