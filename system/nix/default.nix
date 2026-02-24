@@ -1,10 +1,10 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./extra-substituters.nix
   ];
   nix = {
-    package = 
+    package = pkgs.lixPackageSets.stable.lix;
     channel.enable = false;
     settings = {
       experimental-features = [
