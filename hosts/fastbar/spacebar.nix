@@ -22,6 +22,7 @@ in
     gatewayEndpoint = mkEndpoint "gateway-spacebar.greysilly7.xyz" 3002 true;
     cdnEndpoint = mkEndpoint "cdn-spacebar.greysilly7.xyz" 3003 true;
     cdnPath = "/storage";
+    enableCdnCs = true;
 
     cdnSignaturePath = "/secrets/spacebar/cdnSignature";
     legacyJwtSecretPath = "/secrets/spacebar/legacyJwtSecret";

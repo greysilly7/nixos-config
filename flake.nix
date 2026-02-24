@@ -67,34 +67,34 @@
             flake = self;
           };
         };
-        poweredge-r720 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            lix-module.nixosModules.default
-            nixos-facter-modules.nixosModules.facter
-            disko.nixosModules.default
-            sops-nix.nixosModules.sops
-            spacebar.nixosModules.default
-            {
-              config.facter.reportPath = ./hosts/poweredge-r720/facter.json;
-            }
-            ./hosts/poweredge-r720/configuration.nix
-
-            (
-              { ... }:
-              {
-                nix = {
-                  registry.nixpkgs.flake = nixpkgs;
-                  nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
-                };
-              }
-            )
-          ];
-          specialArgs = {
-            flake = self;
-            inherit greysilly7-xyz;
-          };
-        };
+        # poweredge-r720 = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   modules = [
+        #     lix-module.nixosModules.default
+        #     nixos-facter-modules.nixosModules.facter
+        #     disko.nixosModules.default
+        #     sops-nix.nixosModules.sops
+        #     spacebar.nixosModules.default
+        #     {
+        #       config.facter.reportPath = ./hosts/poweredge-r720/facter.json;
+        #     }
+        #     ./hosts/poweredge-r720/configuration.nix
+# 
+        #     (
+        #       { ... }:
+        #       {
+        #         nix = {
+        #           registry.nixpkgs.flake = nixpkgs;
+        #           nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
+        #         };
+        #       }
+        #     )
+        #   ];
+        #   specialArgs = {
+        #     flake = self;
+        #     inherit greysilly7-xyz;
+        #   };
+        # };
         fastbar = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [

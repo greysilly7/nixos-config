@@ -9,6 +9,7 @@ args@{
   imports = [
     ./disko.nix
     ../../system
+    ../../system/secrets
     ../../modules
   ];
 

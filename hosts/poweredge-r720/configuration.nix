@@ -8,7 +8,8 @@ args@{
 {
   imports = [
     ./disko.nix
-    ../../modules/base-server.nix
+    ../../system
+    ../../system/secrets
 
     ./services/spacebar
     ./services/nginx.nix
@@ -20,6 +21,8 @@ args@{
   environment.systemPackages = [
     pkgs.cockpit
   ];
+
+  boot.loader.systemd-boot.enable = true;
 
   services = {
     cockpit = {
