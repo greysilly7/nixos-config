@@ -4,6 +4,7 @@
     ./extra-substituters.nix
   ];
   nix = {
+    package = 
     channel.enable = false;
     settings = {
       experimental-features = [
