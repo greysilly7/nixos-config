@@ -9,7 +9,6 @@ args@{
   imports = [
     ./disko.nix
     ../../system
-    ../../modules
   ];
 
   staypls = {
