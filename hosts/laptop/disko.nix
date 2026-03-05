@@ -29,8 +29,7 @@
                   "tpm2-device=auto"
                   "tpm2-pcrs=0+2+7+12"
                 ];
-                # Uncomment the following line if you want to use a key file for LUKS
-                # keyFile = "/tmp/secret.key";
+                keyFile = "/tmp/secret.key";
               };
               # Uncomment the following line if you want to use additional key files for LUKS
               # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
