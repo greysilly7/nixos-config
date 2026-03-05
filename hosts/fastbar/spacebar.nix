@@ -109,7 +109,7 @@ in
           "steam"
         ];
       };
-            limits = {
+      limits = {
         guild = {
           maxMembers = 25000000;
           maxEmojis = 2000;
