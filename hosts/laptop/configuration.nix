@@ -25,6 +25,8 @@ args@{
     ];
   };
 
+fileSystems."/etc/ssh".neededForBoot = true;
+
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;

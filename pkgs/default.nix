@@ -5,4 +5,5 @@ let
 in
 {
   hypr = callPackage ./hypr { inherit theme; };
+  iloader = callPackage ./iloader.nix { };
 }
