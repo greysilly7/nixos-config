@@ -8,9 +8,12 @@ args@{
 {
   imports = [
     ./disko.nix
+    ./packages.nix
     ../../system
+    ../../system/audio
     ../../system/secrets
     ../../modules
+    ./configs/waybar
   ];
 
   staypls = {
@@ -70,7 +73,10 @@ fileSystems."/etc/ssh".neededForBoot = true;
     };
   };
 
-  environment.systemPackages =
+  environment.systemPackages = with pkgs; [
+    libimobiledevice
+    ifuse # optional, to mount using 'ifuse'
+  ] ++ 
     builtins.attrValues
       flake.packages."${pkgs.stdenv.hostPlatform.system}";
 
@@ -89,4 +95,7 @@ fileSystems."/etc/ssh".neededForBoot = true;
 
   hardware.amdgpu.initrd.enable = true;
   hardware.cpu.amd.updateMicrocode = config.hardware.enableRedistributableFirmware;
+
+  # IOS
+  services.usbmuxd.enable = true;
 }

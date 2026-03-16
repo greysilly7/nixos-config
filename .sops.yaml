@@ -1,8 +1,8 @@
 keys:
   - &admin_greysilly7 age1f0yw5e9w55r5zwun8nfqzezpze6gsez4lkyw44z26efc87na8dhq56yztk
-  - &gaminglaptop age1wj30wew0p07p0af8fkenvyr4vrc0lf7ps4x8qehvnvykle8c493sjtttz7
+  - &gaminglaptop age197z8wj2sny96h2jj5h8ld936xz94hsxpvnaq9cuulmp9vg35la9qxhsn7d
   - &server_dellpoweredge age1xgezes2cpmzzmd986hhr7vh4z7avzd6nwcxryjf2efwzrya6r9qqq6k4yg
-  - &server_desktopserver age1kwa8ke9z8g9u9arwe4je46pmkdncq3hdryq406jj00x2p7hr59sqz3cza6
+  - &server_desktopserver age15p8vdzk68j76733kx6kvtpzw9u55dlaw4exvzre3ppxh0fq8xpcqxycm6f
   - &server_fastbar age14ue4m33pcp5pvgt79axulashdq3dywuydzwast3hqwtcstss258s4qrkeq
 
 creation_rules:

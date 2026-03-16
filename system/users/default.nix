@@ -4,7 +4,7 @@
     ./greysilly7
   ];
   users = {
-    mutableUsers = false;
+    mutableUsers = true;
     users.root = {
       hashedPassword = "$y$j9T$sMqIA3XFlV9qexbX/0qyk/$BtQBmvsoP/ZfPGlk0JiG4YMq7umR1HQE9t.awOVDVh5";
       openssh.authorizedKeys.keys = [

@@ -5,7 +5,7 @@
   sops.age.keyFile = "/var/lib/sops-nix/key.txt";
   sops.age.generateKey = true;
   # This is the actual specification of the secrets.
-  sops.secrets."greysilly7/password" = { };
+  sops.secrets."greysilly7_password" = { };
   sops.secrets."spacebar/database" = { };
   sops.secrets."spacebar/imagorenv" = { };
 }

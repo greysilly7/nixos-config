@@ -3,6 +3,7 @@
   imports = [
     ./users
     ./net
+    ./nix
     ./packages/minimal.nix
   ];
 
@@ -63,6 +64,12 @@
     "git.sr.ht".publicKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZvRd4EtM7R+IHVMWmDkVU3VLQTSwQDSAvW0t2Tkj60";
   };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+    noto-fonts-emoji
+  ];
 
   environment.etc.machine-id.text = "796f7520617265206175746973746963";
   time.timeZone = lib.mkDefault "America/Detroit";

@@ -13,5 +13,8 @@ builtins.attrValues {
     poweralertd
     kitty
     udiskie
+    waybar
+    mako
+    rofi
     ;
 }

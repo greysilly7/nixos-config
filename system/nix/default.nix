@@ -27,5 +27,4 @@
   nixpkgs = {
     config.allowUnfree = true;
   };
-
 }
