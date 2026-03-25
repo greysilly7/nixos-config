@@ -32,5 +32,6 @@
     pkgs.brotli
     pkgs.dnsutils
     pkgs.tmux
+    pkgs.nixd
   ];
 }
