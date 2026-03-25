@@ -81,7 +81,6 @@ in
     animate_manual_resizes = false;
     enable_swallow = true;
     focus_on_activate = true;
-    new_window_takes_over_fullscreen = 2;
     middle_click_paste = false;
     vfr = true;
     vrr = 1;
@@ -104,17 +103,6 @@ in
   decoration = {
     rounding = 0;
     shadow.enabled = false;
-    blur = {
-      enabled = false;
-      size = 2;
-      passes = 2;
-      brightness = 1;
-      contrast = 1.400;
-      ignore_opacity = true;
-      noise = 0;
-      new_optimizations = true;
-      xray = true;
-    };
   };
 
   bindl = [
@@ -177,13 +165,13 @@ in
 
   layerrule = [
     "blur, rofi"
-    " ignorealpha 0.6, rofi"
+    "ignorealpha 0.6, rofi"
   ];
   windowrulev2 = [
-    "workspace 2, class:(firefox|librewolf|brave)"
-    "workspace 4 silent, class:(signal|vesktop)"
+    "workspace 2, initialClass:(firefox|librewolf|brave)"
+    "workspace 4 silent, initialClass:(signal|vesktop)"
     "suppressevent maximize, class:.*"
-    #"scrolltouchpad 0.1, class:^(zen|firefox|brave|chromium-browser|chrome-.*)$"
+    "input:touchpad:scroll_factor 0.1, class:^(zen|firefox|brave|chromium-browser|chrome-.*)$"
     "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
   ];
 }

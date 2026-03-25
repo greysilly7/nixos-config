@@ -3,6 +3,5 @@
   imports = [
     ./homix
     ./laptop
-    ./staypls
   ];
 }

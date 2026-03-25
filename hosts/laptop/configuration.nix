@@ -16,19 +16,22 @@ args@{
     ./configs/waybar
   ];
 
-  staypls = {
-    enable = true;
-    dirs = [
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories = [
       "/etc/ssh"
-      "/etc/NetworkManager"
-      "/etc/nix"
-      "/var/lib/fprint"
+      "/etc/NetworkManager/system-connections"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
       "/var/lib/pipewire"
       "/var/lib/bluetooth"
     ];
+        files = [
+      "/etc/machine-id"
+        ];
   };
 
-fileSystems."/etc/ssh".neededForBoot = true;
+  fileSystems."/persist".neededForBoot = true;
 
   boot = {
     loader = {
@@ -73,22 +76,27 @@ fileSystems."/etc/ssh".neededForBoot = true;
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    libimobiledevice
-    ifuse # optional, to mount using 'ifuse'
-  ] ++ 
-    builtins.attrValues
-      flake.packages."${pkgs.stdenv.hostPlatform.system}";
+  environment.systemPackages =
+    with pkgs;
+    [
+      libimobiledevice
+      ifuse # optional, to mount using 'ifuse'
+      android-tools
+    ]
+    ++ builtins.attrValues flake.packages."${pkgs.stdenv.hostPlatform.system}";
 
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
+  programs = {
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
+    nix-ld.enable = true;
   };
 
   services = {
     asusd = {
       enable = true;
-      enableUserService = true;
+      # enableUserService = true;
     };
     supergfxd.enable = true;
   };

@@ -5,7 +5,6 @@
       enable = true;
       enableBashIntegration = true;
     };
-    adb.enable = true;
     firefox = {
       enable = true;
       package = pkgs.librewolf;

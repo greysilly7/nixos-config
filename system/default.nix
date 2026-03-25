@@ -68,7 +68,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   environment.etc.machine-id.text = "796f7520617265206175746973746963";
