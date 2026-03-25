@@ -1,24 +1,26 @@
 { pkgs, ... }:
 {
-  programs.git = {
-    enable = true;
-    lfs = {
+  programs = {
+    git = {
       enable = true;
-      enablePureSSHTransfer = true;
-    };
-    config = {
-      init = {
-        defaultBranch = "main";
+      lfs = {
+        enable = true;
+        enablePureSSHTransfer = true;
       };
-      core = {
-        preloadindex = true;
-        whitespace = "trailing-space";
-        compression = 9;
-      };
-      push = {
-        default = "current";
-        autoSetupRemote = true;
-        rebase = true;
+      config = {
+        init = {
+          defaultBranch = "main";
+        };
+        core = {
+          preloadindex = true;
+          whitespace = "trailing-space";
+          compression = 9;
+        };
+        push = {
+          default = "current";
+          autoSetupRemote = true;
+          rebase = true;
+        };
       };
     };
   };

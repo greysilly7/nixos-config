@@ -21,20 +21,35 @@
       pkgs.vscodium
       pkgs.legcord
       pkgs.obsidian
-      # pkgs.zed-zed-editor-fhs
       pkgs.gitoxide
       pkgs.libreoffice
       pkgs.antigravity
-      pkgs.nixfmt
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAUXpvCORVoy/X8nGp2dgrgpa50sAPv5IeQeTzjb5KR greysilly7@gmail.com"
     ];
   };
 
-  programs.fish.enable = true;
+  programs = {
+    fish = {
+      enable = true;
+      generateCompletions = true;
+    };
+    bash = {
+      interactiveShellInit = ''
+        if uwsm check may-start && uwsm select; then
+	        exec uwsm start default
+        fi
+
+        if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+        then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        fi      
+      '';
+    };
+  };
   environment.systemPackages = [
-    pkgs.fishPlugins.async-prompt
     pkgs.fishPlugins.bass
     pkgs.fishPlugins.hydro
     pkgs.fishPlugins.sponge
