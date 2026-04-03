@@ -1,10 +1,12 @@
 { den, ... }:
 {
-  # TODO: Configure bash
-  # https://mynixos.com/home-manager/options/programs.bash
-  den.aspects.shell._.bash = den.lib.perUser {
+  den.aspects.misc._.nixd = den.lib.perUser {
     homeManager =
-      { lib, pkgs, ... }:
+      {
+        pkgs,
+        lib,
+        ...
+      }:
       {
         home.packages = [
           pkgs.nixd

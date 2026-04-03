@@ -33,6 +33,7 @@
         den.aspects.terminal
         den.aspects.files
         den.aspects.browser
+        den.aspects.misc
         den.aspects.antigravity
       ];
 
