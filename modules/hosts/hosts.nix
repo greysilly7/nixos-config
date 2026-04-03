@@ -1,5 +1,6 @@
-{den, ...}: {
+_:
+{
   den.hosts.x86_64-linux.gaminglaptop.users = {
-    greysilly7.classes = ["homeManager"];
+    greysilly7.classes = [ "homeManager" ];
   };
 }

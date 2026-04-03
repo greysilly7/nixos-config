@@ -6,22 +6,24 @@
   inputs,
   den,
   ...
-}: {
+}:
+{
   # Flake inputs
   flake-file.inputs.preservation = {
     url = "github:nix-community/preservation";
   };
 
   den.aspects.persist._.enable = den.lib.perHost {
-    nixos = {
-      config,
-      lib,
-      ...
-    }: {
-      # Import the preservation module
-      imports = [inputs.preservation.nixosModules.preservation];
-      # Enable the preservation module by default
-      preservation.enable = lib.mkDefault true;
-    };
+    nixos =
+      {
+        lib,
+        ...
+      }:
+      {
+        # Import the preservation module
+        imports = [ inputs.preservation.nixosModules.preservation ];
+        # Enable the preservation module by default
+        preservation.enable = lib.mkDefault true;
+      };
   };
 }

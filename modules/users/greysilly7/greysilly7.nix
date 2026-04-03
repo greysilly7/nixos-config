@@ -1,13 +1,18 @@
-{den, ...}: {
+_:
+{
   den.aspects.greysilly7 = {
-    nixos = {config, ...}: {
-      sops.secrets = {
-        greysilly7_password.neededForUsers = true;
+    nixos =
+      _:
+      {
+        sops.secrets = {
+          greysilly7_password.neededForUsers = true;
+        };
       };
-    };
-    user = {config, ...}: {
-      hashedPasswordFile = config.sops.secrets.greysilly7_password.path;
-      extraGroups = ["wheel"];
-    };
+    user =
+      { config, ... }:
+      {
+        hashedPasswordFile = config.sops.secrets.greysilly7_password.path;
+        extraGroups = [ "wheel" ];
+      };
   };
 }

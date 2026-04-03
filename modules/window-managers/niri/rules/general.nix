@@ -1,4 +1,5 @@
-{den, ...}: {
+{ den, ... }:
+{
   den.aspects.niri._.rules._.general = den.lib.perUser {
     homeManager = {
       programs.niri.settings = {
@@ -20,17 +21,17 @@
           }
           {
             # Don't start Steam games floating
-            matches = [{app-id = "^steam_app.*";}];
+            matches = [ { app-id = "^steam_app.*"; } ];
             open-floating = false;
           }
           {
             # Don't start bottles apps floating
-            matches = [{app-id = "^.*\\.exe";}];
+            matches = [ { app-id = "^.*\\.exe"; } ];
             open-floating = false;
           }
           {
             # Floating file-roller
-            matches = [{app-id = "^org.gnome.FileRoller$";}];
+            matches = [ { app-id = "^org.gnome.FileRoller$"; } ];
             open-floating = true;
             max-height = 600;
             max-width = 900;

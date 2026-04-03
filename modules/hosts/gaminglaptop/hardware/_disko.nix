@@ -13,7 +13,7 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["umask=0077"];
+              mountOptions = [ "umask=0077" ];
             };
           };
           luks = {
@@ -35,7 +35,7 @@
               # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
               content = {
                 type = "btrfs";
-                extraArgs = ["-f"];
+                extraArgs = [ "-f" ];
                 postCreateHook = ''
                   mntpoint=$(mktemp -d)
                   mount "/dev/mapper/crypted" "$mntpoint" -o subvol=/

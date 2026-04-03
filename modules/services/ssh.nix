@@ -1,6 +1,7 @@
-{den, ...}: {
+{ den, ... }:
+{
   # Include ssh by default in all hosts
-  den.ctx.host.includes = [den.aspects.ssh];
+  den.ctx.host.includes = [ den.aspects.ssh ];
 
   den.aspects.ssh = {
     includes = [
@@ -8,31 +9,37 @@
     ];
 
     _.openssh = den.lib.perHost {
-      nixos = {lib, ...}: {
-        services.openssh = {
-          enable = lib.mkDefault true;
-          openFirewall = lib.mkDefault true;
-          settings = {
-            PermitRootLogin = lib.mkDefault "no";
-            PasswordAuthentication = lib.mkDefault true;
+      nixos =
+        { lib, ... }:
+        {
+          services.openssh = {
+            enable = lib.mkDefault true;
+            openFirewall = lib.mkDefault true;
+            settings = {
+              PermitRootLogin = lib.mkDefault "no";
+              PasswordAuthentication = lib.mkDefault true;
+            };
           };
         };
-      };
 
-      persist = {lib, ...}: {
-        files =
-          lib.map (path: {
-            file = path;
-            how = "symlink";
-            inInitrd = true;
-            configureParent = true;
-          }) [
-            "/etc/ssh/ssh_host_ed25519_key"
-            "/etc/ssh/ssh_host_ed25519_key.pub"
-            "/etc/ssh/ssh_host_rsa_key"
-            "/etc/ssh/ssh_host_rsa_key.pub"
-          ];
-      };
+      persist =
+        { lib, ... }:
+        {
+          files =
+            lib.map
+              (path: {
+                file = path;
+                how = "symlink";
+                inInitrd = true;
+                configureParent = true;
+              })
+              [
+                "/etc/ssh/ssh_host_ed25519_key"
+                "/etc/ssh/ssh_host_ed25519_key.pub"
+                "/etc/ssh/ssh_host_rsa_key"
+                "/etc/ssh/ssh_host_rsa_key.pub"
+              ];
+        };
 
       persistUser.directories = [
         {

@@ -3,7 +3,8 @@
   den,
   lib,
   ...
-}: {
+}:
+{
   # Flake inputs
   flake-file.inputs.home-manager = {
     url = "github:nix-community/home-manager";
@@ -11,8 +12,8 @@
   };
 
   # Default home manager settings
-  den.ctx.hm-host.includes = [den.aspects.home-manager._.nixConfig];
-  den.ctx.hm-user.includes = [den.aspects.home-manager._.hmConfig];
+  den.ctx.hm-host.includes = [ den.aspects.home-manager._.nixConfig ];
+  den.ctx.hm-user.includes = [ den.aspects.home-manager._.hmConfig ];
 
   den.aspects.home-manager = {
     _.nixConfig = den.lib.perHost {

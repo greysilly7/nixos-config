@@ -1,4 +1,5 @@
-{den, ...}: {
+{ den, ... }:
+{
   den.aspects.persist._.class = {
     # Bundles all class components when the complete 'class' sub-aspect is used
     includes = [

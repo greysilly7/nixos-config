@@ -2,7 +2,8 @@
   den,
   lib,
   ...
-}: {
+}:
+{
   den.aspects.persist = {
     # All sub-aspects are included when the generic 'persist' aspect is used
     # enable         - Import and enable the preservation module

@@ -1,6 +1,7 @@
 # Preset system types.
 # These should be imported by BOTH hosts and users wanting to use them.
-{den, ...}: {
+{ den, ... }:
+{
   den.aspects.system-type = {
     _.basic = {
       includes = with den.aspects; [

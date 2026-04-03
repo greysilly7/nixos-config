@@ -2,7 +2,8 @@
   den,
   self,
   ...
-}: {
+}:
+{
   den.aspects.gaminglaptop = {
     includes = [
       den.aspects.persist
@@ -13,20 +14,24 @@
       den.aspects.system-type._.desktop._.gaming
       den.aspects.desktop-type._.window-manager._.niri
     ];
-    provides.to-users = {users, ...}: {
-      includes = [
-        den.aspects.persist
+    provides.to-users =
+      _:
+      {
+        includes = [
+          den.aspects.persist
+          den.aspects.system-type._.desktop._.gaming
+          den.aspects.desktop-type._.window-manager._.niri
+
+          den.aspects.spotify
+        ];
+      };
+
+    provides.greysilly7 =
+      _:
+      [
+        # den.aspects.den._.primary-user
         den.aspects.system-type._.desktop._.gaming
-        den.aspects.desktop-type._.window-manager._.niri
-
-        den.aspects.spotify
       ];
-    };
-
-    provides.greysilly7 = { user, ... }: [
-      # den.aspects.den._.primary-user
-      den.aspects.system-type._.desktop._.gaming
-    ];
     nixos = {
       hardware.facter.reportPath = ./facter.json;
       sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
@@ -34,9 +39,9 @@
       # Homebrew erase my darlings boot script
       boot.initrd.systemd.services.rollback = {
         description = "Rollback BTRFS root subvolume to a pristine state";
-        wantedBy = ["initrd.target"];
-        after = ["systemd-cryptsetup@crypted.service"];
-        before = ["sysroot.mount"];
+        wantedBy = [ "initrd.target" ];
+        after = [ "systemd-cryptsetup@crypted.service" ];
+        before = [ "sysroot.mount" ];
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
         script = ''
