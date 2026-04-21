@@ -1,7 +1,7 @@
 { den, ... }:
 {
   den.aspects.niri._.rules._.theming = den.lib.perUser {
-    homeManager = {
+    homeManager = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       programs.niri.settings = {
         window-rules = [
           {

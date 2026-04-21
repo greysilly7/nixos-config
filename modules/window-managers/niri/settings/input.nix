@@ -5,7 +5,7 @@
 }:
 {
   den.aspects.niri._.settings._.input = den.lib.perUser {
-    homeManager = {
+    homeManager = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       programs.niri.settings.input = inputs.self.lib.applyDefaultsRecursive {
         keyboard = {
           xkb.layout = "us";

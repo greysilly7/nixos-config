@@ -9,7 +9,7 @@ _:
         };
       };
     user =
-      { config, ... }:
+      { config, pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux
       {
         hashedPasswordFile = config.sops.secrets.greysilly7_password.path;
         extraGroups = [ "wheel" ];

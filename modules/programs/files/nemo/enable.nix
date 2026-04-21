@@ -16,13 +16,7 @@
         };
       };
 
-    homeManager =
-      {
-        pkgs,
-        lib,
-        ...
-      }:
-      {
+    homeManager = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         # File browser for Cinnamon
         home.packages = [
           (pkgs.nemo-with-extensions.override {

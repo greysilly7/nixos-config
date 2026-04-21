@@ -1,6 +1,6 @@
 _:
 {
-  den.aspects.greysilly7 = {
+  den.aspects.scottgould = {
     homeManager =
       { config, ... }:
       {

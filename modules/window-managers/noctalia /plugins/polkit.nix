@@ -5,9 +5,7 @@
 }:
 {
   den.aspects.noctalia._.plugins._.polkit = den.lib.perUser {
-    homeManager =
-      { lib, ... }:
-      {
+    homeManager = { lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.noctalia-shell = {
           plugins = inputs.self.lib.applyDefaults {
             states.polkit-agent = {

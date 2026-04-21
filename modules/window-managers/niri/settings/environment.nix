@@ -5,7 +5,7 @@
 }:
 {
   den.aspects.niri._.settings._.environment = den.lib.perUser {
-    homeManager = {
+    homeManager = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       programs.niri.settings.environment = inputs.self.lib.applyDefaults {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
         QT_QPA_PLATFORMTHEME = "qt5ct";

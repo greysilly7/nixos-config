@@ -6,9 +6,7 @@
 }:
 {
   den.aspects.niri._.settings._.main = den.lib.perUser {
-    homeManager =
-      { config, ... }:
-      {
+    homeManager = { config, pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.niri.settings = inputs.self.lib.applyDefaultsRecursive {
           prefer-no-csd = true;
           hotkey-overlay.skip-at-startup = true;

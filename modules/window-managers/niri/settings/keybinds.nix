@@ -5,13 +5,7 @@
 }:
 {
   den.aspects.niri._.settings._.keybinds = den.lib.perUser {
-    homeManager =
-      {
-        config,
-        pkgs,
-        ...
-      }:
-      {
+    homeManager = { config, pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.niri.settings.binds =
           with config.lib.niri.actions;
           let

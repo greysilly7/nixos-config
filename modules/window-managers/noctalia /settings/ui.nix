@@ -5,12 +5,7 @@
 }:
 {
   den.aspects.noctalia._.settings._.ui = den.lib.perUser {
-    homeManager =
-      {
-        lib,
-        ...
-      }:
-      {
+    homeManager = { lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.noctalia-shell.settings = {
           # ---Noctalia UI settings---
           ui = inputs.self.lib.applyDefaults {

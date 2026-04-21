@@ -17,7 +17,7 @@
 
   den.aspects.home-manager = {
     _.nixConfig = den.lib.perHost {
-      nixos.home-manager = {
+      os.home-manager = {
         useUserPackages = lib.mkDefault true;
         useGlobalPkgs = lib.mkDefault true;
         backupFileExtension = lib.mkDefault "backup";

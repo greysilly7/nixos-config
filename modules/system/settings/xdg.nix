@@ -1,7 +1,4 @@
-{
-  den,
-  ...
-}:
+{ den, ... }:
 {
   # Include xdg config by default in all hosts and hm-users
   den.ctx.host.includes = [ den.aspects.xdg._.sys ];
@@ -9,7 +6,7 @@
 
   den.aspects.xdg = {
     _.sys = den.lib.perHost {
-      # Ensure portal definitions and DE provided configurations get linked
+      # The nixos class automatically isolates these paths to your Linux machines
       nixos.environment.pathsToLink = [
         "/share/xdg-desktop-portal"
         "/share/applications"
@@ -24,37 +21,39 @@
           lib,
           ...
         }:
+        let
+          isLinux = pkgs.stdenv.hostPlatform.isLinux;
+        in
         {
           xdg = {
+            # Base XDG config (~/.config, ~/.local/share) is great for macOS too
             enable = lib.mkDefault true;
-            mimeApps.enable = lib.mkDefault true;
-            autostart.enable = lib.mkDefault true;
 
-            userDirs =
-              let
-                docs = config.xdg.userDirs.documents;
-              in
-              {
-                enable = lib.mkDefault config.xdg.enable;
-                createDirectories = lib.mkDefault true;
-                setSessionVariables = lib.mkDefault true;
-                # Directories
-                documents = lib.mkDefault "${config.home.homeDirectory}/Documents";
-                desktop = lib.mkDefault "${docs}/Desktop";
-                download = lib.mkDefault "${docs}/Downloads";
-                pictures = lib.mkDefault "${docs}/Pictures";
-                videos = lib.mkDefault "${docs}/Videos";
-                music = lib.mkDefault "${docs}/Music";
-                templates = lib.mkDefault "${docs}/Templates";
-                publicShare = lib.mkDefault null;
-              };
+            # --- Linux Desktop Specifics ---
+            mimeApps.enable = lib.mkIf isLinux (lib.mkDefault true);
+            autostart.enable = lib.mkIf isLinux (lib.mkDefault true);
 
-            dataFile."mimeapps.list" = lib.mkDefault {
-              source = "${config.xdg.configFile."mimeapps.list".source}";
-              force = true;
+            userDirs = lib.mkIf isLinux {
+              enable = lib.mkDefault config.xdg.enable;
+              createDirectories = lib.mkDefault true;
+              setSessionVariables = lib.mkDefault true;
+              
+              documents = lib.mkDefault "${config.home.homeDirectory}/Documents";
+              desktop = lib.mkDefault "${config.xdg.userDirs.documents}/Desktop";
+              download = lib.mkDefault "${config.xdg.userDirs.documents}/Downloads";
+              pictures = lib.mkDefault "${config.xdg.userDirs.documents}/Pictures";
+              videos = lib.mkDefault "${config.xdg.userDirs.documents}/Videos";
+              music = lib.mkDefault "${config.xdg.userDirs.documents}/Music";
+              templates = lib.mkDefault "${config.xdg.userDirs.documents}/Templates";
+              publicShare = lib.mkDefault null;
             };
 
-            portal = {
+            dataFile."mimeapps.list" = lib.mkIf isLinux (lib.mkDefault {
+              source = config.xdg.configFile."mimeapps.list".source;
+              force = true;
+            });
+
+            portal = lib.mkIf isLinux {
               enable = lib.mkDefault config.xdg.enable;
               extraPortals = lib.mkDefault [
                 pkgs.xdg-desktop-portal-gnome
@@ -68,7 +67,7 @@
           };
 
           home = {
-            # Programs use XDG dirs if supported
+            # Programs use XDG dirs if supported (Works safely on macOS)
             preferXdgDirectories = lib.mkDefault config.xdg.enable;
             # Checks $HOME for unwanted files and directories.
             packages = [ pkgs.xdg-ninja ];
@@ -76,12 +75,8 @@
         };
 
       persistUser =
-        {
-          hmConfig,
-          lib,
-          ...
-        }:
-        {
+        { hmConfig, lib, pkgs, ... }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           directories =
             lib.map
               (path: {
@@ -90,13 +85,13 @@
                 createLinkTarget = true;
               })
               [
-                "${hmConfig.xdg.userDirs.documents}"
-                "${hmConfig.xdg.userDirs.desktop}"
-                "${hmConfig.xdg.userDirs.download}"
-                "${hmConfig.xdg.userDirs.pictures}"
-                "${hmConfig.xdg.userDirs.videos}"
-                "${hmConfig.xdg.userDirs.music}"
-                "${hmConfig.xdg.userDirs.templates}"
+                hmConfig.xdg.userDirs.documents
+                hmConfig.xdg.userDirs.desktop
+                hmConfig.xdg.userDirs.download
+                hmConfig.xdg.userDirs.pictures
+                hmConfig.xdg.userDirs.videos
+                hmConfig.xdg.userDirs.music
+                hmConfig.xdg.userDirs.templates
               ];
 
           files = [
@@ -108,8 +103,8 @@
         };
 
       persistUserTmp =
-        { hmConfig, ... }:
-        {
+        { hmConfig, lib, pkgs, ... }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           ".local" = { }; # "~/.local"
           "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
         };

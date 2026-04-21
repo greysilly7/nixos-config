@@ -10,7 +10,6 @@
         hardware._.firmware
 
         # ---Basic Tools--- #
-        # coolercontrol
         cli
         shell
         git
