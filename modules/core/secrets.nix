@@ -13,8 +13,8 @@
   };
 
   # Include sops-nix by default in all hosts and hm-users
-  den.ctx.host.includes = [ den.aspects.secrets._.secretsNix ];
-  den.ctx.hm-user.includes = [ den.aspects.secrets._.secretsHome ];
+  den.schema.host.includes = [ den.aspects.secrets._.secretsNix ];
+  den.schema.hm-user.includes = [ den.aspects.secrets._.secretsHome ];
 
   # Declare a common sops file using meta-data which can be accessed by all aspects
   den.schema.conf =
@@ -27,8 +27,11 @@
 
   den.aspects.secrets = {
     # ---NixOS module--- #
-    _.secretsNix = den.lib.perHost (
-      { host ? {}, ... }:
+    _.secretsNix =
+      {
+        host ? { },
+        ...
+      }:
       {
         nixos =
           {
@@ -69,43 +72,44 @@
             };
 
           };
-      }
-    );
+      };
 
     # ---Home module--- #
-    _.secretsHome = den.lib.perUser {
-      homeManager =
-        {
-          config,
-          lib,
-          ...
-        }:
-        {
-          imports = [ inputs.sops-nix.homeManagerModules.sops ];
+    _.secretsHome =
+      _:
+      {
+        homeManager =
+          {
+            config,
+            lib,
+            ...
+          }:
+          {
+            imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
-          sops = {
-            age.keyFile = lib.mkDefault "${config.xdg.configHome}/sops/age/keys.txt";
-            defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
+            sops = {
+              age.keyFile = lib.mkDefault "${config.xdg.configHome}/sops/age/keys.txt";
+              defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
+            };
           };
-        };
 
-      # ---Persist config--- #
-      persistUser =
-        { hmConfig, ... }:
-        {
-          directories = [
-            {
-              directory = "${hmConfig.xdg.configHome}/sops";
-              how = "symlink";
-              createLinkTarget = true;
-            }
-          ];
-        };
-      persistUserTmp =
-        { hmConfig, ... }:
-        {
-          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-        };
-    };
+        # ---Persist config--- #
+        persistUser =
+          { hmConfig, ... }:
+          {
+            directories = [
+              {
+                directory = "${hmConfig.xdg.configHome}/sops";
+                how = "symlink";
+                createLinkTarget = true;
+              }
+            ];
+          };
+        persistUserTmp =
+          { hmConfig, ... }:
+          {
+            "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+          };
+      };
   };
 }

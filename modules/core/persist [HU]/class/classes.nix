@@ -31,38 +31,36 @@ let
       dedup ? false,
       requiresFindEphemeral ? false,
     }:
-    den.lib.perHost (
+    {
+      aspect-chain ? [ ],
+      ...
+    }:
+    den._.forward (
       {
-        aspect-chain ? [],
-        ...
-      }:
-      den._.forward (
-        {
-          each = lib.singleton true;
-          fromClass = _: fromClass;
-          intoClass = _: "nixos"; # Preservation only supports NixOS
-          intoPath = _: intoPath;
-          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
-          guard =
-            {
-              config,
-              options,
-              ...
-            }:
-            _:
-            let
-              hasPreservation = options ? preservation;
-              hasFindEphemeral = lib.any (
-                pkg: (pkg.name or "") == "find-ephemeral"
-              ) config.environment.systemPackages;
-            in
-            lib.mkIf (hasPreservation && (!requiresFindEphemeral || hasFindEphemeral));
-          adaptArgs = args: args // { osConfig = args.config; };
-        }
-        // lib.optionalAttrs dedup {
-          adapterModule = dedupModule;
-        }
-      )
+        each = lib.singleton true;
+        fromClass = _: fromClass;
+        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoPath = _: intoPath;
+        fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
+        guard =
+          {
+            config,
+            options,
+            ...
+          }:
+          _:
+          let
+            hasPreservation = options ? preservation;
+            hasFindEphemeral = lib.any (
+              pkg: (pkg.name or "") == "find-ephemeral"
+            ) config.environment.systemPackages;
+          in
+          lib.mkIf (hasPreservation && (!requiresFindEphemeral || hasFindEphemeral));
+        adaptArgs = args: args // { osConfig = args.config; };
+      }
+      // lib.optionalAttrs dedup {
+        adapterModule = dedupModule;
+      }
     );
 
   # Factory to generate user-level custom classes
@@ -73,54 +71,50 @@ let
       dedup ? false,
       requiresFindEphemeral ? false,
     }:
-    den.lib.perUser (
+    {
+      user,
+      aspect-chain ? [ ],
+      ...
+    }:
+    den._.forward (
       {
-        user,
-        ...
-      }:
-      {
-        aspect-chain ? [],
-        ...
-      }:
-      den._.forward (
-        {
-          each = lib.singleton user;
-          fromClass = _: fromClass;
-          intoClass = _: "nixos"; # Preservation only supports NixOS
-          intoPath = u: [
-            "hostConfig"
-            "preservation"
-            intoSubPath
-            u.userName
-          ];
-          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
-          guard =
-            {
-              config,
-              options,
-              ...
-            }:
-            _:
-            let
-              hasPreservation = options ? preservation;
-              hasHomeManager = lib.elem "homeManager" (user.classes or [ ]);
-              hasFindEphemeral = lib.any (
-                pkg: (pkg.name or "") == "find-ephemeral"
-              ) config.environment.systemPackages;
-            in
-            lib.mkIf (hasPreservation && hasHomeManager && (!requiresFindEphemeral || hasFindEphemeral));
-          adaptArgs =
-            { config, ... }@args:
-            args
-            // {
-              hmConfig = config.home-manager.users.${user.userName};
-            };
-        }
-        // lib.optionalAttrs dedup {
-          adapterModule = dedupModule;
-        }
-      )
+        each = lib.singleton user;
+        fromClass = _: fromClass;
+        intoClass = _: "nixos"; # Preservation only supports NixOS
+        intoPath = u: [
+          "hostConfig"
+          "preservation"
+          intoSubPath
+          u.userName
+        ];
+        fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
+        guard =
+          {
+            config,
+            options,
+            ...
+          }:
+          _:
+          let
+            hasPreservation = options ? preservation;
+            hasHomeManager = lib.elem "homeManager" (user.classes or [ ]);
+            hasFindEphemeral = lib.any (
+              pkg: (pkg.name or "") == "find-ephemeral"
+            ) config.environment.systemPackages;
+          in
+          lib.mkIf (hasPreservation && hasHomeManager && (!requiresFindEphemeral || hasFindEphemeral));
+        adaptArgs =
+          { config, ... }@args:
+          args
+          // {
+            hmConfig = config.home-manager.users.${user.userName};
+          };
+      }
+      // lib.optionalAttrs dedup {
+        adapterModule = dedupModule;
+      }
     );
+
 in
 {
   den.aspects.persist._.class._.classes = {

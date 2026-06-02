@@ -5,31 +5,33 @@
       den.aspects.editors._.zed._.enable
     ];
 
-    _.enable = den.lib.perHost {
-      nixos =
-        { pkgs, ... }:
-        {
-          environment.systemPackages = [ pkgs.zed-editor ];
-        };
-      darwin =
-        { pkgs, ... }:
-        {
-          environment.systemPackages = [ pkgs.zed-editor ];
-        };
-      
-      persistUser =
-        { hmConfig, ... }:
-        {
-          directories = [
-            "${hmConfig.home.homeDirectory}/.config/zed"
-          ];
-        };
+    _.enable =
+      _:
+      {
+        nixos =
+          { pkgs, ... }:
+          {
+            environment.systemPackages = [ pkgs.zed-editor ];
+          };
+        darwin =
+          { pkgs, ... }:
+          {
+            environment.systemPackages = [ pkgs.zed-editor ];
+          };
 
-      persistUserTmp =
-        { hmConfig, ... }:
-        {
-          "${hmConfig.xdg.configHome}" = { };
-        };
-    };
+        persistUser =
+          { hmConfig, ... }:
+          {
+            directories = [
+              "${hmConfig.home.homeDirectory}/.config/zed"
+            ];
+          };
+
+        persistUserTmp =
+          { hmConfig, ... }:
+          {
+            "${hmConfig.xdg.configHome}" = { };
+          };
+      };
   };
 }

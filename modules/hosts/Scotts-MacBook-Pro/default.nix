@@ -18,35 +18,33 @@
       den.aspects.editors._.antigravity
       den.aspects.editors._.zed
     ];
-    darwin =
-      _:
-      {
-        security.pam.services.sudo_local.touchIdAuth = true;
-        system.stateVersion = 6;
-        sops.defaultSopsFile = self + "/secrets/scottgould/secrets.yaml";
+    darwin = _: {
+      security.pam.services.sudo_local.touchIdAuth = true;
+      system.stateVersion = 6;
+      sops.defaultSopsFile = self + "/secrets/scottgould/secrets.yaml";
 
-        homebrew = {
-          onActivation = {
-            cleanup = "uninstall";
-            upgrade = true;
-            autoUpdate = true;
-          };
-          enable = true;
-          brews = [ ];
-          casks = [
-            "tailscale-app"
-            "betterdisplay"
-            # "kitty"
-            "spotify"
-            "dbeaver-community"
-            "legcord"
-            "librewolf"
-            "steam"
-            "obsidian"
-            "iloader"
-            "stremioservice"
-          ];
+      homebrew = {
+        onActivation = {
+          cleanup = "uninstall";
+          upgrade = true;
+          autoUpdate = true;
         };
+        enable = true;
+        brews = [ ];
+        casks = [
+          "tailscale-app"
+          "betterdisplay"
+          # "kitty"
+          "spotify"
+          "dbeaver-community"
+          "legcord"
+          "librewolf"
+          "steam"
+          "obsidian"
+          "iloader"
+          "stremioservice"
+        ];
       };
+    };
   };
 }

@@ -19,10 +19,10 @@
 
   den.aspects.disko = {
     # Create a `disko` class to house disko config
-    _.diskoClass = den.lib.perHost (
+    _.diskoClass =
       {
         class ? "nixos",
-        aspect-chain ? [],
+        aspect-chain ? [ ],
         ...
       }:
       den._.forward {
@@ -30,12 +30,13 @@
         fromClass = _: "disko";
         intoClass = _: "nixos"; # Disko only supports NixOS
         intoPath = _: [ ]; # Forwards into root
-        fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
-      }
-    );
+        fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
+      };
     # Import the disko module for NixOS
-    _.diskoImport = den.lib.perHost {
-      nixos.imports = [ inputs.disko.nixosModules.disko ];
-    };
+    _.diskoImport =
+      _:
+      {
+        nixos.imports = [ inputs.disko.nixosModules.disko ];
+      };
   };
 }

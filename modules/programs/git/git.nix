@@ -12,22 +12,24 @@
       # Bundles all git components when the complete 'git' sub-aspect is used
       includes = lib.attrValues den.aspects.git._.git._;
 
-      _.enable = den.lib.perUser {
-        homeManager =
-          { lib, ... }:
-          {
-            programs.git = {
-              enable = lib.mkDefault true;
-              settings = {
-                init.defaultBranch = lib.mkDefault "main";
+      _.enable =
+        _:
+        {
+          homeManager =
+            { lib, ... }:
+            {
+              programs.git = {
+                enable = lib.mkDefault true;
+                settings = {
+                  init.defaultBranch = lib.mkDefault "main";
+                };
               };
             };
-          };
-      };
+        };
 
-      _.class = den.lib.perUser (
+      _.class =
         {
-          aspect-chain ? [],
+          aspect-chain ? [ ],
           ...
         }:
         den._.forward {
@@ -38,24 +40,25 @@
             "programs"
             "git"
           ];
-          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
+          fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
           adaptArgs = lib.id;
           guard = { config, ... }: _: lib.mkIf config.programs.git.enable;
-        }
-      );
-    };
-
-    _.gh = den.lib.perUser {
-      homeManager =
-        { lib, ... }:
-        {
-          programs.gh = {
-            enable = lib.mkDefault true;
-            gitCredentialHelper = {
-              enable = lib.mkDefault true;
-            };
-          };
         };
     };
+
+    _.gh =
+      _:
+      {
+        homeManager =
+          { lib, ... }:
+          {
+            programs.gh = {
+              enable = lib.mkDefault true;
+              gitCredentialHelper = {
+                enable = lib.mkDefault true;
+              };
+            };
+          };
+      };
   };
 }

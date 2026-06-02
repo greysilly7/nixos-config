@@ -2,7 +2,6 @@
 # https://github.com/niri-wm/niri
 {
   inputs,
-  den,
   ...
 }:
 {
@@ -12,21 +11,23 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  den.aspects.niri._.enable = den.lib.perHost {
-    nixos =
-      {
-        pkgs,
-        lib,
-        ...
-      }:
-      {
-        imports = [ inputs.niri.nixosModules.niri ];
+  den.aspects.niri._.enable =
+    _:
+    {
+      nixos =
+        {
+          pkgs,
+          lib,
+          ...
+        }:
+        {
+          imports = [ inputs.niri.nixosModules.niri ];
 
-        programs.niri = {
-          enable = lib.mkDefault true;
-          package = lib.mkDefault pkgs.niri;
+          programs.niri = {
+            enable = lib.mkDefault true;
+            package = lib.mkDefault pkgs.niri;
+          };
+          systemd.user.services.niri-flake-polkit.enable = lib.mkDefault false;
         };
-        systemd.user.services.niri-flake-polkit.enable = lib.mkDefault false;
-      };
-  };
+    };
 }

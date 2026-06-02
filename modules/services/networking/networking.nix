@@ -1,6 +1,6 @@
 { den, ... }:
 {
-  den.ctx.host.includes = [ den.aspects.networking ];
+  den.schema.host.includes = [ den.aspects.networking ];
 
   den.aspects.networking = {
     nixos =

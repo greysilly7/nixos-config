@@ -4,13 +4,10 @@
   ...
 }:
 {
-  den.aspects.noctalia._.class = den.lib.perUser (
+  den.aspects.noctalia._.class =
     {
       user,
-      ...
-    }:
-    {
-      aspect-chain ? [],
+      aspect-chain ? [ ],
       ...
     }:
     den._.forward {
@@ -21,9 +18,8 @@
         "programs"
         "noctalia-shell"
       ];
-      fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
+      fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
       adaptArgs = lib.id;
       guard = { options, ... }: options.programs ? noctalia-shell;
-    }
-  );
+    };
 }
