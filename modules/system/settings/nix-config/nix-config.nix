@@ -33,6 +33,21 @@
           '';
           users.mutableUsers = lib.mkDefault false;
         };
+      darwin =
+        { lib, ... }:
+        {
+          nix.settings = {
+            # Enable flakes
+            experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+            # Add `admin` to trusted users
+            trusted-users = [ "@admin" ];
+          };
+
+          nixpkgs.config.allowUnfree = lib.mkDefault true;
+        };
     };
 
     _.garbage-collection = den.lib.perHost {
@@ -45,7 +60,18 @@
             options = lib.mkDefault "--delete-older-than 30d";
           };
           # Hard link identical files to save space
-          nix.settings.auto-optimise-store = lib.mkDefault true;
+          nix.optimise.automatic = lib.mkDefault true;
+        };
+      darwin =
+        { lib, ... }:
+        {
+          nix.gc = {
+            automatic = lib.mkDefault true;
+            interval = lib.mkDefault { Weekday = 0; Hour = 0; Minute = 0; };
+            options = lib.mkDefault "--delete-older-than 30d";
+          };
+          # Hard link identical files to save space
+          nix.optimise.automatic = lib.mkDefault true;
         };
     };
 

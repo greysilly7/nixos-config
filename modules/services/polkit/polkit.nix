@@ -12,7 +12,14 @@
           security.polkit.enable = lib.mkDefault true;
         };
 
-      homeManager = { config, pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      homeManager =
+        {
+          config,
+          pkgs,
+          lib,
+          ...
+        }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           services.polkit-gnome.enable = lib.mkDefault true;
 
           systemd.user.services = lib.mkIf config.services.polkit-gnome.enable {

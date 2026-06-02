@@ -33,7 +33,8 @@ let
     }:
     den.lib.perHost (
       {
-        aspect-chain,
+        aspect-chain ? [],
+        ...
       }:
       den._.forward (
         {
@@ -41,7 +42,7 @@ let
           fromClass = _: fromClass;
           intoClass = _: "nixos"; # Preservation only supports NixOS
           intoPath = _: intoPath;
-          fromAspect = _: lib.head aspect-chain;
+          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
           guard =
             {
               config,
@@ -75,9 +76,11 @@ let
     den.lib.perUser (
       {
         user,
+        ...
       }:
       {
-        aspect-chain,
+        aspect-chain ? [],
+        ...
       }:
       den._.forward (
         {
@@ -90,7 +93,7 @@ let
             intoSubPath
             u.userName
           ];
-          fromAspect = _: lib.head aspect-chain;
+          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
           guard =
             {
               config,

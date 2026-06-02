@@ -1,25 +1,27 @@
 { den, ... }:
 {
-  den.aspects.editors = {
-    _.zed = den.lib.perUser {
-      homeManager =
+  den.aspects.editors._.zed = {
+    includes = [
+      den.aspects.editors._.zed._.enable
+    ];
+
+    _.enable = den.lib.perHost {
+      nixos =
         { pkgs, ... }:
         {
-          home.packages = [
-            pkgs.zed-editor
-          ];
+          environment.systemPackages = [ pkgs.zed-editor ];
         };
-
+      darwin =
+        { pkgs, ... }:
+        {
+          environment.systemPackages = [ pkgs.zed-editor ];
+        };
+      
       persistUser =
         { hmConfig, ... }:
         {
           directories = [
-            {
-              directory = "${hmConfig.home.homeDirectory}/.config/zed";
-              how = "symlink";
-              mode = "0700";
-              createLinkTarget = true;
-            }
+            "${hmConfig.home.homeDirectory}/.config/zed"
           ];
         };
 

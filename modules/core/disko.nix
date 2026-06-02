@@ -12,7 +12,7 @@
   };
 
   # Include disko by default in all hosts
-  den.ctx.host.includes = [
+  den.schema.host.includes = [
     den.aspects.disko._.diskoImport
     den.aspects.disko._.diskoClass
   ];
@@ -21,15 +21,16 @@
     # Create a `disko` class to house disko config
     _.diskoClass = den.lib.perHost (
       {
-        class,
-        aspect-chain,
+        class ? "nixos",
+        aspect-chain ? [],
+        ...
       }:
       den._.forward {
         each = lib.singleton class;
         fromClass = _: "disko";
         intoClass = _: "nixos"; # Disko only supports NixOS
         intoPath = _: [ ]; # Forwards into root
-        fromAspect = _: lib.head aspect-chain;
+        fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
       }
     );
     # Import the disko module for NixOS

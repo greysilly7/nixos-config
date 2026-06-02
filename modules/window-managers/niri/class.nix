@@ -7,9 +7,11 @@
   den.aspects.niri._.class = den.lib.perUser (
     {
       user,
+      ...
     }:
     {
-      aspect-chain,
+      aspect-chain ? [],
+      ...
     }:
     den._.forward {
       each = lib.singleton user;
@@ -19,7 +21,7 @@
         "programs"
         "niri"
       ];
-      fromAspect = _: lib.head aspect-chain;
+      fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
       adaptArgs = lib.id;
       guard = { options, ... }: options.programs ? niri;
       # This `adapterModule` allows the following lists to append

@@ -14,24 +14,20 @@
       den.aspects.system-type._.desktop._.gaming
       den.aspects.desktop-type._.window-manager._.niri
     ];
-    provides.to-users =
-      _:
-      {
-        includes = [
-          den.aspects.persist
-          den.aspects.system-type._.desktop._.gaming
-          den.aspects.desktop-type._.window-manager._.niri
-
-          den.aspects.spotify
-        ];
-      };
-
-    provides.greysilly7 =
-      _:
-      [
-        # den.aspects.den._.primary-user
+    provides.to-users = _: {
+      includes = [
+        den.aspects.persist
         den.aspects.system-type._.desktop._.gaming
+        den.aspects.desktop-type._.window-manager._.niri
+
+        den.aspects.spotify
       ];
+    };
+
+    provides.greysilly7 = _: [
+      # den.aspects.den._.primary-user
+      den.aspects.system-type._.desktop._.gaming
+    ];
     nixos = {
       hardware.facter.reportPath = ./facter.json;
       sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";

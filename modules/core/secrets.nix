@@ -28,7 +28,7 @@
   den.aspects.secrets = {
     # ---NixOS module--- #
     _.secretsNix = den.lib.perHost (
-      { host }:
+      { host ? {}, ... }:
       {
         nixos =
           {
@@ -52,21 +52,23 @@
             };
           };
 
-        darwin = { pkgs, lib, ... }: {
-          imports = [ inputs.sops-nix.darwinModules.sops ];
+        darwin =
+          { pkgs, lib, ... }:
+          {
+            imports = [ inputs.sops-nix.darwinModules.sops ];
 
-          environment.systemPackages = [
-            pkgs.age
-            pkgs.sops
-            pkgs.ssh-to-age
-          ];
+            environment.systemPackages = [
+              pkgs.age
+              pkgs.sops
+              pkgs.ssh-to-age
+            ];
 
-          sops = {
-            age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
-            defaultSopsFile = lib.mkDefault host.sops.commonSopsFile;
+            sops = {
+              age.sshKeyPaths = lib.mkDefault [ "/etc/ssh/ssh_host_ed25519_key" ];
+              defaultSopsFile = lib.mkDefault host.sops.commonSopsFile;
+            };
+
           };
-
-        };
       }
     );
 

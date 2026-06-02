@@ -27,7 +27,8 @@
 
       _.class = den.lib.perUser (
         {
-          aspect-chain,
+          aspect-chain ? [],
+          ...
         }:
         den._.forward {
           each = lib.singleton true;
@@ -37,7 +38,7 @@
             "programs"
             "git"
           ];
-          fromAspect = _: lib.head aspect-chain;
+          fromAspect = _: if aspect-chain != [] then lib.head aspect-chain else "";
           adaptArgs = lib.id;
           guard = { config, ... }: _: lib.mkIf config.programs.git.enable;
         }

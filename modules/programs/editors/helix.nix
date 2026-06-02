@@ -1,25 +1,27 @@
 { den, ... }:
 {
-  den.aspects.editors = {
-    _.helix = den.lib.perUser {
-      homeManager =
+  den.aspects.editors._.helix = {
+    includes = [
+      den.aspects.editors._.helix._.enable
+    ];
+
+    _.enable = den.lib.perHost {
+      nixos =
         { pkgs, ... }:
         {
-          home.packages = [
-            pkgs.helix
-          ];
+          environment.systemPackages = [ pkgs.helix ];
         };
-
+      darwin =
+        { pkgs, ... }:
+        {
+          environment.systemPackages = [ pkgs.helix ];
+        };
+      
       persistUser =
         { hmConfig, ... }:
         {
           directories = [
-            {
-              directory = "${hmConfig.home.homeDirectory}/.config/helix";
-              how = "symlink";
-              mode = "0700";
-              createLinkTarget = true;
-            }
+            "${hmConfig.home.homeDirectory}/.config/helix"
           ];
         };
 

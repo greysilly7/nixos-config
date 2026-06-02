@@ -12,7 +12,9 @@
     ];
 
     _.enable = den.lib.perUser {
-      homeManager = { lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      homeManager =
+        { lib, pkgs, ... }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           programs.mangohud = {
             enable = lib.mkDefault true;
           };

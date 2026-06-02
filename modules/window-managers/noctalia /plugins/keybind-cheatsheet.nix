@@ -5,24 +5,22 @@
 }:
 {
   den.aspects.noctalia._.plugins._.keybind-cheatsheet = den.lib.perUser {
-    homeManager =
-      _:
-      {
-        programs.noctalia-shell = {
-          plugins = inputs.self.lib.applyDefaults {
-            states.keybind-cheatsheet = {
-              enabled = true;
-              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-            };
+    homeManager = _: {
+      programs.noctalia-shell = {
+        plugins = inputs.self.lib.applyDefaults {
+          states.keybind-cheatsheet = {
+            enabled = true;
+            sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
           };
+        };
 
-          pluginSettings = inputs.self.lib.applyDefaults {
-            keybind-cheatsheet = {
-              columnCount = 2;
-            };
+        pluginSettings = inputs.self.lib.applyDefaults {
+          keybind-cheatsheet = {
+            columnCount = 2;
           };
         };
       };
+    };
 
     persistUser =
       { hmConfig, ... }:

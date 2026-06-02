@@ -28,7 +28,9 @@
           };
         };
 
-      homeManager = { lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      homeManager =
+        { lib, pkgs, ... }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           xdg.mimeApps.defaultApplications = lib.mkBefore (
             let
               application = "steam.desktop";

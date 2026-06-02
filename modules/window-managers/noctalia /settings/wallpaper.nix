@@ -5,7 +5,14 @@
 }:
 {
   den.aspects.noctalia._.settings._.wallpaper = den.lib.perUser {
-    homeManager = { config, pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+    homeManager =
+      {
+        config,
+        pkgs,
+        lib,
+        ...
+      }:
+      lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.noctalia-shell.settings = {
           # ---Noctalia wallpaper settings---
           wallpaper = inputs.self.lib.applyDefaults {

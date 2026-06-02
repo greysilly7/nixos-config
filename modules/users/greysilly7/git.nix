@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.greysilly7 = {
     homeManager =
       { config, ... }:

@@ -6,7 +6,14 @@
     ];
 
     _.gnome-keyring = den.lib.perUser {
-      homeManager = { config, lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+      homeManager =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           services.gnome-keyring.enable = lib.mkDefault true;
 
           xdg.portal.config.common = lib.mkIf config.services.gnome-keyring.enable {

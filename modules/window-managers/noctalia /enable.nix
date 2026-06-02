@@ -21,7 +21,14 @@
   };
 
   den.aspects.noctalia._.enable = den.lib.perUser {
-    homeManager = { config, pkgs, lib, ... }: let
+    homeManager =
+      {
+        config,
+        pkgs,
+        lib,
+        ...
+      }:
+      let
         # Small application to easily show changed values from live noctalia settings
         noctalia-diff = pkgs.writeShellApplication {
           name = "noctalia-diff";

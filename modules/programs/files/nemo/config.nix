@@ -2,7 +2,9 @@
 {
   # Default config for nemo
   den.aspects.files._.nemo._.config = den.lib.perUser {
-    homeManager = { pkgs, lib, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+    homeManager =
+      { pkgs, lib, ... }:
+      lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         dconf.settings = {
           "org/nemo/preferences" = {
             show-hidden-files = lib.mkDefault true;

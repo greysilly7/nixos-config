@@ -8,9 +8,9 @@
 
   # Flake inputs
   flake-file.inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/26.05";
     flake-file.url = "github:vic/flake-file";
-    den.url = "github:vic/den";
+    den.url = "github:denful/den";
   };
 
   # Define avialable systems

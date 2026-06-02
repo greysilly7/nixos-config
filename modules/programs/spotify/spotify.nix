@@ -12,7 +12,7 @@
           lib,
           ...
         }:
-        {
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           home.packages = [
             pkgs.spotify
             pkgs.spotify-tray

@@ -22,7 +22,7 @@
           ...
         }:
         let
-          isLinux = pkgs.stdenv.hostPlatform.isLinux;
+          inherit (pkgs.stdenv.hostPlatform) isLinux;
         in
         {
           xdg = {
@@ -37,7 +37,7 @@
               enable = lib.mkDefault config.xdg.enable;
               createDirectories = lib.mkDefault true;
               setSessionVariables = lib.mkDefault true;
-              
+
               documents = lib.mkDefault "${config.home.homeDirectory}/Documents";
               desktop = lib.mkDefault "${config.xdg.userDirs.documents}/Desktop";
               download = lib.mkDefault "${config.xdg.userDirs.documents}/Downloads";
@@ -48,10 +48,12 @@
               publicShare = lib.mkDefault null;
             };
 
-            dataFile."mimeapps.list" = lib.mkIf isLinux (lib.mkDefault {
-              source = config.xdg.configFile."mimeapps.list".source;
-              force = true;
-            });
+            dataFile."mimeapps.list" = lib.mkIf isLinux (
+              lib.mkDefault {
+                inherit (config.xdg.configFile."mimeapps.list") source;
+                force = true;
+              }
+            );
 
             portal = lib.mkIf isLinux {
               enable = lib.mkDefault config.xdg.enable;
@@ -75,7 +77,12 @@
         };
 
       persistUser =
-        { hmConfig, lib, pkgs, ... }:
+        {
+          hmConfig,
+          lib,
+          pkgs,
+          ...
+        }:
         lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           directories =
             lib.map
@@ -103,7 +110,12 @@
         };
 
       persistUserTmp =
-        { hmConfig, lib, pkgs, ... }:
+        {
+          hmConfig,
+          lib,
+          pkgs,
+          ...
+        }:
         lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
           ".local" = { }; # "~/.local"
           "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"

@@ -9,13 +9,13 @@
       includes = [
         den.aspects.system-type._.basic
         den.aspects.editors._.antigravity
+        den.aspects.editors._.zed
       ];
     };
 
     provides.scottgould = _: [
       den.aspects.system-type._.basic
       den.aspects.editors._.antigravity
-      den.aspects.editors._.helix
       den.aspects.editors._.zed
     ];
     darwin =

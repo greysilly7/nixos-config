@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.scottgould = {
     homeManager =
       { config, ... }:

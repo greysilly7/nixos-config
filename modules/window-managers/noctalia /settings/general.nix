@@ -5,7 +5,9 @@
 }:
 {
   den.aspects.noctalia._.settings._.general = den.lib.perUser {
-    homeManager = { lib, pkgs, ... }: lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+    homeManager =
+      { lib, pkgs, ... }:
+      lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
         programs.noctalia-shell.settings = {
           # ---Noctalia settings version---
           settingsVersion = lib.mkDefault 59;
