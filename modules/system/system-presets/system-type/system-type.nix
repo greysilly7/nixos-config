@@ -32,7 +32,7 @@
         den.aspects.terminal
         den.aspects.files
         den.aspects.browser
-        den.aspects.antigravity
+        den.aspects.editors._.antigravity
       ];
 
       # Desktop system variant that incorporates extras for gaming systems

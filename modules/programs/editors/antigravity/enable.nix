@@ -1,15 +1,12 @@
 { den, ... }:
 {
-  den.aspects.antigravity._.enable = den.lib.perUser {
+  den.aspects.editors._.antigravity._.enable = den.lib.perUser {
     homeManager =
       { pkgs, ... }:
       {
-        # Antigravity is proprietary, so this is required
-        nixpkgs.config.allowUnfree = true;
-
         # Install directly from standard nixpkgs
         home.packages = [
-          pkgs.antigravity # Note: use pkgs.google-antigravity if that is the exact package name in nixpkgs
+          pkgs.antigravity
         ];
       };
 
