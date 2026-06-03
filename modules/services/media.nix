@@ -19,7 +19,7 @@ _: {
             WorkingDirectory = "/var/lib/rdt-client";
             ExecStartPre =
               let
-                rdtPkg = pkgs.callPackage ../packages/rdt-client/default.nix { };
+                rdtPkg = pkgs.callPackage ../../packages/rdt-client/default.nix { };
               in
               pkgs.writeScript "rdt-client-setup" ''
                 #!${pkgs.bash}/bin/bash
@@ -33,7 +33,7 @@ _: {
                   fi
                 done
               '';
-            ExecStart = "${pkgs.callPackage ../packages/rdt-client/default.nix { }}/bin/rdt-client";
+            ExecStart = "${pkgs.callPackage ../../packages/rdt-client/default.nix { }}/bin/rdt-client";
             Restart = "on-failure";
           };
         };

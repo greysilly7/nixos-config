@@ -11,7 +11,7 @@ _:
         }:
         {
           home.packages = [
-            pkgs.equibop
+            (pkgs.callPackage ../../../../../packages/equibop/default.nix { })
           ];
 
           # Autostart
@@ -37,7 +37,7 @@ _:
         {
           directories = [
             {
-              directory = "${hmConfig.xdg.configHome}/legcord";
+              directory = "${hmConfig.xdg.configHome}/equibop";
               how = "symlink";
               mode = "0700";
               createLinkTarget = true;
@@ -49,11 +49,11 @@ _:
         { hmConfig, ... }:
         {
           "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-          "${hmConfig.xdg.configHome}/legcord" = { };
-          "${hmConfig.xdg.configHome}/legcord/Crashpad" = {
+          "${hmConfig.xdg.configHome}/equibop" = { };
+          "${hmConfig.xdg.configHome}/equibop/Crashpad" = {
             mode = "0700";
           };
-          # "${hmConfig.xdg.configHome}/legcord/sessionData" = { mode = "0700"; };
+          # "${hmConfig.xdg.configHome}/equibop/sessionData" = { mode = "0700"; };
         };
     };
 }
