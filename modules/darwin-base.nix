@@ -5,10 +5,18 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  flake-file.inputs.mac-app-util = {
+    url = "github:hraban/mac-app-util";
+  };
+
   den.aspects.darwin-base = {
     darwin =
       { pkgs, ... }:
       {
+        imports = [
+          inputs.mac-app-util.darwinModules.default
+        ];
+
         system.defaults.trackpad.Clicking = true;
         system.defaults.trackpad.TrackpadThreeFingerDrag = true;
         system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
@@ -22,5 +30,13 @@
           darwin-uninstaller
         ];
       };
+
+    provides.to-users = _: {
+      homeManager = _: {
+        imports = [
+          inputs.mac-app-util.homeManagerModules.default
+        ];
+      };
+    };
   };
 }

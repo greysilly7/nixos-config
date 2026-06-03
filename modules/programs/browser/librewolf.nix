@@ -66,6 +66,9 @@
             system.activationScripts.postActivation.text = ''
               # Set default browser to Librewolf
               ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
+              
+              # Remove quarantine flag from LibreWolf to prevent Gatekeeper warnings on update
+              xattr -r -d com.apple.quarantine /Applications/LibreWolf.app 2>/dev/null || true
             '';
           };
 

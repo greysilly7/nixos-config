@@ -8,7 +8,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    den.url = "github:vic/den";
+    den.url = "github:denful/den";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,12 +23,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    mac-app-util.url = "github:hraban/mac-app-util";
     niri = {
       url = "github:cmm/niri-flake/add-extraConfig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/26.05";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v4.7.0";
       inputs = {
@@ -49,6 +50,7 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tidaLuna.url = "github:Inrixia/TidaLuna";
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 }

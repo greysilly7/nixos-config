@@ -10,6 +10,7 @@
         den.aspects.system-type._.basic
         den.aspects.editors._.antigravity
         den.aspects.editors._.zed
+        den.aspects.tidal
       ];
     };
 
@@ -17,6 +18,7 @@
       den.aspects.system-type._.basic
       den.aspects.editors._.antigravity
       den.aspects.editors._.zed
+      den.aspects.tidal
     ];
     darwin = _: {
       security.pam.services.sudo_local.touchIdAuth = true;
