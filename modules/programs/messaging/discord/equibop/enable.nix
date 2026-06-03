@@ -1,6 +1,6 @@
 _:
 {
-  den.aspects.messaging._.discord._.legcord._.enable =
+  den.aspects.messaging._.discord._.equibop._.enable =
     _:
     {
       homeManager =
@@ -11,30 +11,25 @@ _:
         }:
         {
           home.packages = [
-            pkgs.legcord
+            pkgs.equibop
           ];
 
           # Autostart
-          xdg.configFile."autostart/legcord.desktop" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (lib.mkDefault {
+          xdg.configFile."autostart/equibop.desktop" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (lib.mkDefault {
             text = ''
               [Desktop Entry]
               NotShowIn=niri
               Categories=Network;InstantMessaging;Chat
-              Exec=legcord --start-minimized
+              Exec=equibop --start-minimized
               GenericName=Internet Messenger
-              Icon=legcord
-              Keywords=discord;legcord;electron;chat
-              Name=Legcord
-              StartupWMClass=Legcord
+              Icon=equibop
+              Keywords=discord;equibop;electron;chat
+              Name=Equibop
+              StartupWMClass=Equibop
               Type=Application
               Version=1.5
             '';
           });
-
-          services.arrpc = lib.mkDefault {
-            enable = true;
-            systemdTarget = "graphical-session.target";
-          };
         };
 
       persistUser =

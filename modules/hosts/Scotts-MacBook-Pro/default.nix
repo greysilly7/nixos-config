@@ -11,6 +11,7 @@
         den.aspects.editors._.antigravity
         den.aspects.editors._.zed
         den.aspects.tidal
+        den.aspects.messaging._.discord._.equibop
       ];
     };
 
@@ -19,6 +20,7 @@
       den.aspects.editors._.antigravity
       den.aspects.editors._.zed
       den.aspects.tidal
+      den.aspects.messaging._.discord._.equibop
     ];
     darwin = _: {
       security.pam.services.sudo_local.touchIdAuth = true;
