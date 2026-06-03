@@ -14,6 +14,7 @@
         system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
         system.keyboard.enableKeyMapping = true;
         system.keyboard.remapCapsLockToControl = true;
+        programs.zsh.enable = true;
         environment.systemPackages = with inputs.darwin.packages.${pkgs.stdenvNoCC.hostPlatform.system}; [
           darwin-option
           darwin-rebuild

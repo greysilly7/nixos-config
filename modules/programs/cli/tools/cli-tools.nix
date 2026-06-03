@@ -16,6 +16,9 @@ _:
             pkgs.gnused # GNU sed, a batch stream editor
             pkgs.gawk # GNU implementation of the Awk programming language
             pkgs.jq # Lightweight and flexible command-line JSON processor
+
+            pkgs.nil
+            pkgs.nixd
           ];
         };
     };

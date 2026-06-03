@@ -60,6 +60,15 @@
             };
           };
 
+        darwin =
+          { pkgs, ... }:
+          {
+            system.activationScripts.postActivation.text = ''
+              # Set default browser to Librewolf
+              ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
+            '';
+          };
+
         persistUser =
           { hmConfig, ... }:
           {
