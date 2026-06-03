@@ -1,4 +1,4 @@
-{ den, ... }:
+_:
 {
   den.aspects.samba = {
     nixos = _: {
@@ -26,7 +26,7 @@
             "map to guest" = "bad user";
           };
           public = {
-            "path" = "/var/lib/samba/public";
+            "path" = "/mnt/pool/public";
             "browseable" = "yes";
             "read only" = "no";
             "guest ok" = "yes";
@@ -50,7 +50,7 @@
 
       # Ensure the public directory exists with correct permissions
       systemd.tmpfiles.rules = [
-        "d /var/lib/samba/public 0755 nobody nogroup -"
+        "d /mnt/pool/public 0755 nobody nogroup -"
       ];
     };
   };

@@ -6,97 +6,95 @@
       den.aspects.browser._.librewolf
     ];
 
-    _.librewolf =
-      _:
-      {
-        homeManager =
-          {
-            pkgs,
-            lib,
-            ...
-          }:
-          {
-            home.packages = [
-              pkgs.librewolf
-            ];
+    _.librewolf = _: {
+      homeManager =
+        {
+          pkgs,
+          lib,
+          ...
+        }:
+        {
+          home.packages = [
+            pkgs.librewolf
+          ];
 
-            xdg = {
-              mimeApps = {
-                defaultApplications = lib.mkBefore (
-                  let
-                    application = "librewolf.desktop";
-                    mimeTypes = [
-                      "application/rdf+xml"
-                      "application/rss+xml"
-                      "application/xhtml+xml"
-                      "application/xhtml_xml"
-                      "x-scheme-handler/http"
-                      "x-scheme-handler/https"
-                      "x-scheme-handler/about"
-                      "x-scheme-handler/mailto"
-                      "x-scheme-handler/unknown"
-                      "x-scheme-handler/librewolf"
-                    ];
-                  in
-                  lib.genAttrs mimeTypes (_mimetype: application)
-                );
-                associations.added =
-                  let
-                    application = "librewolf.desktop";
-                    mimeTypes = [
-                      "application/xml"
-                      "application/pdf"
-                      "text/markdown"
-                      "image/jpeg"
-                      "image/webp"
-                      "image/gif"
-                      "image/png"
-                      "text/html"
-                      "text/xml"
-                    ];
-                  in
-                  lib.genAttrs mimeTypes (_mimetype: application);
-              };
+          xdg = {
+            mimeApps = {
+              defaultApplications = lib.mkBefore (
+                let
+                  application = "librewolf.desktop";
+                  mimeTypes = [
+                    "application/rdf+xml"
+                    "application/rss+xml"
+                    "application/xhtml+xml"
+                    "application/xhtml_xml"
+                    "x-scheme-handler/http"
+                    "x-scheme-handler/https"
+                    "x-scheme-handler/about"
+                    "x-scheme-handler/mailto"
+                    "x-scheme-handler/unknown"
+                    "x-scheme-handler/librewolf"
+                  ];
+                in
+                lib.genAttrs mimeTypes (_mimetype: application)
+              );
+              associations.added =
+                let
+                  application = "librewolf.desktop";
+                  mimeTypes = [
+                    "application/xml"
+                    "application/pdf"
+                    "text/markdown"
+                    "image/jpeg"
+                    "image/webp"
+                    "image/gif"
+                    "image/png"
+                    "text/html"
+                    "text/xml"
+                  ];
+                in
+                lib.genAttrs mimeTypes (_mimetype: application);
             };
           };
+        };
 
-        darwin =
-          { pkgs, ... }:
-          {
-            system.activationScripts.postActivation.text = ''
-              # Set default browser to Librewolf
-              ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
-              
-              # Remove quarantine flag from LibreWolf to prevent Gatekeeper warnings on update
-              xattr -r -d com.apple.quarantine /Applications/LibreWolf.app 2>/dev/null || true
-            '';
-          };
+      darwin =
+        { pkgs, ... }:
+        {
+          system.activationScripts.postActivation.text = ''
+            # Set default browser to Librewolf
+            ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
 
-        persistUser =
-          { hmConfig, ... }:
-          {
-            directories = [
-              {
-                # directory = "${hmConfig.xdg.home}/.librewolf";
-                directory = "${hmConfig.home.homeDirectory}/.librewolf";
-                how = "symlink";
-                mode = "0700";
-                createLinkTarget = true;
-              }
-            ];
-          };
+            # Remove quarantine flag from LibreWolf to prevent Gatekeeper warnings on update
+            xattr -r -d com.apple.quarantine /Applications/LibreWolf.app 2>/dev/null || true
+          '';
+        };
 
-        persistUserTmp =
-          { hmConfig, ... }:
-          {
-            "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-          };
+      persistUser =
+        { hmConfig, ... }:
+        {
+          directories = [
+            {
+              # directory = "${hmConfig.xdg.home}/.librewolf";
+              directory = "${hmConfig.home.homeDirectory}/.librewolf";
+              how = "symlink";
+              mode = "0700";
+              createLinkTarget = true;
+            }
+          ];
+        };
 
-        persistUserIgnore =
-          { hmConfig, ... }:
-          {
-            directories = [ "${hmConfig.xdg.cacheHome}/librewolf" ];
-          };
-      };
+      persistUserTmp =
+        { hmConfig, ... }:
+        {
+          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        };
+
+      persistUserIgnore =
+        { hmConfig, ... }:
+        {
+          directories = [ "${hmConfig.xdg.cacheHome}/librewolf" ];
+        };
+    };
   };
 }
