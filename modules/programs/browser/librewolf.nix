@@ -18,7 +18,7 @@
             pkgs.librewolf
           ];
 
-          xdg = {
+          xdg = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
             mimeApps = {
               defaultApplications = lib.mkBefore (
                 let
@@ -62,11 +62,12 @@
         { pkgs, ... }:
         {
           system.activationScripts.postActivation.text = ''
-            # Set default browser to Librewolf
-            ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf
+            # Set default browser to Librewolf (may fail if not registered in LaunchServices yet)
+            ${pkgs.defaultbrowser}/bin/defaultbrowser librewolf 2>/dev/null || true
 
             # Remove quarantine flag from LibreWolf to prevent Gatekeeper warnings on update
             xattr -r -d com.apple.quarantine /Applications/LibreWolf.app 2>/dev/null || true
+            xattr -r -d com.apple.quarantine /Users/*/Applications/Home\ Manager\ Apps/LibreWolf.app 2>/dev/null || true
           '';
         };
 

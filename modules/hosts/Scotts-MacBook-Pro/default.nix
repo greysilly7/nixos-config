@@ -12,6 +12,11 @@
         den.aspects.editors._.zed
         den.aspects.tidal
         den.aspects.messaging._.discord._.equibop
+        den.aspects.spotify
+        den.aspects.betterdisplay
+        den.aspects.dbeaver
+        den.aspects.obsidian
+        den.aspects.browser._.librewolf
       ];
     };
 
@@ -21,6 +26,11 @@
       den.aspects.editors._.zed
       den.aspects.tidal
       den.aspects.messaging._.discord._.equibop
+      den.aspects.spotify
+      den.aspects.betterdisplay
+      den.aspects.dbeaver
+      den.aspects.obsidian
+      den.aspects.browser._.librewolf
     ];
     darwin = _: {
       security.pam.services.sudo_local.touchIdAuth = true;
@@ -37,14 +47,8 @@
         brews = [ ];
         casks = [
           "tailscale-app"
-          "betterdisplay"
           # "kitty"
-          "spotify"
-          "dbeaver-community"
-          "legcord"
-          "librewolf"
           "steam"
-          "obsidian"
           "iloader"
           "stremioservice"
         ];

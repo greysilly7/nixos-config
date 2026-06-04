@@ -12,15 +12,18 @@
           lib,
           ...
         }:
-        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+        {
           home.packages = [
             pkgs.spotify
+          ] ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
             pkgs.spotify-tray
           ];
 
-          services.playerctld.enable = true;
+          services.playerctld = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+            enable = true;
+          };
 
-          xdg = {
+          xdg = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
             mimeApps = {
               defaultApplications = lib.mkBefore (
                 let

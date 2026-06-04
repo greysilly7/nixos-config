@@ -1,175 +1,131 @@
 {
   lib,
   stdenv,
-  callPackage,
-  fetchFromGitHub,
+  fetchurl,
   makeWrapper,
-  makeDesktopItem,
-  copyDesktopItems,
-  electron_40,
-  python3Packages,
-  pipewire,
-  libpulseaudio,
-  jq,
-  autoPatchelfHook,
-  bun,
-  nodejs,
-  withTTS ? true,
-  withMiddleClickScroll ? false,
+  # Darwin
+  undmg,
+  # Linux
+  autoPatchelfHook ? null,
+  alsa-lib ? null,
+  cups ? null,
+  libdrm ? null,
+  mesa ? null,
+  nss ? null,
+  libX11 ? null,
+  libXScrnSaver ? null,
+  libXcomposite ? null,
+  libXdamage ? null,
+  libXext ? null,
+  libXfixes ? null,
+  libXrandr ? null,
+  libxcb ? null,
+  libxkbcommon ? null,
+  pango ? null,
+  cairo ? null,
+  atk ? null,
+  at-spi2-atk ? null,
+  at-spi2-core ? null,
+  gtk3 ? null,
+  glib ? null,
+  systemd ? null,
 }:
-let
-  electron = electron_40;
-in
-stdenv.mkDerivation (finalAttrs: {
-  pname = "equibop";
-  version = "3.1.9";
 
-  src = fetchFromGitHub {
-    owner = "Equicord";
-    repo = "Equibop";
-    tag = "v${finalAttrs.version}";
-    hash = "sha256-4v0NKGmdbEdHyjz35l+QUnXvnVfLzIe1vLxOSmdgbYQ=";
+let
+  pname = "equibop";
+  version = "3.2.1";
+
+  srcs = {
+    aarch64-darwin = fetchurl {
+      url = "https://github.com/Equicord/Equibop/releases/download/v${version}/Equibop-${version}-universal.dmg";
+      hash = "sha256-J7SWkMg96yTclfbhmNjcNQ3mY0KPqLO9wHe+YYvqc5w=";
+    };
+    x86_64-darwin = fetchurl {
+      url = "https://github.com/Equicord/Equibop/releases/download/v${version}/Equibop-${version}-universal.dmg";
+      hash = lib.fakeHash;
+    };
+    x86_64-linux = fetchurl {
+      url = "https://github.com/Equicord/Equibop/releases/download/v${version}/equibop-${version}.tar.gz";
+      hash = lib.fakeHash;
+    };
+    aarch64-linux = fetchurl {
+      url = "https://github.com/Equicord/Equibop/releases/download/v${version}/equibop-${version}-arm64.tar.gz";
+      hash = lib.fakeHash;
+    };
   };
 
-  postPatch = ''
-    substituteInPlace scripts/build/build.mts \
-      --replace-fail 'gitHash = execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();' 'gitHash = "${finalAttrs.src.hash}"'
+  src = srcs.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+in
+stdenv.mkDerivation {
+  inherit pname version src;
 
-    # disable auto updates
-    substituteInPlace src/main/updater.ts \
-      --replace-fail 'const isOutdated = autoUpdater.checkForUpdates().then(res => Boolean(res?.isUpdateAvailable));' 'const isOutdated = false;'
-  '';
+  nativeBuildInputs = [ makeWrapper ]
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [ undmg ]
+    ++ lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
 
-  node-modules = callPackage ./node-modules.nix { };
-
-  nativeBuildInputs = [
-    bun
-    jq
-    nodejs
-    makeWrapper
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    autoPatchelfHook
-    copyDesktopItems
+  buildInputs = lib.optionals stdenv.hostPlatform.isLinux [
+    alsa-lib
+    cups
+    libdrm
+    mesa
+    nss
+    libX11
+    libXScrnSaver
+    libXcomposite
+    libXdamage
+    libXext
+    libXfixes
+    libXrandr
+    libxcb
+    libxkbcommon
+    pango
+    cairo
+    atk
+    at-spi2-atk
+    at-spi2-core
+    gtk3
+    glib
+    systemd
   ];
 
-  buildInputs = [
-    (lib.getLib stdenv.cc.cc)
-  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
-    libpulseaudio
-    pipewire
-  ];
-
-  configurePhase = ''
-    runHook preConfigure
-
-    cp -R ${finalAttrs.node-modules} node_modules
-
-    runHook postConfigure
-  '';
-
-  preBuild = ''
-    # Validate electron version matches upstream package.json
-    if [ "`jq -r '.devDependencies.electron' < package.json | cut -d. -f1 | tr -d '^'`" != "${lib.versions.major electron.version}" ]
-    then
-      echo "ERROR: electron version mismatch between package.json and nixpkgs"
-      exit 1
-    fi
-  ''
-  + lib.optionalString stdenv.hostPlatform.isDarwin ''
-    cp -r ${electron.dist}/Electron.app .
-    chmod -R u+w Electron.app
-  ''
-  + lib.optionalString stdenv.hostPlatform.isLinux ''
-    cp -r ${electron.dist} electron-dist
-    chmod -R u+w electron-dist
-  '';
-
-  buildPhase = ''
-    runHook preBuild
-
-    bun run build
-    bun run compileArrpc
-
-    node node_modules/electron-builder/out/cli/cli.js \
-      --dir \
-      -c.electronDist=${if stdenv.hostPlatform.isDarwin then "." else "electron-dist"} \
-      -c.electronVersion=${electron.version} \
-      -c.npmRebuild=false
-
-    runHook postBuild
-  '';
-
-  postBuild = lib.optionalString stdenv.hostPlatform.isLinux ''
-    pushd build
-    ${lib.getExe' python3Packages.icnsutil "icnsutil"} e icon.icns
-    popd
-  '';
+  sourceRoot = if stdenv.hostPlatform.isDarwin then "." else ".";
 
   installPhase = ''
     runHook preInstall
-    
+
     ${if stdenv.hostPlatform.isDarwin then ''
       mkdir -p $out/Applications
-      cp -r dist/mac*/Equibop.app $out/Applications/
+      cp -r *.app $out/Applications/
+      
       mkdir -p $out/bin
       makeWrapper $out/Applications/Equibop.app/Contents/MacOS/Equibop $out/bin/equibop
     '' else ''
       mkdir -p $out/opt/Equibop
-      cp -r dist/*unpacked/resources $out/opt/Equibop/
+      cp -r * $out/opt/Equibop/
+      
+      mkdir -p $out/bin
+      makeWrapper $out/opt/Equibop/equibop $out/bin/equibop \
+        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
 
-      for file in build/icon.icns.export/*.png; do
-        base=''${file##*/}
-        size=''${base/x*/}
-        install -Dm0644 $file $out/share/icons/hicolor/''${size}x''${size}/apps/equibop.png
-      done
-
-      install -Dm0644 build/icon.svg $out/share/icons/hicolor/scalable/apps/equibop.svg
+      # Install desktop file and icons if they exist in the tarball
+      if [ -f equibop.desktop ]; then
+        mkdir -p $out/share/applications
+        cp equibop.desktop $out/share/applications/
+      fi
+      if [ -d icons ]; then
+        mkdir -p $out/share/icons
+        cp -r icons/* $out/share/icons/
+      fi
     ''}
 
     runHook postInstall
   '';
 
-  postFixup = lib.optionalString stdenv.hostPlatform.isLinux ''
-    makeWrapper ${electron}/bin/electron $out/bin/equibop \
-      --add-flags $out/opt/Equibop/resources/app.asar \
-      ${lib.optionalString withTTS ''
-        --run 'if [[ "''${NIXOS_SPEECH:-default}" != "False" ]]; then NIXOS_SPEECH=True; else unset NIXOS_SPEECH; fi' \
-        --add-flags "\''${NIXOS_SPEECH:+--enable-speech-dispatcher}" \
-      ''} \
-      ${lib.optionalString withMiddleClickScroll "--add-flags \"--enable-blink-features=MiddleClickAutoscroll\""} \
-      --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
-  '';
-
-  desktopItems = lib.optional stdenv.hostPlatform.isLinux (makeDesktopItem {
-    name = "equibop";
-    desktopName = "Equibop";
-    exec = "equibop %U";
-    icon = "equibop";
-    startupWMClass = "Equibop";
-    genericName = "Internet Messenger";
-    keywords = [
-      "discord"
-      "equibop"
-      "electron"
-      "chat"
-    ];
-    categories = [
-      "Network"
-      "InstantMessaging"
-      "Chat"
-    ];
-  });
-
-  meta = {
+  meta = with lib; {
     description = "Custom Discord App aiming to give you better performance and improve linux support";
     homepage = "https://github.com/Equicord/Equibop";
-    changelog = "https://github.com/Equicord/Equibop/releases/tag/v${finalAttrs.version}";
-    license = lib.licenses.gpl3Only;
-    maintainers = with lib.maintainers; [
-      NotAShelf
-      rexies
-    ];
+    license = licenses.gpl3Only;
+    platforms = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
     mainProgram = "equibop";
-    platforms = lib.platforms.all;
   };
-})
+}
