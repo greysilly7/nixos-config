@@ -54,14 +54,17 @@ let
     };
   };
 
-  src = srcs.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
+  src =
+    srcs.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
 in
 stdenv.mkDerivation {
   inherit pname version src;
 
-  nativeBuildInputs = [ makeWrapper ]
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [ undmg ]
-    ++ lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
+  nativeBuildInputs = [
+    makeWrapper
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isDarwin [ undmg ]
+  ++ lib.optionals stdenv.hostPlatform.isLinux [ autoPatchelfHook ];
 
   buildInputs = lib.optionals stdenv.hostPlatform.isLinux [
     alsa-lib
@@ -93,30 +96,35 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
 
-    ${if stdenv.hostPlatform.isDarwin then ''
-      mkdir -p $out/Applications
-      cp -r *.app $out/Applications/
-      
-      mkdir -p $out/bin
-      makeWrapper $out/Applications/Equibop.app/Contents/MacOS/Equibop $out/bin/equibop
-    '' else ''
-      mkdir -p $out/opt/Equibop
-      cp -r * $out/opt/Equibop/
-      
-      mkdir -p $out/bin
-      makeWrapper $out/opt/Equibop/equibop $out/bin/equibop \
-        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
+    ${
+      if stdenv.hostPlatform.isDarwin then
+        ''
+          mkdir -p $out/Applications
+          cp -r *.app $out/Applications/
 
-      # Install desktop file and icons if they exist in the tarball
-      if [ -f equibop.desktop ]; then
-        mkdir -p $out/share/applications
-        cp equibop.desktop $out/share/applications/
-      fi
-      if [ -d icons ]; then
-        mkdir -p $out/share/icons
-        cp -r icons/* $out/share/icons/
-      fi
-    ''}
+          mkdir -p $out/bin
+          makeWrapper $out/Applications/Equibop.app/Contents/MacOS/Equibop $out/bin/equibop
+        ''
+      else
+        ''
+          mkdir -p $out/opt/Equibop
+          cp -r * $out/opt/Equibop/
+
+          mkdir -p $out/bin
+          makeWrapper $out/opt/Equibop/equibop $out/bin/equibop \
+            --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
+
+          # Install desktop file and icons if they exist in the tarball
+          if [ -f equibop.desktop ]; then
+            mkdir -p $out/share/applications
+            cp equibop.desktop $out/share/applications/
+          fi
+          if [ -d icons ]; then
+            mkdir -p $out/share/icons
+            cp -r icons/* $out/share/icons/
+          fi
+        ''
+    }
 
     runHook postInstall
   '';
@@ -125,7 +133,12 @@ stdenv.mkDerivation {
     description = "Custom Discord App aiming to give you better performance and improve linux support";
     homepage = "https://github.com/Equicord/Equibop";
     license = licenses.gpl3Only;
-    platforms = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
     mainProgram = "equibop";
   };
 }

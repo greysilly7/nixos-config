@@ -1,21 +1,19 @@
-_:
-{
-  den.aspects.messaging._.discord._.legcord._.enable =
-    _:
-    {
-      homeManager =
-        {
-          pkgs,
-          lib,
-          ...
-        }:
-        {
-          home.packages = [
-            pkgs.legcord
-          ];
+_: {
+  den.aspects.messaging._.discord._.legcord._.enable = _: {
+    homeManager =
+      {
+        pkgs,
+        lib,
+        ...
+      }:
+      {
+        home.packages = [
+          pkgs.legcord
+        ];
 
-          # Autostart
-          xdg.configFile."autostart/legcord.desktop" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (lib.mkDefault {
+        # Autostart
+        xdg.configFile."autostart/legcord.desktop" = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+          lib.mkDefault {
             text = ''
               [Desktop Entry]
               NotShowIn=niri
@@ -29,36 +27,37 @@ _:
               Type=Application
               Version=1.5
             '';
-          });
+          }
+        );
 
-          services.arrpc = lib.mkDefault {
-            enable = true;
-            systemdTarget = "graphical-session.target";
-          };
+        services.arrpc = lib.mkDefault {
+          enable = true;
+          systemdTarget = "graphical-session.target";
         };
+      };
 
-      persistUser =
-        { hmConfig, ... }:
-        {
-          directories = [
-            {
-              directory = "${hmConfig.xdg.configHome}/legcord";
-              how = "symlink";
-              mode = "0700";
-              createLinkTarget = true;
-            }
-          ];
-        };
-
-      persistUserTmp =
-        { hmConfig, ... }:
-        {
-          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-          "${hmConfig.xdg.configHome}/legcord" = { };
-          "${hmConfig.xdg.configHome}/legcord/Crashpad" = {
+    persistUser =
+      { hmConfig, ... }:
+      {
+        directories = [
+          {
+            directory = "${hmConfig.xdg.configHome}/legcord";
+            how = "symlink";
             mode = "0700";
-          };
-          # "${hmConfig.xdg.configHome}/legcord/sessionData" = { mode = "0700"; };
+            createLinkTarget = true;
+          }
+        ];
+      };
+
+    persistUserTmp =
+      { hmConfig, ... }:
+      {
+        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        "${hmConfig.xdg.configHome}/legcord" = { };
+        "${hmConfig.xdg.configHome}/legcord/Crashpad" = {
+          mode = "0700";
         };
-    };
+        # "${hmConfig.xdg.configHome}/legcord/sessionData" = { mode = "0700"; };
+      };
+  };
 }
