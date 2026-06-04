@@ -1,0 +1,11 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Nix build outputs
+result
+result-*
+
+# Direnv & Devenv
+.direnv/
+.devenv/
