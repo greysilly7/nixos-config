@@ -2,9 +2,9 @@
 {
   flake-file.inputs.tidaLuna.url = "github:Inrixia/TidaLuna";
 
-  den.aspects.tidal = {
+  den.aspects.music._.tidal = {
     includes = [
-      den.aspects.tidal._.enable
+      den.aspects.music._.tidal._.enable
     ];
 
     _.enable = _: {

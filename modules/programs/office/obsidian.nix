@@ -1,8 +1,8 @@
 { den, ... }:
 {
-  den.aspects.obsidian = {
+  den.aspects.office._.obsidian = {
     includes = [
-      den.aspects.obsidian._.enable
+      den.aspects.office._.obsidian._.enable
     ];
 
     _.enable = _: {

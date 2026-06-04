@@ -1,8 +1,8 @@
 { den, ... }:
 {
-  den.aspects.betterdisplay = {
+  den.aspects.system._.betterdisplay = {
     includes = [
-      den.aspects.betterdisplay._.enable
+      den.aspects.system._.betterdisplay._.enable
     ];
 
     _.enable = _: {

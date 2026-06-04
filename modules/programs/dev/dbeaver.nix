@@ -1,8 +1,8 @@
 { den, ... }:
 {
-  den.aspects.dbeaver = {
+  den.aspects.dev._.dbeaver = {
     includes = [
-      den.aspects.dbeaver._.enable
+      den.aspects.dev._.dbeaver._.enable
     ];
 
     _.enable = _: {

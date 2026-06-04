@@ -20,7 +20,7 @@
         den.aspects.system-type._.desktop._.gaming
         den.aspects.desktop-type._.window-manager._.niri
 
-        den.aspects.spotify
+        den.aspects.music._.spotify
       ];
     };
 

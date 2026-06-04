@@ -10,12 +10,12 @@
         den.aspects.system-type._.basic
         den.aspects.editors._.antigravity
         den.aspects.editors._.zed
-        den.aspects.tidal
+        den.aspects.music._.tidal
         den.aspects.messaging._.discord._.equibop
-        den.aspects.spotify
-        den.aspects.betterdisplay
-        den.aspects.dbeaver
-        den.aspects.obsidian
+        den.aspects.music._.spotify
+        den.aspects.system._.betterdisplay
+        den.aspects.dev._.dbeaver
+        den.aspects.office._.obsidian
         den.aspects.browser._.librewolf
       ];
     };
@@ -24,12 +24,12 @@
       den.aspects.system-type._.basic
       den.aspects.editors._.antigravity
       den.aspects.editors._.zed
-      den.aspects.tidal
+      den.aspects.music._.tidal
       den.aspects.messaging._.discord._.equibop
-      den.aspects.spotify
-      den.aspects.betterdisplay
-      den.aspects.dbeaver
-      den.aspects.obsidian
+      den.aspects.music._.spotify
+      den.aspects.system._.betterdisplay
+      den.aspects.dev._.dbeaver
+      den.aspects.office._.obsidian
       den.aspects.browser._.librewolf
     ];
     darwin = _: {

@@ -1,8 +1,8 @@
 { den, ... }:
 {
-  den.aspects.spotify = {
+  den.aspects.music._.spotify = {
     includes = [
-      den.aspects.spotify._.enable
+      den.aspects.music._.spotify._.enable
     ];
 
     _.enable = _: {
