@@ -38,7 +38,7 @@ _: {
           };
         };
 
-        networking.firewall.allowedTCPPorts = [ 8085 7575 5055 ];
+        networking.firewall.allowedTCPPorts = [ 8085 7575 5055 80 443 ];
 
         # Sonarr (TV)
         services.sonarr = {
@@ -71,6 +71,34 @@ _: {
         services.seerr = {
           enable = true;
           openFirewall = true;
+        };
+
+        # Caddy Reverse Proxy
+        services.caddy = {
+          enable = true;
+          virtualHosts = {
+            "greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:7575
+            '';
+            "seerr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:5055
+            '';
+            "jellyfin.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:8096
+            '';
+            "sonarr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:8989
+            '';
+            "radarr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:7878
+            '';
+            "prowlarr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:9696
+            '';
+            "torboxarr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:8085
+            '';
+          };
         };
 
         # Homarr Dashboard
