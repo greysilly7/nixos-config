@@ -25,6 +25,7 @@ _: {
             Type = "simple";
             User = "root"; # Needs root to write to /mnt/pool as media group if necessary, or we can use a dedicated user
             Group = "media";
+            UMask = "0002"; # Allow group write access so Arr apps can manipulate downloads
             StateDirectory = "torboxarr";
             WorkingDirectory = "/var/lib/torboxarr";
             EnvironmentFile = config.sops.templates."torboxarr.env".path;
@@ -77,9 +78,6 @@ _: {
         services.caddy = {
           enable = true;
           virtualHosts = {
-            "greysilly7.xyz".extraConfig = ''
-              reverse_proxy localhost:7575
-            '';
             "seerr.greysilly7.xyz".extraConfig = ''
               reverse_proxy localhost:5055
             '';
@@ -94,9 +92,6 @@ _: {
             '';
             "prowlarr.greysilly7.xyz".extraConfig = ''
               reverse_proxy localhost:9696
-            '';
-            "torboxarr.greysilly7.xyz".extraConfig = ''
-              reverse_proxy localhost:8085
             '';
           };
         };
@@ -120,6 +115,7 @@ _: {
           "d /var/lib/homarr/data 0755 root root -"
           "d /var/lib/torboxarr 0775 root media -"
           "d /mnt/pool/arr 0775 root media -"
+          "d /mnt/pool/arr/completed 0775 root media -"
           "d /mnt/pool/arr/downloads 0775 root media -"
           "d /mnt/pool/arr/media 0775 root media -"
           "d /mnt/pool/arr/media/tv 0775 sonarr media -"
