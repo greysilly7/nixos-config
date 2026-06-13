@@ -30,7 +30,7 @@ _: {
             EnvironmentFile = config.sops.templates."torboxarr.env".path;
             Environment = [
               "TORBOXARR_SERVER_BASE_URL=http://localhost:8085"
-              "TORBOXARR_DATA_ROOT=/mnt/pool"
+              "TORBOXARR_DATA_ROOT=/mnt/pool/arr"
               "TORBOXARR_DATABASE_PATH=/var/lib/torboxarr/torboxarr.db"
             ];
             ExecStart = "${pkgs.callPackage ../../packages/torboxarr/default.nix { }}/bin/torboxarr";
@@ -70,10 +70,11 @@ _: {
         # Ensure the media directories exist with the correct group ownership and permissions
         systemd.tmpfiles.rules = [
           "d /var/lib/torboxarr 0775 root media -"
-          "d /mnt/pool/downloads 0775 root media -"
-          "d /mnt/pool/media 0775 root media -"
-          "d /mnt/pool/media/tv 0775 sonarr media -"
-          "d /mnt/pool/media/movies 0775 radarr media -"
+          "d /mnt/pool/arr 0775 root media -"
+          "d /mnt/pool/arr/downloads 0775 root media -"
+          "d /mnt/pool/arr/media 0775 root media -"
+          "d /mnt/pool/arr/media/tv 0775 sonarr media -"
+          "d /mnt/pool/arr/media/movies 0775 radarr media -"
 
           # State directories for the Arr apps so we can seed their configs
           "d /var/lib/sonarr 0700 sonarr media -"
