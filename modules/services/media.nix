@@ -1,44 +1,36 @@
 _: {
   den.aspects.media = {
     nixos =
-      { pkgs, ... }:
+      { pkgs, config, ... }:
       {
         # Define a common media group for all services to share permissions
         users.groups.media = { };
 
-        # Native RDT_Client Service
-        systemd.services.rdt-client = {
-          description = "Real-Debrid Client";
+        # TorBoxarr Service
+        sops.secrets."torboxarr/env" = {};
+
+        systemd.services.torboxarr = {
+          description = "TorBoxarr Download Backend";
           after = [ "network.target" ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "simple";
-            User = "root";
+            User = "root"; # Needs root to write to /mnt/pool as media group if necessary, or we can use a dedicated user
             Group = "media";
-            StateDirectory = "rdt-client";
-            WorkingDirectory = "/var/lib/rdt-client";
-            ExecStartPre =
-              let
-                rdtPkg = pkgs.callPackage ../../packages/rdt-client/default.nix { };
-              in
-              pkgs.writeScript "rdt-client-setup" ''
-                #!${pkgs.bash}/bin/bash
-                # Remove old symlinks
-                ${pkgs.findutils}/bin/find /var/lib/rdt-client -maxdepth 1 -type l -delete
-                # Create symlinks to immutable files
-                for f in ${rdtPkg}/share/rdt-client/*; do
-                  name=$(${pkgs.coreutils}/bin/basename "$f")
-                  if [ ! -e "/var/lib/rdt-client/$name" ]; then
-                    ${pkgs.coreutils}/bin/ln -s "$f" "/var/lib/rdt-client/$name"
-                  fi
-                done
-              '';
-            ExecStart = "${pkgs.callPackage ../../packages/rdt-client/default.nix { }}/bin/rdt-client";
+            StateDirectory = "torboxarr";
+            WorkingDirectory = "/var/lib/torboxarr";
+            EnvironmentFile = config.sops.secrets."torboxarr/env".path;
+            Environment = [
+              "TORBOXARR_SERVER_BASE_URL=http://localhost:8085"
+              "TORBOXARR_DATA_ROOT=/mnt/pool"
+              "TORBOXARR_DATABASE_PATH=/var/lib/torboxarr/torboxarr.db"
+            ];
+            ExecStart = "${pkgs.callPackage ../../packages/torboxarr/default.nix { }}/bin/torboxarr";
             Restart = "on-failure";
           };
         };
 
-        networking.firewall.allowedTCPPorts = [ 6500 ];
+        networking.firewall.allowedTCPPorts = [ 8085 ];
 
         # Sonarr (TV)
         services.sonarr = {
@@ -69,7 +61,7 @@ _: {
 
         # Ensure the media directories exist with the correct group ownership and permissions
         systemd.tmpfiles.rules = [
-          "d /var/lib/rdt-client 0775 root root -"
+          "d /var/lib/torboxarr 0775 root media -"
           "d /mnt/pool/downloads 0775 root media -"
           "d /mnt/pool/media 0775 root media -"
           "d /mnt/pool/media/tv 0775 sonarr media -"
