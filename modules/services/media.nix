@@ -77,14 +77,14 @@ _: {
           "d /mnt/pool/arr/media/movies 0775 radarr media -"
 
           # State directories for the Arr apps so we can seed their configs
-          "d /var/lib/sonarr 0700 sonarr media -"
-          "d /var/lib/radarr 0700 radarr media -"
-          "d /var/lib/prowlarr 0700 prowlarr media -"
+          "d /var/lib/sonarr/.config/NzbDrone 0700 sonarr media -"
+          "d /var/lib/radarr/.config/Radarr 0700 radarr media -"
+          "d /var/lib/prowlarr/Prowlarr 0700 prowlarr media -"
 
           # Seed deterministic API keys
-          "f /var/lib/sonarr/config.xml 0600 sonarr media - <Config><ApiKey>sonarr_api_key_12345</ApiKey><Port>8989</Port><BindAddress>*</BindAddress></Config>"
-          "f /var/lib/radarr/config.xml 0600 radarr media - <Config><ApiKey>radarr_api_key_12345</ApiKey><Port>7878</Port><BindAddress>*</BindAddress></Config>"
-          "f /var/lib/prowlarr/config.xml 0600 prowlarr media - <Config><ApiKey>prowlarr_api_key_12345</ApiKey><Port>9696</Port><BindAddress>*</BindAddress></Config>"
+          "f /var/lib/sonarr/.config/NzbDrone/config.xml 0600 sonarr media - <Config><ApiKey>sonarr_api_key_12345</ApiKey><Port>8989</Port><BindAddress>*</BindAddress></Config>"
+          "f /var/lib/radarr/.config/Radarr/config.xml 0600 radarr media - <Config><ApiKey>radarr_api_key_12345</ApiKey><Port>7878</Port><BindAddress>*</BindAddress></Config>"
+          "f /var/lib/prowlarr/Prowlarr/config.xml 0600 prowlarr media - <Config><ApiKey>prowlarr_api_key_12345</ApiKey><Port>9696</Port><BindAddress>*</BindAddress></Config>"
         ];
 
       };
