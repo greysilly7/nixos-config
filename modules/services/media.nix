@@ -131,15 +131,6 @@ _: {
           "d /var/lib/radarr/.config 0755 radarr media -"
           "d /var/lib/radarr/.config/Radarr 0700 radarr media -"
           "Z /var/lib/radarr/.config/Radarr - radarr media -"
-
-          "d /var/lib/prowlarr 0755 prowlarr media -"
-          "d /var/lib/prowlarr/Prowlarr 0700 prowlarr media -"
-          "Z /var/lib/prowlarr/Prowlarr - prowlarr media -"
-
-          # Seed deterministic API keys
-          "f /var/lib/sonarr/.config/NzbDrone/config.xml 0600 sonarr media - <Config><ApiKey>sonarr_api_key_12345</ApiKey><Port>8989</Port><BindAddress>*</BindAddress></Config>"
-          "f /var/lib/radarr/.config/Radarr/config.xml 0600 radarr media - <Config><ApiKey>radarr_api_key_12345</ApiKey><Port>7878</Port><BindAddress>*</BindAddress></Config>"
-          "f /var/lib/prowlarr/Prowlarr/config.xml 0600 prowlarr media - <Config><ApiKey>prowlarr_api_key_12345</ApiKey><Port>9696</Port><BindAddress>*</BindAddress></Config>"
         ];
 
       };
