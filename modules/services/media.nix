@@ -38,7 +38,7 @@ _: {
           };
         };
 
-        networking.firewall.allowedTCPPorts = [ 8085 ];
+        networking.firewall.allowedTCPPorts = [ 8085 7575 ];
 
         # Sonarr (TV)
         services.sonarr = {
@@ -67,8 +67,23 @@ _: {
           openFirewall = true;
         };
 
+        # Homarr Dashboard
+        virtualisation.oci-containers.containers.homarr = {
+          image = "ghcr.io/ajnart/homarr:latest";
+          ports = [ "7575:7575" ];
+          volumes = [
+            "/var/lib/homarr/configs:/app/data/configs"
+            "/var/lib/homarr/icons:/app/public/icons"
+            "/var/lib/homarr/data:/data"
+          ];
+        };
+
         # Ensure the media directories exist with the correct group ownership and permissions
         systemd.tmpfiles.rules = [
+          "d /var/lib/homarr 0755 root root -"
+          "d /var/lib/homarr/configs 0755 root root -"
+          "d /var/lib/homarr/icons 0755 root root -"
+          "d /var/lib/homarr/data 0755 root root -"
           "d /var/lib/torboxarr 0775 root media -"
           "d /mnt/pool/arr 0775 root media -"
           "d /mnt/pool/arr/downloads 0775 root media -"
