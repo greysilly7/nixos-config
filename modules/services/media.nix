@@ -7,7 +7,15 @@ _: {
         users.groups.media = { };
 
         # TorBoxarr Service
-        sops.secrets."torboxarr/env" = {};
+        sops.secrets."torboxarr/api_token" = {};
+        sops.secrets."torboxarr/qbit_passsword" = {};
+        sops.secrets."torboxarr/sab_api_key" = {};
+
+        sops.templates."torboxarr.env".content = ''
+          TORBOXARR_TORBOX_API_TOKEN=${config.sops.placeholder."torboxarr/api_token"}
+          TORBOXARR_QBIT_PASSWORD=${config.sops.placeholder."torboxarr/qbit_passsword"}
+          TORBOXARR_SAB_API_KEY=${config.sops.placeholder."torboxarr/sab_api_key"}
+        '';
 
         systemd.services.torboxarr = {
           description = "TorBoxarr Download Backend";
@@ -19,7 +27,7 @@ _: {
             Group = "media";
             StateDirectory = "torboxarr";
             WorkingDirectory = "/var/lib/torboxarr";
-            EnvironmentFile = config.sops.secrets."torboxarr/env".path;
+            EnvironmentFile = config.sops.templates."torboxarr.env".path;
             Environment = [
               "TORBOXARR_SERVER_BASE_URL=http://localhost:8085"
               "TORBOXARR_DATA_ROOT=/mnt/pool"
