@@ -38,7 +38,7 @@ _: {
           };
         };
 
-        networking.firewall.allowedTCPPorts = [ 8085 7575 ];
+        networking.firewall.allowedTCPPorts = [ 8085 7575 5055 ];
 
         # Sonarr (TV)
         services.sonarr = {
@@ -64,6 +64,12 @@ _: {
         services.jellyfin = {
           enable = true;
           group = "media";
+          openFirewall = true;
+        };
+
+        # Seerr (Media Requests)
+        services.seerr = {
+          enable = true;
           openFirewall = true;
         };
 
