@@ -55,6 +55,13 @@ _: {
           openFirewall = true;
         };
 
+        # Lidarr (Music)
+        services.lidarr = {
+          enable = true;
+          group = "media";
+          openFirewall = true;
+        };
+
         # Prowlarr (Indexers)
         services.prowlarr = {
           enable = true;
@@ -97,6 +104,9 @@ _: {
             "radarr.greysilly7.xyz".extraConfig = ''
               reverse_proxy localhost:7878
             '';
+            "lidarr.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:8686
+            '';
             "prowlarr.greysilly7.xyz".extraConfig = ''
               reverse_proxy localhost:9696
             '';
@@ -132,6 +142,7 @@ _: {
           "d /mnt/pool/arr/media 0775 root media -"
           "d /mnt/pool/arr/media/tv 0775 sonarr media -"
           "d /mnt/pool/arr/media/movies 0775 radarr media -"
+          "d /mnt/pool/arr/media/music 0775 lidarr media -"
 
           # State directories for the Arr apps so we can seed their configs
           "d /var/lib/sonarr 0755 sonarr media -"
@@ -143,6 +154,11 @@ _: {
           "d /var/lib/radarr/.config 0755 radarr media -"
           "d /var/lib/radarr/.config/Radarr 0700 radarr media -"
           "Z /var/lib/radarr/.config/Radarr - radarr media -"
+
+          "d /var/lib/lidarr 0755 lidarr media -"
+          "d /var/lib/lidarr/.config 0755 lidarr media -"
+          "d /var/lib/lidarr/.config/Lidarr 0700 lidarr media -"
+          "Z /var/lib/lidarr/.config/Lidarr - lidarr media -"
         ];
 
       };
