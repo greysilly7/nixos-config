@@ -61,6 +61,13 @@ _: {
           openFirewall = true;
         };
 
+        # SABnzbd (Download Client)
+        services.sabnzbd = {
+          enable = true;
+          group = "media";
+          openFirewall = true;
+        };
+
         # Jellyfin (Media Server)
         services.jellyfin = {
           enable = true;
@@ -92,6 +99,9 @@ _: {
             '';
             "prowlarr.greysilly7.xyz".extraConfig = ''
               reverse_proxy localhost:9696
+            '';
+            "sabnzbd.greysilly7.xyz".extraConfig = ''
+              reverse_proxy localhost:8080
             '';
           };
         };
