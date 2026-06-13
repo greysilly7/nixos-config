@@ -101,7 +101,9 @@ _: {
               reverse_proxy localhost:9696
             '';
             "sabnzbd.greysilly7.xyz".extraConfig = ''
-              reverse_proxy localhost:8080
+              reverse_proxy localhost:8080 {
+                header_up Host localhost
+              }
             '';
           };
         };
