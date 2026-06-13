@@ -92,9 +92,19 @@ _: {
           "d /mnt/pool/arr/media/movies 0775 radarr media -"
 
           # State directories for the Arr apps so we can seed their configs
+          "d /var/lib/sonarr 0755 sonarr media -"
+          "d /var/lib/sonarr/.config 0755 sonarr media -"
           "d /var/lib/sonarr/.config/NzbDrone 0700 sonarr media -"
+          "Z /var/lib/sonarr/.config/NzbDrone - sonarr media -"
+
+          "d /var/lib/radarr 0755 radarr media -"
+          "d /var/lib/radarr/.config 0755 radarr media -"
           "d /var/lib/radarr/.config/Radarr 0700 radarr media -"
+          "Z /var/lib/radarr/.config/Radarr - radarr media -"
+
+          "d /var/lib/prowlarr 0755 prowlarr media -"
           "d /var/lib/prowlarr/Prowlarr 0700 prowlarr media -"
+          "Z /var/lib/prowlarr/Prowlarr - prowlarr media -"
 
           # Seed deterministic API keys
           "f /var/lib/sonarr/.config/NzbDrone/config.xml 0600 sonarr media - <Config><ApiKey>sonarr_api_key_12345</ApiKey><Port>8989</Port><BindAddress>*</BindAddress></Config>"
