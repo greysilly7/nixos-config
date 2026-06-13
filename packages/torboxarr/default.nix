@@ -13,6 +13,11 @@ buildGoModule rec {
 
   vendorHash = "sha256-qjDuMhTaQ8A3cmqtSlMlADrWC0iKOgyR8zShYC4Ute4=";
 
+  postPatch = ''
+    find . -type f -name "*.go" -exec sed -i 's/0o755/0o775/g' {} +
+    find . -type f -name "*.go" -exec sed -i 's/0o644/0o664/g' {} +
+  '';
+
   meta = with lib; {
     description = "Pretends to be qBittorrent or SABnzbd so your *arr apps can use TorBox as a download backend";
     homepage = "https://github.com/MrJoiny/TorBoxarr";
