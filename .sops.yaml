@@ -5,6 +5,7 @@ keys:
   - &server_desktopserver age15p8vdzk68j76733kx6kvtpzw9u55dlaw4exvzre3ppxh0fq8xpcqxycm6f
   - &server_fastbar age14ue4m33pcp5pvgt79axulashdq3dywuydzwast3hqwtcstss258s4qrkeq
   - &macos_scotts_mac_pro age1ev20ppds3664zqaqt9laqv5hjpvh5aada4s2a0zgdg73lu2l7snqqvhe6d
+  - &server_greyserver age1ppzmqhdhkds7t7pafn32v7xtvngmyzpuzm8tkufh87j2wsc0wddqj4zfsg
 
 
 creation_rules:
@@ -16,6 +17,7 @@ creation_rules:
           - *server_dellpoweredge
           - *server_desktopserver
           - *server_fastbar
+          - *server_greyserver
   - path_regex: secrets/scottgould/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:

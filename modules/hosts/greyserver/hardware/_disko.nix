@@ -82,7 +82,7 @@ in
           compression = "lz4";
           "com.sun:auto-snapshot" = "false";
         };
-        mountpoint = "/";
+        options.mountpoint = "none";
         postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
 
         datasets = builtins.mapAttrs (_: mountpoint: {
@@ -99,7 +99,7 @@ in
           compression = "lz4";
           "com.sun:auto-snapshot" = "false";
         };
-        mountpoint = "/mnt/pool";
+        options.mountpoint = "none";
         datasets = {
           root = {
             type = "zfs_fs";

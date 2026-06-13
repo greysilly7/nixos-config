@@ -1,5 +1,6 @@
 {
   den,
+  self,
   ...
 }:
 {
@@ -17,19 +18,31 @@
     provides.to-users = _: {
       includes = [
         den.aspects.system-type._.basic
+        den.aspects.home-manager._.hmConfig
+        den.aspects.secrets._.secretsHome
       ];
     };
 
     provides.greysilly7 = _: [
       den.aspects.system-type._.basic
+      den.aspects.secrets._.secretsHome
+      den.aspects.home-manager._.hmConfig
     ];
 
     nixos = {
       system.stateVersion = "24.05";
       networking.hostId = "deadbeef"; # Required by ZFS
 
-      # Example sops configuration
-      # sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
+      # Setup secrets
+      sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
+
+      # Enable networking for ethernet
+      networking.useDHCP = true;
+
+      # Bootloader configuration (EFI via systemd-boot)
+      boot.loader.grub.enable = false;
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
     };
   };
 }
