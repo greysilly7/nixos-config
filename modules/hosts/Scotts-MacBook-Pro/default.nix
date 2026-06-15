@@ -51,6 +51,7 @@
           "steam"
           "iloader"
           "stremioservice"
+          "lm-studio"
         ];
       };
     };
