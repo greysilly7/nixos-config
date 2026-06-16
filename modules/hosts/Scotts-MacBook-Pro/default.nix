@@ -52,6 +52,7 @@
           "iloader"
           "stremioservice"
           "lm-studio"
+          "kodi"
         ];
       };
     };
