@@ -15,6 +15,7 @@
         den.aspects.music._.spotify
         den.aspects.system._.betterdisplay
         den.aspects.dev._.dbeaver
+        den.aspects.dev._.nodejs
         den.aspects.office._.obsidian
         den.aspects.browser._.librewolf
       ];
@@ -29,6 +30,7 @@
       den.aspects.music._.spotify
       den.aspects.system._.betterdisplay
       den.aspects.dev._.dbeaver
+      den.aspects.dev._.nodejs
       den.aspects.office._.obsidian
       den.aspects.browser._.librewolf
     ];
