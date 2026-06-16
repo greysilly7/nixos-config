@@ -11,6 +11,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/26.05";
     flake-file.url = "github:vic/flake-file";
     den.url = "github:denful/den";
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   # Define avialable systems

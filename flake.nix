@@ -23,6 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     niri = {
       url = "github:cmm/niri-flake/add-extraConfig";

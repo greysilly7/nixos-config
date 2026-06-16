@@ -16,6 +16,8 @@
         den.aspects.system._.betterdisplay
         den.aspects.dev._.dbeaver
         den.aspects.dev._.nodejs
+        den.aspects.dev._.opencode
+        den.aspects.dev._.antigravity-cli
         den.aspects.office._.obsidian
         den.aspects.browser._.librewolf
       ];
@@ -31,6 +33,8 @@
       den.aspects.system._.betterdisplay
       den.aspects.dev._.dbeaver
       den.aspects.dev._.nodejs
+      den.aspects.dev._.opencode
+      den.aspects.dev._.antigravity-cli
       den.aspects.office._.obsidian
       den.aspects.browser._.librewolf
     ];
