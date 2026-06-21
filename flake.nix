@@ -29,7 +29,6 @@
       url = "github:cmm/niri-flake/add-extraConfig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:NixOS/nixpkgs/26.05";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v4.7.0";

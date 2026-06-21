@@ -15,19 +15,16 @@
       den.aspects.media
     ];
 
-    provides.to-users = _: {
-      includes = [
-        den.aspects.system-type._.basic
-        den.aspects.home-manager._.hmConfig
-        den.aspects.secrets._.secretsHome
-      ];
+    provides = rec {
+      to-users = _: {
+        includes = [
+          den.aspects.system-type._.basic
+          den.aspects.home-manager._.hmConfig
+          den.aspects.secrets._.secretsHome
+        ];
+      };
+      greysilly7 = u: (to-users u).includes;
     };
-
-    provides.greysilly7 = _: [
-      den.aspects.system-type._.basic
-      den.aspects.secrets._.secretsHome
-      den.aspects.home-manager._.hmConfig
-    ];
 
     nixos = {
       system.stateVersion = "26.11";

@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+
+# Load colors
+source "$CONFIG_DIR/colors.sh"
+
+# Global bar settings
+sketchybar --bar height=36 \
+                 blur_radius=30 \
+                 position=top \
+                 sticky=on \
+                 padding_left=10 \
+                 padding_right=10 \
+                 color=$BAR_COLOR \
+                 border_width=1 \
+                 border_color=$BAR_BORDER_COLOR \
+                 corner_radius=9 \
+                 y_offset=5 \
+                 margin=10
+
+# Global defaults
+sketchybar --default icon.font="Hack Nerd Font:Bold:16.0" \
+                     icon.color=$WHITE \
+                     label.font="Hack Nerd Font:Bold:14.0" \
+                     label.color=$WHITE \
+                     padding_left=5 \
+                     padding_right=5 \
+                     label.padding_left=4 \
+                     label.padding_right=4 \
+                     icon.padding_left=4 \
+                     icon.padding_right=4
+
+# Custom Event for AeroSpace
+sketchybar --add event aerospace_workspace_change
+
+# --- Workspaces (AeroSpace) ---
+# Assuming workspaces 1-5 based on aerospace.nix
+for sid in 1 2 3 4 5; do
+  sketchybar --add item space.$sid left \
+             --subscribe space.$sid aerospace_workspace_change \
+             --set space.$sid \
+                   background.color=$SURFACE1 \
+                   background.corner_radius=5 \
+                   background.height=26 \
+                   background.drawing=off \
+                   label="$sid" \
+                   icon.drawing=off \
+                   click_script="aerospace workspace $sid" \
+                   script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
+
+# --- Separator ---
+sketchybar --add item separator left \
+           --set separator icon="|" \
+                           icon.color=$SURFACE1 \
+                           label.drawing=off \
+                           padding_left=10 \
+                           padding_right=10
+
+# --- Front App ---
+sketchybar --add item front_app left \
+           --set front_app background.color=$LAVENDER \
+                           background.corner_radius=5 \
+                           background.height=26 \
+                           icon.color=$BASE \
+                           icon.font="Hack Nerd Font:Bold:14.0" \
+                           label.color=$BASE \
+                           label.padding_left=10 \
+                           label.padding_right=10 \
+                           script="$CONFIG_DIR/plugins/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+# --- Media ---
+sketchybar --add item media center \
+           --set media label.color=$TEXT \
+                       icon=󰝚 \
+                       icon.color=$GREEN \
+                       background.color=$SURFACE0 \
+                       background.corner_radius=5 \
+                       background.height=26 \
+                       drawing=off \
+                       script="$CONFIG_DIR/plugins/media.sh" \
+           --subscribe media media_change
+
+# --- Flameshot ---
+sketchybar --add item flameshot right \
+           --set flameshot icon=󰄄 \
+                            icon.color=$PEACH \
+                            background.color=$SURFACE0 \
+                            background.corner_radius=5 \
+                            background.height=26 \
+                            label.drawing=off \
+                            click_script="open -a Flameshot"
+
+# --- CPU ---
+sketchybar --add item cpu right \
+           --set cpu update_freq=2 \
+                     icon=󰍛 \
+                     icon.color=$SAPPHIRE \
+                     background.color=$SURFACE0 \
+                     background.corner_radius=5 \
+                     background.height=26 \
+                     label.color=$TEXT \
+                     script="$CONFIG_DIR/plugins/cpu.sh"
+
+# --- RAM ---
+sketchybar --add item ram right \
+           --set ram update_freq=2 \
+                     icon=󰘚 \
+                     icon.color=$MAUVE \
+                     background.color=$SURFACE0 \
+                     background.corner_radius=5 \
+                     background.height=26 \
+                     label.color=$TEXT \
+                     script="$CONFIG_DIR/plugins/ram.sh"
+
+# --- Clock ---
+sketchybar --add item clock right \
+           --set clock update_freq=10 \
+                       icon=󰃰 \
+                       icon.color=$BLUE \
+                       background.color=$SURFACE0 \
+                       background.corner_radius=5 \
+                       background.height=26 \
+                       label.color=$TEXT \
+                       script="$CONFIG_DIR/plugins/clock.sh" \
+                       popup.align=center \
+                       popup.background.color=$SURFACE0 \
+                       popup.background.corner_radius=5 \
+                       popup.background.border_width=2 \
+                       popup.background.border_color=$BLUE \
+           --subscribe clock mouse.entered mouse.exited mouse.exited.global
+
+# --- Battery ---
+sketchybar --add item battery right \
+           --set battery update_freq=120 \
+                         icon.color=$GREEN \
+                         background.color=$SURFACE0 \
+                         background.corner_radius=5 \
+                         background.height=26 \
+                         label.color=$TEXT \
+                         script="$CONFIG_DIR/plugins/battery.sh" \
+           --subscribe battery system_woke power_source_change
+
+# Force update all
+sketchybar --update

@@ -18,6 +18,21 @@
             programs.kitty = {
               enable = lib.mkDefault true;
 
+              themeFile = "Catppuccin-Macchiato";
+
+              font = {
+                name = lib.mkForce "Hack Nerd Font";
+                size = lib.mkForce 14.0;
+              };
+
+              settings = {
+                background_opacity = lib.mkForce "0.85";
+                background_blur = lib.mkForce 30;
+                hide_window_decorations = lib.mkForce "titlebar-only";
+                window_padding_width = lib.mkForce 10;
+                confirm_os_window_close = lib.mkForce 0;
+              };
+
               shellIntegration = {
                 enableZshIntegration = lib.mkDefault true;
                 enableBashIntegration = lib.mkDefault true;

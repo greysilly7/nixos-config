@@ -7,5 +7,9 @@ _:
       "/persist".neededForBoot = true;
       "/var/log".neededForBoot = true;
     };
+
+    swapDevices = [
+      { device = "/dev/zvol/zroot/swap"; }
+    ];
   };
 }

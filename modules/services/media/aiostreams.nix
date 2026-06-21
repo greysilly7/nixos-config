@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.media._.aiostreams = {
     nixos =
       { config, ... }:
@@ -16,6 +15,7 @@ _:
           REGEX_FILTER_ACCESS=all
           TEMPLATE_URLS=["https://git.tamtaro.de/complete.json"]
           AIOSTREAMS_AUTH=${config.sops.placeholder."aiostreams/auth"}
+          AIOSTREAMS_AUTH_REQUIRED=true
         '';
 
         virtualisation.oci-containers.containers.aiostreams = {

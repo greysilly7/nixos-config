@@ -3,54 +3,46 @@
   # Include ssh by default in all hosts
   den.schema.host.includes = [ den.aspects.ssh ];
 
-  den.aspects.ssh = {
-    includes = [
-      den.aspects.ssh._.openssh
-    ];
-
-    _.openssh =
-      _:
+  den.aspects.ssh = _: {
+    nixos =
+      { lib, ... }:
       {
-        nixos =
-          { lib, ... }:
-          {
-            services.openssh = {
-              enable = lib.mkDefault true;
-              openFirewall = lib.mkDefault true;
-              settings = {
-                PermitRootLogin = lib.mkDefault "no";
-                PasswordAuthentication = lib.mkDefault true;
-              };
-            };
+        services.openssh = {
+          enable = lib.mkDefault true;
+          openFirewall = lib.mkDefault true;
+          settings = {
+            PermitRootLogin = lib.mkDefault "no";
+            PasswordAuthentication = lib.mkDefault true;
           };
-
-        persist =
-          { lib, ... }:
-          {
-            files =
-              lib.map
-                (path: {
-                  file = path;
-                  how = "symlink";
-                  inInitrd = true;
-                  configureParent = true;
-                })
-                [
-                  "/etc/ssh/ssh_host_ed25519_key"
-                  "/etc/ssh/ssh_host_ed25519_key.pub"
-                  "/etc/ssh/ssh_host_rsa_key"
-                  "/etc/ssh/ssh_host_rsa_key.pub"
-                ];
-          };
-
-        persistUser.directories = [
-          {
-            directory = ".ssh";
-            how = "symlink";
-            mode = "0700";
-            createLinkTarget = true;
-          }
-        ];
+        };
       };
+
+    persist =
+      { lib, ... }:
+      {
+        files =
+          lib.map
+            (path: {
+              file = path;
+              how = "symlink";
+              inInitrd = true;
+              configureParent = true;
+            })
+            [
+              "/etc/ssh/ssh_host_ed25519_key"
+              "/etc/ssh/ssh_host_ed25519_key.pub"
+              "/etc/ssh/ssh_host_rsa_key"
+              "/etc/ssh/ssh_host_rsa_key.pub"
+            ];
+      };
+
+    persistUser.directories = [
+      {
+        directory = ".ssh";
+        how = "symlink";
+        mode = "0700";
+        createLinkTarget = true;
+      }
+    ];
   };
 }

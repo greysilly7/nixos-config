@@ -20,6 +20,7 @@
         system.defaults.trackpad.Clicking = true;
         system.defaults.trackpad.TrackpadThreeFingerDrag = true;
         system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+        system.defaults.NSGlobalDomain._HIHideMenuBar = true;
         system.keyboard.enableKeyMapping = true;
         system.keyboard.remapCapsLockToControl = true;
         programs.zsh.enable = true;
