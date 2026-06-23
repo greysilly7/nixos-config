@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.office._.obsidian = _: {
     darwin =
       { pkgs, ... }:

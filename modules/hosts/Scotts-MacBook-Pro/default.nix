@@ -24,6 +24,7 @@
           den.aspects.dev._.nodejs
           den.aspects.dev._.opencode
           den.aspects.dev._.nixd
+          den.aspects.dev._.nixfmt
           den.aspects.dev._.antigravity-cli
           den.aspects.office._.obsidian
           den.aspects.browser._.librewolf
@@ -37,7 +38,6 @@
       { pkgs, ... }:
       {
         security.pam.services.sudo_local.touchIdAuth = true;
-        system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
         system.stateVersion = 6;
         sops.defaultSopsFile = self + "/secrets/scottgould/secrets.yaml";
 
@@ -47,6 +47,7 @@
             mru-spaces = false;
           };
           NSGlobalDomain = {
+            AppleInterfaceStyle = "Dark";
             AppleShowAllExtensions = true;
             InitialKeyRepeat = 15;
             KeyRepeat = 2;

@@ -12,20 +12,18 @@
       # Bundles all git components when the complete 'git' sub-aspect is used
       includes = lib.attrValues den.aspects.git._.git._;
 
-      _.enable =
-        _:
-        {
-          homeManager =
-            { lib, ... }:
-            {
-              programs.git = {
-                enable = lib.mkDefault true;
-                settings = {
-                  init.defaultBranch = lib.mkDefault "main";
-                };
+      _.enable = _: {
+        homeManager =
+          { lib, ... }:
+          {
+            programs.git = {
+              enable = lib.mkDefault true;
+              settings = {
+                init.defaultBranch = lib.mkDefault "main";
               };
             };
-        };
+          };
+      };
 
       _.class =
         {
@@ -46,19 +44,17 @@
         };
     };
 
-    _.gh =
-      _:
-      {
-        homeManager =
-          { lib, ... }:
-          {
-            programs.gh = {
+    _.gh = _: {
+      homeManager =
+        { lib, ... }:
+        {
+          programs.gh = {
+            enable = lib.mkDefault true;
+            gitCredentialHelper = {
               enable = lib.mkDefault true;
-              gitCredentialHelper = {
-                enable = lib.mkDefault true;
-              };
             };
           };
-      };
+        };
+    };
   };
 }

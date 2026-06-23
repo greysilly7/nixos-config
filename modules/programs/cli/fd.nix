@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.cli._.fd = _: {
     homeManager =
       { lib, ... }:

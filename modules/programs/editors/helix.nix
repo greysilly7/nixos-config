@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.editors._.helix = _: {
     nixos =
       { pkgs, ... }:

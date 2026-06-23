@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.system._.betterdisplay = _: {
     darwin =
       { pkgs, ... }:

@@ -7,85 +7,83 @@
       den.aspects.steam._.enable
     ];
 
-    _.enable =
-      _:
-      {
-        # Generic linux game directories that should be persisted by users
-        includes = [ den.aspects.game-libs._.game-persist ];
+    _.enable = _: {
+      # Generic linux game directories that should be persisted by users
+      includes = [ den.aspects.game-libs._.game-persist ];
 
-        nixos =
-          {
-            pkgs,
-            lib,
-            ...
-          }:
-          {
-            programs.steam = {
-              enable = lib.mkDefault true;
+      nixos =
+        {
+          pkgs,
+          lib,
+          ...
+        }:
+        {
+          programs.steam = {
+            enable = lib.mkDefault true;
 
-              extest.enable = lib.mkDefault true;
-              localNetworkGameTransfers.openFirewall = lib.mkDefault true;
+            extest.enable = lib.mkDefault true;
+            localNetworkGameTransfers.openFirewall = lib.mkDefault true;
 
-              extraCompatPackages = [ pkgs.proton-ge-bin ];
-            };
+            extraCompatPackages = [ pkgs.proton-ge-bin ];
           };
+        };
 
-        homeManager =
-          { lib, pkgs, ... }:
-          lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-            xdg.mimeApps.defaultApplications = lib.mkBefore (
-              let
-                application = "steam.desktop";
-                mimeTypes = [
-                  "x-scheme-handler/steam"
-                  "x-scheme-handler/steamlink"
-                ];
-              in
-              lib.genAttrs mimeTypes (_mimetype: application)
-            );
+      homeManager =
+        { lib, pkgs, ... }:
+        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+          xdg.mimeApps.defaultApplications = lib.mkBefore (
+            let
+              application = "steam.desktop";
+              mimeTypes = [
+                "x-scheme-handler/steam"
+                "x-scheme-handler/steamlink"
+              ];
+            in
+            lib.genAttrs mimeTypes (_mimetype: application)
+          );
 
-            # Autostart
-            xdg.configFile."autostart/steam.desktop" = lib.mkDefault {
-              text = ''
-                [Desktop Entry]
-                NotShowIn=niri
-                Categories=Network;FileTransfer;Game;
-                Exec=steam -silent
-                GenericName=Internet Messenger
-                Icon=steam
-                Keywords=discord;vencord;electron;chat
-                Name=Steam
-                Type=Application
-              '';
-            };
+          # Autostart
+          xdg.configFile."autostart/steam.desktop" = lib.mkDefault {
+            text = ''
+              [Desktop Entry]
+              NotShowIn=niri
+              Categories=Network;FileTransfer;Game;
+              Exec=steam -silent
+              GenericName=Internet Messenger
+              Icon=steam
+              Keywords=discord;vencord;electron;chat
+              Name=Steam
+              Type=Application
+            '';
           };
+        };
 
-        persistUser =
-          { hmConfig, ... }:
-          {
-            directories = [
-              ".steam"
-              {
-                directory = "${hmConfig.xdg.dataHome}/Steam";
-                mode = "0700";
-              }
-              "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d"
-            ];
-          };
+      persistUser =
+        { hmConfig, ... }:
+        {
+          directories = [
+            ".steam"
+            {
+              directory = "${hmConfig.xdg.dataHome}/Steam";
+              mode = "0700";
+            }
+            "${hmConfig.xdg.dataHome}/vulkan/implicit_layer.d"
+          ];
+        };
 
-        persistUserTmp =
-          { hmConfig, ... }:
-          {
-            ".local" = { }; # "~/.local"
-            "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
-            "${hmConfig.xdg.dataHome}/vulkan" = { };
-          };
+      persistUserTmp =
+        { hmConfig, ... }:
+        {
+          ".local" = { }; # "~/.local"
+          "${hmConfig.xdg.dataHome}" = { }; # "~/.local/share"
+          "${hmConfig.xdg.dataHome}/vulkan" = { };
+        };
 
-        persistUserIgnore =
-          { hmConfig, ... }:
-          {
-            directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
-          };
-      };
+      persistUserIgnore =
+        { hmConfig, ... }:
+        {
+          directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
+        };
+    };
   };
 }

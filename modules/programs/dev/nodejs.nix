@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.dev._.nodejs = _: {
     darwin =
       { pkgs, ... }:

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.dev._.dbeaver = _: {
     darwin =
       { pkgs, ... }:

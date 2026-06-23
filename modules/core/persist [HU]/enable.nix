@@ -12,19 +12,17 @@
     url = "github:nix-community/preservation";
   };
 
-  den.aspects.persist._.enable =
-    _:
-    {
-      nixos =
-        {
-          lib,
-          ...
-        }:
-        {
-          # Import the preservation module
-          imports = [ inputs.preservation.nixosModules.preservation ];
-          # Enable the preservation module by default
-          preservation.enable = lib.mkDefault true;
-        };
-    };
+  den.aspects.persist._.enable = _: {
+    nixos =
+      {
+        lib,
+        ...
+      }:
+      {
+        # Import the preservation module
+        imports = [ inputs.preservation.nixosModules.preservation ];
+        # Enable the preservation module by default
+        preservation.enable = lib.mkDefault true;
+      };
+  };
 }

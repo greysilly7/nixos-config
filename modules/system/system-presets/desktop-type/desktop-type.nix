@@ -8,17 +8,14 @@
     _.window-manager = {
       _.niri = {
         includes = [
-          (
-            _:
-            {
-              nixos =
-                { lib, ... }:
-                {
-                  # Set the default login session to Niri
-                  services.displayManager.defaultSession = lib.mkDefault "niri";
-                };
-            }
-          )
+          (_: {
+            nixos =
+              { lib, ... }:
+              {
+                # Set the default login session to Niri
+                services.displayManager.defaultSession = lib.mkDefault "niri";
+              };
+          })
           # ---Core Aspects--- #
           den.aspects.niri
           den.aspects.noctalia

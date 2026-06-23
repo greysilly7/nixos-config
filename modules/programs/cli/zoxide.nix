@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.cli._.zoxide = _: {
     homeManager =
       { lib, ... }:

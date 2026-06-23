@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.samba = {
     nixos = _: {
       # make shares visible for windows/mac clients

@@ -75,41 +75,39 @@
       };
 
     # ---Home module--- #
-    _.secretsHome =
-      _:
-      {
-        homeManager =
-          {
-            config,
-            lib,
-            ...
-          }:
-          {
-            imports = [ inputs.sops-nix.homeManagerModules.sops ];
+    _.secretsHome = _: {
+      homeManager =
+        {
+          config,
+          lib,
+          ...
+        }:
+        {
+          imports = [ inputs.sops-nix.homeManagerModules.sops ];
 
-            sops = {
-              age.keyFile = lib.mkDefault "${config.xdg.configHome}/sops/age/keys.txt";
-              defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
-            };
+          sops = {
+            age.keyFile = lib.mkDefault "${config.xdg.configHome}/sops/age/keys.txt";
+            defaultSopsFile = lib.mkDefault (self + "/secrets/${config.home.username}/secrets.yaml");
           };
+        };
 
-        # ---Persist config--- #
-        persistUser =
-          { hmConfig, ... }:
-          {
-            directories = [
-              {
-                directory = "${hmConfig.xdg.configHome}/sops";
-                how = "symlink";
-                createLinkTarget = true;
-              }
-            ];
-          };
-        persistUserTmp =
-          { hmConfig, ... }:
-          {
-            "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-          };
-      };
+      # ---Persist config--- #
+      persistUser =
+        { hmConfig, ... }:
+        {
+          directories = [
+            {
+              directory = "${hmConfig.xdg.configHome}/sops";
+              how = "symlink";
+              createLinkTarget = true;
+            }
+          ];
+        };
+      persistUserTmp =
+        { hmConfig, ... }:
+        {
+          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        };
+    };
   };
 }

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.podman = {
     nixos = _: {
       virtualisation.podman = {

@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.music._.spotify = _: {
     homeManager =
       {

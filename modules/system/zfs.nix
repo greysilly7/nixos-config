@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.zfs = {
     nixos = _: {
       boot.supportedFilesystems = [ "zfs" ];

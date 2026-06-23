@@ -3,50 +3,48 @@
   ...
 }:
 {
-  den.aspects.noctalia._.plugins._.polkit =
-    _:
-    {
-      homeManager =
-        { lib, pkgs, ... }:
-        lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-          programs.noctalia-shell = {
-            plugins = inputs.self.lib.applyDefaults {
-              states.polkit-agent = {
-                enabled = true;
-                sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-              };
+  den.aspects.noctalia._.plugins._.polkit = _: {
+    homeManager =
+      { lib, pkgs, ... }:
+      lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+        programs.noctalia-shell = {
+          plugins = inputs.self.lib.applyDefaults {
+            states.polkit-agent = {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
             };
           };
-
-          services.polkit-gnome.enable = lib.mkOverride 900 false;
         };
 
-      persistUser =
-        { hmConfig, ... }:
-        {
-          directories = [
-            {
-              directory = "${hmConfig.xdg.configHome}/noctalia/plugins/polkit-agent";
-              how = "symlink";
-              createLinkTarget = true;
-            }
-          ];
-        };
+        services.polkit-gnome.enable = lib.mkOverride 900 false;
+      };
 
-      persistUserTmp =
-        { hmConfig, ... }:
-        {
-          "${hmConfig.xdg.configHome}" = { }; # "~/.config"
-          "${hmConfig.xdg.configHome}/noctalia" = { };
-          "${hmConfig.xdg.configHome}/noctalia/plugins" = { };
-        };
+    persistUser =
+      { hmConfig, ... }:
+      {
+        directories = [
+          {
+            directory = "${hmConfig.xdg.configHome}/noctalia/plugins/polkit-agent";
+            how = "symlink";
+            createLinkTarget = true;
+          }
+        ];
+      };
 
-      persistUserIgnore =
-        { hmConfig, ... }:
-        {
-          files = [
-            "${hmConfig.xdg.configHome}/noctalia/colors.json"
-          ];
-        };
-    };
+    persistUserTmp =
+      { hmConfig, ... }:
+      {
+        "${hmConfig.xdg.configHome}" = { }; # "~/.config"
+        "${hmConfig.xdg.configHome}/noctalia" = { };
+        "${hmConfig.xdg.configHome}/noctalia/plugins" = { };
+      };
+
+    persistUserIgnore =
+      { hmConfig, ... }:
+      {
+        files = [
+          "${hmConfig.xdg.configHome}/noctalia/colors.json"
+        ];
+      };
+  };
 }

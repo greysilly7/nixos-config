@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.media._.torboxarr = {
     nixos =
       { pkgs, config, ... }:

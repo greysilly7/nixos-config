@@ -33,10 +33,8 @@
         fromAspect = _: if aspect-chain != [ ] then lib.head aspect-chain else "";
       };
     # Import the disko module for NixOS
-    _.diskoImport =
-      _:
-      {
-        nixos.imports = [ inputs.disko.nixosModules.disko ];
-      };
+    _.diskoImport = _: {
+      nixos.imports = [ inputs.disko.nixosModules.disko ];
+    };
   };
 }

@@ -16,16 +16,14 @@
   den.schema.hm-user.includes = [ den.aspects.home-manager._.hmConfig ];
 
   den.aspects.home-manager = {
-    _.nixConfig =
-      _:
-      {
-        os.home-manager = {
-          useUserPackages = lib.mkDefault true;
-          useGlobalPkgs = lib.mkDefault true;
-          backupFileExtension = lib.mkDefault "backup";
-          overwriteBackup = lib.mkDefault true;
-        };
+    _.nixConfig = _: {
+      os.home-manager = {
+        useUserPackages = lib.mkDefault true;
+        useGlobalPkgs = lib.mkDefault true;
+        backupFileExtension = lib.mkDefault "backup";
+        overwriteBackup = lib.mkDefault true;
       };
+    };
 
     _.hmConfig = {
       homeManager.home.stateVersion = lib.mkDefault "25.11";

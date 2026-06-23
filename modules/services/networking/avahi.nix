@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.avahi = {
     nixos = _: {
       services.avahi = {
