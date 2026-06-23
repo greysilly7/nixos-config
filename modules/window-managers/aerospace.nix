@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.aerospace = {
     darwin = _: {
       services.jankyborders = {
@@ -13,7 +12,11 @@ _:
         enable = true;
         settings = {
           # Notify Sketchybar of workspace€ changes
-          exec-on-workspace-change = ["bash" "-c" "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"];
+          exec-on-workspace-change = [
+            "bash"
+            "-c"
+            "sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE"
+          ];
 
           # Default root container layout
           default-root-container-layout = "tiles";

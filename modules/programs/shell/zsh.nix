@@ -1,5 +1,4 @@
-_:
-{
+_: {
   den.aspects.shell._.zsh = _: {
     homeManager =
       { lib, ... }:

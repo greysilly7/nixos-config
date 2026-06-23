@@ -13,6 +13,7 @@
       den.aspects.podman
       den.aspects.greyserver-filesystem
       den.aspects.media
+      den.aspects.tailscale
     ];
 
     provides = rec {

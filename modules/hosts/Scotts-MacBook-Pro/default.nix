@@ -15,6 +15,7 @@
           den.aspects.sketchybar
           den.aspects.editors._.antigravity
           den.aspects.editors._.zed
+          den.aspects.editors._.neovim
           den.aspects.music._.tidal
           den.aspects.messaging._.discord._.equibop
           den.aspects.music._.spotify
@@ -22,6 +23,7 @@
           den.aspects.dev._.dbeaver
           den.aspects.dev._.nodejs
           den.aspects.dev._.opencode
+          den.aspects.dev._.nixd
           den.aspects.dev._.antigravity-cli
           den.aspects.office._.obsidian
           den.aspects.browser._.librewolf
