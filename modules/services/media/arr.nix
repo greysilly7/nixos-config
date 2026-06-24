@@ -25,7 +25,7 @@ _: {
       # Prowlarr (Indexers)
       services.prowlarr = {
         enable = true;
-        openFirewall = false;
+        openFirewall = true;
       };
 
       # SABnzbd (Download Client)

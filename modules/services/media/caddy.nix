@@ -8,13 +8,13 @@ _: {
           "seerr.greyserver".extraConfig = ''
             reverse_proxy localhost:5055
           '';
-          "aiostreams.greyserver".extraConfig = ''
+          "aiostreams.greysilly7.xyz".extraConfig = ''
             reverse_proxy localhost:3000
           '';
-          "zipline.greyserver".extraConfig = ''
+          "zipline.greysilly7.xyz".extraConfig = ''
             reverse_proxy localhost:3001
           '';
-          "jellyfin.greyserver".extraConfig = ''
+          "jellyfin.greysilly7.xyz".extraConfig = ''
             reverse_proxy localhost:8096
           '';
           "sonarr.greyserver".extraConfig = ''
@@ -26,7 +26,7 @@ _: {
           "lidarr.greyserver".extraConfig = ''
             reverse_proxy localhost:8686
           '';
-          "prowlarr.greyserver".extraConfig = ''
+          "prowlarr.greysilly7.xyz".extraConfig = ''
             reverse_proxy localhost:9696
           '';
           "greyserver".extraConfig = ''
