@@ -29,35 +29,6 @@ _: {
           "prowlarr.greysilly7.xyz".extraConfig = ''
             reverse_proxy localhost:9696
           '';
-          "greyserver".extraConfig = ''
-            handle_path /seerr* {
-              reverse_proxy localhost:5055
-            }
-            handle_path /aiostreams* {
-              reverse_proxy localhost:3000
-            }
-            handle_path /zipline* {
-              reverse_proxy localhost:3001
-            }
-            handle_path /jellyfin* {
-              reverse_proxy localhost:8096
-            }
-            handle_path /sonarr* {
-              reverse_proxy localhost:8989
-            }
-            handle_path /radarr* {
-              reverse_proxy localhost:7878
-            }
-            handle_path /lidarr* {
-              reverse_proxy localhost:8686
-            }
-            handle_path /prowlarr* {
-              reverse_proxy localhost:9696
-            }
-            handle {
-              redir * /jellyfin
-            }
-          '';
         };
       };
       services.avahi.extraServiceFiles = {
