@@ -4,9 +4,8 @@ _: {
       # Seerr (Media Requests)
       services.seerr = {
         enable = true;
-        openFirewall = true;
+        openFirewall = false;
       };
-      networking.firewall.allowedTCPPorts = [ 5055 ];
     };
   };
 }

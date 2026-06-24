@@ -5,7 +5,7 @@ _: {
       services.jellyfin = {
         enable = true;
         group = "media";
-        openFirewall = true;
+        openFirewall = false;
       };
     };
   };

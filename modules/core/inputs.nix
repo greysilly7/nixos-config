@@ -8,7 +8,7 @@
 
   # Flake inputs
   flake-file.inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/26.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-file.url = "github:vic/flake-file";
     den.url = "github:denful/den";
     llm-agents.url = "github:numtide/llm-agents.nix";

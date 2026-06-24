@@ -3,12 +3,12 @@ _: {
     nixos =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.nixfmt-rfc-style ];
+        environment.systemPackages = [ pkgs.nixfmt ];
       };
     darwin =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.nixfmt-rfc-style ];
+        environment.systemPackages = [ pkgs.nixfmt ];
       };
   };
 }

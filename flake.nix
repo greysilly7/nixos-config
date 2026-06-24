@@ -19,7 +19,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
@@ -29,7 +29,7 @@
       url = "github:cmm/niri-flake/add-extraConfig";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/26.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v4.7.0";
       inputs = {

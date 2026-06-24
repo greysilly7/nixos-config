@@ -5,34 +5,34 @@ _: {
       services.sonarr = {
         enable = true;
         group = "media";
-        openFirewall = true;
+        openFirewall = false;
       };
 
       # Radarr (Movies)
       services.radarr = {
         enable = true;
         group = "media";
-        openFirewall = true;
+        openFirewall = false;
       };
 
       # Lidarr (Music)
       services.lidarr = {
         enable = true;
         group = "media";
-        openFirewall = true;
+        openFirewall = false;
       };
 
       # Prowlarr (Indexers)
       services.prowlarr = {
         enable = true;
-        openFirewall = true;
+        openFirewall = false;
       };
 
       # SABnzbd (Download Client)
       services.sabnzbd = {
         enable = true;
         group = "media";
-        openFirewall = true;
+        openFirewall = false;
       };
     };
   };
