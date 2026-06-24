@@ -19,6 +19,10 @@ _: {
           '';
         };
       };
+      networking.firewall.allowedTCPPorts = [
+        80
+        443
+      ];
       services.avahi.extraServiceFiles = {
         http = ''
           <?xml version="1.0" standalone='no'?><!--*-nxml-*-->
