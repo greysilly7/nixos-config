@@ -55,7 +55,7 @@ _: {
               reverse_proxy localhost:9696
             }
             handle {
-              redir /jellyfin
+              redir * /jellyfin
             }
           '';
         };
