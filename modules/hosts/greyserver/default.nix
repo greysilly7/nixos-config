@@ -14,6 +14,8 @@
       den.aspects.greyserver-filesystem
       den.aspects.media
       den.aspects.tailscale._.server
+      den.aspects.vaultwarden
+      den.aspects.fail2ban
     ];
 
     provides = rec {

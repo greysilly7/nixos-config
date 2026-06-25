@@ -9,6 +9,7 @@ _: {
         sops.templates."zipline.env".content = ''
           CORE_SECRET=${config.sops.placeholder."zipline/core_secret"}
           CORE_PORT=3001
+          CORE_HOSTNAME=127.0.0.1
           DATABASE_URL=postgres://zipline:zipline@127.0.0.1:5444/zipline
         '';
 
@@ -36,8 +37,6 @@ _: {
           environmentFiles = [ config.sops.templates."zipline.env".path ];
           dependsOn = [ "zipline-db" ];
         };
-
-        networking.firewall.allowedTCPPorts = [ 3001 ];
       };
   };
 }

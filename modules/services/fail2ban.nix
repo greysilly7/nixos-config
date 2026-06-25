@@ -49,6 +49,84 @@ _: {
               bantime = "1h";
             };
           };
+
+          # Jellyfin authentication failures
+          jellyfin = {
+            settings = {
+              enabled = true;
+              port = "http,https";
+              filter = "jellyfin";
+              logpath = "/var/lib/jellyfin/log/jellyfin*.log";
+              maxretry = 5;
+              findtime = "10m";
+              bantime = "1h";
+            };
+          };
+
+          # Sonarr authentication failures
+          sonarr = {
+            settings = {
+              enabled = true;
+              port = "http,https,8989";
+              filter = "arr-auth";
+              logpath = "/var/lib/sonarr/.config/NzbDrone/logs/sonarr*.log";
+              maxretry = 5;
+              findtime = "10m";
+              bantime = "1h";
+            };
+          };
+
+          # Radarr authentication failures
+          radarr = {
+            settings = {
+              enabled = true;
+              port = "http,https,7878";
+              filter = "arr-auth";
+              logpath = "/var/lib/radarr/.config/Radarr/logs/radarr*.log";
+              maxretry = 5;
+              findtime = "10m";
+              bantime = "1h";
+            };
+          };
+
+          # Lidarr authentication failures
+          lidarr = {
+            settings = {
+              enabled = true;
+              port = "http,https,8686";
+              filter = "arr-auth";
+              logpath = "/var/lib/lidarr/.config/Lidarr/logs/lidarr*.log";
+              maxretry = 5;
+              findtime = "10m";
+              bantime = "1h";
+            };
+          };
+
+          # Prowlarr authentication failures
+          prowlarr = {
+            settings = {
+              enabled = true;
+              port = "http,https,9696";
+              filter = "arr-auth";
+              logpath = "/var/lib/prowlarr/logs/prowlarr*.log";
+              maxretry = 5;
+              findtime = "10m";
+              bantime = "1h";
+            };
+          };
+
+          # Recidive: ban repeat offenders across all jails for a week
+          recidive = {
+            settings = {
+              enabled = true;
+              filter = "recidive";
+              logpath = "/var/log/fail2ban.log";
+              maxretry = 3;
+              findtime = "1d";
+              bantime = "1w";
+              banaction = "%(banaction_allports)s";
+            };
+          };
         };
       };
 
@@ -63,6 +141,21 @@ _: {
       environment.etc."fail2ban/filter.d/vaultwarden.conf".text = ''
         [Definition]
         failregex = ^.*Username or password is incorrect\. Try again\. IP: <HOST>\..*$
+        ignoreregex =
+      '';
+
+      # Jellyfin filter: catch denied authentication requests
+      environment.etc."fail2ban/filter.d/jellyfin.conf".text = ''
+        [Definition]
+        failregex = ^.*Authentication request for .* has been denied \(IP: "<HOST>"\)\.
+        ignoreregex =
+      '';
+
+      # Shared filter for Sonarr/Radarr/Lidarr/Prowlarr auth failures
+      environment.etc."fail2ban/filter.d/arr-auth.conf".text = ''
+        [Definition]
+        failregex = ^\s*\|Warn\|Auth\|Auth-Failure ip <HOST> username '.*'
+        datepattern = %%y-%%m-%%d %%H:%%M:%%S
         ignoreregex =
       '';
 

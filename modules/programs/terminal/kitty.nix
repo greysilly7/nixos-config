@@ -38,10 +38,17 @@
             enableGitIntegration = lib.mkDefault true;
           };
 
-          # Custom aliases
-          home.shellAliases = {
-            ssh = lib.mkDefault "kitty +kitten ssh";
-          };
+          # Alias ssh to kitten ssh only when running inside Kitty
+          programs.zsh.initExtra = ''
+            if [ "$TERM" = "xterm-kitty" ]; then
+              alias ssh="kitty +kitten ssh"
+            fi
+          '';
+          programs.bash.initExtra = ''
+            if [ "$TERM" = "xterm-kitty" ]; then
+              alias ssh="kitty +kitten ssh"
+            fi
+          '';
 
           xdg = {
             terminal-exec = {

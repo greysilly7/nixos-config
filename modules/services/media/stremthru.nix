@@ -10,7 +10,7 @@ _: {
         sops.templates."stremthru.env".content = ''
           STREMTHRU_PROXY_AUTH=${config.sops.placeholder."stremthru/proxy_auth"}
           STREMTHRU_STORE_AUTH=${config.sops.placeholder."stremthru/store_auth"}
-          STREMTHRU_DATABASE_URI=postgres://stremthru:stremthru@127.0.0.1:5445/stremthru
+          STREMTHRU_DATABASE_URI=postgresql://stremthru:stremthru@127.0.0.1:5445/stremthru
           STREMTHRU_REDIS_URI=redis://127.0.0.1:6379
         '';
 
@@ -37,7 +37,7 @@ _: {
           image = "muniftanjim/stremthru:latest";
           extraOptions = [ "--network=host" ];
           environment = {
-            STREMTHRU_HTTP_PORT = "8081";
+            STREMTHRU_PORT = "8081";
           };
           volumes = [
             "/var/lib/stremthru/data:/app/data"

@@ -35,8 +35,6 @@ _: {
             Restart = "on-failure";
           };
         };
-
-        networking.firewall.allowedTCPPorts = [ 8085 ];
       };
   };
 }

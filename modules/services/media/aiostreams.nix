@@ -20,14 +20,12 @@ _: {
 
         virtualisation.oci-containers.containers.aiostreams = {
           image = "ghcr.io/viren070/aiostreams:latest";
-          ports = [ "3000:3000" ];
+          ports = [ "127.0.0.1:3000:3000" ];
           volumes = [
             "/var/lib/aiostreams/data:/app/data"
           ];
           environmentFiles = [ config.sops.templates."aiostreams.env".path ];
         };
-
-        networking.firewall.allowedTCPPorts = [ 3000 ];
       };
   };
 }

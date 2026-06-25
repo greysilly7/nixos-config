@@ -4,18 +4,47 @@ _: {
       # Caddy Reverse Proxy
       services.caddy = {
         enable = true;
+        extraConfig = ''
+          (security_headers) {
+            header {
+              X-Frame-Options "SAMEORIGIN"
+              X-Content-Type-Options "nosniff"
+              X-XSS-Protection "1; mode=block"
+              Referrer-Policy "strict-origin-when-cross-origin"
+              Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+            }
+          }
+        '';
         virtualHosts = {
           "aiostreams.greysilly7.xyz".extraConfig = ''
+            import security_headers
             reverse_proxy localhost:3000
           '';
           "zipline.greysilly7.xyz".extraConfig = ''
+            import security_headers
             reverse_proxy localhost:3001
           '';
           "jellyfin.greysilly7.xyz".extraConfig = ''
+            import security_headers
             reverse_proxy localhost:8096
           '';
           "prowlarr.greysilly7.xyz".extraConfig = ''
+            import security_headers
             reverse_proxy localhost:9696
+          '';
+          "stremthru.greysilly7.xyz".extraConfig = ''
+            import security_headers
+            reverse_proxy localhost:8081
+          '';
+
+          # Internal-only: accessible via Tailscale at http://<tailscale-ip>:8888
+          "http://:8888".extraConfig = ''
+            import security_headers
+            reverse_proxy localhost:8080 {
+              header_up Host localhost
+              header_up -X-Forwarded-For
+              header_up -X-Real-Ip
+            }
           '';
         };
       };

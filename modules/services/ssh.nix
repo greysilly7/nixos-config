@@ -12,7 +12,8 @@
           openFirewall = lib.mkDefault true;
           settings = {
             PermitRootLogin = lib.mkDefault "no";
-            PasswordAuthentication = lib.mkDefault true;
+            PasswordAuthentication = lib.mkDefault false;
+            KbdInteractiveAuthentication = lib.mkDefault false;
           };
         };
       };
