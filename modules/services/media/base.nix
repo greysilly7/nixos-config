@@ -1,8 +1,12 @@
 _: {
   den.aspects.media._.base = {
     nixos = _: {
-      # Define a common media group for all services to share permissions
+      # Define a common media user and group for all services to share permissions
       users.groups.media = { };
+      users.users.media = {
+        isSystemUser = true;
+        group = "media";
+      };
 
       # Ensure the media directories exist with the correct group ownership and permissions
       systemd.tmpfiles.rules = [
@@ -21,25 +25,31 @@ _: {
         "d /mnt/pool/arr/completed 0775 root media -"
         "d /mnt/pool/arr/downloads 0775 root media -"
         "d /mnt/pool/arr/media 0775 root media -"
-        "d /mnt/pool/arr/media/tv 0775 sonarr media -"
-        "d /mnt/pool/arr/media/movies 0775 radarr media -"
-        "d /mnt/pool/arr/media/music 0775 lidarr media -"
+        "d /mnt/pool/arr/media/tv 0775 media media -"
+        "d /mnt/pool/arr/media/movies 0775 media media -"
+        "d /mnt/pool/arr/media/music 0775 media media -"
 
         # State directories for the Arr apps so we can seed their configs
-        "d /var/lib/sonarr 0755 sonarr media -"
-        "d /var/lib/sonarr/.config 0755 sonarr media -"
-        "d /var/lib/sonarr/.config/NzbDrone 0700 sonarr media -"
-        "Z /var/lib/sonarr/.config/NzbDrone - sonarr media -"
+        "d /var/lib/sonarr 0755 media media -"
+        "d /var/lib/sonarr/.config 0755 media media -"
+        "d /var/lib/sonarr/.config/NzbDrone 0700 media media -"
+        "Z /var/lib/sonarr - media media -"
 
-        "d /var/lib/radarr 0755 radarr media -"
-        "d /var/lib/radarr/.config 0755 radarr media -"
-        "d /var/lib/radarr/.config/Radarr 0700 radarr media -"
-        "Z /var/lib/radarr/.config/Radarr - radarr media -"
+        "d /var/lib/radarr 0755 media media -"
+        "d /var/lib/radarr/.config 0755 media media -"
+        "d /var/lib/radarr/.config/Radarr 0700 media media -"
+        "Z /var/lib/radarr - media media -"
 
-        "d /var/lib/lidarr 0755 lidarr media -"
-        "d /var/lib/lidarr/.config 0755 lidarr media -"
-        "d /var/lib/lidarr/.config/Lidarr 0700 lidarr media -"
-        "Z /var/lib/lidarr/.config/Lidarr - lidarr media -"
+        "d /var/lib/lidarr 0755 media media -"
+        "d /var/lib/lidarr/.config 0755 media media -"
+        "d /var/lib/lidarr/.config/Lidarr 0700 media media -"
+        "Z /var/lib/lidarr - media media -"
+
+        "d /var/lib/prowlarr 0755 media media -"
+        "Z /var/lib/prowlarr - media media -"
+
+        "d /var/lib/sabnzbd 0755 media media -"
+        "Z /var/lib/sabnzbd - media media -"
       ];
     };
   };
