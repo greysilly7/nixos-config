@@ -20,14 +20,18 @@ _: {
         "d /var/lib/zipline/db 0755 root root -"
         "d /var/lib/zipline/uploads 0755 root root -"
         "d /var/lib/zipline/public 0755 root root -"
-        "d /var/lib/torboxarr 0775 root media -"
-        "d /mnt/pool/arr 0775 root media -"
-        "d /mnt/pool/arr/completed 0775 root media -"
-        "d /mnt/pool/arr/downloads 0775 root media -"
-        "d /mnt/pool/arr/media 0775 root media -"
+        "d /var/lib/torboxarr 0775 media media -"
+        "d /mnt/pool/arr 0775 media media -"
+        "d /mnt/pool/arr/completed 0775 media media -"
+        "d /mnt/pool/arr/completed/lidarr 0775 media media -"
+        "d /mnt/pool/arr/completed/sonarr 0775 media media -"
+        "d /mnt/pool/arr/completed/radarr 0775 media media -"
+        "d /mnt/pool/arr/downloads 0775 media media -"
+        "d /mnt/pool/arr/media 0775 media media -"
         "d /mnt/pool/arr/media/tv 0775 media media -"
         "d /mnt/pool/arr/media/movies 0775 media media -"
         "d /mnt/pool/arr/media/music 0775 media media -"
+        "Z /mnt/pool/arr - media media -"
 
         # State directories for the Arr apps so we can seed their configs
         "d /var/lib/sonarr 0755 media media -"
@@ -50,6 +54,9 @@ _: {
 
         "d /var/lib/sabnzbd 0755 media media -"
         "Z /var/lib/sabnzbd - media media -"
+
+        "d /var/lib/nzbhydra2 0755 media media -"
+        "Z /var/lib/nzbhydra2 - media media -"
       ];
     };
   };
