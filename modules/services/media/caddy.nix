@@ -36,6 +36,10 @@ _: {
             import security_headers
             reverse_proxy localhost:8081
           '';
+          "nzbdav.greysilly7.xyz".extraConfig = ''
+            import security_headers
+            reverse_proxy localhost:3002
+          '';
 
           # Internal-only: accessible via Tailscale at http://<tailscale-ip>:8888
           "http://:8888".extraConfig = ''

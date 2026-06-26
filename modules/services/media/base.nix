@@ -54,9 +54,6 @@ _: {
 
         "d /var/lib/sabnzbd 0755 media media -"
         "Z /var/lib/sabnzbd - media media -"
-
-        "d /var/lib/nzbhydra2 0755 media media -"
-        "Z /var/lib/nzbhydra2 - media media -"
       ];
     };
   };
