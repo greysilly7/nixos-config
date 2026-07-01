@@ -14,7 +14,7 @@
           den.aspects.system-type._.basic
           den.aspects.sketchybar
           den.aspects.editors._.antigravity
-          den.aspects.editors._.zed
+          # den.aspects.editors._.zed
           den.aspects.editors._.neovim
           den.aspects.music._.tidal
           den.aspects.messaging._.discord._.equibop
@@ -82,6 +82,7 @@
             "stremioservice"
             "lm-studio"
             "flameshot"
+            "prismlauncher"
           ];
         };
       };
