@@ -112,7 +112,7 @@ _: {
           environment = {
             RIVEN_SETTING__DATABASE_URL = "postgresql://riven:riven@127.0.0.1:5446/riven";
             RIVEN_SETTING__REDIS_URL = "redis://127.0.0.1:6380";
-            RIVEN_SETTING__GQL_PORT = "8080";
+            RIVEN_SETTING__GQL_PORT = "8082";
             RIVEN_SETTING__VFS_MOUNT_PATH = "/mnt/riven";
             RIVEN_SECRET_KEY_PATH = "/mnt/riven/.riven-secret-key";
             RIVEN_SETTING__LOG_LEVEL = "info";
@@ -135,7 +135,7 @@ _: {
           image = "ghcr.io/rivenmedia/riven-frontend:latest";
           extraOptions = [ "--network=host" ];
           environment = {
-            BACKEND_URL = "http://127.0.0.1:8080";
+            BACKEND_URL = "http://127.0.0.1:8082";
             DATABASE_URL = "/riven/data/riven.db";
             ORIGIN = "https://riven.greysilly7.xyz";
             PORT = "3003";
