@@ -6,6 +6,11 @@ _: {
         # Configure FUSE support on the host
         programs.fuse.userAllowOther = true;
 
+        networking.firewall.allowedTCPPorts = [
+          8082
+          8080
+        ];
+
         # Define Riven's sops secrets
         sops.secrets."riven/api_key" = { };
         sops.secrets."riven/auth_secret" = { };
@@ -27,7 +32,11 @@ _: {
           before = [ "podman-riven.service" ];
           after = [ "network-online.target" ];
           wants = [ "network-online.target" ];
-          path = [ pkgs.podman pkgs.git pkgs.shadow ];
+          path = [
+            pkgs.podman
+            pkgs.git
+            pkgs.shadow
+          ];
           serviceConfig = {
             Type = "oneshot";
             ExecStart = pkgs.writeShellScript "build-riven-rs" ''
@@ -96,7 +105,11 @@ _: {
         # Queue (Redis) Container
         virtualisation.oci-containers.containers."riven-redis" = {
           image = "redis:7-alpine";
-          cmd = [ "redis-server" "--port" "6380" ];
+          cmd = [
+            "redis-server"
+            "--port"
+            "6380"
+          ];
           extraOptions = [ "--network=host" ];
         };
 
