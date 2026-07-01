@@ -13,7 +13,7 @@ _: {
           DATABASE_URI=sqlite://./data/db.sqlite
           SEL_SYNC_ACCESS=all
           REGEX_FILTER_ACCESS=all
-          TEMPLATE_URLS=["https://git.tamtaro.de/complete.json"xxxs]
+          TEMPLATE_URLS=["https://git.tamtaro.de/complete.json"]
           AIOSTREAMS_AUTH=${config.sops.placeholder."aiostreams/auth"}
           AIOSTREAMS_AUTH_REQUIRED=true
           TEMPLATE_REFRESH_INTERVAL=3600
