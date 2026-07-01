@@ -43,6 +43,15 @@ _: {
           };
         };
 
+        # Prevent container stop/restart hangs by lazy-unmounting FUSE before stopping
+        systemd.services.podman-riven = {
+          serviceConfig = {
+            ExecStopPre = [
+              "-${pkgs.fuse3}/bin/fusermount3 -uz /var/lib/riven/mount"
+            ];
+          };
+        };
+
         # Shared bind mount setup for container VFS mount propagation
         systemd.services.riven-bind-shared = {
           description = "Make Riven data bind mount shared";
