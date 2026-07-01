@@ -40,20 +40,7 @@ _: {
             import security_headers
             reverse_proxy localhost:3002
           '';
-          "riven.greysilly7.xyz".extraConfig = ''
-            import security_headers
-            reverse_proxy localhost:3003
-          '';
 
-          # Internal-only: accessible via Tailscale at http://<tailscale-ip>:8888
-          "http://:8888".extraConfig = ''
-            import security_headers
-            reverse_proxy localhost:8082 {
-              header_up Host localhost
-              header_up -X-Forwarded-For
-              header_up -X-Real-Ip
-            }
-          '';
         };
       };
       networking.firewall.allowedTCPPorts = [
