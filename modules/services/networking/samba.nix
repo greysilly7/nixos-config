@@ -34,22 +34,26 @@ _: {
             "force user" = "nobody";
             "force group" = "nogroup";
           };
-          # Example of a private share:
-          # private = {
-          #   "path" = "/var/lib/samba/private";
-          #   "browseable" = "yes";
-          #   "read only" = "no";
-          #   "guest ok" = "no";
-          #   "create mask" = "0644";
-          #   "directory mask" = "0755";
-          #   "valid users" = "greysilly7";
-          # };
+          mactimemachine = {
+            "path" = "/mnt/pool/mactimemachine";
+            "browseable" = "yes";
+            "read only" = "no";
+            "guest ok" = "no";
+            "create mask" = "0600";
+            "directory mask" = "0700";
+            "valid users" = "tm";
+            "force user" = "tm";
+            "vfs objects" = "catia fruit streams_xattr";
+            "fruit:aapl" = "yes";
+            "fruit:time machine" = "yes";
+          };
         };
       };
 
-      # Ensure the public directory exists with correct permissions
+      # Ensure the directories exist with correct permissions
       systemd.tmpfiles.rules = [
         "d /mnt/pool/public 0755 nobody nogroup -"
+        "d /mnt/pool/mactimemachine 0700 tm users -"
       ];
     };
   };

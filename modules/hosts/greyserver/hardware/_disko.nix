@@ -106,6 +106,11 @@ in
             mountpoint = "/mnt/pool";
             options.mountpoint = "legacy";
           };
+          mactimemachine = {
+            type = "zfs_fs";
+            mountpoint = "/mnt/pool/mactimemachine";
+            options.mountpoint = "legacy";
+          };
         };
       };
     };
