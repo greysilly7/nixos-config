@@ -21,7 +21,10 @@ rustPlatform.buildRustPackage rec {
   cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
   nativeBuildInputs = [ pkg-config ];
-  buildInputs = [ fuse3 openssl ];
+  buildInputs = [
+    fuse3
+    openssl
+  ];
 
   SQLX_OFFLINE = "true";
 

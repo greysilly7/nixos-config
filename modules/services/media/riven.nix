@@ -10,12 +10,16 @@ _: {
 
         sops.templates."riven.env".content = ''
           RIVEN_SETTING__API_KEY=${config.sops.placeholder."riven/api_key"}
-          RIVEN_SETTING__FRONTEND_AUTH_SIGNING_SECRET=${config.sops.placeholder."riven/frontend_auth_signing_secret"}
+          RIVEN_SETTING__FRONTEND_AUTH_SIGNING_SECRET=${
+            config.sops.placeholder."riven/frontend_auth_signing_secret"
+          }
         '';
 
         sops.templates."riven-frontend.env".content = ''
           AUTH_SECRET=${config.sops.placeholder."riven/auth_secret"}
-          RIVEN_SETTING__FRONTEND_AUTH_SIGNING_SECRET=${config.sops.placeholder."riven/frontend_auth_signing_secret"}
+          RIVEN_SETTING__FRONTEND_AUTH_SIGNING_SECRET=${
+            config.sops.placeholder."riven/frontend_auth_signing_secret"
+          }
         '';
 
         # Enable FUSE user_allow_other for VFS mount
@@ -40,14 +44,25 @@ _: {
         virtualisation.oci-containers.containers."riven-redis" = {
           image = "redis:8-alpine";
           extraOptions = [ "--network=host" ];
-          cmd = [ "redis-server" "--port" "6380" ];
+          cmd = [
+            "redis-server"
+            "--port"
+            "6380"
+          ];
         };
 
         # Riven Backend (Native Systemd Service to support FUSE cleanly)
         systemd.services.riven = {
           description = "Riven Backend (Rust)";
-          after = [ "network.target" "podman-riven-db.service" "podman-riven-redis.service" ];
-          requires = [ "podman-riven-db.service" "podman-riven-redis.service" ];
+          after = [
+            "network.target"
+            "podman-riven-db.service"
+            "podman-riven-redis.service"
+          ];
+          requires = [
+            "podman-riven-db.service"
+            "podman-riven-redis.service"
+          ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "simple";
