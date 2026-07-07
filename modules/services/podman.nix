@@ -1,6 +1,10 @@
 _: {
   den.aspects.podman = {
-    nixos = _: {
+    nixos = { pkgs, ... }: {
+      environment.systemPackages = [
+        pkgs.podman-compose
+      ];
+
       virtualisation.podman = {
         enable = true;
         dockerCompat = true; # Create a `docker` alias for podman

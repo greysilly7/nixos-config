@@ -32,15 +32,14 @@ _: {
             import security_headers
             reverse_proxy localhost:9696
           '';
-          "stremthru.greysilly7.xyz".extraConfig = ''
+          "seerr.greysilly7.xyz".extraConfig = ''
             import security_headers
-            reverse_proxy localhost:8081
+            reverse_proxy localhost:5055
           '';
-          "nzbdav.greysilly7.xyz".extraConfig = ''
+          "rsdebrid.com".extraConfig = ''
             import security_headers
-            reverse_proxy localhost:3002
+            reverse_proxy localhost:29600
           '';
-
         };
       };
       networking.firewall.allowedTCPPorts = [

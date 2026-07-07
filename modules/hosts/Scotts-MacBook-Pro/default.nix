@@ -76,12 +76,8 @@
           brews = [ ];
           casks = [
             "tailscale-app"
-            # "kitty"
-            "steam"
             "iloader"
-            "stremioservice"
             "lm-studio"
-            "flameshot"
             "prismlauncher"
           ];
         };

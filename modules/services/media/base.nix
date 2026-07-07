@@ -21,6 +21,7 @@ _: {
         "d /var/lib/zipline/uploads 0755 root root -"
         "d /var/lib/zipline/public 0755 root root -"
         "d /var/lib/torboxarr 0775 media media -"
+        "d /var/lib/decypharr 0775 media media -"
         "d /mnt/pool/arr 0775 media media -"
         "d /mnt/pool/arr/completed 0775 media media -"
         "d /mnt/pool/arr/completed/lidarr 0775 media media -"
