@@ -36,6 +36,10 @@ _: {
             import security_headers
             reverse_proxy localhost:5055
           '';
+          "riven.greysilly7.xyz".extraConfig = ''
+            import security_headers
+            reverse_proxy localhost:3002
+          '';
           "rsdebrid.com".extraConfig = ''
             import security_headers
             reverse_proxy localhost:29600

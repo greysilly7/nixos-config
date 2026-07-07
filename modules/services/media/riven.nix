@@ -40,13 +40,14 @@ _: {
         virtualisation.oci-containers.containers."riven-redis" = {
           image = "redis:8-alpine";
           extraOptions = [ "--network=host" ];
-          cmd = [ "redis-server", "--port", "6380" ];
+          cmd = [ "redis-server" "--port" "6380" ];
         };
 
         # Riven Backend (Native Systemd Service to support FUSE cleanly)
         systemd.services.riven = {
           description = "Riven Backend (Rust)";
-          after = [ "network.target" ];
+          after = [ "network.target" "podman-riven-db.service" "podman-riven-redis.service" ];
+          requires = [ "podman-riven-db.service" "podman-riven-redis.service" ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "simple";
@@ -72,10 +73,11 @@ _: {
           image = "ghcr.io/rivenmedia/riven-frontend:latest";
           extraOptions = [ "--network=host" ];
           environment = {
+            PORT = "3002";
             DATABASE_URL = "/riven/data/riven.db";
             BACKEND_URL = "http://127.0.0.1:8080";
-            ORIGIN = "http://127.0.0.1:3000"; # Update this to the domain used if proxying
-            PASSKEY_RP_ID = "127.0.0.1";
+            ORIGIN = "https://riven.greysilly7.xyz";
+            PASSKEY_RP_ID = "riven.greysilly7.xyz";
           };
           volumes = [
             "/var/lib/riven/frontend:/riven/data"

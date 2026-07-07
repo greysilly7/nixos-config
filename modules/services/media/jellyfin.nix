@@ -6,6 +6,8 @@ _: {
         enable = true;
         group = "media";
       };
+
+      systemd.services.jellyfin.after = [ "riven.service" ];
     };
   };
 }
