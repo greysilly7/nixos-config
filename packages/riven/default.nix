@@ -20,6 +20,11 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-iLNMxZeMcTuF+cd5Vp6fBSzufHAJD7+1WkROobab3+0=";
 
+  postPatch = ''
+    substituteInPlace Cargo.toml \
+      --replace-fail 'rust-version = "1.96"' 'rust-version = "1.95"'
+  '';
+
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [
     fuse3
