@@ -43,6 +43,10 @@
       # Enable networking for ethernet
       networking.useDHCP = true;
 
+      # Open port 25565 for Minecraft
+      networking.firewall.allowedTCPPorts = [ 25565 ];
+      networking.firewall.allowedUDPPorts = [ 25565 ];
+
       # Bootloader configuration (EFI via systemd-boot)
       boot.loader.grub.enable = false;
       boot.loader.systemd-boot.enable = true;
