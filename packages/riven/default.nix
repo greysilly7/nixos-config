@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
     owner = "olivertgwalton";
     repo = "riven-rs";
     rev = "be8a47c528786414318dfa4f99091830c4ef74d0";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    hash = "sha256-MQiMjbAgYSefZ5cJ7bPkG1CGMl26GkD0MXb7U8SZvQ4==";
   };
 
   cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
