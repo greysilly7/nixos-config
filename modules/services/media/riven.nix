@@ -1,4 +1,4 @@
-_: {
+{ inputs, ... }: {
   den.aspects.media._.riven = {
     nixos =
       { pkgs, config, ... }:
@@ -78,7 +78,10 @@ _: {
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "simple";
-            ExecStart = "${pkgs.callPackage ../../../packages/riven/default.nix { }}/bin/riven";
+            ExecStart = "${pkgs.callPackage ../../../packages/riven/default.nix {
+              inherit inputs;
+              system = pkgs.system;
+            }}/bin/riven";
             Restart = "on-failure";
             User = "root"; # Required for FUSE mounting with user_allow_other
             WorkingDirectory = "/var/lib/riven";

@@ -4,6 +4,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    crane.url = "github:ipetkov/crane";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +43,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     preservation.url = "github:nix-community/preservation";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
