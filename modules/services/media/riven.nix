@@ -7,12 +7,24 @@ _: {
         sops.secrets."riven/api_key" = { };
         sops.secrets."riven/frontend_auth_signing_secret" = { };
         sops.secrets."riven/auth_secret" = { };
+        sops.secrets."riven/seerr_api_key" = { };
+        sops.secrets."riven/tvdb_api_key" = { };
+        sops.secrets."riven/tmdb_api_key" = { };
+        sops.secrets."riven/torbox_api_key" = { };
 
         sops.templates."riven.env".content = ''
           RIVEN_SETTING__API_KEY=${config.sops.placeholder."riven/api_key"}
           RIVEN_SETTING__FRONTEND_AUTH_SIGNING_SECRET=${
             config.sops.placeholder."riven/frontend_auth_signing_secret"
           }
+          RIVEN_PLUGIN_SETTING__SEERR__APIKEY=${config.sops.placeholder."riven/seerr_api_key"}
+          RIVEN_PLUGIN_SETTING__SEERR__URL=https://seerr.greysilly7.xyz
+          RIVEN_PLUGIN_SETTING__SEERR__FILTER=approved
+
+          RIVEN_PLUGIN_SETTING__TMDB__APIKEY=${config.sops.placeholder."riven/tmdb_api_key"}
+          RIVEN_PLUGIN_SETTING__TVDB__APIKEY=${config.sops.placeholder."riven/tvdb_api_key"}
+
+          RIVEN_PLUGIN_SETTING__STREMTHRU__TORBOXAPIKEY=${config.sops.placeholder."riven/torbox_api_key"}
         '';
 
         sops.templates."riven-frontend.env".content = ''
