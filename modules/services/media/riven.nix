@@ -39,7 +39,7 @@
 
         # Postgres Database Container for Riven
         virtualisation.oci-containers.containers."riven-db" = {
-          image = "postgres:17-alpine";
+          image = "postgres:17";
           environment = {
             POSTGRES_USER = "riven";
             POSTGRES_PASSWORD = "riven";
