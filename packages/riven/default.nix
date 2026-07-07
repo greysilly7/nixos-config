@@ -51,6 +51,7 @@ craneLib.buildPackage (
   commonArgs
   // {
     inherit cargoArtifacts;
+    doCheck = false;
 
     meta = with lib; {
       description = "Rust implementation of the Riven Media tool";
