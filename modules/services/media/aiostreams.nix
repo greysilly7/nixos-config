@@ -15,7 +15,6 @@ _: {
           REGEX_FILTER_ACCESS=all
           TEMPLATE_URLS=["https://git.tamtaro.de/complete.json"]
           AIOSTREAMS_AUTH=${config.sops.placeholder."aiostreams/auth"}
-          AIOSTREAMS_AUTH_REQUIRED=true
           TEMPLATE_REFRESH_INTERVAL=3600
           WHITELISTED_SYNC_REFRESH_INTERVAL=3600
         '';
