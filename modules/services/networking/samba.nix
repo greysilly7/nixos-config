@@ -19,7 +19,7 @@ _: {
             # "use sendfile" = "yes";
             # "max protocol" = "smb3";
             # Note: localhost is the ipv6 localhost ::1
-            "hosts allow" = "192.168. 10. 127.0.0.1 localhost";
+            "hosts allow" = "192.168. 10. 100. 127.0.0.1 localhost";
             "hosts deny" = "0.0.0.0/0";
             "guest account" = "nobody";
             "map to guest" = "bad user";
