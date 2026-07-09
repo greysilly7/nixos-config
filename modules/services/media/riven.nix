@@ -63,7 +63,6 @@
           ];
         };
 
-        # Riven Backend (Native Systemd Service to support FUSE cleanly)
         systemd.services.riven = {
           description = "Riven Backend (Rust)";
           after = [
@@ -85,7 +84,8 @@
               }
             }/bin/riven";
             Restart = "on-failure";
-            User = "root"; # Required for FUSE mounting with user_allow_other
+            User = "media";
+            Group = "media";
             WorkingDirectory = "/var/lib/riven";
             StateDirectory = "riven";
             EnvironmentFile = config.sops.templates."riven.env".path;

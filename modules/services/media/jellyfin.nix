@@ -4,6 +4,7 @@ _: {
       # Jellyfin (Media Server)
       services.jellyfin = {
         enable = true;
+        user = "media";
         group = "media";
       };
 
