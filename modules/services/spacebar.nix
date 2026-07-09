@@ -80,7 +80,7 @@
           settings = {
             security = {
               forwardedFor = "X-Forwarded-For";
-              trustedProxies = "192.168.100.1, linklocal";
+              trustedProxies = "127.0.0.1, linklocal";
               cdnSignUrls = true;
               cdnSignatureIncludeIp = true;
               cdnSignatureIncludeUserAgent = false;
