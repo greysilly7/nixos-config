@@ -61,8 +61,8 @@
 
           cdnSignaturePath = config.sops.secrets."spacebar/cdnSignature".path;
           legacyJwtSecretPath = config.sops.secrets."spacebar/legacyJwtSecret".path;
-          mailjetApiKeyPath = config.sops.secrets."spacebar/mailjetApiKey".path;
-          mailjetApiSecretPath = config.sops.secrets."spacebar/mailjetApiSecret".path;
+          # mailjetApiKeyPath = config.sops.secrets."spacebar/mailjetApiKey".path;
+          # mailjetApiSecretPath = config.sops.secrets."spacebar/mailjetApiSecret".path;
           # smtpPasswordPath = config.sops.secrets."spacebar/smtpPassword".path;
           gifApiKeyPath = config.sops.secrets."spacebar/gifApiKey".path;
           # rabbitmqHostPath = config.sops.secrets."spacebar/rabbitmqHost".path;
