@@ -279,6 +279,8 @@
           config.sops.secrets."spacebar/database".path;
         systemd.services.spacebar-gateway.serviceConfig.EnvironmentFile =
           config.sops.secrets."spacebar/database".path;
+        systemd.services.spacebar-webrtc.serviceConfig.EnvironmentFile =
+          config.sops.secrets."spacebar/database".path;
       };
   };
 }
