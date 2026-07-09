@@ -10,7 +10,7 @@
         sops.secrets."riven/seerr_api_key" = { };
         sops.secrets."riven/tvdb_api_key" = { };
         sops.secrets."riven/tmdb_api_key" = { };
-        sops.secrets."riven/torbox_api_key" = { };
+        sops.secrets."torbox/api_key" = { };
 
         sops.templates."riven.env".content = ''
           RIVEN_SETTING__API_KEY=${config.sops.placeholder."riven/api_key"}
@@ -24,7 +24,7 @@
           RIVEN_PLUGIN_SETTING__TMDB__APIKEY=${config.sops.placeholder."riven/tmdb_api_key"}
           RIVEN_PLUGIN_SETTING__TVDB__APIKEY=${config.sops.placeholder."riven/tvdb_api_key"}
 
-          RIVEN_PLUGIN_SETTING__STREMTHRU__TORBOXAPIKEY=${config.sops.placeholder."riven/torbox_api_key"}
+          RIVEN_PLUGIN_SETTING__STREMTHRU__TORBOXAPIKEY=${config.sops.placeholder."torbox/api_key"}
         '';
 
         sops.templates."riven-frontend.env".content = ''

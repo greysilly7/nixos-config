@@ -3,13 +3,12 @@ _: {
     nixos =
       { pkgs, config, ... }:
       let
-        qbitWebuiPort = "8080";
+        qbitWebuiPort = "8085";
         mediaPath = "/mnt/pool/arr";
       in
       {
         # SOPS Secrets for VPN configuration
-        sops.secrets."protonvpn/openvpn_user" = { };
-        sops.secrets."protonvpn/openvpn_password" = { };
+        sops.secrets."protonvpn/wireguard_private_key" = { };
         sops.secrets."protonvpn/vpn_service_provider" = { };
         sops.secrets."protonvpn/vpn_type" = { };
         sops.secrets."protonvpn/vpn_port_forwarding" = { };
@@ -18,9 +17,9 @@ _: {
         sops.templates."protonvpn.env".content = ''
           VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
           VPN_TYPE=${config.sops.placeholder."protonvpn/vpn_type"}
-          OPENVPN_USER=${config.sops.placeholder."protonvpn/openvpn_user"}
-          OPENVPN_PASSWORD=${config.sops.placeholder."protonvpn/openvpn_password"}
+          WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
+          PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           SERVER_COUNTRIES=${config.sops.placeholder."protonvpn/server_countries"}
         '';
 

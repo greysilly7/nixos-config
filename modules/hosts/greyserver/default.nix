@@ -16,6 +16,7 @@
       den.aspects.tailscale._.server
       den.aspects.vaultwarden
       den.aspects.fail2ban
+      den.aspects.qbittorrent
     ];
 
     provides = rec {

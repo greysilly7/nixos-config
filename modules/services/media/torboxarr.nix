@@ -4,12 +4,12 @@ _: {
       { pkgs, config, ... }:
       {
         # TorBoxarr Service
-        sops.secrets."torboxarr/api_token" = { };
+        sops.secrets."torbox/api_key" = { };
         sops.secrets."torboxarr/qbit_passsword" = { };
         sops.secrets."torboxarr/sab_api_key" = { };
 
         sops.templates."torboxarr.env".content = ''
-          TORBOXARR_TORBOX_API_TOKEN=${config.sops.placeholder."torboxarr/api_token"}
+          TORBOXARR_TORBOX_API_TOKEN=${config.sops.placeholder."torbox/api_key"}
           TORBOXARR_QBIT_PASSWORD=${config.sops.placeholder."torboxarr/qbit_passsword"}
           TORBOXARR_SAB_API_KEY=${config.sops.placeholder."torboxarr/sab_api_key"}
         '';
