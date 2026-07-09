@@ -105,7 +105,7 @@
           image = "ghcr.io/rivenmedia/riven-frontend:latest";
           extraOptions = [ "--network=host" ];
           environment = {
-            PORT = "3002";
+            PORT = "4002";
             DATABASE_URL = "/riven/data/riven.db";
             BACKEND_URL = "http://127.0.0.1:8080";
             ORIGIN = "https://riven.greysilly7.xyz";
