@@ -12,7 +12,6 @@ _: {
         sops.secrets."protonvpn/vpn_service_provider" = { };
         sops.secrets."protonvpn/vpn_type" = { };
         sops.secrets."protonvpn/vpn_port_forwarding" = { };
-        sops.secrets."protonvpn/server_countries" = { };
 
         sops.templates."protonvpn.env".content = ''
           VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
@@ -20,7 +19,6 @@ _: {
           WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
-          SERVER_COUNTRIES=${config.sops.placeholder."protonvpn/server_countries"}
         '';
 
         # Dynamically generate PUID and PGID for the media user at service startup
