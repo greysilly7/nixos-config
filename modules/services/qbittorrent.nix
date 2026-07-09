@@ -1,0 +1,92 @@
+_: {
+  den.aspects.qbittorrent = {
+    nixos =
+      { pkgs, config, ... }:
+      let
+        qbitWebuiPort = "8080";
+        mediaPath = "/mnt/pool/arr";
+      in
+      {
+        # SOPS Secrets for VPN configuration
+        sops.secrets."protonvpn/openvpn_user" = { };
+        sops.secrets."protonvpn/openvpn_password" = { };
+        sops.secrets."protonvpn/vpn_service_provider" = { };
+        sops.secrets."protonvpn/vpn_type" = { };
+        sops.secrets."protonvpn/vpn_port_forwarding" = { };
+        sops.secrets."protonvpn/server_countries" = { };
+
+        sops.templates."protonvpn.env".content = ''
+          VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
+          VPN_TYPE=${config.sops.placeholder."protonvpn/vpn_type"}
+          OPENVPN_USER=${config.sops.placeholder."protonvpn/openvpn_user"}
+          OPENVPN_PASSWORD=${config.sops.placeholder."protonvpn/openvpn_password"}
+          VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
+          SERVER_COUNTRIES=${config.sops.placeholder."protonvpn/server_countries"}
+        '';
+
+        # Dynamically generate PUID and PGID for the media user at service startup
+        systemd.services."generate-qbittorrent-env" = {
+          description = "Generate qbittorrent PUID and PGID environment file";
+          wantedBy = [ "podman-qbittorrent.service" ];
+          before = [ "podman-qbittorrent.service" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = pkgs.writeShellScript "gen-qbit-env" ''
+              PUID=$(${pkgs.coreutils}/bin/id -u media)
+              PGID=$(${pkgs.coreutils}/bin/id -g media)
+              echo "PUID=$PUID" > /var/lib/qbittorrent/uid.env
+              echo "PGID=$PGID" >> /var/lib/qbittorrent/uid.env
+            '';
+          };
+        };
+
+        systemd.tmpfiles.rules = [
+          "d /var/lib/protonvpn 0700 root root -"
+          "d /var/lib/qbittorrent 0775 media media -"
+        ];
+
+        # ProtonVPN (Gluetun VPN Gateway) Container
+        virtualisation.oci-containers.containers.protonvpn = {
+          image = "docker.io/qmcgaw/gluetun:latest";
+          environment = {
+            TZ = config.time.timeZone;
+            PORT_FORWARD_ONLY = "on";
+            VPN_PORT_FORWARDING_UP_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
+            VPN_PORT_FORWARDING_DOWN_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":0,\\\"current_network_interface\\\":\\\"lo\\\"}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
+          };
+          environmentFiles = [ config.sops.templates."protonvpn.env".path ];
+          volumes = [
+            "/var/lib/protonvpn:/gluetun"
+          ];
+          ports = [
+            "${qbitWebuiPort}:${qbitWebuiPort}"
+          ];
+          extraOptions = [
+            "--cap-add=NET_ADMIN"
+            "--device=/dev/net/tun:/dev/net/tun"
+          ];
+        };
+
+        # qBittorrent Container
+        virtualisation.oci-containers.containers.qbittorrent = {
+          image = "lscr.io/linuxserver/qbittorrent:latest";
+          dependsOn = [ "protonvpn" ];
+          environment = {
+            TZ = config.time.timeZone;
+            WEBUI_PORT = qbitWebuiPort;
+          };
+          environmentFiles = [
+            "/var/lib/qbittorrent/uid.env"
+          ];
+          volumes = [
+            "/var/lib/qbittorrent:/config"
+            "${mediaPath}:/downloads"
+          ];
+          extraOptions = [
+            "--network=container:protonvpn"
+          ];
+        };
+      };
+  };
+}
