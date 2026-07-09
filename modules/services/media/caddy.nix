@@ -22,7 +22,7 @@ _: {
           '';
           "zipline.greysilly7.xyz".extraConfig = ''
             import security_headers
-            reverse_proxy localhost:3001
+            reverse_proxy localhost:4001
           '';
           "jellyfin.greysilly7.xyz".extraConfig = ''
             import security_headers
