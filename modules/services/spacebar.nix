@@ -37,9 +37,6 @@
           "spacebar/captchaSiteKey" = {
             owner = "spacebarchat";
           };
-          "spacebar/ipdataApiKey" = {
-            owner = "spacebarchat";
-          };
           "spacebar/requestSignature" = {
             owner = "spacebarchat";
           };
@@ -69,7 +66,6 @@
           abuseIpDbApiKeyPath = config.sops.secrets."spacebar/abuseIpDbApiKey".path;
           captchaSecretKeyPath = config.sops.secrets."spacebar/captchaSecretKey".path;
           captchaSiteKeyPath = config.sops.secrets."spacebar/captchaSiteKey".path;
-          ipdataApiKeyPath = config.sops.secrets."spacebar/ipdataApiKey".path;
           requestSignaturePath = config.sops.secrets."spacebar/requestSignature".path;
 
           pion-sfu = {
