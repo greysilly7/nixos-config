@@ -78,7 +78,7 @@ _: {
           ];
           volumes = [
             "/var/lib/qbittorrent:/config"
-            "${mediaPath}:/downloads"
+            "${mediaPath}/downloads:/downloads"
           ];
           extraOptions = [
             "--network=container:protonvpn"
