@@ -73,7 +73,10 @@
             autoUpdate = true;
           };
           enable = true;
-          brews = [ ];
+          brews = [
+            "ruby"
+            "helix"
+          ];
           casks = [
             "tailscale-app"
             "iloader"

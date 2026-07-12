@@ -61,6 +61,7 @@ _: {
           ];
           extraOptions = [
             "--cap-add=NET_ADMIN"
+            "--cap-add=NET_RAW"
             "--device=/dev/net/tun:/dev/net/tun"
           ];
         };
