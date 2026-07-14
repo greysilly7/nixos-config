@@ -15,7 +15,7 @@ _: {
 
         sops.templates."protonvpn.env".content = ''
           VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
-          SERVER_COUNTRIES=Canada
+          SERVER_COUNTRIES=United States
           VPN_TYPE=${config.sops.placeholder."protonvpn/vpn_type"}
           WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
