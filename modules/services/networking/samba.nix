@@ -55,6 +55,10 @@ _: {
         "d /mnt/pool/public 0755 nobody nogroup -"
         "d /mnt/pool/mactimemachine 0700 tm users -"
       ];
+
+      users.users.tm = {
+        isNormalUser = true;
+      };
     };
   };
 }
