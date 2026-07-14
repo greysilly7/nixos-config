@@ -58,6 +58,8 @@
         "processor.max_cstate=5"
         "idle=nomwait"
       ];
+
+      boot.loader.systemd-boot.memtest86.enable = true;
     };
   };
 }
