@@ -70,13 +70,13 @@
 
           pion-sfu = {
             enable = true;
-            publicIp = "voice-spacebar.greysilly7.xyz";
+            publicIp = "15.204.115.161";
           };
 
           settings = {
             security = {
               forwardedFor = "X-Forwarded-For";
-              trustedProxies = "127.0.0.1, linklocal";
+              trustedProxies = "127.0.0.1, 100.97.70.121";
               cdnSignUrls = true;
               cdnSignatureIncludeIp = true;
               cdnSignatureIncludeUserAgent = false;
@@ -216,32 +216,6 @@
                 userAgent = "Mozilla/5.0 (compatible; Discordbot/2.0; +https://discordapp.com)";
               };
             };
-          };
-        };
-
-        services.caddy = {
-          enable = true;
-          virtualHosts = {
-            "spacebar.greysilly7.xyz".extraConfig = ''
-              import security_headers
-              reverse_proxy localhost:3001
-            '';
-            "gateway-spacebar.greysilly7.xyz".extraConfig = ''
-              import security_headers
-              reverse_proxy localhost:3002
-            '';
-            "cdn-spacebar.greysilly7.xyz".extraConfig = ''
-              import security_headers
-              reverse_proxy localhost:3003
-            '';
-            "voice-spacebar.greysilly7.xyz".extraConfig = ''
-              import security_headers
-              reverse_proxy localhost:3005
-            '';
-            "imagor-spacebar.greysilly7.xyz".extraConfig = ''
-              import security_headers
-              reverse_proxy localhost:8089
-            '';
           };
         };
 
