@@ -225,12 +225,11 @@
 
         virtualisation.oci-containers.containers."spacebar-db" = {
           image = "postgres:17-alpine";
-          extraOptions = [ "--network=host" ];
+          ports = [ "5431:5432" ];
           environment = {
             POSTGRES_USER = "spacebar";
             POSTGRES_PASSWORD = "spacebar";
             POSTGRES_DB = "sb";
-            PGPORT = "5431";
           };
           volumes = [
             "/var/lib/spacebar/db:/var/lib/postgresql/data"
@@ -239,7 +238,7 @@
 
         virtualisation.oci-containers.containers."spacebar-imagor" = {
           image = "shumc/imagor:latest";
-          extraOptions = [ "--network=host" ];
+          ports = [ "8089:8089" ];
           environment = {
             PORT = "8089";
             IMAGOR_UNSAFE = "0";
