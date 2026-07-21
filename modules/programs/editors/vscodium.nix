@@ -5,10 +5,10 @@ _: {
       {
         environment.systemPackages = [ pkgs.vscodium ];
       };
-    darwin =
+    homeManager =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.vscodium ];
+        home.packages = [ pkgs.vscodium ];
       };
   };
 }

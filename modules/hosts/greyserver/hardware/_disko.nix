@@ -106,6 +106,11 @@ in
             mountpoint = "/mnt/pool";
             options.mountpoint = "legacy";
           };
+          rsdebrid = {
+            type = "zfs_fs";
+            mountpoint = "/data/rsdebrid";
+            options.mountpoint = "legacy";
+          };
         };
       };
     };

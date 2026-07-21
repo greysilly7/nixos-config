@@ -4,11 +4,6 @@
   ...
 }:
 {
-  flake-file.inputs.stylix = {
-    url = "github:nix-community/stylix";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   den.aspects.stylix = {
     includes = [
       den.aspects.stylix._.sys
@@ -167,7 +162,6 @@
               };
 
               kitty.enable = lib.mkDefault config.programs.kitty.enable;
-              btop.enable = lib.mkDefault config.programs.btop.enable;
               qt.enable = lib.mkDefault (!pkgs.stdenv.hostPlatform.isDarwin);
             };
           };

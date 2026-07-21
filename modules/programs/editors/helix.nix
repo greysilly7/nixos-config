@@ -5,10 +5,10 @@ _: {
       {
         environment.systemPackages = [ pkgs.helix ];
       };
-    darwin =
+    homeManager =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.helix ];
+        home.packages = [ pkgs.helix ];
       };
 
     persistUser =

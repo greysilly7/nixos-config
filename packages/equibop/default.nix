@@ -99,11 +99,9 @@ stdenv.mkDerivation {
     ${
       if stdenv.hostPlatform.isDarwin then
         ''
-          mkdir -p $out/Applications
-          cp -r *.app $out/Applications/
-
           mkdir -p $out/bin
-          makeWrapper $out/Applications/Equibop.app/Contents/MacOS/Equibop $out/bin/equibop
+          cp -r *.app $out/Equibop.app
+          ln -s $out/Equibop.app/Contents/MacOS/Equibop $out/bin/equibop
         ''
       else
         ''
@@ -114,7 +112,6 @@ stdenv.mkDerivation {
           makeWrapper $out/opt/Equibop/equibop $out/bin/equibop \
             --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}"
 
-          # Install desktop file and icons if they exist in the tarball
           if [ -f equibop.desktop ]; then
             mkdir -p $out/share/applications
             cp equibop.desktop $out/share/applications/

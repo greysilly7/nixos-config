@@ -1,7 +1,34 @@
-# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
-# Use `nix run .#write-flake` to regenerate it.
 {
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  description = "nixos-config";
+
+  outputs = inputs:
+    let
+      flake = inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+        imports = [
+          (inputs.import-tree ./modules)
+          ./flake-modules/systems.nix
+        ];
+      };
+    in flake // {
+      templates = {
+        rust = {
+          path = ./templates/rust;
+          description = "Rust devShell with crane + memory-efficient linker";
+        };
+        dart-flutter = {
+          path = ./templates/dart-flutter;
+          description = "Flutter/Dart devShell -- no global pollution";
+        };
+        containerized-microservices = {
+          path = ./templates/containerized-microservices;
+          description = "Containerized microservice devShell with Podman";
+        };
+        default = {
+          path = ./templates/rust;
+          description = "Rust devShell (default)";
+        };
+      };
+    };
 
   inputs = {
     crane.url = "github:ipetkov/crane";

@@ -19,11 +19,6 @@
             };
           };
         };
-      darwin =
-        { pkgs, ... }:
-        {
-          environment.systemPackages = [ pkgs.nh ];
-        };
     };
 
     _.config = _: {

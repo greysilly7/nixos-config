@@ -5,10 +5,10 @@ _: {
       {
         environment.systemPackages = [ pkgs.zed-editor ];
       };
-    darwin =
+    homeManager =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.zed-editor ];
+        home.packages = [ pkgs.zed-editor ];
       };
 
     persistUser =

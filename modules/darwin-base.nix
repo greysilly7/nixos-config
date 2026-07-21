@@ -1,17 +1,8 @@
 { inputs, ... }:
 {
-  flake-file.inputs.darwin = {
-    url = "github:LnL7/nix-darwin";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  flake-file.inputs.mac-app-util = {
-    url = "github:hraban/mac-app-util";
-  };
-
   den.aspects.darwin-base = {
     darwin =
-      { pkgs, ... }:
+      { pkgs, lib, config, ... }:
       {
         imports = [
           inputs.mac-app-util.darwinModules.default
@@ -23,13 +14,19 @@
         system.defaults.NSGlobalDomain._HIHideMenuBar = true;
         system.keyboard.enableKeyMapping = true;
         system.keyboard.remapCapsLockToControl = true;
-        programs.zsh.enable = true;
         environment.systemPackages = with inputs.darwin.packages.${pkgs.stdenvNoCC.hostPlatform.system}; [
           darwin-option
           darwin-rebuild
           darwin-version
           darwin-uninstaller
         ];
+
+        system.activationScripts.postActivation.text = lib.mkAfter ''
+          HM_APPS="${config.users.users.scottgould.home}/Applications/Home Manager Apps"
+          if [ -d "$HM_APPS" ]; then
+            /usr/bin/xattr -r -d com.apple.quarantine "$HM_APPS" 2>/dev/null || true
+          fi
+        '';
       };
 
     provides.to-users = _: {

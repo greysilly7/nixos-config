@@ -5,12 +5,6 @@
   ...
 }:
 {
-  # Flake inputs
-  flake-file.inputs.disko = {
-    url = "github:nix-community/disko";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   # Include disko by default in all hosts
   den.schema.host.includes = [
     den.aspects.disko._.diskoImport

@@ -13,19 +13,13 @@
         includes = [
           den.aspects.system-type._.basic
           den.aspects.sketchybar
-          den.aspects.editors._.antigravity
-          # den.aspects.editors._.zed
-          den.aspects.editors._.neovim
-          den.aspects.music._.tidal
+          den.aspects.editors._.vscodium
           den.aspects.messaging._.discord._.equibop
-          den.aspects.music._.spotify
           den.aspects.system._.betterdisplay
           den.aspects.dev._.dbeaver
-          den.aspects.dev._.nodejs
           den.aspects.dev._.opencode
           den.aspects.dev._.nixd
           den.aspects.dev._.nixfmt
-          den.aspects.dev._.antigravity-cli
           den.aspects.office._.obsidian
           den.aspects.browser._.librewolf
           den.aspects.stylix
@@ -69,8 +63,8 @@
         homebrew = {
           onActivation = {
             cleanup = "uninstall";
-            upgrade = true;
-            autoUpdate = true;
+            upgrade = false;
+            autoUpdate = false;
           };
           enable = true;
           brews = [

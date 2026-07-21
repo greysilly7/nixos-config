@@ -6,6 +6,10 @@ _: {
       fileSystems = {
         "/persist".neededForBoot = true;
         "/var/log".neededForBoot = true;
+        "/data/rsdebrid" = {
+          device = "tank/rsdebrid";
+          fsType = "zfs";
+        };
       };
       swapDevices = [
         { device = "/dev/zvol/zroot/swap"; }

@@ -20,7 +20,6 @@
             (rust-bin.stable.latest.default.override {
               extensions = [ "rust-analyzer" "rust-src" "clippy" ];
             })
-            cargo-watch
             cargo-nextest
             cargo-audit
             cargo-deny

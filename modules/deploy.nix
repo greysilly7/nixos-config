@@ -89,7 +89,7 @@ _: {
           # Resolve target IP/address via Tailscale if not explicitly provided
           if [ -z "$target_ip" ]; then
             # Try to check Tailscale status if available on macOS
-            TS_CLI="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+            TS_CLI="$(command -v tailscale 2>/dev/null || echo "/Applications/Tailscale.app/Contents/MacOS/Tailscale")"
             if [ -x "$TS_CLI" ]; then
               echo "[-] Querying Tailscale for $target_host..."
               # Match hostname in tailscale status

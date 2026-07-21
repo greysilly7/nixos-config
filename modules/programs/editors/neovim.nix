@@ -5,10 +5,10 @@ _: {
       {
         environment.systemPackages = [ pkgs.neovim ];
       };
-    darwin =
+    homeManager =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.neovim ];
+        home.packages = [ pkgs.neovim ];
       };
   };
 }

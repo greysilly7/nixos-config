@@ -18,6 +18,7 @@
       den.aspects.fail2ban
       den.aspects.qbittorrent
       den.aspects.spacebar
+      den.aspects.seaweedfs
     ];
 
     provides = rec {

@@ -6,16 +6,6 @@
     (inputs.den.flakeModules.dendritic or { })
   ];
 
-  # Flake inputs
-  flake-file.inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-file.url = "github:vic/flake-file";
-    den.url = "github:denful/den";
-    llm-agents.url = "github:numtide/llm-agents.nix";
-    crane.url = "github:ipetkov/crane";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-  };
-
   # Define avialable systems
   systems = [
     "aarch64-darwin"

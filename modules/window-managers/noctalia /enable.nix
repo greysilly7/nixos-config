@@ -5,20 +5,6 @@
   ...
 }:
 {
-  flake-file.inputs = {
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/v4.7.0";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        noctalia-qs.follows = "noctalia-qs";
-      };
-    };
-    noctalia-qs = {
-      url = "github:noctalia-dev/noctalia-qs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   den.aspects.noctalia._.enable = _: {
     homeManager =
       {

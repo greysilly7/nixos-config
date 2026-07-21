@@ -10,45 +10,32 @@
       den.aspects.nix-config._.locale
     ];
 
-    # Required core config for all hosts
-    _.core-config = _: {
-      nixos =
-        { lib, ... }:
-        {
-          nix.settings = {
-            # Enable flakes
-            experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-            # Add `wheel` to trusted users
-            trusted-users = [ "@wheel" ];
-          };
-
-          system.stateVersion = lib.mkDefault "25.11";
-          nixpkgs.config.allowUnfree = lib.mkDefault true;
-          # Silence the first time sudo warning
-          security.sudo.extraConfig = ''
-            Defaults lecture = "never"
-          '';
-          users.mutableUsers = lib.mkDefault false;
+    _.core-config = _:
+      let
+        baseNixSettings = {
+          experimental-features = [ "nix-command" "flakes" ];
         };
-      darwin =
-        { lib, ... }:
-        {
-          nix.settings = {
-            # Enable flakes
-            experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-            # Add `admin` to trusted users
-            trusted-users = [ "@admin" ];
+        allowUnfree = true;
+      in
+      {
+        nixos =
+          { lib, ... }:
+          {
+            nix.settings = baseNixSettings // { trusted-users = [ "@wheel" ]; };
+            nixpkgs.config.allowUnfree = allowUnfree;
+            system.stateVersion = lib.mkDefault "25.11";
+            security.sudo.extraConfig = ''
+              Defaults lecture = "never"
+            '';
+            users.mutableUsers = lib.mkDefault false;
           };
-
-          nixpkgs.config.allowUnfree = lib.mkDefault true;
-        };
-    };
+        darwin =
+          { lib, ... }:
+          {
+            nix.settings = baseNixSettings // { trusted-users = [ "@admin" ]; };
+            nixpkgs.config.allowUnfree = allowUnfree;
+          };
+      };
 
     _.garbage-collection = _: {
       nixos =
@@ -68,14 +55,19 @@
           nix.gc = {
             automatic = lib.mkDefault true;
             interval = lib.mkDefault {
-              Weekday = 0;
-              Hour = 0;
+              Hour = 3;
               Minute = 0;
             };
-            options = lib.mkDefault "--delete-older-than 30d";
+            options = lib.mkDefault "--delete-older-than 7d";
           };
-          # Hard link identical files to save space
           nix.optimise.automatic = lib.mkDefault true;
+
+          nix.settings = {
+            min-free = lib.mkDefault 5000000000;
+            max-free = lib.mkDefault 10000000000;
+            auto-optimise-store = lib.mkDefault true;
+            warn-dirty = lib.mkDefault false;
+          };
         };
     };
 
