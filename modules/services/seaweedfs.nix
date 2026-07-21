@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+_: {
   den.aspects.seaweedfs = {
-    nixos = {
+    nixos = { pkgs, ... }: {
       systemd.tmpfiles.rules = [
         "d /data/rsdebrid 0700 root root -"
       ];
