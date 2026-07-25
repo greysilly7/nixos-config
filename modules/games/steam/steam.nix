@@ -109,6 +109,14 @@
           programs.gamescope = {
             enable = lib.mkForce true;
           };
+
+          services.sunshine = {
+            enable = lib.mkDefault true;
+            openFirewall = lib.mkDefault true;
+            autoStart = lib.mkDefault true;
+          };
+
+          environment.systemPackages = [ pkgs.sunshine ];
         };
     };
   };
