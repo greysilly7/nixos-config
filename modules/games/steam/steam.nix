@@ -117,12 +117,14 @@
             capSysAdmin = true;
             settings = {
               csrf_allowed_origins = "https://greyserver,https://greyserver:47990";
+              output_name = 0;
+              adapter_name = "amd";
             };
           };
 
           systemd.user.services.sunshine.wantedBy = lib.mkForce [ "default.target" ];
 
-          environment.systemPackages = [ pkgs.sunshine ];
+          environment.systemPackages = with pkgs; [ sunshine ];
         };
     };
   };

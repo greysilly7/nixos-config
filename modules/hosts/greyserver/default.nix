@@ -67,6 +67,12 @@
 
         boot.loader.systemd-boot.memtest86.enable = true;
 
+        services.xserver.enable = true;
+        services.displayManager.sddm.enable = true;
+        services.displayManager.autoLogin.enable = true;
+        services.displayManager.autoLogin.user = "greysilly7";
+        services.desktopManager.plasma6.enable = true;
+
         environment.systemPackages = [ pkgs.tmux ];
       };
   };
