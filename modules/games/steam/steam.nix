@@ -116,7 +116,7 @@
             autoStart = lib.mkDefault true;
             capSysAdmin = true;
             settings = {
-              csrf_allowed_origins = "https://greyserver";
+              csrf_allowed_origins = "https://greyserver,https://greyserver:47990";
             };
           };
 
