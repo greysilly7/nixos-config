@@ -115,6 +115,9 @@
             openFirewall = lib.mkDefault true;
             autoStart = lib.mkDefault true;
             capSysAdmin = true;
+            settings = {
+              csrf_allowed_origins = "https://greyserver:47990,http://greyserver:47989,https://localhost:47990";
+            };
           };
 
           environment.systemPackages = [ pkgs.sunshine ];
