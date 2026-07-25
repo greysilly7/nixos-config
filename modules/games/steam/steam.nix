@@ -114,6 +114,7 @@
             enable = lib.mkDefault true;
             openFirewall = lib.mkDefault true;
             autoStart = lib.mkDefault true;
+            capSysAdmin = true;
           };
 
           environment.systemPackages = [ pkgs.sunshine ];
