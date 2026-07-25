@@ -116,9 +116,11 @@
             autoStart = lib.mkDefault true;
             capSysAdmin = true;
             settings = {
-              csrf_allowed_origins = "https://greyserver:47990,http://greyserver:47989,https://localhost:47990";
+              csrf_allowed_origins = "*";
             };
           };
+
+          systemd.user.services.sunshine.wantedBy = lib.mkForce [ "default.target" ];
 
           environment.systemPackages = [ pkgs.sunshine ];
         };
