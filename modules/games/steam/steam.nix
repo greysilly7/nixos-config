@@ -110,21 +110,18 @@
             enable = lib.mkForce true;
           };
 
-          services.sunshine = {
-            enable = lib.mkDefault true;
-            openFirewall = lib.mkDefault true;
-            autoStart = lib.mkDefault true;
-            capSysAdmin = true;
-            settings = {
-              csrf_allowed_origins = "https://greyserver,https://greyserver:47990";
-              output_name = 0;
-              adapter_name = "amd";
+          systemd.user.services.steam = {
+            description = "Steam (headless Remote Play)";
+            wantedBy = [ "graphical-session.target" ];
+            partOf = [ "graphical-session.target" ];
+            after = [ "graphical-session.target" ];
+
+            serviceConfig = {
+              ExecStart = "${pkgs.steam}/bin/steam -silent";
+              Restart = "on-failure";
+              RestartSec = "10s";
             };
           };
-
-          systemd.user.services.sunshine.wantedBy = lib.mkForce [ "default.target" ];
-
-          environment.systemPackages = with pkgs; [ sunshine ];
         };
     };
   };
