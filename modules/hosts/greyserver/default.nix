@@ -37,33 +37,37 @@
       greysilly7 = u: (to-users u).includes;
     };
 
-    nixos = {
-      system.stateVersion = "26.11";
-      networking.hostName = "greyserver";
-      networking.hostId = "deadbeef"; # Required by ZFS
+    nixos =
+      { pkgs, ... }:
+      {
+        system.stateVersion = "26.11";
+        networking.hostName = "greyserver";
+        networking.hostId = "deadbeef"; # Required by ZFS
 
-      # Setup secrets
-      sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
+        # Setup secrets
+        sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
 
-      # Enable networking for ethernet
-      networking.useDHCP = true;
+        # Enable networking for ethernet
+        networking.useDHCP = true;
 
-      # Open port 25565 for Minecraft
-      networking.firewall.allowedTCPPorts = [ 25565 ];
-      networking.firewall.allowedUDPPorts = [ 25565 ];
+        # Open port 25565 for Minecraft
+        networking.firewall.allowedTCPPorts = [ 25565 ];
+        networking.firewall.allowedUDPPorts = [ 25565 ];
 
-      # Bootloader configuration (EFI via systemd-boot)
-      boot.loader.grub.enable = false;
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
+        # Bootloader configuration (EFI via systemd-boot)
+        boot.loader.grub.enable = false;
+        boot.loader.systemd-boot.enable = true;
+        boot.loader.efi.canTouchEfiVariables = true;
 
-      boot.kernelParams = [
-        "processor.max_cstate=5"
-        "idle=nomwait"
-        "amdgpu.runpm=0"
-      ];
+        boot.kernelParams = [
+          "processor.max_cstate=5"
+          "idle=nomwait"
+          "amdgpu.runpm=0"
+        ];
 
-      boot.loader.systemd-boot.memtest86.enable = true;
-    };
+        boot.loader.systemd-boot.memtest86.enable = true;
+
+        environment.systemPackages = [ pkgs.tmux ];
+      };
   };
 }
