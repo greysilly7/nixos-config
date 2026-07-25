@@ -85,5 +85,31 @@
           directories = [ "${hmConfig.xdg.cacheHome}/winetricks" ];
         };
     };
+
+    _.headless = _: {
+      includes = [
+        den.aspects.hardware._.graphics
+        den.aspects.hardware._.amdgpu._.enable
+        den.aspects.audio
+      ];
+
+      nixos =
+        { lib, pkgs, ... }:
+        {
+          programs.steam = {
+            enable = lib.mkDefault true;
+
+            remotePlay.openFirewall = lib.mkDefault true;
+            dedicatedServer.openFirewall = lib.mkDefault true;
+            localNetworkGameTransfers.openFirewall = lib.mkDefault true;
+
+            extraCompatPackages = [ pkgs.proton-ge-bin ];
+          };
+
+          programs.gamescope = {
+            enable = lib.mkForce true;
+          };
+        };
+    };
   };
 }

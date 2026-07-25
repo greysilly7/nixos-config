@@ -19,6 +19,8 @@
       den.aspects.qbittorrent
       den.aspects.spacebar
       den.aspects.seaweedfs
+      den.aspects.hardware._.amdcpu._.enable
+      den.aspects.steam._.headless
     ];
 
     provides = rec {
@@ -58,6 +60,7 @@
       boot.kernelParams = [
         "processor.max_cstate=5"
         "idle=nomwait"
+        "amdgpu.runpm=0"
       ];
 
       boot.loader.systemd-boot.memtest86.enable = true;
