@@ -73,7 +73,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     spacebar = {
       url = "github:spacebarchat/server";
