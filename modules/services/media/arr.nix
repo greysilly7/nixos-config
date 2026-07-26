@@ -57,7 +57,7 @@ _: {
 
       # SABnzbd (Download Client)
       services.sabnzbd = {
-        enable = true;
+        enable = false;
         user = "media";
         group = "media";
         openFirewall = false;
