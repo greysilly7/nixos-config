@@ -48,7 +48,7 @@
         sops.defaultSopsFile = self + "/secrets/greysilly7/secrets.yaml";
 
         # Enable networking for ethernet
-        networking.useDHCP = true;
+        networking.networkmanager.enable = true;
 
         # Open port 25565 for Minecraft
         networking.firewall.allowedTCPPorts = [ 25565 ];
