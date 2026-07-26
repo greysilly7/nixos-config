@@ -10,10 +10,14 @@
       den.aspects.nix-config._.locale
     ];
 
-    _.core-config = _:
+    _.core-config =
+      _:
       let
         baseNixSettings = {
-          experimental-features = [ "nix-command" "flakes" ];
+          experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
         };
         allowUnfree = true;
       in
@@ -21,7 +25,9 @@
         nixos =
           { lib, ... }:
           {
-            nix.settings = baseNixSettings // { trusted-users = [ "@wheel" ]; };
+            nix.settings = baseNixSettings // {
+              trusted-users = [ "@wheel" ];
+            };
             nixpkgs.config.allowUnfree = allowUnfree;
             system.stateVersion = lib.mkDefault "25.11";
             security.sudo.extraConfig = ''
@@ -30,9 +36,11 @@
             users.mutableUsers = lib.mkDefault false;
           };
         darwin =
-          { lib, ... }:
+          _:
           {
-            nix.settings = baseNixSettings // { trusted-users = [ "@admin" ]; };
+            nix.settings = baseNixSettings // {
+              trusted-users = [ "@admin" ];
+            };
             nixpkgs.config.allowUnfree = allowUnfree;
           };
       };

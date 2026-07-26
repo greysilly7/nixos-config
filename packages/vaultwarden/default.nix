@@ -28,7 +28,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     hash = "sha256-7l9tIBCfk8DeQDtIoENnjGUzVWJM3aZxw6eA+YaktlM=";
   };
 
-  cargoHash = "sha256-x3AotNZE9TVEaYCpXkQcQuweJBLDFn2cUXlNAINbgy8=";
+  cargoHash = "sha256-sza4ZQz2+QJJJ03Upt6sGXAv+1VPImN2qZHXaTSALFQ=";
 
   env.VW_VERSION = finalAttrs.version;
 

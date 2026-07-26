@@ -5,11 +5,16 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { nixpkgs }:
     let
-      forAllSystems = nixpkgs.lib.genAttrs [ "aarch64-darwin" "x86_64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "x86_64-linux"
+      ];
       pkgsFor = system: import nixpkgs { inherit system; };
-    in {
+    in
+    {
       devShells = forAllSystems (system: {
         default = (pkgsFor system).mkShell {
           packages = with (pkgsFor system); [

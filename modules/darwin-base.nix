@@ -2,7 +2,12 @@
 {
   den.aspects.darwin-base = {
     darwin =
-      { pkgs, lib, config, ... }:
+      {
+        pkgs,
+        lib,
+        config,
+        ...
+      }:
       {
         imports = [
           inputs.mac-app-util.darwinModules.default

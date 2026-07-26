@@ -4,7 +4,7 @@ let
 in
 {
   den.aspects.music._.tidal = _: {
-    homeManager = { ... }: {
+    homeManager = _: {
       home.packages = [
         (pkgs.stdenv.mkDerivation {
           name = "tidal-mac";
