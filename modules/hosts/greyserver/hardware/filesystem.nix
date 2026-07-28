@@ -13,6 +13,7 @@ _: {
           options = [
             "compress=zstd"
             "nofail"
+            "noatime"
           ];
         };
       };
