@@ -4,7 +4,7 @@ _: {
 
     nixos = {
       boot.supportedFilesystems = [ "btrfs" ];
-      fileSystems.fileSystems = {
+      fileSystems = {
         "/persist".neededForBoot = true;
         "/var/log".neededForBoot = true;
         "/mnt/speedy" = {
