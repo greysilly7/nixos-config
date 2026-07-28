@@ -8,7 +8,7 @@ _: {
         "/persist".neededForBoot = true;
         "/var/log".neededForBoot = true;
         "/mnt/speedy" = {
-          device = "/dev/disk/by-uuid/26e8e2bb-267b-4bdb-8268-20ae841f3b88";
+          device = "/dev/disk/by-uuid/5f3ecae9-52eb-4ccd-bd49-e6d04e5e6b01";
           fsType = "btrfs";
           options = [
             "compress=zstd"
