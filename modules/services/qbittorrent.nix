@@ -25,6 +25,8 @@ _: {
 
         sops.templates."mousehole.env".content = ''
           MOUSEHOLE_AUTH_PASSWORD=${config.sops.placeholder."mousehole/webui_password"}
+          MOUSEHOLE_ALLOWED_HOSTS=greyserver:5010
+          MOUSEHOLE_ALLOWED_ORIGINS=greyserver:5010
         '';
 
         # Dynamically generate PUID and PGID for the media user at service startup
@@ -96,7 +98,7 @@ _: {
         };
 
         virtualisation.oci-containers.containers.mousehole = {
-          image = "tmmrtn/mousehole:latest"; # Or docker.io/tmart/mousehole
+          image = "docker.io/tmmrtn/mousehole:edge"; # Or docker.io/tmart/mousehole
           dependsOn = [ "protonvpn" ];
           environment = {
             TZ = config.time.timeZone;
