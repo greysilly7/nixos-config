@@ -12,7 +12,7 @@ _: {
         sops.secrets."protonvpn/vpn_service_provider" = { };
         sops.secrets."protonvpn/vpn_type" = { };
         sops.secrets."protonvpn/vpn_port_forwarding" = { };
-        sops.secrets."mam/mam_id" = { };
+        sops.secrets."mousehole/webui_password" = { };
 
         sops.templates."protonvpn.env".content = ''
           VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
@@ -65,6 +65,7 @@ _: {
           ];
           ports = [
             "${qbitWebuiPort}:${qbitWebuiPort}"
+            "5010:5010"
           ];
           extraOptions = [
             "--cap-add=NET_ADMIN"
