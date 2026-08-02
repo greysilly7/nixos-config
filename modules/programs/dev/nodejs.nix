@@ -3,7 +3,18 @@ _: {
     nixos =
       { pkgs, ... }:
       {
-        environment.systemPackages = [ pkgs.nodejs ];
+        environment.systemPackages = [
+          pkgs.nodejs
+          pkgs.bun
+        ];
+      };
+    darwin =
+      { pkgs, ... }:
+      {
+        environment.systemPackages = [
+          pkgs.nodejs
+          pkgs.bun
+        ];
       };
   };
 }

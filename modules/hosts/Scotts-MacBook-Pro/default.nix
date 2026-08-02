@@ -7,6 +7,7 @@
       den.aspects.aerospace
       den.aspects.sketchybar
       den.aspects.stylix
+      den.aspects.dev._.nodejs
     ];
     provides = rec {
       to-users = _: {

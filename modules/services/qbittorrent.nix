@@ -12,6 +12,7 @@ _: {
         sops.secrets."protonvpn/vpn_service_provider" = { };
         sops.secrets."protonvpn/vpn_type" = { };
         sops.secrets."protonvpn/vpn_port_forwarding" = { };
+        sops.secrets."mam/mam_id" = { };
 
         sops.templates."protonvpn.env".content = ''
           VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
@@ -20,6 +21,10 @@ _: {
           WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
+        '';
+
+        sops.templates."mousehole.env".content = ''
+          MOUSEHOLE_AUTH_PASSWORD=${config.sops.placeholder."mousehole/webui_password"}
         '';
 
         # Dynamically generate PUID and PGID for the media user at service startup
@@ -42,6 +47,7 @@ _: {
         systemd.tmpfiles.rules = [
           "d /var/lib/protonvpn 0700 root root -"
           "d /var/lib/qbittorrent 0775 media media -"
+          "d /var/lob/mousehole 0775 media media -"
         ];
 
         # ProtonVPN (Gluetun VPN Gateway) Container
@@ -82,6 +88,24 @@ _: {
             "/var/lib/qbittorrent:/config"
             "${mediaPath}/downloads:${mediaPath}/downloads"
             "${mediaPath}/downloads:/downloads"
+          ];
+          extraOptions = [
+            "--network=container:protonvpn"
+          ];
+        };
+
+        virtualisation.oci-containers.containers.mousehole = {
+          image = "tmart/mousehole:latest"; # Or docker.io/tmart/mousehole
+          dependsOn = [ "protonvpn" ];
+          environment = {
+            TZ = config.time.timeZone;
+            MOUSEHOLE_PORT = "5010"; # Ensure this doesn't conflict
+          };
+          environmentFiles = [ 
+            config.sops.templates."mousehole.env".path 
+          ];
+          volumes = [
+            "/var/lib/mousehole:/data" # Persists the mam_id internally
           ];
           extraOptions = [
             "--network=container:protonvpn"
