@@ -25,8 +25,8 @@ _: {
 
         sops.templates."mousehole.env".content = ''
           MOUSEHOLE_AUTH_PASSWORD=${config.sops.placeholder."mousehole/webui_password"}
-          MOUSEHOLE_ALLOWED_HOSTS=greyserver:5010
-          MOUSEHOLE_ALLOWED_ORIGINS=greyserver:5010
+          MOUSEHOLE_ALLOWED_HOSTS=http://greyserver:5010
+          MOUSEHOLE_ALLOWED_ORIGINS=http://greyserver:5010
         '';
 
         # Dynamically generate PUID and PGID for the media user at service startup
