@@ -96,7 +96,7 @@ _: {
         };
 
         virtualisation.oci-containers.containers.mousehole = {
-          image = "tmart/mousehole:latest"; # Or docker.io/tmart/mousehole
+          image = "tmmrtn/mousehole:latest"; # Or docker.io/tmart/mousehole
           dependsOn = [ "protonvpn" ];
           environment = {
             TZ = config.time.timeZone;
