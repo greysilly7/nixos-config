@@ -49,7 +49,7 @@ _: {
         systemd.tmpfiles.rules = [
           "d /var/lib/protonvpn 0700 root root -"
           "d /var/lib/qbittorrent 0775 media media -"
-          "d /var/lob/mousehole 0775 media media -"
+          "d /var/lib/mousehole 0775 media media -"
         ];
 
         # ProtonVPN (Gluetun VPN Gateway) Container
