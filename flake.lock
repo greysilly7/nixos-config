@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "aiostreams": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1786223698,
+        "narHash": "sha256-BPWCBrWFu3KYeX1yXZ7UsOR8vyoMG/ljDXdEWAg9XFY=",
+        "owner": "greysilly7",
+        "repo": "AIOStreams",
+        "rev": "6c69a2bddda284b6e903987de6fdf6eb203d92a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "greysilly7",
+        "repo": "AIOStreams",
+        "type": "github"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -836,6 +856,7 @@
     },
     "root": {
       "inputs": {
+        "aiostreams": "aiostreams",
         "crane": "crane",
         "darwin": "darwin",
         "den": "den",
