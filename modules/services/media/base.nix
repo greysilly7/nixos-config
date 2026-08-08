@@ -14,8 +14,10 @@ _: {
         "d /var/lib/homarr/configs 0755 root root -"
         "d /var/lib/homarr/icons 0755 root root -"
         "d /var/lib/homarr/data 0755 root root -"
-        "d /var/lib/aiostreams 0755 root root -"
-        "d /var/lib/aiostreams/data 0755 root root -"
+        # Native aiostreams.service (via the aiostreams flake module) runs as
+        # its own user, replacing the old root-owned docker bind mount dirs —
+        # re-own the existing state tree in place so prior configs/DB survive.
+        "Z /var/lib/aiostreams - aiostreams aiostreams -"
         "d /var/lib/zipline 0755 root root -"
         "d /var/lib/zipline/db 0755 root root -"
         "d /var/lib/zipline/uploads 0755 root root -"
