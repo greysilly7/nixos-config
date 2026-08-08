@@ -20,7 +20,7 @@ _: {
         '';
 
         virtualisation.oci-containers.containers.aiostreams = {
-          image = "ghcr.io/viren070/aiostreams:latest";
+          image = "ghcr.io/viren070/aiostreams:nightly";
           ports = [ "3000:3000" ];
           volumes = [
             "/var/lib/aiostreams/data:/app/data"
