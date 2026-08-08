@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786225028,
-        "narHash": "sha256-/o6pPJozcR4wWrTmxcgzDvIHRjEcrwmaX8E428cT6yQ=",
+        "lastModified": 1786232228,
+        "narHash": "sha256-Vt8Hkm45vuQ0S1pwR1PoWldi++zaBBvae8moYXsCBUQ=",
         "owner": "greysilly7",
         "repo": "AIOStreams",
-        "rev": "a1a36a92934e72fd9775934d199d477d26334930",
+        "rev": "d5925bb80900babda37925b895d9da7acffc2ed6",
         "type": "github"
       },
       "original": {
