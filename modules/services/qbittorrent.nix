@@ -58,7 +58,7 @@ _: {
           environment = {
             TZ = config.time.timeZone;
             PORT_FORWARD_ONLY = "on";
-            VPN_PORT_FORWARDING_UP_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
+            VPN_PORT_FORWARDING_UP_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}},\\\"current_network_interface\\\":\\\"tun0\\\"}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
             VPN_PORT_FORWARDING_DOWN_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":0,\\\"current_network_interface\\\":\\\"lo\\\"}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
           };
           environmentFiles = [ config.sops.templates."protonvpn.env".path ];
