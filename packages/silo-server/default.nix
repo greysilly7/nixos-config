@@ -23,7 +23,7 @@ buildGoModule (finalAttrs: {
     hash = "sha256-aa9JMHRIUDv2S7+VGssJdhPNoLZxsTHt2VTA8SdHo4s=";
   };
 
-  vendorHash = "sha256-Jo6Qm4B4d0xO5escR8bhPknwRbJX1s4Fc1JZQXotLXE=";
+  vendorHash = lib.fakeHash;
 
   subPackages = [ "cmd/silo" ];
 
