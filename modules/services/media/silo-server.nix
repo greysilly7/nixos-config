@@ -36,7 +36,7 @@ _: {
           };
           extraOptions = [ "--network=host" ];
           volumes = [
-            "/var/lib/silo/db:/var/lib/postgresql/data"
+            "/var/lib/silo/db:/var/lib/postgresql"
           ];
         };
 
