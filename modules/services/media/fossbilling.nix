@@ -8,7 +8,7 @@ _: {
       ];
 
       virtualisation.oci-containers.containers."fossbilling-db" = {
-        image = "mariadb:11";
+        image = "docker.io/library/mariadb:11";
         environment = {
           MARIADB_ROOT_PASSWORD = "fossbilling";
           MARIADB_DATABASE = "fossbilling";
@@ -21,7 +21,7 @@ _: {
       };
 
       virtualisation.oci-containers.containers.fossbilling = {
-        image = "fossbilling/fossbilling:latest";
+        image = "docker.io/fossbilling/fossbilling:latest";
         environment = {
           MYSQL_HOST = "fossbilling-db";
           MYSQL_DATABASE = "fossbilling";
