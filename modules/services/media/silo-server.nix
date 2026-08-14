@@ -28,7 +28,7 @@ _: {
         # Postgres 18 + pgvector for Silo — the only piece of this stack that
         # stays containerized, per request. The app itself runs natively.
         virtualisation.oci-containers.containers."silo-db" = {
-          image = "pgvector/pgvector:pg18";
+          image = "docker.io/pgvector/pgvector:pg18";
           environment = {
             POSTGRES_USER = "silo";
             POSTGRES_PASSWORD = "silo";
