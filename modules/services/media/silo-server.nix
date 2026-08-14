@@ -17,6 +17,7 @@ _: {
           SECRET_KEY=${config.sops.placeholder."silo/secret_key"}
           DATABASE_URL=postgres://silo:silo@127.0.0.1:5432/silo
           REDIS_URL=redis://127.0.0.1:6379
+          JF_PORT=8196
         '';
 
         # Postgres 18 + pgvector for Silo — the only piece of this stack that
