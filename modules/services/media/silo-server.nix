@@ -6,15 +6,9 @@ _: {
         silo-server = pkgs.callPackage ../../../packages/silo-server { };
       in
       {
-        users.groups.silo = { };
-        users.users.silo = {
-          isSystemUser = true;
-          group = "silo";
-        };
-
         systemd.tmpfiles.rules = [
-          "d /var/lib/silo 0750 silo silo -"
-          "d /var/lib/silo/db 0750 root root -"
+          "d /var/lib/silo 0750 media media -"
+          "d /var/lib/silo/db 0750 999 999 -"
         ];
 
         sops.secrets."silo/secret_key" = { };
@@ -60,8 +54,8 @@ _: {
           ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
-            User = "silo";
-            Group = "silo";
+            User = "media";
+            Group = "media";
             WorkingDirectory = "/var/lib/silo";
             EnvironmentFile = config.sops.templates."silo.env".path;
             ExecStart = "${silo-server}/bin/silo";
