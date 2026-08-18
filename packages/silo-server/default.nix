@@ -41,6 +41,18 @@ buildGoModule (finalAttrs: {
     cp -r ${frontend} web/dist
   '';
 
+  # Upstream's default ffmpeg path is the Debian jellyfin-ffmpeg7 package
+  # location, which doesn't exist under Nix. Point the built-in default at
+  # this package's own jellyfin-ffmpeg so a fresh server_settings row (no
+  # admin override saved yet) resolves to a real binary instead of failing
+  # every scan/transcode with fork/exec ENOENT.
+  postPatch = ''
+    for f in internal/config/db_loader.go internal/config/config.go internal/config/admin_settings.go; do
+      substituteInPlace "$f" \
+        --replace-fail '/usr/lib/jellyfin-ffmpeg/ffmpeg' '${jellyfin-ffmpeg}/bin/ffmpeg'
+    done
+  '';
+
   postInstall = ''
     wrapProgram $out/bin/silo \
       --prefix PATH : ${lib.makeBinPath [ jellyfin-ffmpeg ]}

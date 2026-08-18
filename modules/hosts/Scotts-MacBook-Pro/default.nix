@@ -77,6 +77,7 @@
             "iloader"
             "lm-studio"
             "prismlauncher"
+            "claude-code"
           ];
         };
       };
