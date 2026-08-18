@@ -20,9 +20,7 @@
       den.aspects.mousesearch
       den.aspects.rsdebrid
       den.aspects.spacebar
-      den.aspects.seaweedfs
       den.aspects.hardware._.amdcpu._.enable
-      den.aspects.steam._.headless
     ];
 
     provides = rec {
@@ -57,23 +55,15 @@
         networking.firewall.allowedUDPPorts = [ 25565 ];
 
         # Bootloader configuration (EFI via systemd-boot)
-        boot.loader.grub.enable = false;
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
         boot.kernelParams = [
-          "processor.max_cstate=5"
-          "idle=nomwait"
+          "amd_pstate=active"
           "amdgpu.runpm=0"
         ];
 
         boot.loader.systemd-boot.memtest86.enable = true;
-
-        services.xserver.enable = true;
-        services.displayManager.sddm.enable = true;
-        services.displayManager.autoLogin.enable = true;
-        services.displayManager.autoLogin.user = "greysilly7";
-        services.desktopManager.plasma6.enable = true;
 
         environment.systemPackages = [ pkgs.tmux ];
       };
