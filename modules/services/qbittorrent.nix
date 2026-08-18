@@ -22,6 +22,7 @@ _: {
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           HTTPPROXY=on
+          HTTPPROXY_STEALTH=on
         '';
 
         sops.templates."mousehole.env".content = ''
