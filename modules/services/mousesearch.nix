@@ -9,11 +9,14 @@ _: {
       in
       {
         sops.secrets."mousesearch/quart_secret_key" = { };
-        sops.secrets."mousesearch/mam_id" = { };
 
+        # MAM_ID is deliberately not sourced from sops: MAM rotates the
+        # cookie on nearly every request, and MouseSearch persists whatever
+        # it last saw straight into config.json under DATA_PATH. A value
+        # here would only ever seed the very first boot, then silently rot —
+        # set it once via Settings -> MyAnonaMouse Auth in the web UI instead.
         sops.templates."mousesearch.env".content = ''
           QUART_SECRET_KEY=${config.sops.placeholder."mousesearch/quart_secret_key"}
-          MAM_ID=${config.sops.placeholder."mousesearch/mam_id"}
           DATA_PATH=${dataDir}
           ADDRESS=0.0.0.0
           PORT=${port}

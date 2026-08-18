@@ -21,6 +21,7 @@ _: {
           WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
           VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
+          HTTPPROXY=on
         '';
 
         sops.templates."mousehole.env".content = ''
