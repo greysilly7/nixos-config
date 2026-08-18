@@ -23,6 +23,7 @@ _: {
           PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
           HTTPPROXY=on
           HTTPPROXY_STEALTH=on
+          HTTPPROXY_LISTENING_ADDRESS=:8889
         '';
 
         sops.templates."mousehole.env".content = ''
@@ -70,7 +71,7 @@ _: {
           ports = [
             "${qbitWebuiPort}:${qbitWebuiPort}"
             "5010:5010"
-            "8888:8888"
+            "8889:8889"
           ];
           extraOptions = [
             "--cap-add=NET_ADMIN"
