@@ -70,6 +70,7 @@ _: {
           ports = [
             "${qbitWebuiPort}:${qbitWebuiPort}"
             "5010:5010"
+            "8888:8888"
           ];
           extraOptions = [
             "--cap-add=NET_ADMIN"
