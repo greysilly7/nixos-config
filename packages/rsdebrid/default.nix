@@ -1,7 +1,7 @@
 { lib, rustPlatform }:
 let
   src = /home/greysilly7/rsdebrid;
-  cargoToml = lib.importTOML "${src}/Cargo.toml";
+  cargoToml = lib.importTOML "${src}/crates/api/Cargo.toml";
 in
 rustPlatform.buildRustPackage {
   pname = cargoToml.package.name;
@@ -12,7 +12,7 @@ rustPlatform.buildRustPackage {
     fileset = lib.fileset.unions [
       (src + "/Cargo.toml")
       (src + "/Cargo.lock")
-      (src + "/src")
+      (src + "/crates")
       # add any other dirs the build needs, e.g. migrations, build.rs assets
     ];
   };
