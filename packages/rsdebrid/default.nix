@@ -1,10 +1,23 @@
 { lib, rustPlatform }:
-rustPlatform.buildRustPackage {
-  pname = "rsdebrid";
-  version = "0.1.0";
+let
   src = /home/greysilly7/rsdebrid;
+  cargoToml = lib.importTOML "${src}/Cargo.toml";
+in
+rustPlatform.buildRustPackage {
+  pname = cargoToml.package.name;
+  version = cargoToml.package.version;
 
-  cargoLock.lockFile = /home/greysilly7/rsdebrid/Cargo.lock;
+  src = lib.fileset.toSource {
+    root = src;
+    fileset = lib.fileset.unions [
+      (src + "/Cargo.toml")
+      (src + "/Cargo.lock")
+      (src + "/src")
+      # add any other dirs the build needs, e.g. migrations, build.rs assets
+    ];
+  };
+
+  cargoLock.lockFile = src + "/Cargo.lock";
 
   doCheck = false;
 

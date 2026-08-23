@@ -14,13 +14,13 @@ let
 in
 buildGoModule (finalAttrs: {
   pname = "silo-server";
-  version = "0-unstable-2026-08-13";
+  version = "0-unstable-2026-08-20";
 
   src = fetchFromGitHub {
     owner = "Silo-Server";
     repo = "silo-server";
-    rev = "ee9356aab341611277bd063a4a9da6b03264bac4";
-    hash = "sha256-aa9JMHRIUDv2S7+VGssJdhPNoLZxsTHt2VTA8SdHo4s=";
+    rev = "c2629ffb659a83772df6de7560fc0d6ba0d9c844";
+    hash = "sha256-qw06DTkoc8Vju7NOyVjLqlDoEKxYzg9GPSxLpgUobl8=";
   };
 
   vendorHash = "sha256-Lzqzs35cq7+KDCz/E6zfM7SQtvpZvSRdSACunjFhpH4=";
