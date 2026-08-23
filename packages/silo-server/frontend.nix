@@ -10,13 +10,16 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "silo-server-frontend";
-  version = "0-unstable-2026-08-13";
+  version = "0-unstable-2026-08-23";
 
+  # Kept in lockstep with packages/silo-server/default.nix's src: both must
+  # point at the same commit, or the built web UI drifts from the backend API
+  # (e.g. missing settings the backend already understands).
   src = fetchFromGitHub {
-    owner = "Silo-Server";
+    owner = "greysilly7";
     repo = "silo-server";
-    rev = "ee9356aab341611277bd063a4a9da6b03264bac4";
-    hash = "sha256-aa9JMHRIUDv2S7+VGssJdhPNoLZxsTHt2VTA8SdHo4s=";
+    rev = "042f7606b5bcd7cf643fb45c359ab0a72cc631b2";
+    hash = "sha256-BPXAHsHmDAV1kr8j6tQDqfsl7GjjQd0riOV9/oRy3Qs=";
   };
 
   sourceRoot = "${finalAttrs.src.name}/web";
