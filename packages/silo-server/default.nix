@@ -14,16 +14,21 @@ let
 in
 buildGoModule (finalAttrs: {
   pname = "silo-server";
-  version = "0-unstable-2026-08-20";
+  version = "0-unstable-2026-08-23";
 
+  # Combines two upstream PRs not yet merged to main, which independently
+  # touch overlapping playback/transcode-node code: PR 634 (HDR-to-SDR
+  # tonemap) and PR 686 (H.264 High10 playback fix). Merged by hand on a
+  # fork branch with the resulting semantic conflicts (not just textual
+  # ones) resolved and the full test suite passing.
   src = fetchFromGitHub {
-    owner = "Silo-Server";
+    owner = "greysilly7";
     repo = "silo-server";
-    rev = "c2629ffb659a83772df6de7560fc0d6ba0d9c844";
-    hash = "sha256-qw06DTkoc8Vju7NOyVjLqlDoEKxYzg9GPSxLpgUobl8=";
+    rev = "042f7606b5bcd7cf643fb45c359ab0a72cc631b2";
+    hash = "sha256-BPXAHsHmDAV1kr8j6tQDqfsl7GjjQd0riOV9/oRy3Qs=";
   };
 
-  vendorHash = "sha256-Lzqzs35cq7+KDCz/E6zfM7SQtvpZvSRdSACunjFhpH4=";
+  vendorHash = "sha256-3YInbuPkkvl/49fKJm8iDr0oZnpiUxOK8HaBRefLnbs=";
 
   subPackages = [ "cmd/silo" ];
 
