@@ -8,6 +8,7 @@ _: {
         group = "media";
         openFirewall = false;
         settings = {
+          Address = "0.0.0.0";
           MusicFolder = "/mnt/pool/arr/media/music";
         };
       };

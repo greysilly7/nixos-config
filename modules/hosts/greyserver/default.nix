@@ -17,7 +17,6 @@
       den.aspects.vaultwarden
       den.aspects.fail2ban
       den.aspects.qbittorrent
-      den.aspects.mousesearch
       den.aspects.rsdebrid
       den.aspects.spacebar
       den.aspects.hardware._.amdcpu._.enable
