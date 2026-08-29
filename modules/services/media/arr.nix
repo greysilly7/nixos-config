@@ -2,7 +2,7 @@ _: {
   den.aspects.media._.arr = {
     nixos = { pkgs, lib, ... }:
       let
-        fixOwnership = import ./lib.nix { inherit pkgs lib; };
+        fixOwnership = import ../../../lib/mkFixOwnership.nix { inherit pkgs lib; };
       in
       {
       # Sonarr (TV)

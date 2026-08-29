@@ -3,7 +3,7 @@ _: {
     nixos =
       { pkgs, lib, ... }:
       let
-        fixOwnership = import ./lib.nix { inherit pkgs lib; };
+        fixOwnership = import ../../../lib/mkFixOwnership.nix { inherit pkgs lib; };
       in
       {
         # Seerr (Media Requests)
