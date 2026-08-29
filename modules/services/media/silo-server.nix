@@ -12,22 +12,25 @@ _: {
         ];
 
         sops.secrets."silo/secret_key" = { };
+        sops.secrets."silo/db_password" = { };
 
         sops.templates."silo.env".content = ''
           SECRET_KEY=${config.sops.placeholder."silo/secret_key"}
-          DATABASE_URL=postgres://silo:silo@127.0.0.1:5432/silo
+          DATABASE_URL=postgres://silo:${config.sops.placeholder."silo/db_password"}@127.0.0.1:5432/silo
           REDIS_URL=redis://127.0.0.1:6379
           JF_PORT=8196
           PORT=8280
         '';
 
+        sops.templates."silo-db.env".content = ''
+          POSTGRES_USER=silo
+          POSTGRES_PASSWORD=${config.sops.placeholder."silo/db_password"}
+          POSTGRES_DB=silo
+        '';
+
         virtualisation.oci-containers.containers."silo-db" = {
           image = "docker.io/pgvector/pgvector:pg18";
-          environment = {
-            POSTGRES_USER = "silo";
-            POSTGRES_PASSWORD = "silo";
-            POSTGRES_DB = "silo";
-          };
+          environmentFiles = [ config.sops.templates."silo-db.env".path ];
           extraOptions = [ "--network=host" ];
           volumes = [
             "/var/lib/silo/db:/var/lib/postgresql"

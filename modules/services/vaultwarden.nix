@@ -10,7 +10,7 @@ _: {
             ROCKET_ADDRESS = "0.0.0.0";
             ROCKET_PORT = 8222;
             DOMAIN = "https://vaultwarden.greysilly7.xyz";
-            SIGNUPS_ALLOWED = true;
+            SIGNUPS_ALLOWED = false;
           };
         };
       };

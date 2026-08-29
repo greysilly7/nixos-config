@@ -1,6 +1,10 @@
 _: {
   den.aspects.media._.arr = {
-    nixos = { pkgs, lib, ... }: {
+    nixos = { pkgs, lib, ... }:
+      let
+        fixOwnership = import ./lib.nix { inherit pkgs lib; };
+      in
+      {
       # Sonarr (TV)
       services.sonarr = {
         enable = true;
@@ -9,10 +13,7 @@ _: {
         openFirewall = false;
       };
 
-      systemd.services.sonarr.serviceConfig.ExecStartPre = lib.mkAfter [
-        "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/sonarr"
-        "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/sonarr"
-      ];
+      systemd.services.sonarr.serviceConfig.ExecStartPre = fixOwnership "/var/lib/sonarr";
 
       # Radarr (Movies)
       services.radarr = {
@@ -22,10 +23,7 @@ _: {
         openFirewall = false;
       };
 
-      systemd.services.radarr.serviceConfig.ExecStartPre = lib.mkAfter [
-        "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/radarr"
-        "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/radarr"
-      ];
+      systemd.services.radarr.serviceConfig.ExecStartPre = fixOwnership "/var/lib/radarr";
 
       # Lidarr (Music)
       services.lidarr = {
@@ -35,10 +33,7 @@ _: {
         openFirewall = false;
       };
 
-      systemd.services.lidarr.serviceConfig.ExecStartPre = lib.mkAfter [
-        "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/lidarr"
-        "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/lidarr"
-      ];
+      systemd.services.lidarr.serviceConfig.ExecStartPre = fixOwnership "/var/lib/lidarr";
 
       # Prowlarr (Indexers)
       services.prowlarr = {
@@ -50,10 +45,7 @@ _: {
         Group = "media";
       };
 
-      systemd.services.prowlarr.serviceConfig.ExecStartPre = lib.mkAfter [
-        "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/prowlarr"
-        "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/prowlarr"
-      ];
+      systemd.services.prowlarr.serviceConfig.ExecStartPre = fixOwnership "/var/lib/prowlarr";
 
       # SABnzbd (Download Client)
       services.sabnzbd = {
@@ -63,10 +55,7 @@ _: {
         openFirewall = false;
       };
 
-      systemd.services.sabnzbd.serviceConfig.ExecStartPre = lib.mkAfter [
-        "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/sabnzbd"
-        "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/sabnzbd"
-      ];
+      systemd.services.sabnzbd.serviceConfig.ExecStartPre = fixOwnership "/var/lib/sabnzbd";
     };
   };
 }

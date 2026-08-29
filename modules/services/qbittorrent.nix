@@ -68,10 +68,13 @@ _: {
           volumes = [
             "/var/lib/protonvpn:/gluetun"
           ];
+          # Loopback-only publish; tailnet reachability on the same ports
+          # comes from the tailscale-serve-qbittorrent unit below. 8889
+          # (VPN HTTP proxy) is loopback-only, no direct tailnet access needed.
           ports = [
-            "${qbitWebuiPort}:${qbitWebuiPort}"
-            "5010:5010"
-            "8889:8889"
+            "127.0.0.1:${qbitWebuiPort}:${qbitWebuiPort}"
+            "127.0.0.1:5010:5010"
+            "127.0.0.1:8889:8889"
           ];
           extraOptions = [
             "--cap-add=NET_ADMIN"
@@ -99,6 +102,24 @@ _: {
           extraOptions = [
             "--network=container:protonvpn"
           ];
+        };
+
+        systemd.services.tailscale-serve-qbittorrent = {
+          description = "Expose qbittorrent + mousehole on the tailnet via tailscale serve";
+          after = [
+            "tailscaled.service"
+            "podman-protonvpn.service"
+          ];
+          wants = [ "tailscaled.service" ];
+          wantedBy = [ "multi-user.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = [
+              "${pkgs.tailscale}/bin/tailscale serve --bg --tcp=${qbitWebuiPort} tcp://127.0.0.1:${qbitWebuiPort}"
+              "${pkgs.tailscale}/bin/tailscale serve --bg --tcp=5010 tcp://127.0.0.1:5010"
+            ];
+          };
         };
 
         virtualisation.oci-containers.containers.mousehole = {

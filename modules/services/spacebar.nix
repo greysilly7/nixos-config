@@ -218,14 +218,19 @@
           "d /var/lib/spacebar/db 0700 root root -"
         ];
 
+        sops.secrets."spacebar/db_password" = { };
+
+        sops.templates."spacebar-db.env".content = ''
+          POSTGRES_USER=spacebar
+          POSTGRES_PASSWORD=${config.sops.placeholder."spacebar/db_password"}
+          POSTGRES_DB=sb
+        '';
+
         virtualisation.oci-containers.containers."spacebar-db" = {
           image = "postgres:17-alpine";
-          ports = [ "5431:5432" ];
-          environment = {
-            POSTGRES_USER = "spacebar";
-            POSTGRES_PASSWORD = "spacebar";
-            POSTGRES_DB = "sb";
-          };
+          # Loopback-only: only other spacebar containers on this host talk to it.
+          ports = [ "127.0.0.1:5431:5432" ];
+          environmentFiles = [ config.sops.templates."spacebar-db.env".path ];
           volumes = [
             "/var/lib/spacebar/db:/var/lib/postgresql/data"
           ];
@@ -233,7 +238,8 @@
 
         virtualisation.oci-containers.containers."spacebar-imagor" = {
           image = "shumc/imagor:latest";
-          ports = [ "8089:8089" ];
+          # Loopback-only: only the spacebar api/cdn containers on this host talk to it.
+          ports = [ "127.0.0.1:8089:8089" ];
           environment = {
             PORT = "8089";
             IMAGOR_UNSAFE = "0";

@@ -6,8 +6,8 @@ _: {
           name = "sort-audiobooks";
           runtimeInputs = [ pkgs.findutils ];
           text = ''
-            SRC="/pool/arr/downloads"
-            STAGE="/pool/arr/staging"
+            SRC="/mnt/pool/arr/downloads"
+            STAGE="/mnt/pool/arr/staging"
 
             [ -d "$SRC" ] || { echo "ERROR: SRC does not exist: $SRC" >&2; exit 1; }
 
@@ -48,9 +48,6 @@ _: {
             done
 
             echo "Symlinked $n items."
-
-            booktree --source "$STAGE/audiobooks" \
-                     --target /pool/arr/library/audiobooks
           '';
         };
       in
@@ -67,8 +64,8 @@ _: {
         };
 
         systemd.services.audiobook-sort.serviceConfig.ExecStartPre = lib.mkAfter [
-          "+${pkgs.coreutils}/bin/mkdir -p /pool/arr/staging"
-          "+${pkgs.coreutils}/bin/chown -R media:media /pool/arr/staging"
+          "+${pkgs.coreutils}/bin/mkdir -p /mnt/pool/arr/staging"
+          "+${pkgs.coreutils}/bin/chown --no-dereference -R media:media /mnt/pool/arr/staging"
         ];
 
         systemd.timers.audiobook-sort = {

@@ -2,6 +2,9 @@ _: {
   den.aspects.media._.seerr = {
     nixos =
       { pkgs, lib, ... }:
+      let
+        fixOwnership = import ./lib.nix { inherit pkgs lib; };
+      in
       {
         # Seerr (Media Requests)
         services.seerr = {
@@ -13,11 +16,10 @@ _: {
           serviceConfig = {
             User = "media";
             Group = "media";
+            # services.seerr has no user/group option upstream and defaults to
+            # DynamicUser; disable it so the unit can run as the shared media user.
             DynamicUser = lib.mkForce false;
-            ExecStartPre = [
-              "+${pkgs.coreutils}/bin/chown -R media:media /var/lib/seerr"
-              "+${pkgs.coreutils}/bin/chmod -R u+rwX,g+rwX /var/lib/seerr"
-            ];
+            ExecStartPre = fixOwnership "/var/lib/seerr";
           };
         };
       };
