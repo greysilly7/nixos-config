@@ -105,16 +105,18 @@
 
       # The upstream module runs nntp-proxy as a systemd DynamicUser, so the
       # rendered overlay (root:root 0400 by default) is unreadable to it.
-      # Hand it to a stable shared group the unit joins.
+      # Hand it to a stable shared group the unit joins. The group name must
+      # NOT match the unit name or DynamicUser allocation fails with
+      # "User or group with specified name already exists".
       sops.templates."nntp-credentials.toml" = {
-        group = "nntp-proxy";
+        group = "nntp-proxy-secrets";
         mode = "0440";
         restartUnits = [ "nntp-proxy.service" ];
       };
 
-      users.groups.nntp-proxy = { };
+      users.groups.nntp-proxy-secrets = { };
 
-      systemd.services.nntp-proxy.serviceConfig.SupplementaryGroups = [ "nntp-proxy" ];
+      systemd.services.nntp-proxy.serviceConfig.SupplementaryGroups = [ "nntp-proxy-secrets" ];
 
       imports = [ inputs.nntp-proxy.nixosModules.default ];
 
