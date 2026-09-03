@@ -197,7 +197,7 @@
         };
       };
 
-      networking.firewall.allowedTCPPorts = [ 593 80 443 ];
+      networking.firewall.allowedTCPPorts = [ 563 80 443 ];
 
       security.acme = {
         acceptTerms = true;
@@ -219,7 +219,7 @@
         enable = true;
         streamConfig = ''
           server {
-            listen 593 ssl;
+            listen 563 ssl;
             proxy_pass 127.0.0.1:8119;
             
             ssl_certificate ${config.security.acme.certs."news.greysilly7.xyz".directory}/fullchain.pem;
