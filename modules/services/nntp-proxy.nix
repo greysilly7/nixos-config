@@ -103,6 +103,19 @@
         tls_verify_cert = true
       '';
 
+      # The upstream module runs nntp-proxy as a systemd DynamicUser, so the
+      # rendered overlay (root:root 0400 by default) is unreadable to it.
+      # Hand it to a stable shared group the unit joins.
+      sops.templates."nntp-credentials.toml" = {
+        group = "nntp-proxy";
+        mode = "0440";
+        restartUnits = [ "nntp-proxy.service" ];
+      };
+
+      users.groups.nntp-proxy = { };
+
+      systemd.services.nntp-proxy.serviceConfig.SupplementaryGroups = [ "nntp-proxy" ];
+
       imports = [ inputs.nntp-proxy.nixosModules.default ];
 
       services.nntp-proxy = {
@@ -146,6 +159,11 @@
               shards = 4;
             };
           };
+          web_panel = {
+            enabled = true;
+            host = "127.0.0.1";
+            port = 8080;
+          };
         };
       };
 
@@ -160,6 +178,10 @@
       services.nginx.virtualHosts."news.greysilly7.xyz" = {
         enableACME = true;
         forceSSL = true;
+        locations = {
+          "= /".return = "302 /client";
+          "/".proxyPass = "http://127.0.0.1:8080";
+        };
       };
 
       # 3. Stream the TLS traffic to the local nntp-proxy
