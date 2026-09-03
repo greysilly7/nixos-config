@@ -6,6 +6,8 @@
   ...
 }:
 {
+  flake-file.inputs.sops-nix.url = "github:Mic92/sops-nix";
+
   # Include sops-nix by default in all hosts and hm-users
   den.schema.host.includes = [ den.aspects.secrets._.secretsNix ];
   den.schema.hm-user.includes = [ den.aspects.secrets._.secretsHome ];

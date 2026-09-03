@@ -1,5 +1,13 @@
 { inputs, ... }:
 {
+  flake-file.inputs = {
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mac-app-util.url = "github:hraban/mac-app-util";
+  };
+
   den.aspects.darwin-base = {
     darwin =
       {

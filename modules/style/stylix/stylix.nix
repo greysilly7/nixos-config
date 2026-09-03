@@ -4,6 +4,11 @@
   ...
 }:
 {
+  flake-file.inputs.stylix = {
+    url = "github:nix-community/stylix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   den.aspects.stylix = {
     includes = [
       den.aspects.stylix._.sys

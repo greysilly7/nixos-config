@@ -6,6 +6,14 @@
     (inputs.den.flakeModules.dendritic or { })
   ];
 
+  flake-file.description = "nixos-config";
+
+  # Core flake inputs
+  flake-file.inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    den.url = "github:denful/den";
+  };
+
   # Define avialable systems
   systems = [
     "aarch64-darwin"

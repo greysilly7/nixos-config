@@ -12,7 +12,7 @@
 let
   frontend = callPackage ./frontend.nix { };
 in
-buildGoModule (finalAttrs: {
+buildGoModule (_finalAttrs: {
   pname = "silo-server";
   version = "0-unstable-2026-08-23";
 

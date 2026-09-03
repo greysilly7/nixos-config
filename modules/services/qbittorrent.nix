@@ -129,8 +129,8 @@ _: {
             TZ = config.time.timeZone;
             MOUSEHOLE_PORT = "5010"; # Ensure this doesn't conflict
           };
-          environmentFiles = [ 
-            config.sops.templates."mousehole.env".path 
+          environmentFiles = [
+            config.sops.templates."mousehole.env".path
           ];
           volumes = [
             "/var/lib/mousehole:/data" # Persists the mam_id internally

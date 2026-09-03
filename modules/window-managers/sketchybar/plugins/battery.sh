@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck source=/dev/null
 source "$CONFIG_DIR/colors.sh"
 
 BATT_PERCENT=$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)
@@ -27,4 +28,4 @@ else
   fi
 fi
 
-sketchybar --set $NAME icon="$ICON" label="${BATT_PERCENT}%" icon.color=$COLOR
+sketchybar --set "$NAME" icon="$ICON" label="${BATT_PERCENT}%" icon.color="$COLOR"

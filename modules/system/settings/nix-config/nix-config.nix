@@ -35,14 +35,12 @@
             '';
             users.mutableUsers = lib.mkDefault false;
           };
-        darwin =
-          _:
-          {
-            nix.settings = baseNixSettings // {
-              trusted-users = [ "@admin" ];
-            };
-            nixpkgs.config.allowUnfree = allowUnfree;
+        darwin = _: {
+          nix.settings = baseNixSettings // {
+            trusted-users = [ "@admin" ];
           };
+          nixpkgs.config.allowUnfree = allowUnfree;
+        };
       };
 
     _.garbage-collection = _: {

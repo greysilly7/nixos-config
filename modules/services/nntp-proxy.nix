@@ -1,10 +1,10 @@
-{inputs, ...}: {
-  den.aspects.nntp-proxy = {
-    flake-file.inputs.nntp-proxy = {
-      url = "github:greysilly7/nntp-proxy";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+{ inputs, ... }: {
+  flake-file.inputs.nntp-proxy = {
+    url = "github:greysilly7/nntp-proxy";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
+  den.aspects.nntp-proxy = {
     nixos = { config, ... }: {
       sops.secrets = {
         "nntp/servers/newshosting_pw" = { };

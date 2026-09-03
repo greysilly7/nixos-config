@@ -7,6 +7,8 @@
   ...
 }:
 {
+  flake-file.inputs.preservation.url = "github:nix-community/preservation";
+
   den.aspects.persist._.enable = _: {
     nixos =
       {

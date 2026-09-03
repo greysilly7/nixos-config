@@ -1,4 +1,9 @@
 { inputs, ... }: {
+  flake-file.inputs.aiostreams = {
+    url = "github:greysilly7/AIOStreams";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   den.aspects.media._.aiostreams = {
     nixos =
       { config, ... }:

@@ -1,41 +1,15 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
   description = "nixos-config";
 
-  outputs = inputs:
-    let
-      flake = inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-        imports = [
-          (inputs.import-tree ./modules)
-          ./flake-modules/systems.nix
-        ];
-      };
-    in flake // {
-      templates = {
-        rust = {
-          path = ./templates/rust;
-          description = "Rust devShell with crane + memory-efficient linker";
-        };
-        dart-flutter = {
-          path = ./templates/dart-flutter;
-          description = "Flutter/Dart devShell -- no global pollution";
-        };
-        containerized-microservices = {
-          path = ./templates/containerized-microservices;
-          description = "Containerized microservice devShell with Podman";
-        };
-        default = {
-          path = ./templates/rust;
-          description = "Rust devShell (default)";
-        };
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
     aiostreams = {
       url = "github:greysilly7/AIOStreams";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    crane.url = "github:ipetkov/crane";
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nntp-proxy = {
+      url = "github:greysilly7/nntp-proxy";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v4.7.0";
       inputs = {
@@ -74,11 +52,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     preservation.url = "github:nix-community/preservation";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    sops-nix.url = "github:Mic92/sops-nix";
     spacebar = {
       url = "github:spacebarchat/server";
       inputs.nixpkgs.follows = "nixpkgs";

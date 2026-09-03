@@ -1,5 +1,10 @@
 { inputs, ... }: {
 
+  flake-file.inputs.spacebar = {
+    url = "github:spacebarchat/server";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   den.aspects.spacebar = {
     nixos =
       { config, ... }:

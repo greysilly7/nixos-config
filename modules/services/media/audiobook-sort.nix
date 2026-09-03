@@ -1,6 +1,7 @@
 _: {
   den.aspects.media._.audiobook-sort = {
-    nixos = { pkgs, lib, ... }:
+    nixos =
+      { pkgs, lib, ... }:
       let
         audiobookSort = pkgs.writeShellApplication {
           name = "sort-audiobooks";

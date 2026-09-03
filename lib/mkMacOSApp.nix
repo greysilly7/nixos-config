@@ -32,11 +32,11 @@ stdenv.mkDerivation (
     '';
 
     meta = {
-        platforms = [
-          "aarch64-darwin"
-          "x86_64-darwin"
-        ];
-      }
-      // meta;
+      platforms = [
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+    }
+    // meta;
   }
 )
