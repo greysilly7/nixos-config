@@ -16,91 +16,37 @@
         "nntp/servers/torbox_pw" = { };
       };
 
-      # 2. Render the credentials TOML overlay at runtime
+      # 2. Render the credentials-only overlay at runtime. Non-secret server
+      # fields live in `services.nntp-proxy.settings.servers`; this overlay only
+      # carries passwords, matched to those servers by `name`.
       sops.templates."nntp-credentials.toml".content = ''
         [[servers]]
-        host = "news.newshosting.com"
-        port = 563
         name = "Newshosting"
-        max_connections = 100
-        tier = 0
-        username = "6ind3c3y"
         password = "${config.sops.placeholder."nntp/servers/newshosting_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
 
         [[servers]]
-        host = "newshosting.tweaknews.eu"
-        port = 563
         name = "Tweaknews"
-        max_connections = 40
-        tier = 1
-        username = "cnzzykughklk"
         password = "${config.sops.placeholder."nntp/servers/tweaknews_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
 
         [[servers]]
-        host = "news.newsgroupdirect.com"
-        port = 563
         name = "NewsGroupDirect"
-        max_connections = 100
-        tier = 2
-        username = "ehg741689847"
         password = "${config.sops.placeholder."nntp/servers/ngd_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
 
         [[servers]]
-        host = "super.newsgroupdirect.com"
-        port = 563
         name = "Supernews"
-        max_connections = 30
-        tier = 3
-        username = "ehg741689847@newsgroupdirect.com"
         password = "${config.sops.placeholder."nntp/servers/supernews_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
 
         [[servers]]
-        host = "farm.newsgroupdirect.com"
-        port = 563
         name = "UsenetFarm"
-        max_connections = 40
-        tier = 4
-        username = "ehg741689847"
         password = "${config.sops.placeholder."nntp/servers/usenetfarm_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
 
         [[servers]]
-        host = "viper.newsgroupdirect.com"
-        port = 563
         name = "Viper"
-        max_connections = 1
-        tier = 4
-        username = "ehg741689847"
         password = "${config.sops.placeholder."nntp/servers/viper_pw"}"
-        stat_missing = 1
-        use_tls = true   
-        tls_verify_cert = true
 
         [[servers]]
-        host = "news.torbox.app"
-        port = 563
         name = "Torbox"
-        max_connections = 10
-        tier = 5
-        username = "d2a19a91-520c-404f-a167-9392aec89e6e"
         password = "${config.sops.placeholder."nntp/servers/torbox_pw"}"
-        stat_missing = 1
-        use_tls = true
-        tls_verify_cert = true
       '';
 
       # The upstream module runs nntp-proxy as a systemd DynamicUser, so the
@@ -134,6 +80,88 @@
             threads = 0;
             validate_yenc = false;
           };
+
+          # Non-secret backend definitions. Passwords are merged at runtime from
+          # the credentials overlay (see sops.templates above), matched by name.
+          servers = [
+            {
+              name = "Newshosting";
+              host = "news.newshosting.com";
+              port = 563;
+              username = "6ind3c3y";
+              max_connections = 100;
+              tier = 0;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "Tweaknews";
+              host = "newshosting.tweaknews.eu";
+              port = 563;
+              username = "cnzzykughklk";
+              max_connections = 40;
+              tier = 1;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "NewsGroupDirect";
+              host = "news.newsgroupdirect.com";
+              port = 563;
+              username = "ehg741689847";
+              max_connections = 100;
+              tier = 2;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "Supernews";
+              host = "super.newsgroupdirect.com";
+              port = 563;
+              username = "ehg741689847@newsgroupdirect.com";
+              max_connections = 30;
+              tier = 3;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "UsenetFarm";
+              host = "farm.newsgroupdirect.com";
+              port = 563;
+              username = "ehg741689847";
+              max_connections = 40;
+              tier = 4;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "Viper";
+              host = "viper.newsgroupdirect.com";
+              port = 563;
+              username = "ehg741689847";
+              max_connections = 1;
+              tier = 4;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+            {
+              name = "Torbox";
+              host = "news.torbox.app";
+              port = 563;
+              username = "d2a19a91-520c-404f-a167-9392aec89e6e";
+              max_connections = 10;
+              tier = 5;
+              stat_missing = 1;
+              use_tls = true;
+              tls_verify_cert = true;
+            }
+          ];
 
           routing = {
             mode = "hybrid";
