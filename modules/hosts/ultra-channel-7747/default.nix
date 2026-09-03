@@ -45,6 +45,12 @@
           useOSProber = false;
         };
 
+        # VM guest: no physical hardware, so skip firmware blobs entirely
+        # (also dodges the large linux-firmware download over a flaky link).
+        hardware.enableAllFirmware = false;
+        hardware.enableRedistributableFirmware = false;
+        services.fwupd.enable = false;
+
         # Static networking (Proxmox guest, no DHCP). Interface matched by MAC
         # since NixOS predictable naming will not call it "eth0".
         networking.useDHCP = false;
