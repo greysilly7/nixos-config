@@ -197,7 +197,7 @@
         };
       };
 
-      networking.firewall.allowedTCPPorts = [ 593 ];
+      networking.firewall.allowedTCPPorts = [ 593 80 443 ];
 
       security.acme = {
         acceptTerms = true;
