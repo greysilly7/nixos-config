@@ -1,6 +1,6 @@
 {...}: {
   den.aspects.nntp-proxy = {
-    flake-file.inputs.home-manager = {
+    flake-file.inputs.nntp-proxy = {
       url = "github:greysilly7/nntp-proxy";
       inputs.nixpkgs.follows = "nixpkgs";
     };
