@@ -11,6 +11,7 @@
       den.aspects.tailscale._.server
       den.aspects.fail2ban
       den.aspects.ultra-channel-7747-filesystem
+      den.aspects.nntp-proxy
     ];
 
     provides = rec {
@@ -43,7 +44,20 @@
           device = lib.mkForce "nodev";
           efiSupport = false;
           useOSProber = false;
+          # GRUB output to the Proxmox serial console as well as VGA.
+          extraConfig = ''
+            serial --unit=0 --speed=115200
+            terminal_input --append serial
+            terminal_output --append serial
+          '';
         };
+
+        # Proxmox serial console: kernel + boot logs on ttyS0, and a
+        # serial-getty. tty0 kept first so VGA still works if attached.
+        boot.kernelParams = [
+          "console=tty0"
+          "console=ttyS0,115200"
+        ];
 
         # VM guest: no physical hardware, so skip firmware blobs entirely
         # (also dodges the large linux-firmware download over a flaky link).
