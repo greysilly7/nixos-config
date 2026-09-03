@@ -5,7 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos = { config, inputs, ... }: {
+    nixos = { config, ... }: {
       sops.secrets = {
         "nntp/servers/newshosting_pw" = { };
         "nntp/servers/tweaknews_pw" = { };
