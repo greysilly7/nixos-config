@@ -1,4 +1,4 @@
-{...}: {
+{inputs, ...}: {
   den.aspects.nntp-proxy = {
     flake-file.inputs.nntp-proxy = {
       url = "github:greysilly7/nntp-proxy";
@@ -170,8 +170,8 @@
             listen 593 ssl;
             proxy_pass 127.0.0.1:8119;
             
-            ssl_certificate ${config.security.acme.certs."nntp.yourdomain.com".directory}/fullchain.pem;
-            ssl_certificate_key ${config.security.acme.certs."nntp.yourdomain.com".directory}/key.pem;
+            ssl_certificate ${config.security.acme.certs."news.greysilly7.xyz".directory}/fullchain.pem;
+            ssl_certificate_key ${config.security.acme.certs."news.greysilly7.xyz".directory}/key.pem;
             
             ssl_protocols TLSv1.2 TLSv1.3;
             ssl_ciphers HIGH:!aNULL:!MD5;
