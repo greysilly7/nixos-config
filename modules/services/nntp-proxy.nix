@@ -1,4 +1,4 @@
-_: {
+{...}: {
   den.aspects.nntp-proxy = {
     flake-file.inputs.home-manager = {
       url = "github:greysilly7/nntp-proxy";
