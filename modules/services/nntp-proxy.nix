@@ -5,7 +5,7 @@
   };
 
   den.aspects.nntp-proxy = {
-    nixos = { config, ... }: {
+    nixos = { config, lib, pkgs, ... }: {
       sops.secrets = {
         "nntp/servers/newshosting_pw" = { };
         "nntp/servers/tweaknews_pw" = { };
@@ -199,37 +199,41 @@
 
       networking.firewall.allowedTCPPorts = [ 563 80 443 ];
 
-      security.acme = {
-        acceptTerms = true;
-        defaults.email = "greysilly7@greysilly7.xyz";
-      };
-
-      # Set up a dummy web host just so ACME can validate the domain
-      services.nginx.virtualHosts."news.greysilly7.xyz" = {
-        enableACME = true;
-        forceSSL = true;
-        locations = {
-          "= /".return = "302 /client";
-          "/".proxyPass = "http://127.0.0.1:8080";
-        };
-      };
-
-      # 3. Stream the TLS traffic to the local nntp-proxy
-      services.nginx = {
+      # Edge proxy for this host is Caddy (the ingress-gateway globals and the
+      # wildcard vhost live in modules/hosts/ultra-channel-7747/default.nix).
+      # Caddy owns :80/:443, and via the caddy-l4 plugin it also terminates
+      # NNTPS on :563 and forwards plaintext to the local nntp-proxy listener.
+      services.caddy = {
         enable = true;
-        streamConfig = ''
-          server {
-            listen 563 ssl;
-            proxy_pass 127.0.0.1:8119;
-            
-            ssl_certificate ${config.security.acme.certs."news.greysilly7.xyz".directory}/fullchain.pem;
-            ssl_certificate_key ${config.security.acme.certs."news.greysilly7.xyz".directory}/key.pem;
-            
-            ssl_protocols TLSv1.2 TLSv1.3;
-            ssl_ciphers HIGH:!aNULL:!MD5;
-            ssl_session_cache shared:SSL:20m;
-            ssl_session_timeout 4h;
+
+        # caddy-l4 (layer4 TCP/UDP) is not in the stock Caddy build, so we build
+        # a Caddy with the plugin vendored in. On the first `nixos-rebuild`, Nix
+        # prints the correct vendor hash — paste it over lib.fakeHash.
+        package = pkgs.caddy.withPlugins {
+          plugins = [ "github.com/mholt/caddy-l4@v0.1.2" ];
+          hash = lib.fakeHash;
+        };
+
+        # Layer4 NNTPS terminator. `tls` (no args) uses Caddy's automatically
+        # managed cert for news.greysilly7.xyz — issued via HTTP-01 because
+        # Caddy now owns :80 — matched by SNI.
+        globalConfig = ''
+          layer4 {
+            :563 {
+              route {
+                tls
+                proxy 127.0.0.1:8119
+              }
+            }
           }
+        '';
+
+        # Web panel vhost (replaces the old nginx dummy host). `= /` -> /client,
+        # everything else proxied to the panel. Automatic HTTPS + ACME.
+        virtualHosts."news.greysilly7.xyz".extraConfig = ''
+          @root path /
+          redir @root /client 302
+          reverse_proxy 127.0.0.1:8080
         '';
       };
     };

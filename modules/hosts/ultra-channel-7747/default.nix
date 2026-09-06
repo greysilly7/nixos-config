@@ -98,6 +98,54 @@
           "sd_mod"
           "sr_mod"
         ];
+
+        # --- Caddy ingress gateway (Two-Tier Proxy, tier 1) ------------------
+        # Wildcard catch for *.aiostreams.greysilly7.xyz ONLY, secured with
+        # on-demand TLS and routed over Tailscale to the local Proxmox Caddy
+        # LXC. This adds one isolated virtualHost and appends to globalConfig;
+        # it does not touch any other services.caddy.virtualHosts (the
+        # news.greysilly7.xyz vhost and the :563 NNTPS terminator are defined
+        # in modules/services/nntp-proxy.nix and stay intact).
+        services.caddy.enable = true;
+
+        # On-demand issuance guard. Modern Caddy refuses to start with
+        # `on_demand` unless `ask` is set: before issuing, Caddy GETs
+        # http://127.0.0.1:5555/?domain=<sni> and only proceeds on HTTP 200.
+        # `interval`/`burst` additionally rate-limit new issuances.
+        services.caddy.globalConfig = ''
+          on_demand_tls {
+            ask http://127.0.0.1:5555
+            interval 2m
+            burst 5
+          }
+        '';
+
+        # Internal ask endpoint (loopback only, plain HTTP). Allowlist:
+        # anything under *.aiostreams.greysilly7.xyz, plus news.greysilly7.xyz.
+        # Everything else -> 403, so Caddy never asks Let's Encrypt for it.
+        services.caddy.virtualHosts."http://127.0.0.1:5555".extraConfig = ''
+          @allowed expression `{query.domain}.endsWith(".aiostreams.greysilly7.xyz") || {query.domain} == "news.greysilly7.xyz"`
+          respond @allowed 200
+          respond 403
+        '';
+
+        services.caddy.virtualHosts."*.aiostreams.greysilly7.xyz".extraConfig = ''
+          tls {
+            on_demand
+          }
+          reverse_proxy http://100.111.93.13:80
+        '';
+
+        # tier-1 ingress + ACME HTTP-01 challenges. (563/80/443 are also opened
+        # by the nntp-proxy aspect; list options merge, duplicates are inert.)
+        networking.firewall.allowedTCPPorts = [
+          80
+          443
+        ];
+
+        # services.tailscale.enable is already true via
+        # den.aspects.tailscale._.server (see this host's `includes`), so
+        # Tailnet routing for the reverse_proxy above already works.
       };
   };
 }
