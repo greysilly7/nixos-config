@@ -5,7 +5,7 @@
   };
 
   den.aspects.nntp-proxy = {
-    nixos = { config, lib, pkgs, ... }: {
+    nixos = { config, pkgs, ... }: {
       sops.secrets = {
         "nntp/servers/newshosting_pw" = { };
         "nntp/servers/tweaknews_pw" = { };
@@ -207,11 +207,12 @@
         enable = true;
 
         # caddy-l4 (layer4 TCP/UDP) is not in the stock Caddy build, so we build
-        # a Caddy with the plugin vendored in. On the first `nixos-rebuild`, Nix
-        # prints the correct vendor hash — paste it over lib.fakeHash.
+        # a Caddy with the plugin vendored in. Hash is the src-with-plugins
+        # fixed-output hash for caddy-l4 v0.1.2 on Caddy 2.11.4; regenerate
+        # (set to lib.fakeHash, rebuild, copy the "got:" value) if either bumps.
         package = pkgs.caddy.withPlugins {
           plugins = [ "github.com/mholt/caddy-l4@v0.1.2" ];
-          hash = lib.fakeHash;
+          hash = "sha256-C+ksbA6ucY3GUsYHSUhkYoh1gTP8SIAJv0MLjhX8BQM=";
         };
 
         # Layer4 NNTPS terminator. `tls` (no args) uses Caddy's automatically
