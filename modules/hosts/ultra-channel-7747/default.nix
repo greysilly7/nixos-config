@@ -111,18 +111,18 @@
         # On-demand issuance guard. Modern Caddy refuses to start with
         # `on_demand` unless `ask` is set: before issuing, Caddy GETs
         # http://127.0.0.1:5555/?domain=<sni> and only proceeds on HTTP 200.
-        # `interval`/`burst` additionally rate-limit new issuances.
+        # (The old `interval`/`burst` rate-limit knobs were removed from
+        # on_demand_tls; the ask endpoint is now the sole gate.)
         services.caddy.globalConfig = ''
           on_demand_tls {
             ask http://127.0.0.1:5555
-            interval 2m
-            burst 5
           }
         '';
 
         # Internal ask endpoint (loopback only, plain HTTP). Allowlist:
         # anything under *.aiostreams.greysilly7.xyz, plus news.greysilly7.xyz.
         # Everything else -> 403, so Caddy never asks Let's Encrypt for it.
+        # This is also where to add rate-limiting if you want it back.
         services.caddy.virtualHosts."http://127.0.0.1:5555".extraConfig = ''
           @allowed expression `{query.domain}.endsWith(".aiostreams.greysilly7.xyz") || {query.domain} == "news.greysilly7.xyz"`
           respond @allowed 200
