@@ -19,7 +19,6 @@
       den.aspects.qbittorrent
       den.aspects.rsdebrid
       den.aspects.spacebar
-      den.aspects.hardware._.amdcpu._.enable
     ];
 
     provides = rec {
@@ -57,9 +56,14 @@
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
 
-        boot.kernelParams = [
-          "amd_pstate=active"
-          "amdgpu.runpm=0"
+        # Proxmox/KVM guest: modules needed to find the root disk in initrd.
+        boot.initrd.availableKernelModules = [
+          "virtio_pci"
+          "virtio_scsi"
+          "virtio_blk"
+          "ahci"
+          "sd_mod"
+          "sr_mod"
         ];
 
         boot.loader.systemd-boot.memtest86.enable = true;

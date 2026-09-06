@@ -1,13 +1,5 @@
 let
-  rootDatasets = {
-    root = "/";
-    nix = "/nix";
-    persist = "/persist";
-    var_log = "/var/log";
-  };
-
-  nvmeId = "/dev/disk/by-id/nvme-SKHynix_HFS256GEJ4X112N_4YC5N026115505I1R";
-
+  nvmeId = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
   storageDiskIds = [
     "/dev/disk/by-id/wwn-0x5000cca01d2069fc"
     "/dev/disk/by-id/wwn-0x5000cca0726c4420"
@@ -61,11 +53,18 @@ in
                 mountOptions = [ "umask=0077" ];
               };
             };
-            zfs = {
+            swap = {
+              size = "8G";
+              content = {
+                type = "swap";
+              };
+            };
+            root = {
               size = "100%";
               content = {
-                type = "zfs";
-                pool = "zroot";
+                type = "filesystem";
+                format = "xfs";
+                mountpoint = "/";
               };
             };
           };
@@ -75,35 +74,20 @@ in
     // storageDisksAttrs;
 
     zpool = {
-      zroot = {
-        type = "zpool";
-        mode = ""; # single disk
-        rootFsOptions = {
-          compression = "lz4";
-          "com.sun:auto-snapshot" = "false";
-          mountpoint = "none";
-        };
-        postCreateHook = "zfs list -t snapshot -H -o name | grep -E '^zroot@blank$' || zfs snapshot zroot@blank";
-
-        datasets = builtins.mapAttrs (_: mountpoint: {
-          type = "zfs_fs";
-          inherit mountpoint;
-          options.mountpoint = "legacy";
-        }) rootDatasets;
-      };
-
       tank = {
         type = "zpool";
         mode = "raidz2";
         rootFsOptions = {
-          compression = "lz4";
+          compression = "zstd";
           "com.sun:auto-snapshot" = "false";
           mountpoint = "none";
         };
         datasets = {
           root = {
             type = "zfs_fs";
-            mountpoint = "/mnt/pool";
+            # No `mountpoint` here on purpose: disko then emits no fileSystems
+            # entry, so a missing/un-imported tank cannot wedge boot. Mount it
+            # manually (legacy mountpoint) once the pool is imported.
             options.mountpoint = "legacy";
           };
 

@@ -1,21 +1,16 @@
 { lib, rustPlatform }:
 let
-  src = /home/greysilly7/rsdebrid;
+  src = builtins.fetchGit {
+    url = "git@github.com:Alpaca-Industries/rsdebrid.git";
+    rev = "424dfb94f6318fbd8fd9d9c2d046d03db37df5ee";
+  };
   cargoToml = lib.importTOML "${src}/crates/api/Cargo.toml";
 in
 rustPlatform.buildRustPackage {
   pname = cargoToml.package.name;
   version = cargoToml.package.version;
 
-  src = lib.fileset.toSource {
-    root = src;
-    fileset = lib.fileset.unions [
-      (src + "/Cargo.toml")
-      (src + "/Cargo.lock")
-      (src + "/crates")
-      # add any other dirs the build needs, e.g. migrations, build.rs assets
-    ];
-  };
+  inherit src;
 
   cargoLock.lockFile = src + "/Cargo.lock";
 

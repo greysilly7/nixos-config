@@ -3,23 +3,15 @@ _: {
     disko = import ./_disko.nix;
 
     nixos = {
-      boot.supportedFilesystems = [ "btrfs" ];
-      fileSystems = {
-        "/persist".neededForBoot = true;
-        "/var/log".neededForBoot = true;
-        "/mnt/speedy" = {
-          device = "/dev/disk/by-uuid/5f3ecae9-52eb-4ccd-bd49-e6d04e5e6b01";
-          fsType = "btrfs";
-          options = [
-            "compress=zstd"
-            "nofail"
-            "noatime"
-          ];
-        };
-      };
-      swapDevices = [
-        { device = "/dev/zvol/zroot/swap"; }
+      boot.supportedFilesystems = [
+        "xfs"
+        "zfs"
       ];
+
+      # tank is NOT auto-imported or mounted for now. It is the pre-existing
+      # bare-metal pool; import it by hand once the box boots:
+      #   zpool import -f -d /dev/disk/by-id tank
+      # then re-enable `boot.zfs.extraPools` + the `/mnt/pool` mount.
     };
   };
 }

@@ -13,6 +13,7 @@
       to-users = _: {
         includes = [
           den.aspects.system-type._.basic
+          den.aspects.cli._.nh
           den.aspects.sketchybar
           den.aspects.editors._.vscodium
           den.aspects.messaging._.discord._.equibop
@@ -78,6 +79,7 @@
             "lm-studio"
             "prismlauncher"
             "claude-code"
+            "t3-code"
           ];
         };
       };
