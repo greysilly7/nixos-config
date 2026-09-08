@@ -122,7 +122,7 @@
           virtualHosts = {
             # Caddy on-demand TLS authorization endpoint.
             "http://127.0.0.1:5555".extraConfig = ''
-              @allowed expression `{query.domain}.endsWith(".harbor.greysilly7.xyz") || {query.domain} == "harbor.greysilly7.xyz" || {query.domain} == "news.greysilly7.xyz"`
+              @allowed expression `{query.domain}.endsWith(".harbor.greysilly7.xyz") || {query.domain} == "harbor.greysilly7.xyz"  || {query.domain}.endsWith(".aiostreams.greysilly7.xyz") || {query.domain} == "news.greysilly7.xyz"`
               respond @allowed 200
               respond 403
             '';
@@ -130,6 +130,14 @@
             # Tenant ingress:
             # front-tier Caddy -> Proxmox-side Caddy over Tailscale.
             "*.harbor.greysilly7.xyz".extraConfig = ''
+              tls {
+                on_demand
+              }
+
+              reverse_proxy http://100.111.93.13:80
+            '';
+
+            "*.aiostreams.greysilly7.xyz".extraConfig = ''
               tls {
                 on_demand
               }
