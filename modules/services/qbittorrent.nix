@@ -8,22 +8,21 @@ _: {
       in
       {
         # SOPS Secrets for VPN configuration
-        sops.secrets."protonvpn/wireguard_private_key" = { };
-        sops.secrets."protonvpn/vpn_service_provider" = { };
-        sops.secrets."protonvpn/vpn_type" = { };
-        sops.secrets."protonvpn/vpn_port_forwarding" = { };
+        sops.secrets."airvpn/wireguard_private_key" = { };
+        sops.secrets."airvpn/wireguard_public_key" = { };
+        sops.secrets."airvpn/vpn_service_provider" = { };
+        sops.secrets."airvpn/vpn_type" = { };
+        sops.secrets."airvpn/wireguard_addresses" = { };
+        sops.secrets."airvpn/ports" = { };
         sops.secrets."mousehole/webui_password" = { };
 
-        sops.templates."protonvpn.env".content = ''
-          VPN_SERVICE_PROVIDER=${config.sops.placeholder."protonvpn/vpn_service_provider"}
-          SERVER_COUNTRIES="United States"
-          VPN_TYPE=${config.sops.placeholder."protonvpn/vpn_type"}
-          WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."protonvpn/wireguard_private_key"}
-          VPN_PORT_FORWARDING=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
-          PORT_FOWARD_ONLY=${config.sops.placeholder."protonvpn/vpn_port_forwarding"}
-          HTTPPROXY=on
-          HTTPPROXY_STEALTH=on
-          HTTPPROXY_LISTENING_ADDRESS=:8889
+        sops.templates."airvpn.env".content = ''
+          VPN_SERVICE_PROVIDER=${config.sops.placeholder."airvpn/vpn_service_provider"}
+          VPN_TYPE=${config.sops.placeholder."airvpn/vpn_type"}
+          WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."airvpn/wireguard_private_key"}
+          WIREGUARD_PUBLIC_KEY=${config.sops.placeholder."airvpn/wireguard_public_key"}
+          WIREGUARD_ADDRESSES=${config.sops.placeholder."airvpn/wireguard_addresses"}
+          FIREWALL_VPN_INPUT_PORTS=${config.sops.placeholder."airvpn/ports"}
         '';
 
         sops.templates."mousehole.env".content = ''
