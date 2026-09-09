@@ -17,7 +17,7 @@
       den.aspects.vaultwarden
       den.aspects.fail2ban
       den.aspects.qbittorrent
-      den.aspects.rsdebrid
+      # den.aspects.rsdebrid
       den.aspects.spacebar
     ];
 
