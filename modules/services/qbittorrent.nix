@@ -22,7 +22,7 @@ _: {
           VPN_TYPE=${config.sops.placeholder."airvpn/vpn_type"}
           WIREGUARD_PRIVATE_KEY=${config.sops.placeholder."airvpn/wireguard_private_key"}
           WIREGUARD_PUBLIC_KEY=${config.sops.placeholder."airvpn/wireguard_public_key"}
-          WIREGUARD_PRE_SHARED_KEY=${config.sops.placeholder."airvpn/wireguard_pre_shared_key"}
+          WIREGUARD_PRESHARED_KEY=${config.sops.placeholder."airvpn/wireguard_pre_shared_key"}
           WIREGUARD_ADDRESSES=${config.sops.placeholder."airvpn/wireguard_addresses"}
           FIREWALL_VPN_INPUT_PORTS=${config.sops.placeholder."airvpn/ports"}
         '';
