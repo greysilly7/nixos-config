@@ -38,8 +38,8 @@ _: {
         # overlay mounts and open fds pin it), the stop fails, and every
         # pool-backed service cascades into a failed state.
         systemd.services = lib.genAttrs [
-          "rsdebrid-api"
-          "rsdebrid-worker"
+          # "rsdebrid-api"
+          # "rsdebrid-worker"
           "spacebar-api"
           "spacebar-cdn"
           "spacebar-gateway"
