@@ -48,6 +48,12 @@ _: {
           "d /mnt/pool/podman/storage 0710 root root -"
         ];
 
+        virtualisation.containers.registries.search = [
+          "docker.io"
+          "ghcr.io"
+          "quay.io"
+        ];
+
         hardware.nvidia-container-toolkit.enable = false;
       };
   };
