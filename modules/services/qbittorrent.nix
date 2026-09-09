@@ -49,13 +49,13 @@ _: {
         };
 
         systemd.tmpfiles.rules = [
-          "d /var/lib/protonvpn 0700 root root -"
+          "d /var/lib/airvpn 0700 root root -"
           "d /var/lib/qbittorrent 0775 media media -"
           "d /var/lib/mousehole 0775 media media -"
         ];
 
-        # ProtonVPN (Gluetun VPN Gateway) Container
-        virtualisation.oci-containers.containers.protonvpn = {
+        # airvpn (Gluetun VPN Gateway) Container
+        virtualisation.oci-containers.containers.airvpn = {
           image = "docker.io/qmcgaw/gluetun:latest";
           environment = {
             TZ = config.time.timeZone;
@@ -63,9 +63,9 @@ _: {
             VPN_PORT_FORWARDING_UP_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}},\\\"current_network_interface\\\":\\\"tun0\\\"}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
             VPN_PORT_FORWARDING_DOWN_COMMAND = "/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":0,\\\"current_network_interface\\\":\\\"lo\\\"}\" http://127.0.0.1:${qbitWebuiPort}/api/v2/app/setPreferences 2>&1'";
           };
-          environmentFiles = [ config.sops.templates."protonvpn.env".path ];
+          environmentFiles = [ config.sops.templates."airvpn.env".path ];
           volumes = [
-            "/var/lib/protonvpn:/gluetun"
+            "/var/lib/airvpn:/gluetun"
           ];
           # Loopback-only publish; tailnet reachability on the same ports
           # comes from the tailscale-serve-qbittorrent unit below. 8889
@@ -85,7 +85,7 @@ _: {
         # qBittorrent Container
         virtualisation.oci-containers.containers.qbittorrent = {
           image = "lscr.io/linuxserver/qbittorrent:latest";
-          dependsOn = [ "protonvpn" ];
+          dependsOn = [ "airvpn" ];
           environment = {
             TZ = config.time.timeZone;
             WEBUI_PORT = qbitWebuiPort;
@@ -99,7 +99,7 @@ _: {
             "${mediaPath}/downloads:/downloads"
           ];
           extraOptions = [
-            "--network=container:protonvpn"
+            "--network=container:airvpn"
           ];
         };
 
@@ -107,7 +107,7 @@ _: {
           description = "Expose qbittorrent + mousehole on the tailnet via tailscale serve";
           after = [
             "tailscaled.service"
-            "podman-protonvpn.service"
+            "podman-airvpn.service"
           ];
           wants = [ "tailscaled.service" ];
           wantedBy = [ "multi-user.target" ];
@@ -123,7 +123,7 @@ _: {
 
         virtualisation.oci-containers.containers.mousehole = {
           image = "docker.io/tmmrtn/mousehole:edge"; # Or docker.io/tmart/mousehole
-          dependsOn = [ "protonvpn" ];
+          dependsOn = [ "airvpn" ];
           environment = {
             TZ = config.time.timeZone;
             MOUSEHOLE_PORT = "5010"; # Ensure this doesn't conflict
@@ -135,7 +135,7 @@ _: {
             "/var/lib/mousehole:/data" # Persists the mam_id internally
           ];
           extraOptions = [
-            "--network=container:protonvpn"
+            "--network=container:airvpn"
           ];
         };
       };
