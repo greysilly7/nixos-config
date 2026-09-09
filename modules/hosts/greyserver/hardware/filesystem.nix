@@ -47,7 +47,7 @@ _: {
           "spacebar-webrtc"
           "podman"
           "podman-qbittorrent"
-          "podman-protonvpn"
+          "podman-airvpn"
           "podman-mousehole"
           "podman-spacebar-db"
           "podman-spacebar-imagor"

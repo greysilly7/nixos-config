@@ -68,9 +68,6 @@ _: {
           volumes = [
             "/var/lib/airvpn:/gluetun"
           ];
-          # Loopback-only publish; tailnet reachability on the same ports
-          # comes from the tailscale-serve-qbittorrent unit below. 8889
-          # (VPN HTTP proxy) is loopback-only, no direct tailnet access needed.
           ports = [
             "127.0.0.1:${qbitWebuiPort}:${qbitWebuiPort}"
             "127.0.0.1:5010:5010"
