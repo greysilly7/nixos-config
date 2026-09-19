@@ -25,6 +25,8 @@ _: {
           WIREGUARD_PRESHARED_KEY=${config.sops.placeholder."airvpn/wireguard_pre_shared_key"}
           WIREGUARD_ADDRESSES=${config.sops.placeholder."airvpn/wireguard_addresses"}
           FIREWALL_VPN_INPUT_PORTS=${config.sops.placeholder."airvpn/ports"}
+          SERVER_COUNTRIES=United States
+          SERVER_REGIONS=America
         '';
 
         sops.templates."mousehole.env".content = ''

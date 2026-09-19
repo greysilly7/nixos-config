@@ -56,6 +56,10 @@
 
         # Proxmox serial console: kernel + boot logs on ttyS0, with VGA
         # retained on tty0.
+        # Test BBR without changing the existing fq_codel qdisc.
+        boot.kernelModules = [ "tcp_bbr" ];
+        boot.kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+
         boot.kernelParams = [
           "console=tty0"
           "console=ttyS0,115200"
