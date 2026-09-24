@@ -115,46 +115,16 @@
         services.caddy = {
           enable = true;
 
-          # Permit on-demand certificates only for Harbor control-plane
-          # and tenant hosts.
-          globalConfig = ''
-            on_demand_tls {
-              ask http://127.0.0.1:5555
-            }
-          '';
-
           virtualHosts = {
-            # Caddy on-demand TLS authorization endpoint.
-            "http://127.0.0.1:5555".extraConfig = ''
-              @allowed expression `{query.domain}.endsWith(".harbor.greysilly7.xyz") || {query.domain} == "harbor.greysilly7.xyz"  || {query.domain}.endsWith(".aiostreams.greysilly7.xyz") || {query.domain} == "news.greysilly7.xyz"`
-              respond @allowed 200
-              respond 403
-            '';
-
-            # Tenant ingress:
-            # front-tier Caddy -> Proxmox-side Caddy over Tailscale.
-            "*.harbor.greysilly7.xyz".extraConfig = ''
-              tls {
-                on_demand
-              }
-
-              reverse_proxy http://100.111.93.13:80
-            '';
-
-            "*.aiostreams.greysilly7.xyz".extraConfig = ''
-              tls {
-                on_demand
-              }
-
-              reverse_proxy http://100.111.93.13:80
-            '';
 
             # Harbor control plane:
             # front-tier Caddy -> Proxmox-side Caddy -> CT 103.
-            #
-            # The Proxmox-side Caddy must define:
-            # harbor.greysilly7.xyz -> 192.168.2.103:3000
             "harbor.greysilly7.xyz".extraConfig = ''
+              reverse_proxy http://100.111.93.13:80
+            '';
+
+            # Ashore control plane.
+            "ashore.dev".extraConfig = ''
               reverse_proxy http://100.111.93.13:80
             '';
           };
