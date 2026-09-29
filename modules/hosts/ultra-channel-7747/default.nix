@@ -115,18 +115,47 @@
         services.caddy = {
           enable = true;
 
+          globalConfig = lib.mkAfter ''
+            admin 127.0.0.1:2019 {
+              origins localhost:2019 127.0.0.1:2019 ultra-channel-7747.taile55d22.ts.net:8443
+            }
+          '';
+
           virtualHosts = {
 
-            # Harbor control plane:
-            # front-tier Caddy -> Proxmox-side Caddy -> CT 103.
+            # Preserve the old hostname without the retired proxy dependency.
             "harbor.greysilly7.xyz".extraConfig = ''
-              reverse_proxy http://100.111.93.13:80
+              redir https://ashore.dev{uri} 302
             '';
 
             # Ashore control plane.
             "ashore.dev".extraConfig = ''
-              reverse_proxy http://100.111.93.13:80
+              reverse_proxy http://100.75.171.127:3000
             '';
+
+            "vaultwarden.greysilly7.xyz".extraConfig = ''
+              reverse_proxy http://greyserver:8222
+            '';
+          };
+        };
+
+        systemd.services.caddy-admin-tailnet = {
+          description = "Expose Caddy Admin over private tailnet HTTPS";
+          wantedBy = [ "multi-user.target" ];
+          after = [
+            "network-online.target"
+            "tailscaled.service"
+            "caddy.service"
+          ];
+          wants = [ "network-online.target" ];
+          requires = [
+            "tailscaled.service"
+            "caddy.service"
+          ];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+            ExecStart = "/run/current-system/sw/bin/tailscale serve --bg --https=8443 http://127.0.0.1:2019";
           };
         };
 
