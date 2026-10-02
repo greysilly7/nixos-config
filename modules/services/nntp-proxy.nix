@@ -197,7 +197,11 @@
         };
       };
 
-      networking.firewall.allowedTCPPorts = [ 563 80 443 ];
+      networking.firewall.allowedTCPPorts = [
+        563
+        80
+        443
+      ];
 
       # Edge proxy for this host is Caddy (the ingress-gateway globals and the
       # wildcard vhost live in modules/hosts/ultra-channel-7747/default.nix).

@@ -32,6 +32,9 @@
     nixos =
       { lib, ... }:
       {
+        imports = [
+          ./_caddy.nix
+        ];
         system.stateVersion = "26.11";
         networking.hostName = "ultra-channel-7747";
 
@@ -111,33 +114,6 @@
           "sd_mod"
           "sr_mod"
         ];
-
-        services.caddy = {
-          enable = true;
-
-          globalConfig = lib.mkAfter ''
-            admin 127.0.0.1:2019 {
-              origins localhost:2019 127.0.0.1:2019 ultra-channel-7747.taile55d22.ts.net:8443
-            }
-          '';
-
-          virtualHosts = {
-
-            # Preserve the old hostname without the retired proxy dependency.
-            "harbor.greysilly7.xyz".extraConfig = ''
-              redir https://ashore.dev{uri} 302
-            '';
-
-            # Ashore control plane.
-            "ashore.dev".extraConfig = ''
-              reverse_proxy http://100.75.171.127:3000
-            '';
-
-            "vaultwarden.greysilly7.xyz".extraConfig = ''
-              reverse_proxy http://greyserver:8222
-            '';
-          };
-        };
 
         systemd.services.caddy-admin-tailnet = {
           description = "Expose Caddy Admin over private tailnet HTTPS";
