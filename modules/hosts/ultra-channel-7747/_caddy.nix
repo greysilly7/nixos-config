@@ -1,5 +1,26 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
+  sops.secrets."ashore/proxy_token" = {
+    sopsFile = ../../../secrets/greysilly7/ashore-proxy-token.yaml;
+    owner = "caddy";
+    group = "caddy";
+    mode = "0400";
+  };
+
+  sops.templates."ashore-caddy.env" = {
+    content = ''
+      PAAS_TRUSTED_PROXY_TOKEN=${config.sops.placeholder."ashore/proxy_token"}
+    '';
+    owner = "caddy";
+    group = "caddy";
+    mode = "0400";
+    restartUnits = [ "caddy.service" ];
+  };
+
+  systemd.services.caddy.serviceConfig.EnvironmentFile = [
+    config.sops.templates."ashore-caddy.env".path
+  ];
+
   services.caddy = {
     enable = true;
 
@@ -13,7 +34,11 @@
     virtualHosts = {
       # Preserve the old hostname without the retired proxy dependency.
       "harbor.greysilly7.xyz".extraConfig = "redir https://ashore.dev{uri}";
-      "ashore.dev".extraConfig = "reverse_proxy 100.75.171.127:3000";
+      "ashore.dev".extraConfig = ''
+        reverse_proxy 100.75.171.127:3000 {
+          header_up X-Harbor-Proxy-Token {$PAAS_TRUSTED_PROXY_TOKEN}
+        }
+      '';
 
       "vaultwarden.greysilly7.xyz".extraConfig = "reverse_proxy greyserver:8222";
       "aiostreams.greysilly7.xyz".extraConfig = "reverse_proxy greyserver:3000";
