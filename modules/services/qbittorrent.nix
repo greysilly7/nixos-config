@@ -5,6 +5,18 @@ _: {
       let
         qbitWebuiPort = "8085";
         mediaPath = "/mnt/pool/arr";
+        waitForTailscale = pkgs.writeShellScript "wait-for-tailscale" ''
+          for _ in $(${pkgs.coreutils}/bin/seq 30); do
+            if ${pkgs.tailscale}/bin/tailscale status --json 2>/dev/null |
+              ${pkgs.gnugrep}/bin/grep -Eq '"BackendState"[[:space:]]*:[[:space:]]*"Running"'
+            then
+              exit 0
+            fi
+            ${pkgs.coreutils}/bin/sleep 1
+          done
+          echo "tailscale did not reach Running state" >&2
+          exit 1
+        '';
       in
       {
         # SOPS Secrets for VPN configuration
@@ -108,12 +120,20 @@ _: {
           after = [
             "tailscaled.service"
             "podman-airvpn.service"
+            "podman-qbittorrent.service"
+            "podman-mousehole.service"
           ];
-          wants = [ "tailscaled.service" ];
+          requires = [
+            "tailscaled.service"
+            "podman-airvpn.service"
+            "podman-qbittorrent.service"
+            "podman-mousehole.service"
+          ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
+            ExecStartPre = waitForTailscale;
             ExecStart = [
               "${pkgs.tailscale}/bin/tailscale serve --bg --tcp=${qbitWebuiPort} tcp://127.0.0.1:${qbitWebuiPort}"
               "${pkgs.tailscale}/bin/tailscale serve --bg --tcp=5010 tcp://127.0.0.1:5010"
