@@ -13,6 +13,7 @@
       den.aspects.podman
       den.aspects.greyserver-filesystem
       den.aspects.media
+      den.aspects.backup
       den.aspects.tailscale._.server
       den.aspects.vaultwarden
       den.aspects.fail2ban
