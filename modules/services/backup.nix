@@ -16,7 +16,7 @@ _:
         ];
 
         services.restic.backups.greyserver = {
-          repository = "rclone:greyserver-gdrive:greyserver";
+          repository = "rclone:gdrive:greyserver";
           rcloneConfigFile = "/var/lib/greyserver-backup/rclone.conf";
           passwordFile = config.sops.secrets."backup/restic_password".path;
           paths = [ "/mnt/pool" ];
