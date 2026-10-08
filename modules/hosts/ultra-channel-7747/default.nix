@@ -138,10 +138,8 @@
         # Tier-1 ingress + ACME HTTP-01 challenges.
         # 563/80/443 may also be opened by the nntp-proxy aspect.
         # List options merge, so duplicates are harmless.
-        networking.firewall.allowedTCPPorts = [
-          80
-          443
-        ];
+        networking.firewall.allowedTCPPorts =
+          [ 80 443 ] ++ (lib.range 30432 30463);
 
         networking.firewall.allowedUDPPorts = [
           443
