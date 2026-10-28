@@ -212,11 +212,11 @@
 
         # caddy-l4 (layer4 TCP/UDP) is not in the stock Caddy build, so we build
         # a Caddy with the plugin vendored in. Hash is the src-with-plugins
-        # fixed-output hash for caddy-l4 v0.1.2 on Caddy 2.11.4; regenerate
+        # fixed-output hash for caddy-l4 v0.1.2 on Caddy 2.11.7; regenerate
         # (set to lib.fakeHash, rebuild, copy the "got:" value) if either bumps.
         package = pkgs.caddy.withPlugins {
           plugins = [ "github.com/mholt/caddy-l4@v0.1.2" ];
-          hash = "sha256-C+ksbA6ucY3GUsYHSUhkYoh1gTP8SIAJv0MLjhX8BQM=";
+          hash = "sha256-FwGmHobFqBkEI7LN/YaPsL0t+dJn8uZMhCp9asDEsYw=";
         };
 
         # Layer4 NNTPS terminator. `tls` (no args) uses Caddy's automatically
